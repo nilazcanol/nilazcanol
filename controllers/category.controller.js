@@ -39,4 +39,19 @@ const categoryPost = async (req = request, res = response) => {
 	});
 };
 
-module.exports = { categoryGet, categoryPost }
+const categoryPut = async (req = request, res = response) => {
+		
+	const { id } = req.params;
+	const { _id, name, ...resto } = req.body;
+	
+	console.log(resto);
+
+	const category = await Category.findByIdAndUpdate(id, {name});
+	
+	res.json({
+		status: true,
+		category,
+	});
+};
+
+module.exports = { categoryGet, categoryPost, categoryPut }
