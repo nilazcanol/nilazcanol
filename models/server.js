@@ -13,8 +13,10 @@ class Server {
 
 		// Path
 		this.usersPath = '/api/users';
+
 		// Middleware
 		this.middlewares();
+		
 		// Routes
 		this.routes();
 	}
