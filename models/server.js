@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routerUsers = require('../routes/users.routes');
+const routerCategories = require('../routes/category.routes');
 const { dbConnection } = require('../database/config');
 
 class Server {
@@ -13,6 +14,8 @@ class Server {
 
 		// Path
 		this.usersPath = '/api/users';
+		this.categoriesPath = '/api/category';
+
 		// Middleware
 		this.middlewares();
 		// Routes
@@ -32,6 +35,7 @@ class Server {
 	// Routes
 	routes() {
 		this.app.use(this.usersPath, routerUsers);
+		this.app.use(this.categoriesPath, routerCategories);
 	}
 
 	listen() {
