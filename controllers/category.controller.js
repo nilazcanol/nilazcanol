@@ -54,4 +54,15 @@ const categoryPut = async (req = request, res = response) => {
 	});
 };
 
-module.exports = { categoryGet, categoryPost, categoryPut }
+const categoryDelete = async (req = request, res = response) => {
+	const { id } = req.params;
+	
+	const user = await Category.findByIdAndDelete(id);
+	
+	res.json({
+		status: true,
+		user
+	})
+};
+
+module.exports = { categoryGet, categoryPost, categoryPut, categoryDelete }
