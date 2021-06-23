@@ -14,6 +14,6 @@ routerUsers.put(`/:id`, userPut);
 
 routerUsers.post(`/`, userPost);
 
-routerUsers.delete(`/`, userDelete);
+routerUsers.delete(`/:id`, userDelete);
 
 module.exports = routerUsers;

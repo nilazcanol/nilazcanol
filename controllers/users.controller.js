@@ -1,31 +1,70 @@
 const { response, request } = require('express');
+const bcryptjs = require('bcryptjs');
+const User = require('../models/users');
 
-const userGet = (req = request, res = response) => {
-	const {lastname,name} = req.query;
+const userGet = async (req = request, res = response) => {
+	
+	const { limit = 5, since = 0 } = req.query;
+	const query = {state:true}
+
+	const [total, users] = await  Promise.all([
+		User.countDocuments(query),
+		User.find(query).limit(Number(limit)).skip(Number(since))
+	])
+
 	res.json({
-		msg: 'get success',
-		lastname,
-		name
+		total,
+		users		
 	});
 };
-const userPut = (req = request, res = response) => {
-	const id = req.params.id;
+
+const userPut = async (req = request, res = response) => {
+
+	const { id } = req.params;
+	const { _id, password, email, ...resto } = req.body;
+	
+	if (password) {
+		const salt = bcryptjs.genSaltSync();
+		resto.password = bcryptjs.hashSync(password, salt);
+	}	
+	const user = await User.findByIdAndUpdate(id, resto);
+	
 	res.json({
-		msg: 'put success',
-		id
+		status: true,
+		user,
 	});
 };
-const userPost = (req = request, res = response) => {
-	const {name,edad} = req.body;
-	res.json({
-		msg: 'post success',
-		name,edad
+
+const userPost = async (req = request, res = response) => {
+	const { name, email, password, rol, ...resto } = req.body;
+	const user = new User({ name, email, password, rol });
+
+	const existEmail = await User.findOne({ email });
+
+	if (existEmail) {
+		return res.status(400).json({
+			msg: 'Email is already registered',
+		});
+	}
+	
+	const salt = bcryptjs.genSaltSync();
+	user.password = bcryptjs.hashSync(password, salt);
+	user.save();
+
+	res.json({  
+		msg: 'User saved correctly',
+		user,
 	});
 };
-const userDelete = (req = request, res = response) => {
+
+const userDelete = async (req = request, res = response) => {
+	const { id } = req.params;
+	const user = await User.findByIdAndUpdate(id, {state:false});
+	
 	res.json({
-		msg: 'delete success',
-	});
+		status: true,
+		user
+	})
 };
 
 module.exports = {
