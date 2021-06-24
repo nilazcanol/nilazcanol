@@ -2,6 +2,7 @@ const { Router } = require('express');
 const {	productGet, productPost, productPut,productDelete } = require('../controllers/product.controller');
 const { validateFields } =require('../middlewares');
 const { check } = require('express-validator')
+const { existProductById } = require('../helpers/db-validatiors');
 
 
 const routerProduct = Router();
@@ -18,7 +19,13 @@ routerProduct.post(`/`,[
     check('category' ,'The category is required').not().isEmpty(),
     validateFields
 ] , productPost);
-routerProduct.put(`/:id`, productPut);
+
+
+routerProduct.put(`/:id`,[
+    check('id','It is not a valid ID').isMongoId(),
+    check('id').custom(existProductById),
+    validateFields
+], productPut);
 routerProduct.delete(`/:id`, productDelete);
 
 
