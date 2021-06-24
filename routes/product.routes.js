@@ -26,7 +26,12 @@ routerProduct.put(`/:id`,[
     check('id').custom(existProductById),
     validateFields
 ], productPut);
-routerProduct.delete(`/:id`, productDelete);
+routerProduct.delete(`/:id`, [
+    check('id','It is not a valid ID').isMongoId(),
+    check('id').custom(existProductById),
+    validateFields
+
+],productDelete);
 
 
 module.exports = routerProduct;
