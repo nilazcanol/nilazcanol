@@ -55,4 +55,19 @@ const productPost = async (req = request, res = response) => {
 	});
 };
 
-module.exports = { productGet,productPost }
+
+const productPut = async (req = request, res = response) => {
+		
+	const { id } = req.params;
+	const { name, description, price, stock, state, category , img, ...resto } = req.body;
+	
+
+	const product = await Product.findByIdAndUpdate(id, {name, description, price, stock, state, category , img});
+	
+	res.json({
+		status: true,
+		product,
+	});
+};
+
+module.exports = { productGet,productPost,productPut }
