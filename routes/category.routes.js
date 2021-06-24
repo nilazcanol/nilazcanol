@@ -3,11 +3,11 @@ const {	categoryGet, categoryPost,categoryPut, categoryDelete } = require('../co
 
 
 
-const routerUsers = Router();
+const routerCategory = Router();
 
-routerUsers.get(`/`, categoryGet);
-routerUsers.post(`/`, categoryPost);
-routerUsers.put(`/:id`, categoryPut);
-routerUsers.delete(`/:id`, categoryDelete);
+routerCategory.get(`/`, categoryGet);
+routerCategory.post(`/`, categoryPost);
+routerCategory.put(`/:id`, categoryPut);
+routerCategory.delete(`/:id`, categoryDelete);
 
-module.exports = routerUsers;
+module.exports = routerCategory;
