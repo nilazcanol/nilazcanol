@@ -81,4 +81,4 @@ const productDelete = async (req = request, res = response) => {
 	})
 };
 
-module.exports = { productGet,productPost,productPut,productDelete }
+module.exports = { productGet, productPost, productPut, productDelete }
