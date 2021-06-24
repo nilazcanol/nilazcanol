@@ -15,6 +15,7 @@ class Server {
 		// Path
 		this.usersPath = '/api/users';
 		this.categoriesPath = '/api/category';
+		this.salesPath = '/api/sale';
 
 		// Middleware
 		this.middlewares();
