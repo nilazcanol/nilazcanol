@@ -70,4 +70,15 @@ const productPut = async (req = request, res = response) => {
 	});
 };
 
-module.exports = { productGet,productPost,productPut }
+const productDelete = async (req = request, res = response) => {
+	const { id } = req.params;
+	
+	const product = await Product.findByIdAndDelete(id);
+	
+	res.json({
+		status: true,
+		product
+	})
+};
+
+module.exports = { productGet,productPost,productPut,productDelete }
