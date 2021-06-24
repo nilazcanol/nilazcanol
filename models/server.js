@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routerUsers = require('../routes/users.routes');
 const routerCategories = require('../routes/category.routes');
+const routerProducts = require('../routes/product.routes');
 const { dbConnection } = require('../database/config');
 
 class Server {
@@ -16,6 +17,7 @@ class Server {
 		this.usersPath = '/api/users';
 		this.categoriesPath = '/api/category';
 		this.salesPath = '/api/sale';
+		this.productPath = '/api/products';
 
 		// Middleware
 		this.middlewares();
@@ -38,6 +40,7 @@ class Server {
 	routes() {
 		this.app.use(this.usersPath, routerUsers);
 		this.app.use(this.categoriesPath, routerCategories);
+		this.app.use(this.productPath, routerProducts);
 	}
 
 	listen() {

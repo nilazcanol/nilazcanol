@@ -44,7 +44,6 @@ const categoryPut = async (req = request, res = response) => {
 	const { id } = req.params;
 	const { _id, name, ...resto } = req.body;
 	
-	console.log(resto);
 
 	const category = await Category.findByIdAndUpdate(id, {name});
 	
@@ -57,11 +56,11 @@ const categoryPut = async (req = request, res = response) => {
 const categoryDelete = async (req = request, res = response) => {
 	const { id } = req.params;
 	
-	const user = await Category.findByIdAndDelete(id);
+	const category = await Category.findByIdAndDelete(id);
 	
 	res.json({
 		status: true,
-		user
+		category
 	})
 };
 
