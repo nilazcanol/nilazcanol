@@ -10,7 +10,7 @@ const existProductById = async  (id = '') => {
 } 
 const existCategoryById = async  (id = '') => {
 
-    const exist = await Category.findOne({uid: id})
+    const exist = await Category.find({_id: id})
 	if( !exist ){
 		throw new Error(`The Category with id ${id} does not exist`);		
 	}

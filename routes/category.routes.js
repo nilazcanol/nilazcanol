@@ -23,6 +23,10 @@ routerCategory.put(`/:id`,[
 ], categoryPut);
 
 
-routerCategory.delete(`/:id`, categoryDelete);
+routerCategory.delete(`/:id`,[
+    check('id','It is not a valid ID').isMongoId(),
+    check('id').custom(existCategoryById),
+    validateFields
+],categoryDelete);
 
 module.exports = routerCategory;
