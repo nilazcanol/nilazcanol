@@ -1,5 +1,5 @@
 const Product = require('../models/product');
-
+const Category = require('../models/category')
 
 const existProductById = async  (id = '') => {
 
@@ -8,8 +8,16 @@ const existProductById = async  (id = '') => {
 		throw new Error(`The Product with ID ${id} does not exist`);		
 	}
 } 
+const existCategoryById = async  (id = '') => {
+
+    const exist = await Category.findOne({uid: id})
+	if( !exist ){
+		throw new Error(`The Category with id ${id} does not exist`);		
+	}
+} 
 
 
 module.exports = {
-    existProductById
+    existProductById,
+	existCategoryById
 }
