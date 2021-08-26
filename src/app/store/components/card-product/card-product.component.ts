@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-card-product',
@@ -15,6 +16,9 @@ export class CardProductComponent implements OnInit {
   @Input('descriptionProduct') descriptionProduct: string = "description";
   @Input('priceProduct') priceProduct: number = 12;
   @Input('stockProduct') stockProduct: string = '12' ;
+  @Input('categoryProduct') categoryProduct: string = ' ' ;
+
+  @Input('products') products: Product[] = [];
 
   ngOnInit(): void {
   }

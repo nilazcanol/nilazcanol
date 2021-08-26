@@ -1,0 +1,17 @@
+<p-orderList [value]="mostSelledProducts" [listStyle]="{'height':'auto'}" header="List of Products" filterBy="name" filterPlaceholder="Filter by name" [dragdrop]="true">
+    <ng-template let-product pTemplate="item">
+        <div class="product-item">
+          
+            
+            <div class="product-list-detail">
+                <h5 class="p-mb-2">{{product.nameProduct}}</h5>
+                <i class="pi pi-tag product-category-icon me-2"></i>
+                <span class="product-category">{{product.category}}</span>
+            </div>
+            <div class="product-list-action">
+                <h6 class="p-mb-2">${{product.priceProduct}}</h6>
+            </div>
+         
+        </div>
+    </ng-template>
+</p-orderList>

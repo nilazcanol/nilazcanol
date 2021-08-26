@@ -9,6 +9,8 @@ import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
 import { CardModule } from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
+import {OrderListModule} from 'primeng/orderlist';
+import { ListProductsComponent } from './components/list-products/list-products.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -16,13 +18,15 @@ import {ButtonModule} from 'primeng/button';
     HomeComponent,
     CategoryComponent,
     ProductComponent,
+    ListProductsComponent,
   ],
   imports: [
     CommonModule,
     StoreRoutingModule,
     MenuModule,
     CardModule,
-    ButtonModule
+    ButtonModule,
+    OrderListModule,
   ]
 })
 export class StoreModule { }
