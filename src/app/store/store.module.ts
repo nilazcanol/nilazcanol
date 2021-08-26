@@ -7,20 +7,22 @@ import { CardProductComponent } from './components/card-product/card-product.com
 import { HomeComponent } from './pages/home/home.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
-
-
+import { CardModule } from 'primeng/card';
+import {ButtonModule} from 'primeng/button';
 @NgModule({
   declarations: [
     MenuStoreComponent,
     CardProductComponent,
     HomeComponent,
     CategoryComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     CommonModule,
     StoreRoutingModule,
-    MenuModule
+    MenuModule,
+    CardModule,
+    ButtonModule
   ]
 })
 export class StoreModule { }
