@@ -1,0 +1,16 @@
+<p-orderList [value]="listCategories" [listStyle]="{'height':'auto'}" header="List of Products" filterBy="name" filterPlaceholder="Filter by name" [dragdrop]="true">
+    <ng-template let-categories pTemplate="item">
+        <div class="product-item">
+          
+            
+            <div class="product-list-detail">
+                <i class="pi pi-tag product-category-icon me-2"></i>
+                <span class="product-category">{{categories.nameCategory}}</span>
+                <button class="btn btn-danger float-end mx-1">Delete</button>
+                <button class="btn btn-warning float-end mx-1">Edit</button>
+            </div>
+           
+         
+        </div>
+    </ng-template>
+</p-orderList>

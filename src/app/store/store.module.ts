@@ -11,6 +11,7 @@ import { CardModule } from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {OrderListModule} from 'primeng/orderlist';
 import { ListProductsComponent } from './components/list-products/list-products.component';
+import { ListCategoriesComponent } from './components/list-categories/list-categories.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -19,6 +20,7 @@ import { ListProductsComponent } from './components/list-products/list-products.
     CategoryComponent,
     ProductComponent,
     ListProductsComponent,
+    ListCategoriesComponent,
   ],
   imports: [
     CommonModule,
