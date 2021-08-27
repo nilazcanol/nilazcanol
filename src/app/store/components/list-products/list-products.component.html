@@ -1,4 +1,4 @@
-<p-orderList [value]="mostSelledProducts" [listStyle]="{'height':'auto'}" header="List of Products" filterBy="name" filterPlaceholder="Filter by name" [dragdrop]="true">
+<p-orderList [value]="mostSelledProducts" [listStyle]="{'height':'auto'}" header="List of Products" filterBy="nameProduct" filterPlaceholder="Filter by name" [dragdrop]="true">
     <ng-template let-product pTemplate="item">
         <div class="product-item">
           
@@ -11,6 +11,9 @@
             <div class="product-list-action">
                 <h6 class="p-mb-2">${{product.priceProduct}}</h6>
                 <button class="btn btn-primary float-end">Detail</button>
+                <button class="btn btn-danger float-end mx-1">Delete</button>
+                <button class="btn btn-warning float-end mx-1">Edit</button>
+
             </div>
             <div class="product-list-action">
                 <h6 class="p-mb-2">Stock: {{product.stockProduct}}</h6>
