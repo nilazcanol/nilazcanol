@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { category } from '../../interfaces/category.interface';
+import { CategoriesService } from '../../services/categories.service';
 
 @Component({
   selector: 'app-list-categories',
@@ -9,14 +10,11 @@ import { category } from '../../interfaces/category.interface';
 })
 export class ListCategoriesComponent implements OnInit {
 
-  constructor() { }
+  constructor( private categoriesService: CategoriesService) { }
 
   listCategories: category[] = []
   ngOnInit(): void {
-      this.listCategories = [
-          { nameCategory:'Grocery'},
-          { nameCategory:'Dairy products'}
-        ]
+      this.listCategories = this.categoriesService.getListCategories();
   }
 
 }
