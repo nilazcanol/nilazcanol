@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product',
@@ -9,35 +10,21 @@ import { Product } from '../../interfaces/product.interface';
 })
 export class ProductComponent implements OnInit {
 
-  constructor() { }
+  constructor( private productServices:ProductsService) { }
   
-  mostSelledProducts: Product[] = [
-    {
-      nameProduct: 'Flour',
-      descriptionProduct: 'lorem9',
-      priceProduct:1999,
-      stockProduct:'13',
-      category:'Grocery',
-      img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-    },
-    {
-      nameProduct: 'Product 2',
-      descriptionProduct: 'Product ',
-      priceProduct:5999,
-      stockProduct:'13',
-      category:'Grocery',
-      img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-    },
-    {
-      nameProduct: 'Product 3',
-      descriptionProduct: 'Product ',
-      priceProduct:8999,
-      stockProduct:'13',
-      category:'Grocery',
-      img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-    },
-  ]
+
+  isList!:boolean;
+
+  mostSelledProducts!: Product[] ;
   ngOnInit(): void {
+      this.isList = true;
+
+      this.mostSelledProducts = this.productServices.getProducts();
+  }
+
+
+  changeView(isList: boolean){
+    this.isList = !isList;
   }
 
 }

@@ -15,8 +15,7 @@ export class ListCategoriesComponent implements OnInit {
   ngOnInit(): void {
       this.listCategories = [
           { nameCategory:'Grocery'},
-          { nameCategory:'Dairy products'},
-          { nameCategory:'Toiletries'}
+          { nameCategory:'Dairy products'}
         ]
   }
 

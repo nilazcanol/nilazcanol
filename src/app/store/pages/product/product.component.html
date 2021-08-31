@@ -7,12 +7,65 @@
         <div class="col-sm-12">
           <div class="alert alert-primary mb-4" role="alert">
             <h4>List products</h4>
+            <p>Full list of all products in DB</p>
+                <ul class="list-unstyled">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                            <li>Create product</li>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                            <li>See detail</li>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                            <li>Edit producto</li>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                            <li>Remove product</li>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-7">
+                            <li>Search for the name</li>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                </ul>
           </div>
         </div>
 
-        <div class="col-sm-12" >
+        <div class="col-sm-12 mb-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                  <a class="btn btn-primary mx-2">New product</a>
+                </li>
+                <li class="nav-item">
+                  <button class="btn btn-secondary mx-2" [disabled]="isList" (click)="changeView(isList)">Change List</button>
+                </li>
+                <li class="nav-item">
+                  <button class="btn btn-secondary mx-2" [disabled]="!isList" (click)="changeView(isList)">Change to Cards</button>
+                </li>
+               
+              </ul>
+        </div>
+
+        <div class="col-sm-12" *ngIf="isList; else tableView" >
           <app-list-products [listProduct]="mostSelledProducts"></app-list-products>
         </div>
+        <ng-template #tableView class="col-sm-12" >
+            <div class="row">
+                <div *ngFor="let product of mostSelledProducts" class="col-12 col-sm-6 col-md-5 col-lg-3 col-xl-3 col-xxl-3">
+                    <app-card-product
+                        [nameProduct]="product.nameProduct"
+                        [descriptionProduct]='product.descriptionProduct'
+                        [priceProduct]="product.priceProduct"
+                        [stockProduct]="product.stockProduct"
+                        [categoryProduct]="product.category">                
+                    </app-card-product>
+                </div>
+            </div>
+        </ng-template>
  
       </div>
   </div>
