@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { ProductsService } from '../../services/products.service';
 
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -10,12 +11,13 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductComponent implements OnInit {
 
-  constructor( private productServices:ProductsService) { }
-  
+  constructor( private productServices:ProductsService) {}
+
 
   isList!:boolean;
 
   mostSelledProducts!: Product[] ;
+  
   ngOnInit(): void {
       this.isList = true;
 
@@ -26,5 +28,13 @@ export class ProductComponent implements OnInit {
   changeView(isList: boolean){
     this.isList = !isList;
   }
+
+  display: boolean = false;
+
+  showDialog() {
+      this.display = true;
+  }
+  
+
 
 }
