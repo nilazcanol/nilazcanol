@@ -11,7 +11,11 @@
           </ul>
 
     <ng-template pTemplate="footer">
-        <p-button label="Detail" icon="pi pi-info-circle"></p-button>
+        <div class="d-grid gap-3">
+            <button pButton type="button" icon="pi pi-info" iconPos="left" label="Detail" class="p-button-primary"></button>
+            <button pButton type="button" icon="pi pi-pencil" iconPos="left" label="Update" class="p-button-warning"></button>
+            <button pButton type="button" icon="pi pi-trash" iconPos="left" label="Delete" class="p-button-danger" ></button>
+        </div>
    </ng-template>
 </p-card>
 

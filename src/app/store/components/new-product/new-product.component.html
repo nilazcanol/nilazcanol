@@ -1,4 +1,4 @@
-<form [formGroup]="myFormProduct">
+<form [formGroup]="myFormProduct" (ngSubmit)="saveProduct()">
   <div class="input-group mb-3">
     <span class="input-group-text">Name</span>
     <input
@@ -69,7 +69,7 @@ The category must be required  </span>
 
   <button
     [disabled]="myFormProduct.invalid"
-    type="button"
+    type="submit"
     class="btn btn-primary float-end"
   >
     Save product

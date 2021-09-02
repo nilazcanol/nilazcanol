@@ -31,4 +31,13 @@ export class NewProductComponent implements OnInit {
       this.myFormProduct.controls[campo].touched
     )
   }
+
+
+  clearForm():void{
+      this.myFormProduct.reset();
+  }
+
+  saveProduct():void{
+    this.clearForm();
+  }
 }
