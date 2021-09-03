@@ -17,6 +17,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { PrimengModule } from '../primeNg/primeng.module';
 import { ModalAddProductComponent } from './components/modal-add-product/modal-add-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ListProductsComponent,
     ListCategoriesComponent,
     NewProductComponent,
-    ModalAddProductComponent
+    ModalAddProductComponent,
+    ModalEditProductComponent
   ],
   imports: [
     CommonModule,
