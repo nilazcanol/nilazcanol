@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 
 @Component({
@@ -15,7 +14,22 @@ export class ListProductsComponent implements OnInit {
 
   }
 
+  @Output() productCheckedSend: EventEmitter<Product> = new EventEmitter<Product>();
+
+  
+//   productChecked:Product = {
+//       category:'',
+//       descriptionProduct:'',
+//       nameProduct:'',
+//       priceProduct:0,
+//       stockProduct:'',
+//       img:''
+//     }
+
   @Input('listProduct') mostSelledProducts!: Product[];
 
 
+  selectProduct(productSelect: Product):void {
+    this.productCheckedSend.emit( productSelect)
+  }
 }

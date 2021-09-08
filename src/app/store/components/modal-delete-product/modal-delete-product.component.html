@@ -1,0 +1,31 @@
+  <!-- Modal -->
+  <div class="modal fade" id="modalDeleteProduct" tabindex="-1" aria-labelledby="modalDeleteProduct" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalNewProduct">Delete Product: {{productSelected.nameProduct}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <dl class="row">
+                <dt class="col-sm-3">Category:</dt>
+                <dd class="col-sm-9">{{productSelected.categoryProduct}}</dd>
+             
+                <dt class="col-sm-3">Description:</dt>
+                <dd class="col-sm-9">
+                  <p>{{productSelected.descriptionProduct}}</p>
+                </dd>
+
+                <div class="col-sm-12 mt-3">
+                    <button pButton type="button" class="p-button-raised p-button-rounded p-button-danger" label="Delete product"></button>
+                    <button pButton type="button" class="p-button-raised p-button-rounded p-button-warning float-end" label="Back"></button>
+
+                </div>
+            </dl>
+          
+
+              
+    
+      </div>
+    </div>
+  </div>

@@ -1,40 +1,58 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Product } from '../../interfaces/product.interface';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Product } from '../../interfaces/product.interface'
 
 @Component({
   selector: 'app-new-product',
   templateUrl: './new-product.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class NewProductComponent implements OnInit {
+export class NewProductComponent implements OnInit, OnChanges {
+  @Input('productInput') productInput!: Product
 
+  constructor(private fb: FormBuilder) {}
 
- @Input('productInput') productInput :Product = {
-     category: '',
-     descriptionProduct: '',
-     nameProduct:'',
-     priceProduct:0,
-     stockProduct:'',
-     img:''
- };
-
-  myFormProduct: FormGroup = this.fb.group({
-    name        :[this.productInput.nameProduct ,Validators.required],
-    img         :[this.productInput.img,Validators.required],
-    description :[this.productInput.descriptionProduct,Validators.required],
-    price       :[this.productInput.priceProduct,Validators.required],
-    stock       :[this.productInput.stockProduct,Validators.required],
-    category    :[this.productInput.category,Validators.required]
-  })
-  
-  constructor(private fb: FormBuilder) { }
-
+  myFormProduct!: FormGroup
 
   ngOnInit(): void {
+    this.myFormProduct = this.fb.group({
+      nameProduct: ['', Validators.required],
+      imgProduct: ['', Validators.required],
+      descriptionProduct: ['', Validators.required],
+      priceProduct: [0, Validators.required],
+      stockProduct: ['', Validators.required],
+      categoryProduct: ['', Validators.required],
+    })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.myFormProduct.controls['nameProduct'].setValue(
+        changes.productInput.currentValue.nameProduct
+      )
+    
+    this.myFormProduct.controls['categoryProduct'].setValue(
+      changes.productInput.currentValue.categoryProduct,
+    )
+    this.myFormProduct.controls['descriptionProduct'].setValue(
+      changes.productInput.currentValue.descriptionProduct,
+    )
+    this.myFormProduct.controls['priceProduct'].setValue(
+      changes.productInput.currentValue.priceProduct,
+    )
+    this.myFormProduct.controls['stockProduct'].setValue(
+      changes.productInput.currentValue.stockProduct,
+    )
+    this.myFormProduct.controls['imgProduct'].setValue(
+      changes.productInput.currentValue.imgProduct,
+    )
+
+  }
 
   fieldIsValid(campo: string) {
     return (
@@ -43,12 +61,11 @@ export class NewProductComponent implements OnInit {
     )
   }
 
-
-  clearForm():void{
-      this.myFormProduct.reset();
+  clearForm(): void {
+    this.myFormProduct.reset()
   }
 
-  saveProduct():void{
-    this.clearForm();
+  saveProduct(): void {
+    this.clearForm()
   }
 }

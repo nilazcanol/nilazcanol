@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../interfaces/product.interface';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-modal-add-product',
