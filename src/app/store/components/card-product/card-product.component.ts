@@ -14,8 +14,8 @@ export class CardProductComponent implements OnInit {
 
   @Input('nameProduct') nameProduct: string = "name";
   @Input('descriptionProduct') descriptionProduct: string = "description";
-  @Input('priceProduct') priceProduct: number = 12;
-  @Input('stockProduct') stockProduct: string = '12' ;
+  @Input('priceProduct') priceProduct: number = 0;
+  @Input('stockProduct') stockProduct: string = '0' ;
   @Input('categoryProduct') categoryProduct: string = ' ' ;
 
   @Input('products') products: Product[] = [];

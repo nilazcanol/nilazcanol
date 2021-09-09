@@ -9,4 +9,6 @@ export class CategoriesService {
   getListCategories = () => {
     return [{ nameCategory: 'Grocery' }, { nameCategory: 'Dairy products' }]
   }
+
+  
 }

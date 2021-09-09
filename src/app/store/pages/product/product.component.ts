@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Product } from '../../interfaces/product.interface'
+import { resApiProduct } from '../../interfaces/resApiProduct.interface';
 import { ProductsService } from '../../services/products.service'
 
 @Component({
@@ -8,18 +9,18 @@ import { ProductsService } from '../../services/products.service'
   styles: [],
 })
 export class ProductComponent implements OnInit {
-  constructor(private productServices: ProductsService) {}
+  constructor(private productService: ProductsService) {}
 
   isList!: boolean
   isNew!: boolean;
   mostSelledProducts!: Product[]
   productSelected: Product ={
-    categoryProduct: '',
-    nameProduct: '',
-    descriptionProduct: '',
-    priceProduct:0,
-    stockProduct:'',
-    imgProduct:''
+    category: '',
+    name: '',
+    description: '',
+    price:0,
+    stock:'',
+    img:''
   };
 
 
@@ -27,12 +28,14 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.isList = true
     this.isNew = true
-    this.mostSelledProducts = this.productServices.getProducts()
+    this.mostSelledProducts = this.productService.getProducts();
+    this.productService.getAllProducts().subscribe( (res)=> {
+        this.mostSelledProducts = res.products;
+    })
   }
 
   changeView(isList: boolean) {
     this.isList = !isList;
-    console.log(isList);
   }
 
   display: boolean = false

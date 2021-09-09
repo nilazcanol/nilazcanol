@@ -5,12 +5,12 @@
       type="text"
       class="form-control"
       placeholder="Name"
-      aria-label="nameProduct"
-      formControlName="nameProduct"
+      aria-label="name"
+      formControlName="name"
       aria-describedby="basic-addon1"
     />
   </div>
-  <span *ngIf="fieldIsValid('nameProduct')" class="input-group alert alert-danger mb-3">
+  <span *ngIf="fieldIsValid('name')" class="input-group alert alert-danger mb-3">
     The name must be required
   </span>
 
@@ -20,11 +20,11 @@
     <span class="input-group-text">Description</span>
     <textarea
       class="form-control"
-      aria-label="descriptionProduct"
-      formControlName="descriptionProduct"
+      aria-label="description"
+      formControlName="description"
     ></textarea>
   </div>
-  <span *ngIf="fieldIsValid('descriptionProduct')" class="input-group alert alert-danger mb-3">
+  <span *ngIf="fieldIsValid('description')" class="input-group alert alert-danger mb-3">
     The description must be required
   </span>
 
@@ -34,11 +34,11 @@
       type="text"
       class="form-control"
       aria-label="imgProduct"
-      formControlName="imgProduct"
+      formControlName="img"
       aria-describedby="basic-addon1"
     />
   </div>
-  <span *ngIf="fieldIsValid('imgProduct')" class="input-group alert alert-danger mb-3">
+  <span *ngIf="fieldIsValid('img')" class="input-group alert alert-danger mb-3">
     The img must be required
   </span>
 
@@ -48,25 +48,25 @@
     <input
       type="number"
       class="form-control"
-      formControlName="priceProduct"
-      aria-label="priceProduct"
+      formControlName="price"
+      aria-label="price"
     />
   </div>
-  <span *ngIf="fieldIsValid('priceProduct')" class="input-group alert alert-danger mb-3">
+  <span *ngIf="fieldIsValid('price')" class="input-group alert alert-danger mb-3">
 The Price must be required  </span>
 
   <div class="input-group mb-3">
     <span class="input-group-text">Stock</span>
-    <input type="number" class="form-control" formControlName="stockProduct" />
+    <input type="number" class="form-control" formControlName="stock" />
   </div>
-  <span *ngIf="fieldIsValid('stockProduct')" class="input-group alert alert-danger mb-3">
+  <span *ngIf="fieldIsValid('stock')" class="input-group alert alert-danger mb-3">
 The stock must be required  </span>
 
   <div class="input-group mb-3">
     <span class="input-group-text">Category</span>
-    <input type="text" class="form-control" formControlName="categoryProduct" />
+    <input type="text" class="form-control" formControlName="category" />
   </div>
-  <span *ngIf="fieldIsValid('categoryProduct')" class="input-group alert alert-danger mb-3">
+  <span *ngIf="fieldIsValid('category')" class="input-group alert alert-danger mb-3">
 The category must be required  </span>
 
   <button

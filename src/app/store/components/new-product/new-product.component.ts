@@ -22,34 +22,34 @@ export class NewProductComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.myFormProduct = this.fb.group({
-      nameProduct: ['', Validators.required],
-      imgProduct: ['', Validators.required],
-      descriptionProduct: ['', Validators.required],
-      priceProduct: [0, Validators.required],
-      stockProduct: ['', Validators.required],
-      categoryProduct: ['', Validators.required],
+      name: ['', Validators.required],
+      img: ['', Validators.required],
+      description: ['', Validators.required],
+      price: [0, Validators.required],
+      stock: ['', Validators.required],
+      category: ['', Validators.required],
     })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.myFormProduct.controls['nameProduct'].setValue(
-        changes.productInput.currentValue.nameProduct
+    this.myFormProduct.controls['name'].setValue(
+        changes.productInput.currentValue.name
       )
     
-    this.myFormProduct.controls['categoryProduct'].setValue(
-      changes.productInput.currentValue.categoryProduct,
+    this.myFormProduct.controls['category'].setValue(
+      changes.productInput.currentValue.category,
     )
-    this.myFormProduct.controls['descriptionProduct'].setValue(
-      changes.productInput.currentValue.descriptionProduct,
+    this.myFormProduct.controls['description'].setValue(
+      changes.productInput.currentValue.description,
     )
-    this.myFormProduct.controls['priceProduct'].setValue(
-      changes.productInput.currentValue.priceProduct,
+    this.myFormProduct.controls['price'].setValue(
+      changes.productInput.currentValue.price,
     )
-    this.myFormProduct.controls['stockProduct'].setValue(
-      changes.productInput.currentValue.stockProduct,
+    this.myFormProduct.controls['stock'].setValue(
+      changes.productInput.currentValue.stock,
     )
-    this.myFormProduct.controls['imgProduct'].setValue(
-      changes.productInput.currentValue.imgProduct,
+    this.myFormProduct.controls['img'].setValue(
+      changes.productInput.currentValue.img,
     )
 
   }
