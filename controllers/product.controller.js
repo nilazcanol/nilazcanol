@@ -9,16 +9,34 @@ const productGet = async (req = request, res = response) => {
 
     const { limit = 5, since = 0 } = req.query;
 
-    const [total, products] = await  Promise.all([
+    const [total, productsPromise] = await  Promise.all([
 		Product.countDocuments(),
 		Product.find().limit(Number(limit)).skip(Number(since))
 	])
 
+    const products = await Promise.all(
+        productsPromise.map( async (product)=>{
+            const {name}= await Category.findById(product.category);
+            return {
+                "img": product.img,
+                "state": product.state,
+                "_id": product._id,
+                "name": product.name,
+                "description": product.description,
+                "price": product.price,
+                "stock": product.stock,
+                "category": name
+            }
+        }) 
+    ) 
+
+    
 	res.json({  
 		total,
 		products,
 	});
 };
+
 
 const productPost = async (req = request, res = response) => {
 
