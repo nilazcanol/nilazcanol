@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { ProductSmall } from '../../interfaces/product-small.interface'
 import { Product } from '../../interfaces/product.interface'
 import { ProductsService } from '../../services/products.service'
 
@@ -12,7 +11,7 @@ export class ProductComponent implements OnInit {
   constructor(private productServices: ProductsService) {}
 
   isList!: boolean
-  isNew!: boolean
+  isNew!: boolean;
   mostSelledProducts!: Product[]
   productSelected: Product ={
     categoryProduct: '',
@@ -23,11 +22,7 @@ export class ProductComponent implements OnInit {
     imgProduct:''
   };
 
-  productSelectedSmall: ProductSmall ={
-    categoryProduct: '',
-    nameProduct: '',
-    descriptionProduct: '',
-  };
+
 
   ngOnInit(): void {
     this.isList = true
@@ -36,7 +31,8 @@ export class ProductComponent implements OnInit {
   }
 
   changeView(isList: boolean) {
-    this.isList = !isList
+    this.isList = !isList;
+    console.log(isList);
   }
 
   display: boolean = false
@@ -45,15 +41,12 @@ export class ProductComponent implements OnInit {
     this.display = true
   }
 
-  showProduct(product:Product){
-
+  showProduct(product:Product):void{
     this.productSelected = product;
-
-    this.productSelectedSmall = {
-        nameProduct:product.nameProduct,
-        descriptionProduct:product.descriptionProduct,
-        categoryProduct:product.categoryProduct
-    }
   }
 
+  selectProductCard(product:Product):void{
+    this.productSelected = product;
+  }
 }
+

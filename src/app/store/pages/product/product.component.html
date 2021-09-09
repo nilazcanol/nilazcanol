@@ -30,26 +30,27 @@
         </div>
       </div>
 
-      <!-- <h5>Basic</h5> -->
 
       <div class="col-sm-12 mb-4">
-      
-        
         <ul class="nav justify-content-center">
           <li class="nav-item">
             <button type="button" pButton  (click)="showDialog()" icon="pi pi-plus" label="New" data-bs-toggle="modal" class="p-button-raised p-button-rounded" data-bs-target="#modalNewProduct" ></button>
-
           </li>
-
           <li class="nav-item">          
-              
-            <button type="button" pButton icon="pi pi-book" class="mx-2 p-button-warning p-button-raised p-button-rounded" [disabled]="isList"
-            (click)="changeView(isList)" label="Change List"></button>
-
+            <button type="button" pButton icon="pi pi-book"  
+                    [class]="isList == true ? 
+                        ['mx-2' ,'p-button-secondary' ,'p-button-rounded' ,'p-button-raised','p-button-primary']:
+                        ['mx-2' ,'p-button-warning' ,'p-button-rounded' ,'p-button-raised','p-button-primary']" [disabled]="isList"
+                (click)="changeView(isList)" label="Change List">
+            </button>
           </li>
           <li class="nav-item">
-            <button type="button" pButton  icon="pi pi-book" class="mx-2 p-button-warning p-button-raised p-button-rounded" [disabled]="!isList"
-            (click)="changeView(isList)" label="Change Cards"></button>
+            <button type="button" pButton  icon="pi pi-book" 
+                    [class]="isList == true ? 
+                        ['mx-2' ,'p-button-secondary' ,'p-button-rounded' ,'p-button-raised','p-button-warning']:
+                        ['mx-2' ,'p-button-secondary' ,'p-button-rounded' ,'p-button-raised','p-button-primary']" [disabled]="!isList"
+                (click)="changeView(isList)" label="Change Cards">
+            </button>
           </li>
         </ul>
       </div>
@@ -73,6 +74,7 @@
               [priceProduct]="product.priceProduct"
               [stockProduct]="product.stockProduct"
               [categoryProduct]="product.categoryProduct"
+              (click)='selectProductCard(product)'
             ></app-card-product>
           </div>
         </div>
@@ -88,7 +90,7 @@
         ></app-modal-edit-product>
       </div>
       <div class="col-sm-12">        
-        <app-modal-delete-product [productDelete]="productSelectedSmall"></app-modal-delete-product>
+        <app-modal-delete-product [productDelete]="productSelected"></app-modal-delete-product>
       </div>
     </div>
   </div>

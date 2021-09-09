@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ProductSmall } from '../../interfaces/product-small.interface'
 import { Product } from '../../interfaces/product.interface'
 
 @Component({
@@ -10,7 +9,7 @@ import { Product } from '../../interfaces/product.interface'
 export class ModalDeleteProductComponent implements OnInit {
   constructor() {}
 
-  @Input('productDelete') productSelected!: ProductSmall;
+  @Input('productDelete') productSelected!: Product;
 
   ngOnInit(): void {}
 }
