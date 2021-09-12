@@ -32,27 +32,32 @@
 
 
       <div class="col-sm-12 mb-4">
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <button type="button" pButton  (click)="showDialog()" icon="pi pi-plus" label="New" data-bs-toggle="modal" class="p-button-raised p-button-rounded" data-bs-target="#modalNewProduct" ></button>
-          </li>
-          <li class="nav-item">          
-            <button type="button" pButton icon="pi pi-book"  
-                    [class]="isList == true ? 
-                        ['mx-2' ,'p-button-secondary' ,'p-button-rounded' ,'p-button-raised','p-button-primary']:
-                        ['mx-2' ,'p-button-warning' ,'p-button-rounded' ,'p-button-raised','p-button-primary']" [disabled]="isList"
-                (click)="changeView(isList)" label="Change List">
-            </button>
-          </li>
-          <li class="nav-item">
-            <button type="button" pButton  icon="pi pi-book" 
-                    [class]="isList == true ? 
-                        ['mx-2' ,'p-button-secondary' ,'p-button-rounded' ,'p-button-raised','p-button-warning']:
-                        ['mx-2' ,'p-button-secondary' ,'p-button-rounded' ,'p-button-raised','p-button-primary']" [disabled]="!isList"
-                (click)="changeView(isList)" label="Change Cards">
-            </button>
-          </li>
-        </ul>
+      
+        <ul class="nav nav-pills">
+            <li class="nav-item">                
+              <a pButton data-bs-target="#modalNewProduct"  data-bs-toggle="modal" label="New" class="nav-link mx-2  p-button-secondary lp p-button-rounded p-button-raised"  (click)="showDialog()" >
+                <i class="pi pi-book mx-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a pButton data-bs-target="#modalNewProduct" label="Grid"  
+                    class="nav-link mx-2 p-button-secondary p-button-rounded p-button-raise p-button-warning" (click)="changeView(isList)"
+                [hidden]="!isList">
+                <i class="pi pi-book mx-2"></i>
+                </a>            
+            </li>
+            <li class="nav-item">
+                <a pButton data-bs-target="#modalNewProduct" label="List"  
+                   class="nav-link mx-2 p-button-secondary p-button-rounded p-button-raise p-button-warning" (click)="changeView(isList)"
+                  [hidden]="isList">
+                <i class="pi pi-book mx-2"></i>
+                </a>  
+            </li>
+           
+          </ul>
+
+
+        
       </div>
 
       <div class="col-sm-12" *ngIf="isList; else tableView">
