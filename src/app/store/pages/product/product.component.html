@@ -68,7 +68,7 @@
       </div>
 
       <ng-template #tableView class="col-sm-12">
-        <div class="row">
+        <!-- <div class="row">
           <div
             *ngFor="let product of mostSelledProducts"
             class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-2 mb-3"
@@ -82,8 +82,20 @@
               (click)='selectProductCard(product)'
             ></app-card-product>
           </div>
-        </div>
-      </ng-template>
+        </div> -->
+        <div class="row row-cols-1 row-cols-3 g4">
+            <div *ngFor="let product of mostSelledProducts" class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-2 mb-3">
+                <app-card-product
+                    [nameProduct]="product.name"
+                    [descriptionProduct]="product.description"
+                    [priceProduct]="product.price"
+                    [stockProduct]="product.stock"
+                    [categoryProduct]="product.category"
+                    (click)='selectProductCard(product)'>                    
+                </app-card-product>
+            </div>
+        </div>    
+    </ng-template>
 
       <div class="col-sm-12">        
         <app-modal-add-product
