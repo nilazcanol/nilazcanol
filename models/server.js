@@ -4,7 +4,7 @@ const routerUsers = require('../routes/users.routes');
 const routerCategories = require('../routes/category.routes');
 const routerProducts = require('../routes/product.routes');
 const { dbConnection } = require('../database/config');
-
+const path = require('path');
 class Server {
 	constructor() {
 		this.app = express();
@@ -24,6 +24,11 @@ class Server {
 		
 		// Routes
 		this.routes();
+
+        // Other Routes
+        this.app.get('*', (req, res)=> {
+            res.sendFile(path.resolve(__dirname,'../public/index.html'))
+        })        
 	}
 
 	async connectDB (){
@@ -41,6 +46,7 @@ class Server {
 		this.app.use(this.usersPath, routerUsers);
 		this.app.use(this.categoriesPath, routerCategories);
 		this.app.use(this.productPath, routerProducts);
+        
 	}
 
 	listen() {
