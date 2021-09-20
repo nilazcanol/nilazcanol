@@ -4,29 +4,37 @@ const Sale = require('../models/sale');
 
 const saleGet = async (req = request, res = response) => {
 
-	const { limit = 5, since = 0 } = req.query;
+	const { date = new Date() } = req.query;
+    const dateNow = new Date()
 
-	const [total, Sales] = await  Promise.all([
-		Sale.countDocuments(),
-		Sale.find().limit(Number(limit)).skip(Number(since))
-	])
 
-	res.json({
-		total,
-		Sales		
-	});
+    if(typeof date == 'object'){         
+        const Sales = await (await Sale.find()).filter( sale => ( sale.saleDate.getMonth() == dateNow.getMonth() ))        
+        return res.json({
+            total:Sales.length,
+            Sales
+        });        
+    }else{  
+        const dateIn = new Date(date);     
+        const Sales = await (await Sale.find()).filter( sale => ( sale.saleDate.getMonth()+1 == dateIn.getMonth()+1 ))
+           
+        return res.json({
+            total: Sales.length,
+            Sales
+        });
+    }
+
 };
 
 
 const saveSale = async ( req = request, res = response) => {
     
     const { totalSale, saleDate } = req.body;
-    console.log({
-        totalSale, saleDate
-    });
 
+    const dateNow = new Date(saleDate)
 
-    const sale = new Sale({ totalSale, saleDate });
+    
+    const sale = new Sale({ totalSale, saleDate : dateNow  });
 
     sale.save();
 
@@ -36,4 +44,6 @@ const saveSale = async ( req = request, res = response) => {
     })
 }
 
-module.exports = { saleGet, saveSale }
+
+
+module.exports = { saleGet, saveSale, }

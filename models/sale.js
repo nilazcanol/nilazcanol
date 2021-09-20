@@ -10,7 +10,7 @@ const saleSchema = Schema({
         required: [true, 'The total item is required' ]
     },
     saleDate : {
-        type: String,
+        type: Date,
         required: [true,'The sale date is required']
     },
    
