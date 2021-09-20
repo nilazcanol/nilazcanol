@@ -5,6 +5,7 @@ const routerCategories = require('../routes/category.routes');
 const routerProducts = require('../routes/product.routes');
 const { dbConnection } = require('../database/config');
 const path = require('path');
+const routerSales = require('../routes/sale.routes');
 class Server {
 	constructor() {
 		this.app = express();
@@ -46,6 +47,7 @@ class Server {
 		this.app.use(this.usersPath, routerUsers);
 		this.app.use(this.categoriesPath, routerCategories);
 		this.app.use(this.productPath, routerProducts);
+		this.app.use(this.salesPath, routerSales);
         
 	}
 
