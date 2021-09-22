@@ -19,6 +19,9 @@ import { ModalAddProductComponent } from './components/modal-add-product/modal-a
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalEditProductComponent } from './components/modal-edit-product/modal-edit-product.component';
 import { ModalDeleteProductComponent } from './components/modal-delete-product/modal-delete-product.component';
+import { SaleComponent } from './pages/sale/sale.component';
+import { ProductSaleComponent } from './components/product-sale/product-sale.component';
+import { MenuSaleComponent } from './components/menu-sale/menu-sale.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -31,7 +34,10 @@ import { ModalDeleteProductComponent } from './components/modal-delete-product/m
     NewProductComponent,
     ModalAddProductComponent,
     ModalEditProductComponent,
-    ModalDeleteProductComponent
+    ModalDeleteProductComponent,
+    SaleComponent,
+    ProductSaleComponent,
+    MenuSaleComponent
   ],
   imports: [
     CommonModule,

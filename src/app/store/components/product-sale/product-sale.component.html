@@ -1,0 +1,29 @@
+<div class="card mb-3" >
+    <div class="row g-0">
+      <div class="col-md-4">
+          <div class="card-title mt-3 ms-3">
+            <span *ngIf="stock>4" class="badge bg-success"> Available </span>            
+            <span *ngIf="stock> 0 && stock<5" class="badge bg-warning">Low stock</span>
+            <span *ngIf="stock==0" class="badge bg-danger"> Out of stock</span> 
+          </div>
+        <img src="https://unimarc.vteximg.com.br/arquivos/ids/199233-292-292/000000000000355630-UN-01.jpg?v=637304705548170000" class="img-fluid rounded-start" alt="..."  >
+
+    </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{name}}</h5>
+          <p class="card-text">{{description}}</p>
+          <p class="card-text">
+           <span class="badge bg-primary mx-2"><strong>Stock: </strong> {{stock}} </span>            
+          
+        </p>
+        <label for="customRange2" class="form-label">Quantity: {{miFormularioReactivo.controls['amount'].value }} </label>
+        <form [formGroup]="miFormularioReactivo">
+            <input [hidden]="stock == 0 || stock == undefined" formControlName="amount" type="range" class="form-range" min=1 [max]=stock  step="1">
+            <button [disabled]="stock == 0 || stock == undefined" pButton label="Add to Cart" icon="pi pi-plus" [class]="stock == 0 || stock == undefined ? 'p-button-secondary': 'p-button-primary' "></button>
+        </form>
+
+        </div>
+      </div>
+    </div>
+  </div>

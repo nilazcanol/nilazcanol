@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { Product } from '../../interfaces/product.interface'
-import { resApiProduct } from '../../interfaces/resApiProduct.interface';
 import { ProductsService } from '../../services/products.service'
 
 @Component({
@@ -19,7 +18,7 @@ export class ProductComponent implements OnInit {
     name: '',
     description: '',
     price:0,
-    stock:'',
+    stock:0,
     img:''
   };
 
