@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li *ngFor="let item of menuList" class="nav-item">
-            <a  class="nav-link active" aria-current="page" [routerLink]="item.routerLink"><i [class]=""></i> {{item.label}}</a>
+            <a  class="nav-link active" aria-current="page" [routerLink]="item.routerLink"><i [class]="item.icon"></i> {{item.label}}</a>
         </li>
                   
         </ul>

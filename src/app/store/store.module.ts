@@ -22,6 +22,9 @@ import { ModalDeleteProductComponent } from './components/modal-delete-product/m
 import { SaleComponent } from './pages/sale/sale.component';
 import { ProductSaleComponent } from './components/product-sale/product-sale.component';
 import { MenuSaleComponent } from './components/menu-sale/menu-sale.component';
+import { ProductSaleListComponent } from './components/product-sale-list/product-sale-list.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -37,7 +40,10 @@ import { MenuSaleComponent } from './components/menu-sale/menu-sale.component';
     ModalDeleteProductComponent,
     SaleComponent,
     ProductSaleComponent,
-    MenuSaleComponent
+    MenuSaleComponent,
+    ProductSaleListComponent,
+    ShoppingCartComponent,
+    HomeSaleComponent
   ],
   imports: [
     CommonModule,

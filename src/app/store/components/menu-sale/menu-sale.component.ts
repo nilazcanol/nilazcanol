@@ -17,11 +17,17 @@ export class MenuSaleComponent implements OnInit {
    
     this.menuList = [
         { 
-            label: 'Home', 
-            icon: 'pi pi-home  me-2 ', 
-            routerLink:'/store/home',
+            label: 'Product', 
+            icon: 'pi pi-th-large  me-2 ', 
+            routerLink:'/store/sales',
             routerLinkActiveOptions:"active"
         },
+        { 
+            label: 'Shopping cart', 
+            icon: 'pi pi-shopping-cart me-2 ', 
+            routerLink:'/store/sales/shopping-cart',
+            routerLinkActiveOptions:"active"
+        }
     ]
   }
 

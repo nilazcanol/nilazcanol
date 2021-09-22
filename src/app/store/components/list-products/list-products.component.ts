@@ -17,14 +17,7 @@ export class ListProductsComponent implements OnInit {
   @Output() productCheckedSend: EventEmitter<Product> = new EventEmitter<Product>();
 
   
-//   productChecked:Product = {
-//       category:'',
-//       descriptionProduct:'',
-//       nameProduct:'',
-//       priceProduct:0,
-//       stockProduct:'',
-//       img:''
-//     }
+
 
   @Input('listProduct') mostSelledProducts!: Product[];
 

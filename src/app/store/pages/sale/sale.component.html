@@ -1,24 +1,14 @@
 
 <div class="row">
-    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mb-3">
-      <app-menu-store></app-menu-store>
-    </div>
-    <div class="col-sm-12 col-md-8">
-        <div class="row">
-            <div class="col-sm-12 mb-3">
-                <app-menu-sale>
-                </app-menu-sale>
-            </div>
-            <div *ngFor="let product of arrayProduct" class="col-sm-12 col-md-6  col-lg-4 col-xl-4 col-xxl-3 mb-3">
-                <app-product-sale
-                    [name]='product.name' 
-                    [priceProduct]="product.price"
-                    [stock]="product.stock"
-                    [description]="product.description" >
-                </app-product-sale>
-            </div>
-            
+  
+    <div class="col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+
+            <div class="col-sm-12">
+                <app-product-sale-list                  
+                  [listProduct]="arrayProduct"
+                ></app-product-sale-list>
+              </div>
             
         </div>
-    </div>
+   
 </div>
