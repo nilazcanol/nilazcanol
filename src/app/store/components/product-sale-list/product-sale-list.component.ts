@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../interfaces/product.interface';
 
 @Component({
@@ -13,7 +14,13 @@ export class ProductSaleListComponent implements OnInit {
     
  @Input('listProduct') mostSelledProducts!: Product[];
  
- constructor() { }
+ formProductSelect: FormGroup = this.fb.group({
+    selectAccount: [0, [Validators.required ] ],
+   
+  })
+ constructor( private fb:FormBuilder ) { }
+
+ val: number=10;
 
   ngOnInit(): void {
   }
