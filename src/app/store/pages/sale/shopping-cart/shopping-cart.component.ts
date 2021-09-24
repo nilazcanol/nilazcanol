@@ -10,7 +10,14 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor() { }
 
+  isFinished: boolean = false;
+
   ngOnInit(): void {
+  }
+
+  finishPurchase(state:boolean){
+      console.log(state);
+    this.isFinished = state;
   }
 
 }

@@ -2,13 +2,18 @@
   [value]="mostSelledProducts"
   [listStyle]="{ height: 'auto' }"
   header="Products"
-  filterBy="nameProduct"
+  filterBy="name"
   filterPlaceholder="Filter by name"
   [dragdrop]="true"
 >
   <ng-template let-product pTemplate="item">
     <div class="product-item">
       <div class="product-list-detail">
+        <div class="card-title mb-3 mt-2">
+        <span *ngIf="product.stock>4" class="badge bg-success"> Available </span>            
+            <span *ngIf="product.stock> 0 && product.stock<5" class="badge bg-warning">Low stock</span>
+            <span *ngIf="product.stock==0" class="badge bg-danger"> Out of stock</span> 
+          </div>
         <h5 class="p-mb-2">{{ product.name }}</h5>
         <i class="pi pi-tag product-category-icon me-2"></i>
         <span class="product-category">{{ product.category }}</span>
@@ -30,7 +35,7 @@
             <div class="col-sm-12 col-md-4 mb-4">
                 <form [formGroup]="formProductSelect">
                     <h6 class="mb-4 mt-1"><strong>Quantity selects:</strong> {{selectAccount.value}}</h6>
-                    <p-slider  #selectAccount formControlName='selectAccount' [min]="0" [max]="product.stock" [step]=1></p-slider>
+                    <p-slider  [disabled]="product.stock == 0" #selectAccount formControlName='selectAccount' [min]="0" [max]="product.stock" [step]=1></p-slider>
 
                 </form>
 
@@ -41,7 +46,7 @@
                         <button pButton label="Detail" icon="pi pi-info" class="mb-2 p-button-secondary"></button>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-2 mt-4 mx-sm-1 mx-md-4 mx-lg-4  ms-xl-4 mx-xxl-3  mt-sm-2 mx-lg-1 ">
-                        <button pButton label="Add" class="mb-2" icon="pi pi-plus"></button>
+                        <button [disabled]="product.stock == 0" pButton label="Add" class="mb-2" icon="pi pi-plus"></button>
                    </div>
                 </div>
             </div>
