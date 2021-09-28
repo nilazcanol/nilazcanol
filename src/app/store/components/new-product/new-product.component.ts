@@ -7,6 +7,7 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Product } from '../../interfaces/product.interface'
+import { ProductsService } from '../../services/products.service'
 
 @Component({
   selector: 'app-new-product',
@@ -16,14 +17,14 @@ import { Product } from '../../interfaces/product.interface'
 export class NewProductComponent implements OnInit, OnChanges {
   @Input('productInput') productInput!: Product
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private productService:ProductsService) {}
 
   myFormProduct!: FormGroup
 
   ngOnInit(): void {
     this.myFormProduct = this.fb.group({
       name: ['', Validators.required],
-      img: ['', Validators.required],
+      img: [''],
       description: ['', Validators.required],
       price: [0, Validators.required],
       stock: ['', Validators.required],
@@ -33,9 +34,9 @@ export class NewProductComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.myFormProduct.controls['name'].setValue(
-        changes.productInput.currentValue.name
-      )
-    
+      changes.productInput.currentValue.name,
+    )
+
     this.myFormProduct.controls['category'].setValue(
       changes.productInput.currentValue.category,
     )
@@ -51,7 +52,6 @@ export class NewProductComponent implements OnInit, OnChanges {
     this.myFormProduct.controls['img'].setValue(
       changes.productInput.currentValue.img,
     )
-
   }
 
   fieldIsValid(campo: string) {
@@ -66,6 +66,9 @@ export class NewProductComponent implements OnInit, OnChanges {
   }
 
   saveProduct(): void {
-    this.clearForm()
+    console.log(this.myFormProduct.value)
+    this.productService.saveNewProduct(this.myFormProduct.value).subscribe( (res) => {
+        console.log(res);
+    })    
   }
 }
