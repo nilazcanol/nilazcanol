@@ -1,10 +1,11 @@
-import { NgModule }        from '@angular/core';
+import { NgModule     }    from '@angular/core';
 import { CommonModule }    from '@angular/common';
-import { MenuModule }      from 'primeng/menu';
+import { MenuModule   }    from 'primeng/menu';
 import { CardModule   }    from 'primeng/card';
 import { ButtonModule }    from 'primeng/button';
 import { OrderListModule } from 'primeng/orderlist';
-import {SliderModule} from 'primeng/slider';
+import { SliderModule   }  from 'primeng/slider';
+import { ToastModule    }  from 'primeng/toast';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import {SliderModule} from 'primeng/slider';
     CardModule,
     ButtonModule,
     OrderListModule,
-    SliderModule
+    SliderModule,
+    ToastModule,
+
   ]
 })
 export class PrimengModule { }

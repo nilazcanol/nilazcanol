@@ -25,6 +25,7 @@ import { MenuSaleComponent } from './components/menu-sale/menu-sale.component';
 import { ProductSaleListComponent } from './components/product-sale-list/product-sale-list.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
+import { MiniShoppingCartComponent } from './components/mini-shopping-cart/mini-shopping-cart.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -43,7 +44,8 @@ import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
     MenuSaleComponent,
     ProductSaleListComponent,
     ShoppingCartComponent,
-    HomeSaleComponent
+    HomeSaleComponent,
+    MiniShoppingCartComponent
   ],
   imports: [
     CommonModule,

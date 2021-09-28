@@ -1,0 +1,22 @@
+<div class="collapse mb-3" id="collapseExample">
+  <div class="row">
+    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-3 mb-4" *ngFor="let product of listShoppingCart">
+        <span>{{product.name}}</span>
+      <button
+        type="button"
+        class="btn btn-outline-danger position-relative ms-4"
+      >
+        <i class="pi pi-trash"></i>
+        Delete
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        >
+          3
+        </span>
+      </button>
+    </div>
+    <div class="col-sm-12">
+      <hr width="40%" class="bg-warning" />
+    </div>
+  </div>
+</div>
