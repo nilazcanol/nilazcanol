@@ -59,7 +59,7 @@ const productPost = async (req = request, res = response) => {
     
 	if ( !existCategory ) {
 		return res.status(400).json({
-			msg: 'Category o registered letter',
+			msg: 'category does not exist',
 		});
 	}
 
