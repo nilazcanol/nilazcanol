@@ -7,11 +7,10 @@ const Category = require('../models/category');
 
 const productGet = async (req = request, res = response) => {
 
-    const { limit = 5, since = 0 } = req.query;
 
     const [total, productsPromise] = await  Promise.all([
 		Product.countDocuments(),
-		Product.find().limit(Number(limit)).skip(Number(since))
+		Product.find()
 	])
 
     const products = await Promise.all(
