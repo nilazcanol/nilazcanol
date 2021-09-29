@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product.interface';
+import { resApiError } from '../interfaces/resApiError.interface';
 import { resApiProduct } from '../interfaces/resApiProduct.interface';
 @Injectable({
   providedIn: 'root'
@@ -54,9 +55,12 @@ export class ProductsService {
     return this.http.get<resApiProduct>(url);
   }
 
-  saveNewProduct(product:Product):Observable<resApiProduct>{
+  saveNewProduct(product:Product):Observable<resApiProduct|resApiError >{
+
+
       const url:string = `${this._urlBase}/products`;
-      return this.http.post<resApiProduct>(url,product);
+      console.log(product);
+      return this.http.post<resApiProduct|resApiError>(url,product);
   }
 
 

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http'
 import {
   Component,
   Input,
@@ -6,19 +7,21 @@ import {
   SimpleChanges,
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import {MessageService} from 'primeng/api';
 import { Product } from '../../interfaces/product.interface'
+import { resApiProductSave } from '../../interfaces/resApiProductSave.interface';
 import { ProductsService } from '../../services/products.service'
 
 @Component({
   selector: 'app-new-product',
   templateUrl: './new-product.component.html',
   styles: [],
+  providers:[MessageService]
 })
 export class NewProductComponent implements OnInit, OnChanges {
   @Input('productInput') productInput!: Product
 
-  constructor(private fb: FormBuilder, private productService:ProductsService) {}
-
+  constructor(private fb: FormBuilder, private productService:ProductsService, private messageService: MessageService) {}
   myFormProduct!: FormGroup
 
   ngOnInit(): void {
@@ -66,9 +69,19 @@ export class NewProductComponent implements OnInit, OnChanges {
   }
 
   saveProduct(): void {
-    console.log(this.myFormProduct.value)
-    this.productService.saveNewProduct(this.myFormProduct.value).subscribe( (res) => {
+    this.productService.saveNewProduct(this.myFormProduct.value).subscribe( (res ) => {
+
         console.log(res);
-    })    
+        this.messageService.add({severity:'success', summary: ' saved correctly', detail: '' });
+
+    },(errors:HttpErrorResponse )=>{
+
+        if(errors.status == 400 ){
+            this.messageService.add({severity:'error', summary: 'Error Bad Request: 400', detail: " Error: Check the data entered: In case the error persists, contact the technical support." });
+        }
+        if(errors.status == 500 ){
+            this.messageService.add({severity:'error', summary: 'Error:  HTTP server internal error', detail: "Contact the technical support." });
+        }
+    })   
   }
 }
