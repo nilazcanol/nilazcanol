@@ -8,20 +8,32 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {MessageService} from 'primeng/api';
+import { category } from '../../interfaces/category.interface';
 import { Product } from '../../interfaces/product.interface'
 import { resApiProductSave } from '../../interfaces/resApiProductSave.interface';
+import { CategoriesService } from '../../services/categories.service';
 import { ProductsService } from '../../services/products.service'
 
 @Component({
-  selector: 'app-new-product',
-  templateUrl: './new-product.component.html',
+  selector: 'app-product-features',
+  templateUrl: './product-features.component.html',
   styles: [],
   providers:[MessageService]
 })
 export class NewProductComponent implements OnInit, OnChanges {
-  @Input('productInput') productInput!: Product
+  
+    @Input('productInput') productInput?: Product;
+    @Input('isNewProduct') isNewProduct: boolean = true;
 
-  constructor(private fb: FormBuilder, private productService:ProductsService, private messageService: MessageService) {}
+  listCategories:category[] = [
+      {name:'default'}
+  ]
+
+  constructor(
+      private fb: FormBuilder, 
+      private productService:ProductsService,
+      private categoryService:CategoriesService, 
+      private messageService: MessageService) {}
   myFormProduct!: FormGroup
 
   ngOnInit(): void {
@@ -32,6 +44,10 @@ export class NewProductComponent implements OnInit, OnChanges {
       price: [0, Validators.required],
       stock: ['', Validators.required],
       category: ['', Validators.required],
+    })
+    this.categoryService.getAllCategories().subscribe( res => {
+        console.log(res);
+        this.listCategories = res.categories
     })
   }
 
@@ -83,5 +99,9 @@ export class NewProductComponent implements OnInit, OnChanges {
             this.messageService.add({severity:'error', summary: 'Error:  HTTP server internal error', detail: "Contact the technical support." });
         }
     })   
+  }
+
+  updateProduct():void {
+      console.log('Actualizar product');
   }
 }

@@ -20,7 +20,10 @@ export class ProductSaleListComponent implements OnInit {
     selectAccount: [0, [Validators.required ] ],
    
   })
- constructor( private fb:FormBuilder, private messageService: MessageService ) { }
+ constructor( 
+    private fb:FormBuilder, 
+    private messageService: MessageService,
+    ) { }
 
  val: number=10;
 
@@ -28,6 +31,7 @@ export class ProductSaleListComponent implements OnInit {
 
   ] ;
   ngOnInit(): void {
+
   }
 
   addProduct(productSelected:Product){

@@ -33,22 +33,13 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  changeView(isList: boolean) {
-    this.isList = !isList;
-  }
 
-  display: boolean = false
 
-  showDialog() {
-    this.display = true
-  }
 
   showProduct(product:Product):void{
     this.productSelected = product;
   }
 
-  selectProductCard(product:Product):void{
-    this.productSelected = product;
-  }
+ 
 }
 

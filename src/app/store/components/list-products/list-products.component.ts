@@ -14,15 +14,21 @@ export class ListProductsComponent implements OnInit {
 
   }
 
-  @Output() productCheckedSend: EventEmitter<Product> = new EventEmitter<Product>();
 
-  
-
+  isNewProduct:boolean = true;
+  productInput? :Product;
 
   @Input('listProduct') mostSelledProducts!: Product[];
 
 
-  selectProduct(productSelect: Product):void {
-    this.productCheckedSend.emit( productSelect)
+  selectProduct(isNew:boolean = true,productSelect?: Product):void {
+    if(isNew){
+        this.isNewProduct = isNew;             
+    } else {
+        this.isNewProduct = isNew; 
+        this.productInput = productSelect!;       
+
+    }
   }
+  
 }

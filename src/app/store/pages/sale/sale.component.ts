@@ -18,8 +18,12 @@ export class SaleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.arrayProduct = this.productService.getProducts();
+    this.productService.getAllProducts().subscribe(res =>{
+        this.arrayProduct = res.products;
+    });
 
   }
+
+  
 
 }
