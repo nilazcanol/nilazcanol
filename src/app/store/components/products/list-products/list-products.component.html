@@ -1,4 +1,13 @@
+<button 
+    class="mb-4" 
+    pButton 
+    label="New Product"
+    (click)="selectProduct(true)"
+    data-bs-target="#modalProduct"  
+    data-bs-toggle="modal" 
+    ></button>
 <p-orderList [value]="mostSelledProducts" [listStyle]="{'height':'auto'}" header="List of Products" filterBy="nameProduct" filterPlaceholder="Filter by name" [dragdrop]="true">
+    
     <ng-template let-product pTemplate="item">
         <div class="product-item">
           
@@ -15,10 +24,31 @@
                         <button pButton type="button" icon="pi pi-info" iconPos="left" label="Detail" class="p-button-primary mx-2 float-end  p-button-raised p-button-rounded"></button>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 col-xxl-1 mb-3">
-                        <button pButton type="button" icon="pi pi-pencil" iconPos="left" label="Update" class="p-button-warning mx-2 float-end  p-button-raised p-button-rounded" data-bs-toggle="modal" data-bs-target="#modalEditProduct" (click)='selectProduct(product)'></button>
+                        <button 
+                            pButton 
+                            type="button" 
+                            icon="pi pi-pencil" 
+                            iconPos="left" 
+                            label="Update" 
+                            class="p-button-warning mx-2 float-end p-button-raised p-button-rounded" 
+                            (click)="selectProduct(false,product)"  
+                            pButton 
+                            data-bs-target="#modalProduct"  
+                            data-bs-toggle="modal">
+                        </button>
                     </div>
                     <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 col-xxl-1  mb-3">
-                        <button pButton type="button" icon="pi pi-trash" iconPos="left" label="Delete" class="p-button-danger mx-2 float-end  p-button-raised p-button-rounded" data-bs-toggle="modal" data-bs-target="#modalDeleteProduct" (click)='selectProduct(product)'></button>
+                        <button 
+                            pButton 
+                            type="button" 
+                            icon="pi pi-trash" 
+                            iconPos="left" 
+                            label="Delete" 
+                            class="p-button-danger mx-2 float-end p-button-raised p-button-rounded"
+                            pButton
+                            data-bs-target="#modalProduct"
+                            data-bs-toggle="modal">
+                        </button>
                     </div>
                 </div>
   
@@ -29,4 +59,9 @@
          
         </div>
     </ng-template>
-</p-orderList>
+</p-orderList>          
+
+<app-product-features
+ [isNewProduct]="isNewProduct"
+ [productInput]="productInput">
+</app-product-features>

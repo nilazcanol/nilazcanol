@@ -1,3 +1,5 @@
 export interface category{
-    nameCategory: string
+    name: string,
+    uid?:string,
+    __v?: number
 }

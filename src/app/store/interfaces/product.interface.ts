@@ -3,7 +3,7 @@ export interface Product{
     name: string,
     description: string,
     price: number,
-    stock: string,
+    stock: number,
     category:string,
     img?:string,
     state?:Boolean

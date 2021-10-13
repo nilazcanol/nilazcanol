@@ -1,0 +1,100 @@
+
+<div class="modal fade" id="modalProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{isNewProduct == true ? "New product": "Update product" }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="myFormProduct" (ngSubmit)="isNewProduct === true ? saveProduct(): updateProduct() ">
+                <div class="input-group mb-3">
+                <span class="input-group-text">Name</span>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Name"
+                  aria-label="name"
+                  formControlName="name"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <span *ngIf="fieldIsValid('name')" class="input-group alert alert-danger mb-3">
+                The name must be required
+              </span>
+            
+            
+            
+              <div class="input-group mb-3">
+                <span class="input-group-text">Description</span>
+                <textarea
+                  class="form-control"
+                  aria-label="description"
+                  formControlName="description"
+                ></textarea>
+              </div>
+              <span *ngIf="fieldIsValid('description')" class="input-group alert alert-danger mb-3">
+                The description must be required
+              </span>
+            
+              <div class="input-group mb-3">
+                <span class="input-group-text">Img</span>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="imgProduct"
+                  formControlName="img"
+                  aria-describedby="basic-addon1"
+                />
+              </div>
+              <span *ngIf="fieldIsValid('img')" class="input-group alert alert-danger mb-3">
+                The img must be required
+              </span>
+            
+            
+              <div class="input-group mb-3">
+                <span class="input-group-text">Price $</span>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="price"
+                  aria-label="price"
+                />
+              </div>
+              <span *ngIf="fieldIsValid('price')" class="input-group alert alert-danger mb-3">
+            The Price must be required  </span>
+            
+              <div class="input-group mb-3">
+                <span class="input-group-text">Stock</span>
+                <input type="number" class="form-control" formControlName="stock" />
+              </div>
+              <span *ngIf="fieldIsValid('stock')" class="input-group alert alert-danger mb-3">
+            The stock must be required  </span>
+            
+              <div class="input-group mb-3">
+                <span class="input-group-text">Category</span>
+                <select formControlName="category" class="form-select" aria-label="Default select example">
+                    <option  *ngFor="let category of listCategories" [value]="category.uid">{{category.name}}</option>
+                </select>
+              </div>
+              <span *ngIf="fieldIsValid('category')" class="input-group alert alert-danger mb-3">
+            The category must be required  </span>
+            
+              <button
+                [disabled]="myFormProduct.invalid"
+                type="submit"
+                class="btn btn-primary float-end"
+              >
+                Save product
+              </button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-toast></p-toast>
