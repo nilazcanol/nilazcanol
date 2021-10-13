@@ -98,4 +98,12 @@ export class NewProductComponent implements OnInit {
 	updateProduct(): void {
 		// console.log('Actualizar product');
 	}
+
+    Restoreform(){
+       
+        setTimeout(() => {
+            this.myFormProduct.reset();
+            this.productWasSaved= false;
+		}, 2000);
+    }
 }
