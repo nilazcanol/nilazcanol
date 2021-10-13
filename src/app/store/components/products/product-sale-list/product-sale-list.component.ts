@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MessageService} from 'primeng/api';
-import { Product } from '../../interfaces/product.interface';
+import { Product } from '../../../interfaces/product.interface';
 
 @Component({
   selector: 'app-product-sale-list',

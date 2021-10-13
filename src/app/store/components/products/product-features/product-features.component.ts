@@ -8,11 +8,11 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import {MessageService} from 'primeng/api';
-import { category } from '../../interfaces/category.interface';
-import { Product } from '../../interfaces/product.interface'
-import { resApiProductSave } from '../../interfaces/resApiProductSave.interface';
-import { CategoriesService } from '../../services/categories.service';
-import { ProductsService } from '../../services/products.service'
+import { category } from '../../../interfaces/category.interface';
+import { Product } from '../../../interfaces/product.interface'
+import { resApiProductSave } from '../../../interfaces/resApiProductSave.interface';
+import { CategoriesService } from '../../../services/categories.service';
+import { ProductsService } from '../../../services/products.service'
 
 @Component({
   selector: 'app-product-features',
