@@ -1,67 +1,44 @@
-<button 
-    class="mb-4" 
-    pButton 
-    label="New Product"
-    (click)="selectProduct(true)"
-    data-bs-target="#modalProduct"  
-    data-bs-toggle="modal" 
-    ></button>
-<p-orderList [value]="mostSelledProducts" [listStyle]="{'height':'auto'}" header="List of Products" filterBy="nameProduct" filterPlaceholder="Filter by name" [dragdrop]="true">
-    
-    <ng-template let-product pTemplate="item">
-        <div class="product-item">
-          
-            
-            <div class="product-list-detail">
-                <h5 class="p-mb-2">{{product.name}}</h5>
-                <i class="pi pi-tag product-category-icon me-2"></i>
-                <span class="product-category">{{product.category}}</span>
-            </div>
-            <div class="product-list-action mt-2">
-                <h6 class="p-mb-2"><strong>Price:</strong> ${{product.price}}</h6>
-                <div class="row justify-content-md-end">
-                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 col-xxl-1 mb-3">
-                        <button pButton type="button" icon="pi pi-info" iconPos="left" label="Detail" class="p-button-primary mx-2 float-end  p-button-raised p-button-rounded"></button>
-                    </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 col-xxl-1 mb-3">
-                        <button 
-                            pButton 
-                            type="button" 
-                            icon="pi pi-pencil" 
-                            iconPos="left" 
-                            label="Update" 
-                            class="p-button-warning mx-2 float-end p-button-raised p-button-rounded" 
-                            (click)="selectProduct(false,product)"  
-                            pButton 
-                            data-bs-target="#modalProduct"  
-                            data-bs-toggle="modal">
-                        </button>
-                    </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 col-xxl-1  mb-3">
-                        <button 
-                            pButton 
-                            type="button" 
-                            icon="pi pi-trash" 
-                            iconPos="left" 
-                            label="Delete" 
-                            class="p-button-danger mx-2 float-end p-button-raised p-button-rounded"
-                            pButton
-                            data-bs-target="#modalProduct"
-                            data-bs-toggle="modal">
-                        </button>
-                    </div>
-                </div>
-  
-            </div>
-            <div class="product-list-action">
-                <h6 class="p-mb-2"><strong>Stock:</strong> {{product.stock}}</h6>
-            </div>
-         
-        </div>
-    </ng-template>
-</p-orderList>          
+<button
+	class="mb-4"
+	pButton
+	label="New Product"
+	(click)="selectProduct(true)"
+	data-bs-target="#modalProduct"
+	data-bs-toggle="modal"
+></button>
 
+
+<div class="table-responsive">    
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of mostSelledProducts; let index = index">
+                <th scope="row">{{index+1}}</th>
+                <td>{{product.name}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.stock}}</td>
+                <td> 
+                    <button class="btn btn-primary mx-1">Detail</button> 
+                    <button class="btn btn-warning mx-1">Edit</button> 
+                    <button class="btn btn-danger mx-1">Delete</button> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <app-product-features
- [isNewProduct]="isNewProduct"
- [productInput]="productInput">
+	[isNewProduct]="isNewProduct"
+	[productInput]="productInput"
+	(productNew)="addToTheList($event)"
+>
 </app-product-features>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProductsService } from 'src/app/store/services/products.service';
 import { Product } from '../../../interfaces/product.interface';
 
 @Component({
@@ -8,18 +9,31 @@ import { Product } from '../../../interfaces/product.interface';
 })
 export class ListProductsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
+    this.productService.getAllProducts().subscribe( (res)=> {
+        this.mostSelledProducts = res.products;
+    },(res)=>{
+        this.mostSelledProducts = [
+            {
+                category:'test',
+                description:'test',
+                name:'test',
+                price:0,
+                stock:0
+            }
+        ];
 
+    })
   }
 
 
   isNewProduct:boolean = true;
   productInput? :Product;
 
-  @Input('listProduct') mostSelledProducts!: Product[];
 
+  mostSelledProducts!: Product[]
 
   selectProduct(isNew:boolean = true,productSelect?: Product):void {
     if(isNew){
@@ -29,6 +43,11 @@ export class ListProductsComponent implements OnInit {
         this.productInput = productSelect!;       
 
     }
+  }
+
+  addToTheList(product:Product){
+
+      this.mostSelledProducts.push(product)
   }
   
 }

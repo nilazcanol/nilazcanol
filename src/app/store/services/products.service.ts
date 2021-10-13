@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product.interface';
 import { resApiError } from '../interfaces/resApiError.interface';
 import { resApiProduct } from '../interfaces/resApiProduct.interface';
+import { resApiProductSave } from '../interfaces/resApiProductSave.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,54 +14,17 @@ export class ProductsService {
     private _urlBase = environment.URLBASE;
   constructor(private http:HttpClient) { }
 
-  getProducts = ()=>{
-        return [
-            {
-              name: 'Arroz Tucapel',
-              description: 'Arroz Gran Selección Grado 2 Tucapel, 1kg',
-              price:1999,
-              stock:13,
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-            {
-              name: 'Azúcar Iansa',
-              description: 'Azúcar Blanca Granulada Iansa, 1kg',
-              price:5999,
-              stock:0,
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-            {
-              name: 'Azúcar Iansa',
-              description: 'Azúcar Blanca Granulada Iansa, 1kg',
-              price:5999,
-              stock:3,
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-            {
-              name: 'Azúcar Iansa',
-              description: 'Azúcar Blanca Granulada Iansa, 1kg',
-              price:5999,
-              stock:25,
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-          ]
-  }
 
   getAllProducts():Observable<resApiProduct> {
     const url:string = `${this._urlBase}/products` 
     return this.http.get<resApiProduct>(url);
   }
 
-  saveNewProduct(product:Product):Observable<resApiProduct|resApiError >{
+  saveNewProduct(product:Product):Observable<resApiProductSave >{
 
 
       const url:string = `${this._urlBase}/products`;
-      console.log(product);
-      return this.http.post<resApiProduct|resApiError>(url,product);
+      return this.http.post<resApiProductSave>(url,product);
   }
 
 

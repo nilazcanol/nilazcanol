@@ -6,8 +6,8 @@
           <h5 class="modal-title" id="staticBackdropLabel">{{isNewProduct == true ? "New product": "Update product" }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form [formGroup]="myFormProduct" (ngSubmit)="isNewProduct === true ? saveProduct(): updateProduct() ">
         <div class="modal-body">
-            <form [formGroup]="myFormProduct" (ngSubmit)="isNewProduct === true ? saveProduct(): updateProduct() ">
                 <div class="input-group mb-3">
                 <span class="input-group-text">Name</span>
                 <input
@@ -80,20 +80,21 @@
               <span *ngIf="fieldIsValid('category')" class="input-group alert alert-danger mb-3">
             The category must be required  </span>
             
-              <button
+           
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button
                 [disabled]="myFormProduct.invalid"
+                [hidden]=productWasSaved
                 type="submit"
                 class="btn btn-primary float-end"
               >
                 Save product
               </button>
-            </form>
+            </div>
+        </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
     </div>
   </div>
 
