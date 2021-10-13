@@ -17,20 +17,27 @@
                 <th scope="col">Category</th>
                 <th scope="col">Price</th>
                 <th scope="col">Stock</th>
+                <th scope="col">img</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let product of mostSelledProducts; let index = index">
+            <tr *ngFor="let product of listProducts; let index = index">
                 <th scope="row">{{index+1}}</th>
                 <td>{{product.name}}</td>
                 <td>{{product.category}}</td>
-                <td>{{product.price}}</td>
+                <td>{{product.price| currency : '$' : 'symbol' : '1.0-0'}}</td>
                 <td>{{product.stock}}</td>
+                <td><img width="100vw" [src]="product.img" [alt]="product.name"></td>
                 <td> 
-                    <button class="btn btn-primary mx-1">Detail</button> 
-                    <button class="btn btn-warning mx-1">Edit</button> 
-                    <button class="btn btn-danger mx-1">Delete</button> 
+                    <button class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2">Detail</button> 
+                    <button class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2">Edit</button> 
+                    <button class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2" 	
+                        data-bs-target="#modalDeleteProduct"
+                        data-bs-toggle="modal"
+                        (click)="selectProduct(false,product)">
+                        Delete
+                    </button> 
                 </td>
             </tr>
         </tbody>
@@ -42,3 +49,11 @@
 	(productNew)="addToTheList($event)"
 >
 </app-product-features>
+
+
+<app-modal-delete-product
+[productRemoved]=false
+[productSelected]="productToBeDeleted!"
+(productDelete)="deleteTheList($event)">
+</app-modal-delete-product>
+

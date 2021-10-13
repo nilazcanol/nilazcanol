@@ -5,27 +5,27 @@ import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product.interface';
 import { resApiError } from '../interfaces/resApiError.interface';
 import { resApiProduct } from '../interfaces/resApiProduct.interface';
-import { resApiProductSave } from '../interfaces/resApiProductSave.interface';
+import { resApiProductResponse } from '../interfaces/resApiProductResponse.interface';
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class ProductsService {
+	private _urlBase = environment.URLBASE;
+	constructor(private http: HttpClient) {}
 
-    private _urlBase = environment.URLBASE;
-  constructor(private http:HttpClient) { }
+	getAllProducts(): Observable<resApiProduct> {
+		const url: string = `${this._urlBase}/products`;
+		return this.http.get<resApiProduct>(url);
+	}
 
+	saveNewProduct(product: Product): Observable<resApiProductResponse> {
+		const url: string = `${this._urlBase}/products`;
+		return this.http.post<resApiProductResponse>(url, product);
+	}
+	deleteProduct(product: Product): Observable<resApiProductResponse> {
+		const url: string = `${this._urlBase}/products/${product._id}`;
+		return this.http.delete<resApiProductResponse>(url);
+	}
 
-  getAllProducts():Observable<resApiProduct> {
-    const url:string = `${this._urlBase}/products` 
-    return this.http.get<resApiProduct>(url);
-  }
-
-  saveNewProduct(product:Product):Observable<resApiProductSave >{
-
-
-      const url:string = `${this._urlBase}/products`;
-      return this.http.post<resApiProductSave>(url,product);
-  }
-
-
+  
 }

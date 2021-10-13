@@ -3,10 +3,8 @@ import {
 	Component,
 	EventEmitter,
 	Input,
-	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -21,7 +19,7 @@ import { ProductsService } from '../../../services/products.service';
 	styles: [],
 	providers: [MessageService],
 })
-export class NewProductComponent implements OnInit, OnChanges {
+export class NewProductComponent implements OnInit {
 	@Input('productInput') productInput?: Product;
 	@Input('isNewProduct') isNewProduct: boolean = true;
 
@@ -52,27 +50,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 		});
 	}
 
-	ngOnChanges(changes: SimpleChanges): void {
-		this.myFormProduct.controls['name'].setValue(
-			changes.productInput.currentValue.name
-		);
-
-		this.myFormProduct.controls['category'].setValue(
-			changes.productInput.currentValue.category
-		);
-		this.myFormProduct.controls['description'].setValue(
-			changes.productInput.currentValue.description
-		);
-		this.myFormProduct.controls['price'].setValue(
-			changes.productInput.currentValue.price
-		);
-		this.myFormProduct.controls['stock'].setValue(
-			changes.productInput.currentValue.stock
-		);
-		this.myFormProduct.controls['img'].setValue(
-			changes.productInput.currentValue.img
-		);
-	}
+	
 
 	fieldIsValid(campo: string) {
 		return (
