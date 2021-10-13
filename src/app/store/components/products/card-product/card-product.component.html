@@ -1,38 +1,22 @@
-<!-- 
+<div class="card-body">
+	<p class="card-text">
+		<strong>Product: </strong>{{ nameProduct | titlecase }} |
+		<small class="text-muted">{{ categoryProduct }}</small> <br />
+		<strong>Description: </strong> {{ descriptionProduct | titlecase }}
+		<br />
+		<strong>Price: </strong>
+		{{ priceProduct | currency: 'USD':'symbol':'1.0-0' }} <br />
+		<strong>Stock: </strong> {{ stockProduct }} U
+	</p>
+	<div class="card-text">
+		<img [src]="imgProduct" [alt]="nameProduct" class="img-fluid" />
+	</div>
 
-<p-card [header]="nameProduct" [subheader]="'Stock: '+stockProduct" styleClass="p-card-shadow">
-    <ng-template pTemplate="header">
-        <img alt="Card" src="https://lh3.googleusercontent.com/uBmaIq9zP2Ge4sp-LU61lC9-alomAY-Irn6pfW_5IAAOpQNZQyksjkRlspovEzQrh49PAtYN8yzRuXoP=w1080-h608-p-no-v0">
-    </ng-template>
-
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Description: </strong>{{descriptionProduct}}</li>
-            <li class="list-group-item"><strong>Price: </strong>{{priceProduct}}</li>
-          </ul>
-
-    <ng-template pTemplate="footer">
-        <div class="d-grid gap-3">
-            <button pButton type="button" icon="pi pi-info" iconPos="left" label="Detail" class="p-button-primary p-button-raised p-button-rounded"></button>
-            <button pButton type="button" icon="pi pi-pencil" iconPos="left" label="Update" class="p-button-warning p-button-raised p-button-rounded"data-bs-toggle="modal" data-bs-target="#modalEditProduct"></button>
-            <button pButton type="button" icon="pi pi-trash" iconPos="left" label="Delete" class="p-button-danger p-button-raised p-button-rounded" data-bs-toggle="modal" data-bs-target="#modalDeleteProduct"></button>
-        </div>
-   </ng-template>
-</p-card> -->
-
-<div class="card h-100">
-    <img src="https://img1.wsimg.com/isteam/ip/06a14135-22af-492f-8110-4de91186a63d/abarrotes.png" class="card-img-top" alt="...">
-    <div class="card-body">
-        <h4 class="text-start">{{[nameProduct | titlecase]}}</h4>
-        <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item"><strong>Description: </strong>{{descriptionProduct}}</li>
-            <li class="list-group-item"><strong>Price: </strong>{{priceProduct}}</li>
-          </ul>
-
-
-      <div class="d-grid gap-3 mb-2">
-        <button pButton type="button" icon="pi pi-info" iconPos="left" label="Detail" class="p-button-primary p-button-raised p-button-rounded"></button>
-        <button pButton type="button" icon="pi pi-pencil" iconPos="left" label="Update" class="p-button-warning p-button-raised p-button-rounded"data-bs-toggle="modal" data-bs-target="#modalEditProduct"></button>
-        <button pButton type="button" icon="pi pi-trash" iconPos="left" label="Delete" class="p-button-danger p-button-raised p-button-rounded" data-bs-toggle="modal" data-bs-target="#modalDeleteProduct"></button>
-        </div>
-    </div>
-  </div>
+	<button
+		pButton
+		type="button"
+		class="p-button-raised p-button-rounded p-button-danger float-end mt-5"
+		label="Close"
+		data-bs-dismiss="modal"
+	></button>
+</div>

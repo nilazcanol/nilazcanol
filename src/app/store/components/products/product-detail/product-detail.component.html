@@ -1,0 +1,24 @@
+  <!-- Modal -->
+  <div class="modal fade" id="modalDetailProduct" tabindex="-1" aria-labelledby="modalDetailProduct" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalNewProduct">Detail Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+          
+            <app-card-product
+            [nameProduct]=productSelected.name
+            [imgProduct]=productSelected.img!
+            [descriptionProduct]=productSelected.description
+            [priceProduct]=productSelected.price
+            [stockProduct]=productSelected.stock
+            [categoryProduct]=productSelected.category>
+            </app-card-product>
+              
+    
+      </div>
+    </div>
+  </div>

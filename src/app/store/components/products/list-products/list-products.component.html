@@ -30,7 +30,12 @@
                 <td>{{product.stock}}</td>
                 <td><img width="100vw" [src]="product.img" [alt]="product.name"></td>
                 <td> 
-                    <button class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2">Detail</button> 
+                    <button class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+                    data-bs-target="#modalDetailProduct"
+                    data-bs-toggle="modal"
+                    (click)="selectProduct(false,product)">
+                        Detail
+                    </button> 
                     <button class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2">Edit</button> 
                     <button class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2" 	
                         data-bs-target="#modalDeleteProduct"
@@ -57,3 +62,6 @@
 (productDelete)="deleteTheList($event)">
 </app-modal-delete-product>
 
+<app-product-detail
+[productSelected]="productToBeDeleted!"
+></app-product-detail>

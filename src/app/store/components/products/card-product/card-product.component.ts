@@ -4,8 +4,7 @@ import { Product } from '../../../interfaces/product.interface';
 @Component({
   selector: 'app-card-product',
   templateUrl: './card-product.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class CardProductComponent implements OnInit {
 
@@ -16,6 +15,7 @@ export class CardProductComponent implements OnInit {
   @Input('descriptionProduct') descriptionProduct: string = "description";
   @Input('priceProduct') priceProduct: number = 0;
   @Input('stockProduct') stockProduct: number = 0 ;
+  @Input('imgProduct') imgProduct: string = '' ;
   @Input('categoryProduct') categoryProduct: string = ' ' ;
 
   @Input('products') products: Product[] = [];
