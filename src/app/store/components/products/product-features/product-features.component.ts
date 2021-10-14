@@ -28,29 +28,35 @@ export class NewProductComponent implements OnInit {
 	listCategories: category[] = [{ name: 'default' }];
 	productWasSaved: boolean = false;
 
+
+
 	constructor(
 		private fb: FormBuilder,
 		private productService: ProductsService,
 		private categoryService: CategoriesService,
 		private messageService: MessageService
 	) {}
+
+
 	myFormProduct!: FormGroup;
 
+    // TODO Implement update product
+
 	ngOnInit(): void {
-		this.myFormProduct = this.fb.group({
-			name: ['', Validators.required],
-			img: [''],
-			description: ['', Validators.required],
-			price: [0, Validators.required],
-			stock: ['', Validators.required],
-			category: ['', Validators.required],
-		});
+        this.myFormProduct = this.fb.group({
+            name: [this.productInput!.name , Validators.required],
+            img: [this.productInput!.img],
+            description: [this.productInput!.description, Validators.required],
+            price: [this.productInput!.price, Validators.required],
+            stock: [this.productInput!.stock, Validators.required],
+            category: [this.productInput!.category, Validators.required],
+        }); 
+		
+
 		this.categoryService.getAllCategories().subscribe((res) => {
 			this.listCategories = res.categories;
 		});
 	}
-
-	
 
 	fieldIsValid(campo: string) {
 		return (
@@ -73,7 +79,7 @@ export class NewProductComponent implements OnInit {
 				});
 				this.productWasSaved = true;
 
-                this.productNew.emit(res.product);
+				this.productNew.emit(res.product);
 			},
 			(errors: HttpErrorResponse) => {
 				if (errors.status == 400) {
@@ -99,11 +105,10 @@ export class NewProductComponent implements OnInit {
 		// console.log('Actualizar product');
 	}
 
-    Restoreform(){
-       
-        setTimeout(() => {
-            this.myFormProduct.reset();
-            this.productWasSaved= false;
+	Restoreform() {
+		setTimeout(() => {
+			this.myFormProduct.reset();
+			this.productWasSaved = false;
 		}, 2000);
-    }
+	}
 }

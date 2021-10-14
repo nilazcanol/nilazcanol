@@ -26,7 +26,6 @@
                 <th scope="row">{{index+1}}</th>
                 <td>{{product.name}}</td>
                 <td>{{product.category}}</td>
-                <td>{{'category'| categoryName}}</td>
                 <td>{{product.price| currency : '$' : 'symbol' : '1.0-0'}}</td>
                 <td>{{product.stock}}</td>
                 <td><img width="100vw" [src]="product.img" [alt]="product.name"></td>
@@ -37,7 +36,13 @@
                     (click)="selectProduct(false,product)">
                         Detail
                     </button> 
-                    <button class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2">Edit</button> 
+                    <button 
+                        class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+                        data-bs-target="#modalProduct"
+	                    data-bs-toggle="modal"
+                        (click)="selectProduct(false,product)">
+                        Edit
+                    </button> 
                     <button class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2" 	
                         data-bs-target="#modalDeleteProduct"
                         data-bs-toggle="modal"
@@ -51,7 +56,7 @@
 </div>
 <app-product-features
 	[isNewProduct]="isNewProduct"
-	[productInput]="productInput"
+	[productInput]="productSelected"
 	(productNew)="addToTheList($event)"
 >
 </app-product-features>
@@ -59,10 +64,10 @@
 
 <app-modal-delete-product
 [productRemoved]=false
-[productSelected]="productToBeDeleted!"
+[productSelected]="productSelected!"
 (productDelete)="deleteTheList($event)">
 </app-modal-delete-product>
 
 <app-product-detail
-[productSelected]="productToBeDeleted!"
+[productSelected]="productSelected!"
 ></app-product-detail>

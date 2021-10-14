@@ -16,7 +16,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   finishPurchase(state:boolean){
-      console.log(state);
     this.isFinished = state;
   }
 

@@ -20,11 +20,9 @@ export class ModalDeleteProductComponent implements OnInit {
 	ngOnInit(): void {}
 
 	deleteProduct() {
-		console.log(this.productSelected);
 		this.productService
 			.deleteProduct(this.productSelected)
 			.subscribe((res) => {
-				console.log(res);
 				this.productDelete.emit(res.product);
 				this.productRemoved = true;
 			});

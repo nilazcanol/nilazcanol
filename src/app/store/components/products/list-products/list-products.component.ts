@@ -12,15 +12,14 @@ export class ListProductsComponent implements OnInit {
     
 
 	isNewProduct: boolean = true;
-	productInput?: Product;
 	listProducts!: Product[];
-    productToBeDeleted?:Product;
-
+    productSelected?:Product;
+    
 	ngOnInit(): void {
-        this.productToBeDeleted = {
-            category: 'test',
-            description: 'test',
-            name: 'test',
+        this.productSelected = {
+            category: '',
+            description: '',
+            name: '',
             price: 0,
             stock: 0,
         };
@@ -44,11 +43,10 @@ export class ListProductsComponent implements OnInit {
 
 	selectProduct(isNew: boolean = true, productSelect?: Product): void {
 		if (isNew) {
-            console.log('new');
 			this.isNewProduct = isNew;
 		} else {
 			this.isNewProduct = isNew;
-			this.productToBeDeleted = productSelect!;
+			this.productSelected = productSelect!;
 		}
 	}
 
