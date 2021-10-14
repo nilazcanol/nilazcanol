@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { categorySmall } from '../interfaces/categorySmall.interface';
 import { resApiCategories } from '../interfaces/resApiCategories.interface';
 
 @Injectable({
@@ -23,5 +24,9 @@ export class CategoriesService {
     return this.http.get<resApiCategories>(url);
   }
 
+  getNameCategory(id:string):Observable<categorySmall>{
+    const url:string = `${this._urlBase}/${id}` 
+    return this.http.get<categorySmall>(url);
+  }
   
 }

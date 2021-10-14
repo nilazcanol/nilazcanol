@@ -23,6 +23,9 @@ import { MenuSaleComponent } from './components/menus/menu-sale/menu-sale.compon
 import { ProductSaleListComponent } from './components/products/product-sale-list/product-sale-list.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
+import { ProductFunctionsListComponent } from './components/products/product-functions-list/product-functions-list.component';
+import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
+import { CategoryPipe } from './pipes/category.pipe';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -40,6 +43,9 @@ import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
     ProductSaleListComponent,
     ShoppingCartComponent,
     HomeSaleComponent,
+    ProductFunctionsListComponent,
+    ProductDetailComponent,
+    CategoryPipe
     
   ],
   imports: [

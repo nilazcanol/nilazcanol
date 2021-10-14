@@ -42,7 +42,6 @@ export class ProductSaleListComponent implements OnInit {
   }
 
   getList(){
-      console.log(this.listProductSelection);
   }
 
 }

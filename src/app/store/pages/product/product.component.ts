@@ -8,11 +8,10 @@ import { ProductsService } from '../../services/products.service'
   styles: [],
 })
 export class ProductComponent implements OnInit {
-  constructor(private productService: ProductsService) {}
+  constructor() {}
 
   isList!: boolean
   isNew!: boolean;
-  mostSelledProducts!: Product[]
   productSelected: Product ={
     category: '',
     name: '',
@@ -27,10 +26,7 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.isList = true
     this.isNew = true
-    this.mostSelledProducts = this.productService.getProducts();
-    this.productService.getAllProducts().subscribe( (res)=> {
-        this.mostSelledProducts = res.products;
-    })
+   
   }
 
 
