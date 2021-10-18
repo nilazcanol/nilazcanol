@@ -46,7 +46,6 @@ import { CategoryPipe } from './pipes/category.pipe';
     ProductFunctionsListComponent,
     ProductDetailComponent,
     CategoryPipe
-    
   ],
   imports: [
     CommonModule,

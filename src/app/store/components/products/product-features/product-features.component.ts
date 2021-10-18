@@ -40,7 +40,7 @@ export class NewProductComponent implements OnInit {
 
 	myFormProduct!: FormGroup;
 
-    // TODO Implement update product
+    // TODO: Implement update product
 
 	ngOnInit(): void {
         this.myFormProduct = this.fb.group({
