@@ -18,6 +18,11 @@ export class ProductsService {
 		return this.http.get<resApiProduct>(url);
 	}
 
+	getProductById(product: Product[]): Observable<Product[]> {
+		const url: string = `${this._urlBase}/products/${product}`;
+		return this.http.get<Product[]>(url);
+	}
+
 	saveNewProduct(product: Product): Observable<resApiProductResponse> {
 		const url: string = `${this._urlBase}/products`;
 		return this.http.post<resApiProductResponse>(url, product);

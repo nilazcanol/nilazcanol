@@ -1,0 +1,17 @@
+<div class="mt-2">
+	<form [formGroup]="searchForm" class="mb-5" (ngSubmit)="searchProduct()">
+		<div class="input-group">
+			<input
+				type="search"
+				class="form-control rounded"
+				placeholder="Search product name"
+				aria-label="Search"
+				aria-describedby="search-addon"
+                formControlName="product"
+			/>
+			<button [disabled]="searchForm.invalid" type="submit" class="btn btn-outline-primary">
+				search
+			</button>
+		</div>
+	</form>
+</div>

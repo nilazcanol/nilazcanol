@@ -26,6 +26,7 @@ import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
 import { ProductFunctionsListComponent } from './components/products/product-functions-list/product-functions-list.component';
 import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
 import { CategoryPipe } from './pipes/category.pipe';
+import { SearchComponent } from './components/products/product-search/product-search.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -45,7 +46,8 @@ import { CategoryPipe } from './pipes/category.pipe';
     HomeSaleComponent,
     ProductFunctionsListComponent,
     ProductDetailComponent,
-    CategoryPipe
+    CategoryPipe,
+    SearchComponent
   ],
   imports: [
     CommonModule,

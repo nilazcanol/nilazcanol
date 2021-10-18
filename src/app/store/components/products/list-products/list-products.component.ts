@@ -9,20 +9,19 @@ import { Product } from '../../../interfaces/product.interface';
 })
 export class ListProductsComponent implements OnInit {
 	constructor(private productService: ProductsService) {}
-    
 
 	isNewProduct: boolean = true;
 	listProducts!: Product[];
-    productSelected?:Product;
-    
+	productSelected?: Product;
+
 	ngOnInit(): void {
-        this.productSelected = {
-            category: '',
-            description: '',
-            name: '',
-            price: 0,
-            stock: 0,
-        };
+		this.productSelected = {
+			category: '',
+			description: '',
+			name: '',
+			price: 0,
+			stock: 0,
+		};
 		this.productService.getAllProducts().subscribe(
 			(res) => {
 				this.listProducts = res.products;
@@ -53,8 +52,15 @@ export class ListProductsComponent implements OnInit {
 	addToTheList(product: Product) {
 		this.listProducts.push(product);
 	}
+
+	refreshTheList(products:Product[]) {
+  
+        this.listProducts = products;
+	}
+
 	deleteTheList(product: Product) {
-     
-		this.listProducts = this.listProducts.filter( item => item._id !== product._id );
-    }
+		this.listProducts = this.listProducts.filter(
+			(item) => item._id !== product._id
+		);
+	}
 }
