@@ -28,8 +28,12 @@ export class SearchComponent implements OnInit {
 	searchProduct() {
 		const productName = this.searchForm.controls['product'].value;
 		this.productService.getProductById(productName).subscribe((res) => {
-            console.log(res);
 			this.productSearch.emit(res);
+		});
+	}
+	getAllProducts() {
+		this.productService.getAllProducts().subscribe((res) => {
+			this.productSearch.emit(res.products);
 		});
 	}
 }
