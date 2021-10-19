@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { pagination } from 'src/app/store/interfaces/pagination.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
 import { Product } from '../../../interfaces/product.interface';
 
@@ -13,6 +14,8 @@ export class ListProductsComponent implements OnInit {
 	isNewProduct: boolean = true;
 	listProducts!: Product[];
 	productSelected?: Product;
+	pagination: pagination[] = [];
+    pageActive:number=1;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -24,6 +27,13 @@ export class ListProductsComponent implements OnInit {
 		};
 		this.productService.getAllProducts().subscribe(
 			(res) => {
+				const numberOfPages = Number(res.total) / 6;
+				for (let index = 0; index < numberOfPages; index++) {
+					this.pagination.push({
+						numberPage: index + 1,
+						url: 'aa',
+					});
+				}
 				this.listProducts = res.products;
 			},
 			() => {
@@ -53,9 +63,8 @@ export class ListProductsComponent implements OnInit {
 		this.listProducts.push(product);
 	}
 
-	refreshTheList(products:Product[]) {
-  
-        this.listProducts = products;
+	refreshTheList(products: Product[]) {
+		this.listProducts = products;
 	}
 
 	deleteTheList(product: Product) {
@@ -63,4 +72,11 @@ export class ListProductsComponent implements OnInit {
 			(item) => item._id !== product._id
 		);
 	}
+
+    changePage(from:number){
+        this.pageActive = from;        
+        this.productService.getAllProducts((from-1)*6).subscribe( res => {
+            this.listProducts= res.products
+        })
+    }
 }

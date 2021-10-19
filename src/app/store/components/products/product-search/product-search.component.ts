@@ -32,6 +32,8 @@ export class SearchComponent implements OnInit {
 		});
 	}
 	getAllProducts() {
+        const productName = this.searchForm.controls['product'].reset();
+
 		this.productService.getAllProducts().subscribe((res) => {
 			this.productSearch.emit(res.products);
 		});

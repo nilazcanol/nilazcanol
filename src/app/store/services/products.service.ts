@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product.interface';
-import { resApiError } from '../interfaces/resApiError.interface';
 import { resApiProduct } from '../interfaces/resApiProduct.interface';
 import { resApiProductResponse } from '../interfaces/resApiProductResponse.interface';
 @Injectable({
@@ -13,8 +12,8 @@ export class ProductsService {
 	private _urlBase = environment.URLBASE;
 	constructor(private http: HttpClient) {}
 
-	getAllProducts(): Observable<resApiProduct> {
-		const url: string = `${this._urlBase}/products`;
+	getAllProducts(page:number = 0): Observable<resApiProduct> {
+		const url: string = `${this._urlBase}/products?from=${page}`;
 		return this.http.get<resApiProduct>(url);
 	}
 

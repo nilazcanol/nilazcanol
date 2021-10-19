@@ -102,7 +102,6 @@ export class NewProductComponent implements OnInit {
 	}
 
 	updateProduct(): void {
-		// console.log('Actualizar product');
 	}
 
 	Restoreform() {
