@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {	categoryGet, categoryPost,categoryPut, categoryDelete } = require('../controllers/category.controller');
+const {	categoryGet, categoryPost,categoryPut, categoryDelete, getCategoryByID } = require('../controllers/category.controller');
 const { check } = require('express-validator')
 const { existCategoryById } = require('../helpers/db-validatiors');
 const { validateFields } =require('../middlewares');
@@ -9,6 +9,9 @@ const { validateFields } =require('../middlewares');
 const routerCategory = Router();
 
 routerCategory.get(`/`, categoryGet);
+
+routerCategory.get(`/:id`, getCategoryByID);
+
 routerCategory.post(`/`,[
     check('name','The name is required').not().isEmpty(),
     check('name','The name must be a string').isString(),

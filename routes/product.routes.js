@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {	productGet, productPost, productPut,productDelete } = require('../controllers/product.controller');
+const {	productGet, productPost, productPut,productDelete, searchProducts } = require('../controllers/product.controller');
 const { validateFields } =require('../middlewares');
 const { check } = require('express-validator')
 const { existProductById } = require('../helpers/db-validatiors');
@@ -8,6 +8,8 @@ const { existProductById } = require('../helpers/db-validatiors');
 const routerProduct = Router();
 
 routerProduct.get(`/`, productGet);
+
+routerProduct.get(`/:product`, searchProducts);
 routerProduct.post(`/`,[
     check('name','The name is required').not().isEmpty(),
     check('description' ,'The description is required').not().isEmpty(),

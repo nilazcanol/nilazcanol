@@ -17,6 +17,19 @@ const categoryGet = async (req = request, res = response) => {
 	});
 };
 
+const getCategoryByID = async (req = request, res = response) => {
+
+
+	const { id } = req.params;
+	const category = await Category.findById(id);
+
+	
+
+	res.json({
+		category:category.name		
+	});
+};
+
 const categoryPost = async (req = request, res = response) => {
 
 
@@ -64,4 +77,4 @@ const categoryDelete = async (req = request, res = response) => {
 	})
 };
 
-module.exports = { categoryGet, categoryPost, categoryPut, categoryDelete }
+module.exports = { categoryGet, categoryPost, categoryPut, categoryDelete,getCategoryByID }
