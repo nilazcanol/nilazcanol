@@ -12,7 +12,7 @@ export class ListProductsComponent implements OnInit {
 	constructor(private productService: ProductsService) {}
 
 	isNewProduct: boolean = true;
-	listProducts!: Product[];
+	listProducts: Product[]=[];
 	productSelected?: Product;
 	pagination: pagination[] = [];
     pageActive:number=1;

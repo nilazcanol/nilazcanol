@@ -9,13 +9,11 @@ export class CategoryPipe implements PipeTransform{
 
     constructor(private categoriesService: CategoriesService) {}
 
-    transform(valor:string):string {
+    transform (valor:string):string {
 
-        this.categoriesService.getNameCategory(valor).subscribe( res => {
-            return res.category
-        })
+      return ''
+
         
-        return 'aaa'
     }
 
 }

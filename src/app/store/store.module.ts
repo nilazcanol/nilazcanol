@@ -27,6 +27,8 @@ import { ProductFunctionsListComponent } from './components/products/product-fun
 import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
 import { CategoryPipe } from './pipes/category.pipe';
 import { SearchComponent } from './components/products/product-search/product-search.component';
+import { CategoryFeaturesComponent } from './components/categories/category-features/category-features.component';
+import { ModalDeleteCategoryComponent } from './components/categories/modal-delete-category/modal-delete-category.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -47,7 +49,9 @@ import { SearchComponent } from './components/products/product-search/product-se
     ProductFunctionsListComponent,
     ProductDetailComponent,
     CategoryPipe,
-    SearchComponent
+    SearchComponent,
+    CategoryFeaturesComponent,
+    ModalDeleteCategoryComponent
   ],
   imports: [
     CommonModule,
