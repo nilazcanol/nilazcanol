@@ -3,12 +3,13 @@ const Product = require('../models/product');
 const Category = require('../models/category');
 
 const productGet = async (req = request, res = response) => {
-
-    const { page = 1,from = 1 }  = req.query;
+	const { page = 1, from = 1 } = req.query;
 
 	const [total, productsPromise] = await Promise.all([
 		Product.countDocuments(),
-		Product.find().skip(Number(from) ).limit(page*6),
+		Product.find()
+			.skip(Number(from))
+			.limit(page * 6),
 	]);
 
 	const products = await Promise.all(
@@ -33,19 +34,14 @@ const productGet = async (req = request, res = response) => {
 	});
 };
 const searchProducts = async (req = request, res = response) => {
-
 	const { product } = req.params;
 
-
-    const regex = new RegExp(product,'i')
+	const regex = new RegExp(product, 'i');
 	const productSearch = await Product.find({
-        $or:[            
-            {name:regex}
-        ]
-    });
+		$or: [{ name: regex }],
+	});
 
-
-    const products = await Promise.all(
+	const products = await Promise.all(
 		productSearch.map(async (product) => {
 			const { name } = await Category.findById(product.category);
 			return {
@@ -61,11 +57,8 @@ const searchProducts = async (req = request, res = response) => {
 		})
 	);
 
-
-
 	res.json(products);
 };
-
 
 const productPost = async (req = request, res = response) => {
 	const {
@@ -88,7 +81,6 @@ const productPost = async (req = request, res = response) => {
 		img,
 		category,
 	});
-
 	const existProduct = await Product.findOne({ name });
 
 	const existCategory = await Category.findById({ _id: category });
@@ -98,18 +90,26 @@ const productPost = async (req = request, res = response) => {
 			msg: 'Product is already registered',
 		});
 	}
-
 	if (!existCategory) {
 		return res.status(400).json({
 			msg: 'category does not exist',
 		});
 	}
-
 	product.save();
+	
 
 	res.json({
 		msg: 'Product saved correctly',
-		product,
+		product: {
+			img: product.img,
+			state: product.state,
+			_id: product._id,
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			stock: product.stock,
+			category:existCategory.name,
+		},
 	});
 };
 
@@ -158,6 +158,5 @@ module.exports = {
 	productPost,
 	productPut,
 	productDelete,
-	searchProducts
-
+	searchProducts,
 };
