@@ -30,8 +30,14 @@ export class ListCategoriesComponent implements OnInit {
     deleteToTheList(category:category){
         	this.listCategories = this.listCategories.filter(
 			(item) => item.uid !== category.uid
-		);
+		);        
+    }
 
-        
+    goToProductByCategory(category:category){
+        /**
+         * TODO: Should be sent by router ("navegate")
+         * TODO: The category to request the data with that filter
+         
+         */
     }
 }

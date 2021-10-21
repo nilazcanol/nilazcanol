@@ -6,52 +6,57 @@
 	data-bs-toggle="modal"
 ></button>
 
-
-<div *ngIf="listCategories.length !== 0;else messageThereAreNoCategories" class="table-responsive">    
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>              
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr
-           
-            *ngFor="let category of listCategories; let index = index">
-                <th scope="row">{{index+1}}</th>
-                <td>{{category.name}}</td>           
-                <td> 
-                    
-                    <button 
-                        class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
-                        data-bs-target="#modalDeteteCategory"
-	                    data-bs-toggle="modal"
-                        (click)="selectCategory(category)"
-                        >
-                        Delete
-                    </button> 
-                   
-                </td>
-            </tr>
-        </tbody>
-    </table>    
+<div
+	*ngIf="listCategories.length !== 0; else messageThereAreNoCategories"
+	class="table-responsive"
+>
+	<table class="table table-sm">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let category of listCategories; let index = index">
+				<th scope="row">{{ index + 1 }}</th>
+				<td>{{ category.name }}</td>
+				<td>
+					<button
+						class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+                        (click)="goToProductByCategory(category)"
+					>
+						View products
+					</button>
+					<button
+						class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+						data-bs-target="#modalDeteteCategory"
+						data-bs-toggle="modal"
+						(click)="selectCategory(category)"
+					>
+						Delete
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <ng-template #messageThereAreNoCategories>
-    <div class="alert alert-danger" role="alert">
-        No categories were found!
-      </div>
+	<div class="alert alert-danger" role="alert">
+		No categories were found!
+	</div>
 </ng-template>
 
 <app-category-features
-(categoryNew)="addToTheList($event)"
-[categoryInput]="categorySelected">
+	(categoryNew)="addToTheList($event)"
+	[categoryInput]="categorySelected"
+>
 </app-category-features>
 
 <app-modal-delete-category
-[categorySelected]="categorySelected"
-(categoryDelete)="deleteToTheList($event)">    
+	[categorySelected]="categorySelected"
+	(categoryDelete)="deleteToTheList($event)"
+>
 </app-modal-delete-category>
-
