@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { pagination } from 'src/app/store/interfaces/pagination.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
 import { Product } from '../../../interfaces/product.interface';
@@ -7,15 +8,20 @@ import { Product } from '../../../interfaces/product.interface';
 	selector: 'app-list-products',
 	templateUrl: './list-products.component.html',
 	styles: [],
+	providers: [MessageService],
 })
 export class ListProductsComponent implements OnInit {
-	constructor(private productService: ProductsService) {}
+	@Input('searchCategory') searchCategory?: string;
+	constructor(
+		private productService: ProductsService,
+		private messageService: MessageService
+	) {}
 
 	isNewProduct: boolean = true;
-	listProducts: Product[]=[];
+	listProducts: Product[] = [];
 	productSelected?: Product;
 	pagination: pagination[] = [];
-    pageActive:number=1;
+	pageActive: number = 1;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -25,29 +31,34 @@ export class ListProductsComponent implements OnInit {
 			price: 0,
 			stock: 0,
 		};
-		this.productService.getAllProducts().subscribe(
-			(res) => {
-				const numberOfPages = Number(res.total) / 6;
-				for (let index = 0; index < numberOfPages; index++) {
-					this.pagination.push({
-						numberPage: index + 1,
-						url: 'aa',
-					});
+
+		if (this.searchCategory !== undefined) {
+			this.searchProduct();
+		} else {
+			this.productService.getAllProducts().subscribe(
+				(res) => {
+					const numberOfPages = Number(res.total) / 6;
+					for (let index = 0; index < numberOfPages; index++) {
+						this.pagination.push({
+							numberPage: index + 1,
+							url: 'aa',
+						});
+					}
+					this.listProducts = res.products;
+				},
+				() => {
+					this.listProducts = [
+						{
+							category: 'test',
+							description: 'test',
+							name: 'test',
+							price: 0,
+							stock: 0,
+						},
+					];
 				}
-				this.listProducts = res.products;
-			},
-			() => {
-				this.listProducts = [
-					{
-						category: 'test',
-						description: 'test',
-						name: 'test',
-						price: 0,
-						stock: 0,
-					},
-				];
-			}
-		);
+			);
+		}
 	}
 
 	selectProduct(isNew: boolean = true, productSelect?: Product): void {
@@ -73,10 +84,30 @@ export class ListProductsComponent implements OnInit {
 		);
 	}
 
-    changePage(from:number){
-        this.pageActive = from;        
-        this.productService.getAllProducts((from-1)*6).subscribe( res => {
-            this.listProducts= res.products
-        })
-    }
+	changePage(from: number) {
+		this.pageActive = from;
+		this.productService.getAllProducts((from - 1) * 6).subscribe((res) => {
+			this.listProducts = res.products;
+		});
+	}
+
+	searchProduct() {
+		this.productService.getProductById('', this.searchCategory).subscribe(
+			(res) => {
+                this.messageService.add({
+                    severity: 'success',
+					summary: 'It was filtered by category name',
+					detail: '',
+				});
+                this.listProducts =  res;
+			},
+			() => {
+				this.messageService.add({
+					severity: 'warn',
+					summary: 'Error, contact technical support',
+					detail: '',
+				});
+			}
+		);
+	}
 }
