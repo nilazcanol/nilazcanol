@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { category } from '../interfaces/category.interface';
 import { Product } from '../interfaces/product.interface';
 import { resApiProduct } from '../interfaces/resApiProduct.interface';
 import { resApiProductResponse } from '../interfaces/resApiProductResponse.interface';
@@ -17,8 +18,13 @@ export class ProductsService {
 		return this.http.get<resApiProduct>(url);
 	}
 
-	getProductById(product: Product[]): Observable<Product[]> {
-		const url: string = `${this._urlBase}/products/${product}`;
+	getProductById(productID?: string, category?:category): Observable<Product[]> {
+        var url:string = ''
+        if(productID?.length!==0){
+            url = `${this._urlBase}/products/search?product=${productID}`;
+        }else{
+            url = `${this._urlBase}/products/search?category=${category}`;
+        }
 		return this.http.get<Product[]>(url);
 	}
 

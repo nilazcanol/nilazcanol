@@ -9,7 +9,23 @@
 				aria-describedby="search-addon"
                 formControlName="product"
 			/>
-			<button [disabled]="searchForm.invalid" type="submit" class="btn btn-outline-primary">
+			<button [disabled]="searchForm.controls['product'].invalid" type="submit" class="btn btn-outline-primary">
+				Search
+			</button>
+			<button  type="button" class="btn btn-outline-secondary" (click)="getAllProducts()">
+				Clear
+			</button>
+		</div>
+		<div class="input-group mt-3">
+            <select 
+                class="form-select  rounded"
+                type="search"
+                formControlName="category">
+                <option  [value]="category.uid" *ngFor="let category of categoryList">{{category.name}}</option>
+       
+              </select>
+		
+			<button [disabled]="searchForm.controls['category'].invalid" type="submit" class="btn btn-outline-primary">
 				Search
 			</button>
 			<button  type="button" class="btn btn-outline-secondary" (click)="getAllProducts()">
