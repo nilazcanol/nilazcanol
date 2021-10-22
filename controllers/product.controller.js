@@ -2,6 +2,42 @@ const { response, request } = require('express');
 const Product = require('../models/product');
 const Category = require('../models/category');
 
+
+// TODO send how Query the type of filter
+
+const searchProductsWithName = async (req = request, res = response) => {
+
+    const { product, category } = req.query;
+
+    var productSearch;
+
+	if(category == undefined){
+        const regex = new RegExp(product, 'i');
+        productSearch = await Product.find({ name: regex } );
+    }else{
+        productSearch = await Product.find({ category:category });
+    }
+
+
+	const products = await Promise.all(
+		productSearch.map(async (product) => {
+			const { name } = await Category.findById(product.category);
+			return {
+				img: product.img,
+				state: product.state,
+				_id: product._id,
+				name: product.name,
+				description: product.description,
+				price: product.price,
+				stock: product.stock,
+				category: name,
+			};
+		})
+	);
+
+	res.json(products);
+};
+
 const productGet = async (req = request, res = response) => {
 	const { page = 1, from = 1 } = req.query;
 
@@ -33,33 +69,6 @@ const productGet = async (req = request, res = response) => {
 		products,
 	});
 };
-const searchProducts = async (req = request, res = response) => {
-	const { product } = req.params;
-
-	const regex = new RegExp(product, 'i');
-	const productSearch = await Product.find({
-		$or: [{ name: regex }],
-	});
-
-	const products = await Promise.all(
-		productSearch.map(async (product) => {
-			const { name } = await Category.findById(product.category);
-			return {
-				img: product.img,
-				state: product.state,
-				_id: product._id,
-				name: product.name,
-				description: product.description,
-				price: product.price,
-				stock: product.stock,
-				category: name,
-			};
-		})
-	);
-
-	res.json(products);
-};
-
 const productPost = async (req = request, res = response) => {
 	const {
 		name,
@@ -158,5 +167,5 @@ module.exports = {
 	productPost,
 	productPut,
 	productDelete,
-	searchProducts,
+	searchProductsWithName,
 };

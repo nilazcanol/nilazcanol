@@ -13,7 +13,6 @@ const saleSchema = Schema({
         type: Date,
         required: [true,'The sale date is required']
     },
-   
     
 });
 
