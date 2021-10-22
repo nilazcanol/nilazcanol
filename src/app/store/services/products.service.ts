@@ -18,7 +18,7 @@ export class ProductsService {
 		return this.http.get<resApiProduct>(url);
 	}
 
-	getProductById(productID?: string, category?:category): Observable<Product[]> {
+	getProductById(productID?: string, category?:string): Observable<Product[]> {
         var url:string = ''
         if(productID?.length!==0){
             url = `${this._urlBase}/products/search?product=${productID}`;

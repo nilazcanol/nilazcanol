@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Params, Router } from '@angular/router';
 import { category } from '../../../interfaces/category.interface';
 import { CategoriesService } from '../../../services/categories.service';
 
@@ -8,11 +9,14 @@ import { CategoriesService } from '../../../services/categories.service';
 	styles: [],
 })
 export class ListCategoriesComponent implements OnInit {
-	constructor(private categoriesService: CategoriesService) {}
+	constructor(
+		private categoriesService: CategoriesService,
+		private router: Router
+	) {}
 
 	listCategories: category[] = [];
 
-	categorySelected: category = {name:'Abarrates'};
+	categorySelected: category = { name: 'Abarrates' };
 
 	ngOnInit(): void {
 		this.categoriesService.getAllCategories().subscribe((res) => {
@@ -20,24 +24,25 @@ export class ListCategoriesComponent implements OnInit {
 		});
 	}
 
-	selectCategory(category:category) {
-        this.categorySelected= category;
-    }
+	selectCategory(category: category) {
+		this.categorySelected = category;
+	}
 
-    addToTheList(category:category){
-        this.listCategories.push(category);
-    }
-    deleteToTheList(category:category){
-        	this.listCategories = this.listCategories.filter(
+	addToTheList(category: category) {
+		this.listCategories.push(category);
+	}
+	deleteToTheList(category: category) {
+		this.listCategories = this.listCategories.filter(
 			(item) => item.uid !== category.uid
-		);        
-    }
+		);
+	}
 
-    goToProductByCategory(category:category){
-        /**
-         * TODO: Should be sent by router ("navegate")
-         * TODO: The category to request the data with that filter
-         
-         */
-    }
+	goToProductByCategory(category: category) {
+	
+         const queryParams: Params = {  categoryid: category.uid };
+
+		this.router.navigate(['/store/products'], {
+			queryParams
+		});
+	}
 }
