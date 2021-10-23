@@ -18,21 +18,20 @@
 
                 <div class="col-sm-12 mt-3">
                     <button 
-                        pButton 
+                        
                         type="button" 
-                        class="p-button-raised p-button-rounded p-button-danger" 
-                        label="Delete product" 
+                        class="btn btn-dark" 
                         [disabled]=productRemoved
                         [hidden]=productRemoved
                         (click)="deleteProduct()">
+                        Delete product
                     </button>
                     <button 
-                        pButton 
                         type="button" 
-                        class="p-button-raised p-button-rounded p-button-warning float-end" 
-                        label="Back" 
+                        class="btn btn-danger float-end" 
                         data-bs-dismiss="modal"
                         (click)="activateButtonAgain()">
+                        Back
                     </button>
 
                 </div>

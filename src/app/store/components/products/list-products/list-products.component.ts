@@ -7,7 +7,21 @@ import { Product } from '../../../interfaces/product.interface';
 @Component({
 	selector: 'app-list-products',
 	templateUrl: './list-products.component.html',
-	styles: [],
+	styles: [
+		`
+			.page-item.active .page-link {
+				z-index: 3;
+				color: #FFCA2C;
+				border-color: #FFCA2C;
+				background-color: #212529;
+			}
+            
+			.page-link {
+                background-color: #fff;
+                color: #212529;
+			}
+		`,
+	],
 	providers: [MessageService],
 })
 export class ListProductsComponent implements OnInit {
@@ -94,12 +108,12 @@ export class ListProductsComponent implements OnInit {
 	searchProduct() {
 		this.productService.getProductById('', this.searchCategory).subscribe(
 			(res) => {
-                this.messageService.add({
-                    severity: 'success',
+				this.messageService.add({
+					severity: 'success',
 					summary: 'It was filtered by category name',
 					detail: '',
 				});
-                this.listProducts =  res;
+				this.listProducts = res;
 			},
 			() => {
 				this.messageService.add({

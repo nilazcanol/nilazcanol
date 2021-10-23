@@ -1,10 +1,10 @@
 <button
-	class="mb-4"
-	pButton
+	class="mb-4 btn btn-dark"
+	
 	label="New category"
 	data-bs-target="#modalCategory"
 	data-bs-toggle="modal"
-></button>
+>New category</button>
 
 <div
 	*ngIf="listCategories.length !== 0; else messageThereAreNoCategories"
@@ -24,13 +24,13 @@
 				<td>{{ category.name }}</td>
 				<td>
 					<button
-						class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+						class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
                         (click)="goToProductByCategory(category)"
 					>
 						View products
 					</button>
 					<button
-						class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+						class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
 						data-bs-target="#modalDeteteCategory"
 						data-bs-toggle="modal"
 						(click)="selectCategory(category)"

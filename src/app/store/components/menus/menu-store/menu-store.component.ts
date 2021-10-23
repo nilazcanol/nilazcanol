@@ -4,8 +4,7 @@ import {MenuItem} from 'primeng/api';
 @Component({
   selector: 'app-menu-store',
   templateUrl: './menu-store.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class MenuStoreComponent implements OnInit {
 

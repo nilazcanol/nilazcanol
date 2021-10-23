@@ -19,6 +19,7 @@
 					type="button"
 					class="btn-close"
 					data-bs-dismiss="modal"
+                    
 					aria-label="Close"
 				></button>
 			</div>
@@ -30,7 +31,7 @@
 			>
 				<div class="modal-body">
 					<div class="input-group mb-3">
-						<span class="input-group-text">Name</span>
+						<span class="input-group-text">* Name</span>
 						<input
 							type="text"
 							class="form-control"
@@ -38,21 +39,23 @@
 							aria-label="name"
 							formControlName="name"
 							aria-describedby="basic-addon1"
+                            required
 						/>
 					</div>
 					<span
 						*ngIf="fieldIsValid('name')"
 						class="input-group alert alert-danger mb-3"
 					>
-						The name must be required
+						The name must be required 
 					</span>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text">Description</span>
+						<span class="input-group-text">* Description</span>
 						<textarea
 							class="form-control"
 							aria-label="description"
 							formControlName="description"
+                            required
 						></textarea>
 					</div>
 					<span
@@ -63,13 +66,14 @@
 					</span>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text">Img</span>
+						<span class="input-group-text">* Img</span>
 						<input
 							type="text"
 							class="form-control"
 							aria-label="imgProduct"
 							formControlName="img"
 							aria-describedby="basic-addon1"
+                            required
 						/>
 					</div>
 					<span
@@ -80,12 +84,13 @@
 					</span>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text">Price $</span>
+						<span class="input-group-text">* Price $</span>
 						<input
 							type="number"
 							class="form-control"
 							formControlName="price"
 							aria-label="price"
+                            required
 						/>
 					</div>
 					<span
@@ -96,11 +101,12 @@
 					</span>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text">Stock</span>
+						<span class="input-group-text">* Stock</span>
 						<input
 							type="number"
 							class="form-control"
 							formControlName="stock"
+                            required
 						/>
 					</div>
 					<span
@@ -111,11 +117,12 @@
 					</span>
 
 					<div class="input-group mb-3">
-						<span class="input-group-text">Category</span>
+						<span class="input-group-text">* Category</span>
 						<select
 							formControlName="category"
 							class="form-select"
 							aria-label="Default select example"
+                            required
 						>
 							<option
 								*ngFor="let category of listCategories"
@@ -127,6 +134,7 @@
 					<span
 						*ngIf="fieldIsValid('category')"
 						class="input-group alert alert-danger mb-3"
+                        
 					>
 						The category must be required
 					</span>
@@ -134,7 +142,7 @@
 				<div class="modal-footer">
 					<button
 						type="button"
-						class="btn btn-secondary"
+						class="btn btn-danger"
 						data-bs-dismiss="modal"
                         (click)="Restoreform()"
 					>
@@ -144,7 +152,7 @@
 						[disabled]="myFormProduct.invalid"
 						[hidden]="productWasSaved"
 						type="submit"
-						class="btn btn-primary float-end"
+						class="btn btn-dark float-end"
 					>
 						Save product
 					</button>

@@ -9,10 +9,10 @@
 				aria-describedby="search-addon"
                 formControlName="product"
 			/>
-			<button [disabled]="searchForm.controls['product'].invalid" type="submit" class="btn btn-outline-primary">
+			<button [disabled]="searchForm.controls['product'].invalid" type="submit" class="btn btn-outline-dark">
 				Search
 			</button>
-			<button  type="button" class="btn btn-outline-secondary" (click)="getAllProducts()">
+			<button  type="button" class="btn btn-outline-danger" (click)="getAllProducts()">
 				Clear
 			</button>
 		</div>
@@ -25,10 +25,10 @@
        
               </select>
 		
-			<button [disabled]="searchForm.controls['category'].invalid" type="submit" class="btn btn-outline-primary">
+			<button [disabled]="searchForm.controls['category'].invalid" type="submit" class="btn btn-outline-dark">
 				Search
 			</button>
-			<button  type="button" class="btn btn-outline-secondary" (click)="getAllProducts()">
+			<button  type="button" class="btn btn-outline-danger" (click)="getAllProducts()">
 				Clear
 			</button>
 		</div>

@@ -1,11 +1,10 @@
 <button
-	class="mb-4"
-	pButton
-	label="New Product"
+	class="mb-4 btn btn-dark"
+	
 	(click)="selectProduct(true)"
 	data-bs-target="#modalProduct"
 	data-bs-toggle="modal"
-></button>
+>New Product</button>
 
 
 
@@ -34,10 +33,30 @@
                 <td>{{product.name}}</td>
                 <td>{{product.category }}</td>
                 <td>{{product.price| currency : '$' : 'symbol' : '1.0-0'}}</td>
-                <td>{{product.stock}}</td>
+                <td *ngIf="product.stock==0;else productStock">
+                    <span class="badge bg-danger">
+                    Out of stock
+                </span>
+                </td>
+                <ng-template #productStock>
+                    <td>
+                        <span [class]="product.stock > 0  && product.stock < 4
+                        ?'badge bg-warning'
+                        :'badge bg-dark'
+                        ">
+                        {{
+                            product.stock > 0  && product.stock < 4
+                        ?'Under inventory'
+                        :'Available'
+                        }}
+                    </span>
+                    </td>
+
+                </ng-template>
+                 
                 <td><img width="100vw" [src]="product.img" [alt]="product.name"></td>
                 <td> 
-                    <button class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+                    <button class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
                     data-bs-target="#modalDetailProduct"
                     data-bs-toggle="modal"
                     (click)="selectProduct(false,product)">
@@ -60,11 +79,11 @@
             </tr>
         </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation">
         <ul class="pagination">
     
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+            <a class="page-link" (click)="changePage(pageActive-1)" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
@@ -78,7 +97,7 @@
             </li>
           
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+            <a class="page-link" (click)="changePage(pageActive+1)" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
