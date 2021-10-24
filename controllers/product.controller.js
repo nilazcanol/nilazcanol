@@ -40,6 +40,7 @@ const searchProductsWithName = async (req = request, res = response) => {
 
 const productGet = async (req = request, res = response) => {
 	const { page = 1, from = 1 } = req.query;
+    console.log(from);
 
 	const [total, productsPromise] = await Promise.all([
 		Product.countDocuments(),
