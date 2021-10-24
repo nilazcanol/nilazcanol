@@ -114,10 +114,16 @@ export class ListProductsComponent implements OnInit {
 	}
 
 	changePage(from: number) {
-		this.pageActive = from;
-		this.productService.getAllProducts((from - 1) * 6).subscribe((res) => {
-			this.listProducts = res.products;
-		});
+        console.log(from);
+        if(from <=0 || from > this.pagination.length){
+            console.log('el valor es invalido: ',from);
+        }else{
+            this.pageActive = from;
+            this.productService.getAllProducts((from - 1) * 6).subscribe((res) => {
+                this.listProducts = res.products;
+            });
+        }
+
 	}
 
 	searchProduct() {

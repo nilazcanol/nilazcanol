@@ -81,7 +81,8 @@
 					</td>
 
 					<td>
-						<button
+                        <div class="d-grid gap-2 d-md-block">
+                           <button
 							class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
 							data-bs-target="#modalDetailProduct"
 							data-bs-toggle="modal"
@@ -105,6 +106,8 @@
 						>
 							Delete
 						</button>
+                          </div>
+						
 					</td>
 				</tr>
 			</tbody>
@@ -137,7 +140,7 @@
 
 				<li class="page-item">
 					<button
-						[disabled]="pageActive <= 0"
+						[disabled]="pageActive == pagination.length "
 						class="page-link backAndNext"
 						(click)="changePage(pageActive + 1)"
 						aria-label="Next"
