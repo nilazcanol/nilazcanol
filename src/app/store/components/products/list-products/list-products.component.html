@@ -1,132 +1,227 @@
 <button
 	class="mb-4 btn btn-dark"
-	
 	(click)="selectProduct(true)"
 	data-bs-target="#modalProduct"
 	data-bs-toggle="modal"
->New Product</button>
+>
+	New Product
+</button>
+<div *ngIf="listProducts.length !== 0; else messageThereAreNoProducts">
+	<app-search (productSearch)="refreshTheList($event)"> </app-search>
 
+	<div class="table-responsive ">
+		<table class="table table-hover align-middle">
+			<thead>
+				<tr>
+					<th scope="col">Product</th>
+					<th scope="col">Price</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let product of listProducts; let index = index">
+					<td>
+                        <div class="row justify-content-sm-center justify-content-md-start">
+                            <div class="col-sm-12 col-md-2 mb-md-2 mt-md-2">
+                                <img
+                                class="img-fluid img-list"
+								[src]="product.img"
+								[alt]="product.name"
+							/>
+                            </div>
+                            <div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
+                                <div class="ms-3">
+                                    <div class="fw-bold mb-1">
+                                        {{ product.name | titlecase }}
+                                    </div>
+                                    <div class="text-muted mb-0">
+                                        {{ product.category | titlecase }}
+                                    </div>
+                                    <div class="text-muted mb-0">
+                                        <td
+                                            *ngIf="
+                                                product.stock == 0;
+                                                else productStock
+                                            "
+                                        >
+                                            <span class="badge bg-danger">
+                                                Out of stock
+                                            </span>
+                                        </td>
+                                        <ng-template #productStock>
+                                            <td>
+                                                <span
+                                                    [class]="
+                                                        product.stock > 0 &&
+                                                        product.stock < 4
+                                                            ? 'badge bg-warning'
+                                                            : 'badge bg-dark'
+                                                    "
+                                                >
+                                                    {{
+                                                        product.stock > 0 &&
+                                                        product.stock < 4
+                                                            ? 'Under inventory'
+                                                            : 'Available'
+                                                    }}
+                                                </span>
+                                            </td>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						
+					</td>
 
+					<td>
+						<p class="fw-bold">
+							{{ product.price | currency: '$':'symbol':'1.0-0' }}
+						</p>
+					</td>
 
-<app-search
-(productSearch)="refreshTheList($event)">
-</app-search>
+					<td>
+						<button
+							class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+							data-bs-target="#modalDetailProduct"
+							data-bs-toggle="modal"
+							(click)="selectProduct(false, product)"
+						>
+							Detail
+						</button>
+						<button
+							class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+							data-bs-target="#modalProduct"
+							data-bs-toggle="modal"
+							(click)="selectProduct(false, product)"
+						>
+							Edit
+						</button>
+						<button
+							class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+							data-bs-target="#modalDeleteProduct"
+							data-bs-toggle="modal"
+							(click)="selectProduct(false, product)"
+						>
+							Delete
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				<li class="page-item">
+					<button
+						[disabled]="pageActive <= 0"
+						[hidden]="pageActive == -1"
+						class="page-link backAndNext"
+						(click)="changePage(pageActive - 1)"
+						aria-label="Previous"
+					>
+						<span aria-hidden="true">&laquo;</span>
+					</button>
+				</li>
+				<li
+					*ngFor="let page of pagination"
+					[class]="
+						page.numberPage == pageActive
+							? 'page-item active'
+							: 'page-item'
+					"
+				>
+					<a class="page-link" (click)="changePage(page.numberPage)">
+						{{ page.numberPage }}
+					</a>
+				</li>
 
-<div *ngIf="listProducts.length !== 0;else messageThereAreNoProducts" class="table-responsive">    
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
-                <th scope="col">Stock</th>
-                <th scope="col">img</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr
-           
-            *ngFor="let product of listProducts; let index = index">
-                <th scope="row">{{index+1}}</th>
-                <td>{{product.name}}</td>
-                <td>{{product.category }}</td>
-                <td>{{product.price| currency : '$' : 'symbol' : '1.0-0'}}</td>
-                <td *ngIf="product.stock==0;else productStock">
-                    <span class="badge bg-danger">
-                    Out of stock
-                </span>
-                </td>
-                <ng-template #productStock>
-                    <td>
-                        <span [class]="product.stock > 0  && product.stock < 4
-                        ?'badge bg-warning'
-                        :'badge bg-dark'
-                        ">
-                        {{
-                            product.stock > 0  && product.stock < 4
-                        ?'Under inventory'
-                        :'Available'
-                        }}
-                    </span>
-                    </td>
+				<li class="page-item">
+					<button
+						[disabled]="pageActive <= 0"
+						class="page-link backAndNext"
+						(click)="changePage(pageActive + 1)"
+						aria-label="Next"
+					>
+						<span aria-hidden="true">&raquo;</span>
+					</button>
+				</li>
+			</ul>
+		</nav>
+	</div>
 
-                </ng-template>
-                 
-                <td><img width="100vw" [src]="product.img" [alt]="product.name"></td>
-                <td> 
-                    <button class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
-                    data-bs-target="#modalDetailProduct"
-                    data-bs-toggle="modal"
-                    (click)="selectProduct(false,product)">
-                        Detail
-                    </button> 
-                    <button 
-                        class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2"
-                        data-bs-target="#modalProduct"
-	                    data-bs-toggle="modal"
-                        (click)="selectProduct(false,product)">
-                        Edit
-                    </button> 
-                    <button class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2" 	
-                        data-bs-target="#modalDeleteProduct"
-                        data-bs-toggle="modal"
-                        (click)="selectProduct(false,product)">
-                        Delete
-                    </button> 
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-    
-          <li class="page-item">
-            <a class="page-link" (click)="changePage(pageActive-1)" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li  
-            *ngFor="let page of pagination" 
-            [class]="page.numberPage==pageActive?'page-item active':'page-item'">
-                <a class="page-link"
-                    (click)="changePage(page.numberPage)">
-                    {{page.numberPage}}
-                </a>
-            </li>
-          
-          <li class="page-item">
-            <a class="page-link" (click)="changePage(pageActive+1)" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-    
-        </ul>
-      </nav>
+	<app-product-features
+		[isNewProduct]="isNewProduct"
+		[productInput]="productSelected"
+		(productNew)="addToTheList($event)"
+	>
+	</app-product-features>
+
+	<app-modal-delete-product
+		[productRemoved]="false"
+		[productSelected]="productSelected!"
+		(productDelete)="deleteTheList($event)"
+	>
+	</app-modal-delete-product>
+
+	<app-product-detail
+		[productSelected]="productSelected!"
+	></app-product-detail>
 </div>
 
 <ng-template #messageThereAreNoProducts>
-    <div class="alert alert-danger" role="alert">
-        No products were found!
-      </div>
+	<div class="alert alert-danger" role="alert">
+		No products were found!
+	</div>
 </ng-template>
 
+<!-- 
+<button
+	class="mb-4 btn btn-dark"
+	
+	label="New category"
+	data-bs-target="#modalCategory"
+	data-bs-toggle="modal"
+>New category</button>
 
-<app-product-features
-	[isNewProduct]="isNewProduct"
-	[productInput]="productSelected"
-	(productNew)="addToTheList($event)"
+<div
+	*ngIf="listProducts.length !== 0; else messageThereAreNoCategories"
+	class="table-responsive"
 >
-</app-product-features>
+	<table class="table table-sm">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let product of listProducts; let index = index">
+				<th scope="row">{{ index + 1 }}</th>
+				<td>{{ product.name }}</td>
+                
+				<td>
+					<button
+						class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+					>
+						View products
+					</button>
+					<button
+						class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+						data-bs-target="#modalDeteteCategory"
+						data-bs-toggle="modal"
+					>
+						Delete
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
-
-<app-modal-delete-product
-[productRemoved]=false
-[productSelected]="productSelected!"
-(productDelete)="deleteTheList($event)">
-</app-modal-delete-product>
-
-<app-product-detail
-[productSelected]="productSelected!"
-></app-product-detail>
+<ng-template #messageThereAreNoCategories>
+	<div class="alert alert-danger" role="alert">
+		No categories were found!
+	</div>
+</ng-template>
+ -->

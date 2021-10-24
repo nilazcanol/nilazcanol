@@ -8,18 +8,41 @@ import { Product } from '../../../interfaces/product.interface';
 	selector: 'app-list-products',
 	templateUrl: './list-products.component.html',
 	styles: [
-		`
-			.page-item.active .page-link {
+
+        `
+        .img-list{
+           
+            max-width:70px;
+            cursor:pointer;
+        }
+
+		.page-item.active .page-link {
 				z-index: 3;
-				color: #FFCA2C;
-				border-color: #FFCA2C;
-				background-color: #212529;
+				color: #FFF;
+				border-color: #FFF;
+				background-color: #FFCA2C;
+                cursor:pointer;
+
 			}
             
 			.page-link {
-                background-color: #fff;
+                background-color: #FFF;
                 color: #212529;
+                border-color: #FFF;
+                cursor:pointer;
+
 			}
+
+            .backAndNext{
+                background-color: #FFCA2C;
+                border-color: #FFF;
+                color: #FFF;
+            }
+            .backAndNext:hover{
+                background-color: #FFC008;
+                border-color: #FFF;
+                color: #FFF;
+            }
 		`,
 	],
 	providers: [MessageService],
@@ -61,15 +84,7 @@ export class ListProductsComponent implements OnInit {
 					this.listProducts = res.products;
 				},
 				() => {
-					this.listProducts = [
-						{
-							category: 'test',
-							description: 'test',
-							name: 'test',
-							price: 0,
-							stock: 0,
-						},
-					];
+					this.listProducts = [];
 				}
 			);
 		}
