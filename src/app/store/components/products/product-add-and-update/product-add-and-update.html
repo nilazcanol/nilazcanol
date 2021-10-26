@@ -11,9 +11,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">
-					{{
-						isNewProduct == true ? 'New product' : 'Update product'
-					}}
+					{{isNewProduct == true ?' New product': 'Update product'}}
 				</h5>
 				<button
 					type="button"
@@ -25,9 +23,7 @@
 			</div>
 			<form
 				[formGroup]="myFormProduct"
-				(ngSubmit)="
-					isNewProduct === true ? saveProduct() : updateProduct()
-				"
+				(ngSubmit)="isNewProduct == true ? saveProduct() :updateProduct()"
 			>
 				<div class="modal-body">
 					<div class="input-group mb-3">
@@ -151,6 +147,7 @@
 					<button
 						[disabled]="myFormProduct.invalid"
 						[hidden]="productWasSaved"
+                        data-bs-dismiss="modal"
 						type="submit"
 						class="btn btn-dark float-end"
 					>

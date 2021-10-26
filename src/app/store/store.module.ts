@@ -13,7 +13,7 @@ import { ProductComponent }     from './pages/product/product.component';
 
 import { ListProductsComponent }    from './components/products/list-products/list-products.component';
 import { ListCategoriesComponent }  from './components/categories/list-categories/list-categories.component';
-import { NewProductComponent } from './components/products/product-features/product-features.component';
+import { NewProductComponent } from './components/products/product-add-and-update/product-add-and-update.component';
 import { PrimengModule } from '../primeNg/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalDeleteProductComponent } from './components/products/modal-delete-product/modal-delete-product.component';
@@ -51,7 +51,7 @@ import { ModalDeleteCategoryComponent } from './components/categories/modal-dele
     CategoryPipe,
     SearchComponent,
     CategoryFeaturesComponent,
-    ModalDeleteCategoryComponent
+    ModalDeleteCategoryComponent,
   ],
   imports: [
     CommonModule,

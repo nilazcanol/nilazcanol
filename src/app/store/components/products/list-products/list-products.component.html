@@ -86,7 +86,7 @@
 							class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
 							data-bs-target="#modalDetailProduct"
 							data-bs-toggle="modal"
-							(click)="selectProduct(false, product)"
+							(click)="selectProduct(false,product)"
 						>
 							Detail
 						</button>
@@ -94,7 +94,7 @@
 							class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2"
 							data-bs-target="#modalProduct"
 							data-bs-toggle="modal"
-							(click)="selectProduct(false, product)"
+							(click)="selectProduct(false,product)"
 						>
 							Edit
 						</button>
@@ -102,7 +102,7 @@
 							class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
 							data-bs-target="#modalDeleteProduct"
 							data-bs-toggle="modal"
-							(click)="selectProduct(false, product)"
+							(click)="selectProduct( false,product)"
 						>
 							Delete
 						</button>
@@ -152,12 +152,13 @@
 		</nav>
 	</div>
 
-	<app-product-features
-		[isNewProduct]="isNewProduct"
+	<app-product-add-and-update
+		[productInput]="productSelected"
 		[productInput]="productSelected"
 		(productNew)="addToTheList($event)"
+		(productUpdate)="updateToTheList($event)"
 	>
-	</app-product-features>
+	</app-product-add-and-update>
 
 	<app-modal-delete-product
 		[productRemoved]="false"
@@ -169,6 +170,8 @@
 	<app-product-detail
 		[productSelected]="productSelected!"
 	></app-product-detail>
+
+
 </div>
 
 <ng-template #messageThereAreNoProducts>
@@ -177,54 +180,3 @@
 	</div>
 </ng-template>
 
-<!-- 
-<button
-	class="mb-4 btn btn-dark"
-	
-	label="New category"
-	data-bs-target="#modalCategory"
-	data-bs-toggle="modal"
->New category</button>
-
-<div
-	*ngIf="listProducts.length !== 0; else messageThereAreNoCategories"
-	class="table-responsive"
->
-	<table class="table table-sm">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Name</th>
-				<th scope="col">Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let product of listProducts; let index = index">
-				<th scope="row">{{ index + 1 }}</th>
-				<td>{{ product.name }}</td>
-                
-				<td>
-					<button
-						class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
-					>
-						View products
-					</button>
-					<button
-						class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
-						data-bs-target="#modalDeteteCategory"
-						data-bs-toggle="modal"
-					>
-						Delete
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-<ng-template #messageThereAreNoCategories>
-	<div class="alert alert-danger" role="alert">
-		No categories were found!
-	</div>
-</ng-template>
- -->

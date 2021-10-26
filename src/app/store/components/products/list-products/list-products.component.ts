@@ -49,16 +49,18 @@ import { Product } from '../../../interfaces/product.interface';
 })
 export class ListProductsComponent implements OnInit {
 	@Input('searchCategory') searchCategory?: string;
+
+
 	constructor(
 		private productService: ProductsService,
 		private messageService: MessageService
 	) {}
 
-	isNewProduct: boolean = true;
 	listProducts: Product[] = [];
 	productSelected?: Product;
 	pagination: pagination[] = [];
 	pageActive: number = 1;
+    isNewProduct:Boolean = true;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -90,17 +92,34 @@ export class ListProductsComponent implements OnInit {
 		}
 	}
 
-	selectProduct(isNew: boolean = true, productSelect?: Product): void {
-		if (isNew) {
-			this.isNewProduct = isNew;
-		} else {
-			this.isNewProduct = isNew;
+	selectProduct( newProduct:boolean,productSelect?: Product): void {
+        
+        
+        if(productSelect !== undefined){
 			this.productSelected = productSelect!;
-		}
+            this.isNewProduct = newProduct;
+        }
+		
 	}
 
 	addToTheList(product: Product) {
 		this.listProducts.push(product);
+	}
+
+	updateToTheList(product: Product) {
+        const productUpdated = this.listProducts.findIndex(el => el._id == product._id );
+        let newAllProducts = [...this.listProducts];
+        newAllProducts[productUpdated] = {...newAllProducts[productUpdated], 
+            name:product.name, 
+            description:product.description, 
+            price:product.price, 
+            img:product.img, 
+            category:product.category, 
+            stock:product.stock,            
+            _id:product._id            
+        }
+
+        this.listProducts = newAllProducts;
 	}
 
 	refreshTheList(products: Product[]) {
@@ -145,4 +164,8 @@ export class ListProductsComponent implements OnInit {
 			}
 		);
 	}
+
+
+
+
 }
