@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const Product = require('../models/product');
 const Category = require('../models/category');
+const { $where } = require('../models/product');
 
 
 // TODO send how Query the type of filter
@@ -40,7 +41,6 @@ const searchProductsWithName = async (req = request, res = response) => {
 
 const productGet = async (req = request, res = response) => {
 	const { page = 1, from = 1 } = req.query;
-    console.log(from);
 
 	const [total, productsPromise] = await Promise.all([
 		Product.countDocuments(),
@@ -136,15 +136,26 @@ const productPut = async (req = request, res = response) => {
 		...resto
 	} = req.body;
 
-	const product = await Product.findByIdAndUpdate(id, {
+    const categorySelected = await Category.findOne(
+        $where[
+            {name:category },
+            {_id:category }
+        ]
+    );
+	const productUpdate = await Product.findByIdAndUpdate(id, {
 		name,
 		description,
 		price,
 		stock,
-		state,
-		category,
+		state : true,
+		category:categorySelected._id,
 		img,
-	});
+	},{ new: true });
+
+    const product = {
+        ...productUpdate,
+        category :  categorySelected.name
+    }
 
 	res.json({
 		status: true,

@@ -45,9 +45,11 @@ const categoryPost = async (req = request, res = response) => {
 
 const categoryPut = async (req = request, res = response) => {
 	const { id } = req.params;
+
+    console.log(req.body);
 	const { _id, name, ...resto } = req.body;
 
-	const category = await Category.findByIdAndUpdate(id, { name });
+	const category = await Category.findByIdAndUpdate(id, { name },{ new: true });
 
 	res.json({
 		status: true,
