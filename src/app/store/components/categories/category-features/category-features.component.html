@@ -11,7 +11,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">
-					New Category
+					{{isNewCategory== true? 'New Category': 'Update Category'}}
 				</h5>
 				<button
 					type="button"
@@ -23,7 +23,7 @@
 
 			<form
 				[formGroup]="myFormCategory"
-				(ngSubmit)="saveCategory() "
+				(ngSubmit)="isNewCategory== true ? saveCategory(): updateCategory() "
 			>
 				<div class="modal-body">
 					<div class="input-group mb-3">

@@ -1,6 +1,6 @@
 <button
 	class="mb-4 btn btn-dark"
-	
+	(click)="selectCategory(true)"
 	label="New category"
 	data-bs-target="#modalCategory"
 	data-bs-toggle="modal"
@@ -23,18 +23,26 @@
 				<th scope="row">{{ index + 1 }}</th>
 				<td>{{ category.name }}</td>
 				<td>
-                    <div class="d-grid gap-2 d-md-block">
+                    <div class="d-grid gap-3 d-md-block">
                         <button
 						class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
                         (click)="goToProductByCategory(category)"
 					>
 						View products
 					</button>
+                        <button
+						class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+                        (click)="selectCategory(false,category)"
+                        data-bs-target="#modalCategory"
+                        data-bs-toggle="modal"
+					>
+						Edit
+					</button>
 					<button
 						class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
 						data-bs-target="#modalDeteteCategory"
 						data-bs-toggle="modal"
-						(click)="selectCategory(category)"
+						(click)="selectCategory(false,category)"
 					>
 						Delete
 					</button>
@@ -55,7 +63,9 @@
 
 <app-category-features
 	(categoryNew)="addToTheList($event)"
+	(categoryUpdate)="updateToTheList($event)"
 	[categoryInput]="categorySelected"
+	[isNewCategory]="isNewCategory"
 >
 </app-category-features>
 

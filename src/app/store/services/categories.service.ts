@@ -34,6 +34,13 @@ export class CategoriesService {
 		const url: string = `${this._urlBase}/category`;
 		return this.http.post<resApiCategoryResponse>(url, { name: category });
 	}
+
+	updateCategory(categoryID: string, categoryName: string) {
+
+		const url: string = `${this._urlBase}/category/${categoryID}`;
+		return this.http.put<resApiCategoryResponse>(url, { name: categoryName });
+	}
+
 	deleteCategory(category: category) {
 		const url: string = `${this._urlBase}/category/${category.uid}`;
 		return this.http.delete<resApiCategoryDeleteResponse>(url);

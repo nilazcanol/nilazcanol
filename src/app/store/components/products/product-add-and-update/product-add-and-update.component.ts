@@ -3,9 +3,10 @@ import {
 	Component,
 	EventEmitter,
 	Input,
+	OnChanges,
 	OnInit,
 	Output,
-    SimpleChanges,
+	SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -20,7 +21,7 @@ import { ProductsService } from '../../../services/products.service';
 	styles: [],
 	providers: [MessageService],
 })
-export class NewProductComponent implements OnInit {
+export class NewProductComponent implements OnInit, OnChanges {
 	@Input('productInput') productInput?: Product;
 	@Input('isNewProduct') isNewProduct!: boolean;
 
@@ -30,8 +31,6 @@ export class NewProductComponent implements OnInit {
 	@Output('productUpdate') productUpdate: EventEmitter<
 		Product
 	> = new EventEmitter();
-
-
 
 	listCategories: category[] = [{ name: 'default' }];
 	productWasSaved: boolean = false;
@@ -43,22 +42,29 @@ export class NewProductComponent implements OnInit {
 		private messageService: MessageService
 	) {}
 
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if(this.myFormProduct !== undefined ){
-                this.myFormProduct.controls['_id'].setValue(this.productInput?._id);
-                this.myFormProduct.controls['name'].setValue(this.productInput?.name);
-                this.myFormProduct.controls['description'].setValue(this.productInput?.description);
-                this.myFormProduct.controls['img'].setValue(this.productInput?.img);
-                this.myFormProduct.controls['category'].setValue(this.productInput?.category);
-                this.myFormProduct.controls['price'].setValue(this.productInput?.price);
-                this.myFormProduct.controls['stock'].setValue(this.productInput?.stock);
-        }   
-
-    }
+	ngOnChanges(changes: SimpleChanges): void {
+		if (this.myFormProduct !== undefined) {
+			this.myFormProduct.controls['_id'].setValue(this.productInput?._id);
+			this.myFormProduct.controls['name'].setValue(
+				this.productInput?.name
+			);
+			this.myFormProduct.controls['description'].setValue(
+				this.productInput?.description
+			);
+			this.myFormProduct.controls['img'].setValue(this.productInput?.img);
+			this.myFormProduct.controls['category'].setValue(
+				this.productInput?.category
+			);
+			this.myFormProduct.controls['price'].setValue(
+				this.productInput?.price
+			);
+			this.myFormProduct.controls['stock'].setValue(
+				this.productInput?.stock
+			);
+		}
+	}
 
 	myFormProduct!: FormGroup;
-
 
 	ngOnInit(): void {
 		this.myFormProduct = this.fb.group({
@@ -120,7 +126,7 @@ export class NewProductComponent implements OnInit {
 	}
 
 	updateProduct(): void {
-        this.productService.updateProduct(this.myFormProduct.value).subscribe(
+		this.productService.updateProduct(this.myFormProduct.value).subscribe(
 			(res) => {
 				this.messageService.add({
 					severity: 'success',
@@ -130,7 +136,6 @@ export class NewProductComponent implements OnInit {
 				this.productWasSaved = true;
 
 				this.productUpdate.emit(res.product);
-
 			},
 			(errors: HttpErrorResponse) => {
 				if (errors.status == 400) {
@@ -150,7 +155,7 @@ export class NewProductComponent implements OnInit {
 				}
 			}
 		);
-    }
+	}
 
 	Restoreform() {
 		setTimeout(() => {

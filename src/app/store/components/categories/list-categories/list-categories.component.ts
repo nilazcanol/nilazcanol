@@ -17,6 +17,7 @@ export class ListCategoriesComponent implements OnInit {
 	listCategories: category[] = [];
 
 	categorySelected: category = { name: 'Abarrates' };
+	isNewCategory: boolean = true;
 
 	ngOnInit(): void {
 		this.categoriesService.getAllCategories().subscribe((res) => {
@@ -24,12 +25,29 @@ export class ListCategoriesComponent implements OnInit {
 		});
 	}
 
-	selectCategory(category: category) {
-		this.categorySelected = category;
+	selectCategory(newCategory: boolean, category?: category) {
+		if (category !== undefined) {
+			this.categorySelected = category!;
+			this.isNewCategory = newCategory;
+		}
 	}
 
 	addToTheList(category: category) {
 		this.listCategories.push(category);
+	}
+
+	updateToTheList(category: category) {
+		const productUpdated = this.listCategories.findIndex(
+			(el) => el.uid == category.uid
+		);
+		let newAllCategory = [...this.listCategories];
+		newAllCategory[productUpdated] = {
+			...newAllCategory[productUpdated],
+			name: category.name,
+			uid: category.uid,
+		};
+
+		this.listCategories = newAllCategory;
 	}
 	deleteToTheList(category: category) {
 		this.listCategories = this.listCategories.filter(
@@ -38,11 +56,10 @@ export class ListCategoriesComponent implements OnInit {
 	}
 
 	goToProductByCategory(category: category) {
-	
-         const queryParams: Params = {  categoryid: category.uid };
+		const queryParams: Params = { categoryid: category.uid };
 
 		this.router.navigate(['/store/products'], {
-			queryParams
+			queryParams,
 		});
 	}
 }
