@@ -8,34 +8,59 @@ import { Product } from '../../../interfaces/product.interface';
 	selector: 'app-list-products',
 	templateUrl: './list-products.component.html',
 	styles: [
-		`
-			.page-item.active .page-link {
+
+        `
+        .img-list{
+           
+            max-width:70px;
+            cursor:pointer;
+        }
+
+		.page-item.active .page-link {
 				z-index: 3;
-				color: #FFCA2C;
-				border-color: #FFCA2C;
-				background-color: #212529;
+				color: #FFF;
+				border-color: #FFF;
+				background-color: #FFCA2C;
+                cursor:pointer;
+
 			}
             
 			.page-link {
-                background-color: #fff;
+                background-color: #FFF;
                 color: #212529;
+                border-color: #FFF;
+                cursor:pointer;
+
 			}
+
+            .backAndNext{
+                background-color: #FFCA2C;
+                border-color: #FFF;
+                color: #FFF;
+            }
+            .backAndNext:hover{
+                background-color: #FFC008;
+                border-color: #FFF;
+                color: #FFF;
+            }
 		`,
 	],
 	providers: [MessageService],
 })
 export class ListProductsComponent implements OnInit {
 	@Input('searchCategory') searchCategory?: string;
+
+
 	constructor(
 		private productService: ProductsService,
 		private messageService: MessageService
 	) {}
 
-	isNewProduct: boolean = true;
 	listProducts: Product[] = [];
 	productSelected?: Product;
 	pagination: pagination[] = [];
 	pageActive: number = 1;
+    isNewProduct:Boolean = true;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -61,31 +86,40 @@ export class ListProductsComponent implements OnInit {
 					this.listProducts = res.products;
 				},
 				() => {
-					this.listProducts = [
-						{
-							category: 'test',
-							description: 'test',
-							name: 'test',
-							price: 0,
-							stock: 0,
-						},
-					];
+					this.listProducts = [];
 				}
 			);
 		}
 	}
 
-	selectProduct(isNew: boolean = true, productSelect?: Product): void {
-		if (isNew) {
-			this.isNewProduct = isNew;
-		} else {
-			this.isNewProduct = isNew;
+	selectProduct( newProduct:boolean,productSelect?: Product): void {
+        
+        
+        if(productSelect !== undefined){
 			this.productSelected = productSelect!;
-		}
+            this.isNewProduct = newProduct;
+        }
+		
 	}
 
 	addToTheList(product: Product) {
 		this.listProducts.push(product);
+	}
+
+	updateToTheList(product: Product) {
+        const productUpdated = this.listProducts.findIndex(el => el._id == product._id );
+        let newAllProducts = [...this.listProducts];
+        newAllProducts[productUpdated] = {...newAllProducts[productUpdated], 
+            name:product.name, 
+            description:product.description, 
+            price:product.price, 
+            img:product.img, 
+            category:product.category, 
+            stock:product.stock,            
+            _id:product._id            
+        }
+
+        this.listProducts = newAllProducts;
 	}
 
 	refreshTheList(products: Product[]) {
@@ -99,10 +133,16 @@ export class ListProductsComponent implements OnInit {
 	}
 
 	changePage(from: number) {
-		this.pageActive = from;
-		this.productService.getAllProducts((from - 1) * 6).subscribe((res) => {
-			this.listProducts = res.products;
-		});
+        console.log(from);
+        if(from <=0 || from > this.pagination.length){
+            console.log('el valor es invalido: ',from);
+        }else{
+            this.pageActive = from;
+            this.productService.getAllProducts((from - 1) * 6).subscribe((res) => {
+                this.listProducts = res.products;
+            });
+        }
+
 	}
 
 	searchProduct() {
@@ -124,4 +164,8 @@ export class ListProductsComponent implements OnInit {
 			}
 		);
 	}
+
+
+
+
 }

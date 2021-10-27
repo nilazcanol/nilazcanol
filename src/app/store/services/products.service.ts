@@ -32,6 +32,13 @@ export class ProductsService {
 		const url: string = `${this._urlBase}/products`;
 		return this.http.post<resApiProductResponse>(url, product);
 	}
+
+    updateProduct(product:Product):Observable<resApiProductResponse>{
+        const url: string = `${this._urlBase}/products/${product._id}`;
+        return this.http.put<resApiProductResponse>(url,product);
+    }
+
+
 	deleteProduct(product: Product): Observable<resApiProductResponse> {
 		const url: string = `${this._urlBase}/products/${product._id}`;
 		return this.http.delete<resApiProductResponse>(url);
