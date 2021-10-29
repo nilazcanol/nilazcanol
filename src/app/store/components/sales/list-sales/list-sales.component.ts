@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { sale } from 'src/app/store/interfaces/sales/sale.interface';
+import { saleResponseGet } from 'src/app/store/interfaces/sales/saleResponseGet.inteface';
 import { SalesService } from 'src/app/store/services/sales.service';
 
 @Component({
@@ -35,4 +36,8 @@ export class ListSalesComponent implements OnInit {
 		var dateRes = year + '-' + month + '-' + day;
 		return dateRes;
 	};
+
+    refreshListSales(res:saleResponseGet){
+        this.listSales = res.Sales;
+    }
 }

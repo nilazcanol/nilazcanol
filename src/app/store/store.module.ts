@@ -32,6 +32,7 @@ import { ModalDeleteCategoryComponent } from './components/categories/modal-dele
 import { HistoryComponent } from './pages/sale/history/history.component';
 import { NewComponent } from './pages/sale/new/new.component';
 import { ListSalesComponent } from './components/sales/list-sales/list-sales.component';
+import { SalesSearchComponent } from './components/sales/sales-search/sales-search.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -58,6 +59,7 @@ import { ListSalesComponent } from './components/sales/list-sales/list-sales.com
     HistoryComponent,
     NewComponent,
     ListSalesComponent,
+    SalesSearchComponent,
   ],
   imports: [
     CommonModule,
