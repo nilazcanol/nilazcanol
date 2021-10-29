@@ -5,7 +5,10 @@
             
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                 <li *ngFor="let item of items" class="nav-item ">
-                    <a [routerLink]="item.routerLink" routerLinkActive="bg-warning px-4" class="nav-link align-middle px-0 text-white ">
+                    <a 
+                        [routerLink]="item.routerLink" 
+                        routerLinkActive="bg-warning px-4" 
+                        [class]="item.label !=='Logout'?'nav-link align-middle px-0 text-white' :'nav-link align-middle px-0 bg-danger text-white px-3 mt-4' ">
                         <i [class]="item.icon" ></i> <span class="ms-1 d-none d-sm-inline">{{item.label}}</span>
                     </a>
                 </li>                
