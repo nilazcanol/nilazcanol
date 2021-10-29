@@ -29,6 +29,9 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { SearchComponent } from './components/products/product-search/product-search.component';
 import { CategoryFeaturesComponent } from './components/categories/category-features/category-features.component';
 import { ModalDeleteCategoryComponent } from './components/categories/modal-delete-category/modal-delete-category.component';
+import { HistoryComponent } from './pages/sale/history/history.component';
+import { NewComponent } from './pages/sale/new/new.component';
+import { ListSalesComponent } from './components/sales/list-sales/list-sales.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -52,6 +55,9 @@ import { ModalDeleteCategoryComponent } from './components/categories/modal-dele
     SearchComponent,
     CategoryFeaturesComponent,
     ModalDeleteCategoryComponent,
+    HistoryComponent,
+    NewComponent,
+    ListSalesComponent,
   ],
   imports: [
     CommonModule,
