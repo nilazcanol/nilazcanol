@@ -9,14 +9,14 @@ const saleGet = async (req = request, res = response) => {
 
 
     if(typeof date == 'object'){         
-        const Sales = await (await Sale.find()).filter( sale => ( sale.saleDate.getMonth() == dateNow.getMonth() ))        
+        const Sales = await (await Sale.find()).filter( sale => ( sale.date.getMonth() == dateNow.getMonth() ))        
         return res.json({
             total:Sales.length,
             Sales
         });        
     }else{  
         const dateIn = new Date(date);     
-        const Sales = await (await Sale.find()).filter( sale => ( sale.saleDate.getMonth()+1 == dateIn.getMonth()+1 ))
+        const Sales = await (await Sale.find()).filter( sale => ( sale.date.getMonth()+1 == dateIn.getMonth()+1 ))
            
         return res.json({
             total: Sales.length,

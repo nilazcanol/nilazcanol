@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 const routerUsers = require('../routes/users.routes');
 const routerCategories = require('../routes/category.routes');
 const routerProducts = require('../routes/product.routes');
@@ -15,10 +16,10 @@ class Server {
 		this.connectDB();
 
 		// Path
-		this.usersPath = '/api/users';
+		this.usersPath      = '/api/users';
 		this.categoriesPath = '/api/category';
-		this.salesPath = '/api/sale';
-		this.productPath = '/api/products';
+		this.salesPath      = '/api/sale';
+		this.productPath    = '/api/products';
 
 		// Middleware
 		this.middlewares();
@@ -40,6 +41,12 @@ class Server {
 		this.app.use(cors());
 		this.app.use(express.static('public'));
 		this.app.use(express.json());
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }));
+
 	}
 
 	// Routes

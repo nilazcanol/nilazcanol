@@ -2,23 +2,21 @@ const { response, request } = require('express');
 const Product = require('../models/product');
 const Category = require('../models/category');
 const { $where } = require('../models/product');
+const { uploadFile } = require('../helpers/uploadFile');
 
-
-// TODO send how Query the type of filter
+const cloudinary = require('cloudinary').v2;
 
 const searchProductsWithName = async (req = request, res = response) => {
+	const { product, category } = req.query;
 
-    const { product, category } = req.query;
+	var productSearch;
 
-    var productSearch;
-
-	if(category == undefined){
-        const regex = new RegExp(product, 'i');
-        productSearch = await Product.find({ name: regex } );
-    }else{
-        productSearch = await Product.find({ category:category });
-    }
-
+	if (category == undefined) {
+		const regex = new RegExp(product, 'i');
+		productSearch = await Product.find({ name: regex });
+	} else {
+		productSearch = await Product.find({ category: category });
+	}
 
 	const products = await Promise.all(
 		productSearch.map(async (product) => {
@@ -71,6 +69,15 @@ const productGet = async (req = request, res = response) => {
 	});
 };
 const productPost = async (req = request, res = response) => {
+	cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
+
+	if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
+		res.status(400).json({ msg: 'No file to load' });
+		return;
+	}
+	const { tempFilePath } = req.files.file;
+	const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+
 	const {
 		name,
 		description,
@@ -78,7 +85,6 @@ const productPost = async (req = request, res = response) => {
 		stock,
 		state,
 		category,
-		img,
 		...resto
 	} = req.body;
 
@@ -88,7 +94,7 @@ const productPost = async (req = request, res = response) => {
 		price,
 		stock,
 		state,
-		img,
+		img: secure_url,
 		category,
 	});
 	const existProduct = await Product.findOne({ name });
@@ -106,7 +112,6 @@ const productPost = async (req = request, res = response) => {
 		});
 	}
 	product.save();
-	
 
 	res.json({
 		msg: 'Product saved correctly',
@@ -118,7 +123,7 @@ const productPost = async (req = request, res = response) => {
 			description: product.description,
 			price: product.price,
 			stock: product.stock,
-			category:existCategory.name,
+			category: existCategory.name,
 		},
 	});
 };
@@ -136,26 +141,45 @@ const productPut = async (req = request, res = response) => {
 		...resto
 	} = req.body;
 
-    const categorySelected = await Category.findOne(
-        $where[
-            {name:category },
-            {_id:category }
-        ]
-    );
-	const productUpdate = await Product.findByIdAndUpdate(id, {
-		name,
-		description,
-		price,
-		stock,
-		state : true,
-		category:categorySelected._id,
-		img,
-	},{ new: true });
+	if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
+		res.status(400).json({ msg: 'No file to load' });
+		return;
+	}
+	const categorySelected = await Category.findOne(
+		$where[({ name: category }, { _id: category })]
+	);
 
-    const product = {
-        ...productUpdate,
-        category :  categorySelected.name
-    }
+	cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
+
+	const productToBeUpdated = await Product.findById(id);
+	if (productToBeUpdated.img) {
+		const nameArr = productToBeUpdated.img.split('/');
+		const name = nameArr[nameArr.length - 1];
+		const [public_id] = name.split('.');
+		cloudinary.uploader.destroy(public_id);
+	}
+
+	const { tempFilePath } = req.files.file;
+	const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+
+	const updatedProduct = await Product.findByIdAndUpdate(
+		id,
+		{
+			name,
+			description,
+			price,
+			stock,
+			state: true,
+			category: categorySelected._id,
+			img: secure_url,
+		},
+		{ new: true }
+	);
+
+	const product = {
+		...updatedProduct,
+		category: categorySelected.name,
+	};
 
 	res.json({
 		status: true,

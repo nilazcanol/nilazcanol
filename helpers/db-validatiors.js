@@ -5,7 +5,6 @@ const existProductById = async  (id = '') => {
 
     const exist = await Product.findOne({_id:id})
 
-    console.log(exist);
 
     if( !exist ){
 		throw new Error(`The Product with ID ${id} does not exist`);		

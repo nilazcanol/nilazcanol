@@ -20,7 +20,6 @@ routerProduct.post(`/`,[
     check('stock' ,'The stock is required').not().isEmpty(),
     check('category' ,'The category is required').not().isEmpty(),
     check('category' ,'The category is not a valid ID').isMongoId(),
-
     validateFields
 ] , productPost);
 
