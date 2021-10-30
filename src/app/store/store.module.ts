@@ -17,7 +17,6 @@ import { NewProductComponent } from './components/products/product-add-and-updat
 import { PrimengModule } from '../primeNg/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalDeleteProductComponent } from './components/products/modal-delete-product/modal-delete-product.component';
-import { SaleComponent } from './pages/sale/sale.component';
 import { ProductSaleComponent } from './components/products/product-sale/product-sale.component';
 import { MenuSaleComponent } from './components/menus/menu-sale/menu-sale.component';
 import { ProductSaleListComponent } from './components/products/product-sale-list/product-sale-list.component';
@@ -44,7 +43,6 @@ import { SalesSearchComponent } from './components/sales/sales-search/sales-sear
     ListCategoriesComponent,
     NewProductComponent,
     ModalDeleteProductComponent,
-    SaleComponent,
     ProductSaleComponent,
     MenuSaleComponent,
     ProductSaleListComponent,

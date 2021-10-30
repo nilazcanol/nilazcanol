@@ -17,6 +17,12 @@ export class MenuSaleComponent implements OnInit {
    
     this.menuList = [
         { 
+            label: 'History', 
+            class: 'pi pi-book  me-1 ', 
+            routerLink:'/store/sales/history',
+            classActive:"active"
+        },
+        { 
             label: 'New', 
             class: 'pi pi-plus  me-1 ', 
             routerLink:'/store/sales/new',
@@ -27,13 +33,7 @@ export class MenuSaleComponent implements OnInit {
             class: 'pi pi-book  me-1 ', 
             routerLink:'/store/sales/shopping-cart',
             classActive:"active"
-        },        
-        { 
-            label: 'History', 
-            class: 'pi pi-book  me-1 ', 
-            routerLink:'/store/sales/history',
-            classActive:"active"
-        }
+        }        
     ]
   }
 
