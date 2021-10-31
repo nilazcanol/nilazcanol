@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -28,13 +28,13 @@ export class ProductsService {
 		return this.http.get<Product[]>(url);
 	}
 
-	saveNewProduct(product: Product): Observable<resApiProductResponse> {
+	saveNewProduct(product: FormData): Observable<resApiProductResponse> {
 		const url: string = `${this._urlBase}/products`;
 		return this.http.post<resApiProductResponse>(url, product);
 	}
 
-    updateProduct(product:Product):Observable<resApiProductResponse>{
-        const url: string = `${this._urlBase}/products/${product._id}`;
+    updateProduct(product:FormData,productID:string):Observable<resApiProductResponse>{
+        const url: string = `${this._urlBase}/products/${productID}`;
         return this.http.put<resApiProductResponse>(url,product);
     }
 

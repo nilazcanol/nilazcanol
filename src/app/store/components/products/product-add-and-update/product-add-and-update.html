@@ -11,6 +11,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="staticBackdropLabel">
+                    
 					{{isNewProduct == true ?' New product': 'Update product'}}
 				</h5>
 				<button
@@ -64,12 +65,14 @@
 					<div class="input-group mb-3">
 						<span class="input-group-text">* Img</span>
 						<input
-							type="text"
+							type="file"
 							class="form-control"
 							aria-label="imgProduct"
 							formControlName="img"
 							aria-describedby="basic-addon1"
+                            (change)="captureDocument($event)"
                             required
+
 						/>
 					</div>
 					<span
@@ -147,7 +150,7 @@
 					<button
 						[disabled]="myFormProduct.invalid"
 						[hidden]="productWasSaved"
-                        data-bs-dismiss="modal"
+                        
 						type="submit"
 						class="btn btn-dark float-end"
 					>
