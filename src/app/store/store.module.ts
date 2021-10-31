@@ -17,7 +17,6 @@ import { NewProductComponent } from './components/products/product-add-and-updat
 import { PrimengModule } from '../primeNg/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalDeleteProductComponent } from './components/products/modal-delete-product/modal-delete-product.component';
-import { SaleComponent } from './pages/sale/sale.component';
 import { ProductSaleComponent } from './components/products/product-sale/product-sale.component';
 import { MenuSaleComponent } from './components/menus/menu-sale/menu-sale.component';
 import { ProductSaleListComponent } from './components/products/product-sale-list/product-sale-list.component';
@@ -29,6 +28,10 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { SearchComponent } from './components/products/product-search/product-search.component';
 import { CategoryFeaturesComponent } from './components/categories/category-features/category-features.component';
 import { ModalDeleteCategoryComponent } from './components/categories/modal-delete-category/modal-delete-category.component';
+import { HistoryComponent } from './pages/sale/history/history.component';
+import { NewComponent } from './pages/sale/new/new.component';
+import { ListSalesComponent } from './components/sales/list-sales/list-sales.component';
+import { SalesSearchComponent } from './components/sales/sales-search/sales-search.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -40,7 +43,6 @@ import { ModalDeleteCategoryComponent } from './components/categories/modal-dele
     ListCategoriesComponent,
     NewProductComponent,
     ModalDeleteProductComponent,
-    SaleComponent,
     ProductSaleComponent,
     MenuSaleComponent,
     ProductSaleListComponent,
@@ -52,6 +54,10 @@ import { ModalDeleteCategoryComponent } from './components/categories/modal-dele
     SearchComponent,
     CategoryFeaturesComponent,
     ModalDeleteCategoryComponent,
+    HistoryComponent,
+    NewComponent,
+    ListSalesComponent,
+    SalesSearchComponent,
   ],
   imports: [
     CommonModule,

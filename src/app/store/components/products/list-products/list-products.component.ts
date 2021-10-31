@@ -60,7 +60,7 @@ export class ListProductsComponent implements OnInit {
 	productSelected?: Product;
 	pagination: pagination[] = [];
 	pageActive: number = 1;
-    isNewProduct:Boolean = true;
+    isNewProduct:boolean = true;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -99,6 +99,7 @@ export class ListProductsComponent implements OnInit {
 			this.productSelected = productSelect!;
             this.isNewProduct = newProduct;
         }
+        this.isNewProduct = newProduct;
 		
 	}
 

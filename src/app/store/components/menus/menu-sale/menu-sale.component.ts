@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { salesMenu } from 'src/app/store/interfaces/menu/salesMenu.interface';
 
 @Component({
   selector: 'app-menu-sale',
@@ -11,23 +11,29 @@ export class MenuSaleComponent implements OnInit {
 
   constructor() { }
 
-  menuList!: MenuItem[]
+  menuList!: salesMenu[]
 
   ngOnInit(): void {
    
     this.menuList = [
         { 
-            label: 'Product', 
-            icon: 'pi pi-th-large  me-2 ', 
-            routerLink:'/store/sales',
-            routerLinkActiveOptions:"active"
+            label: 'History', 
+            class: 'pi pi-book  me-1 ', 
+            routerLink:'/store/sales/history',
+            classActive:"active"
+        },
+        { 
+            label: 'New', 
+            class: 'pi pi-plus  me-1 ', 
+            routerLink:'/store/sales/new',
+            classActive:"active"
         },
         { 
             label: 'Shopping cart', 
-            icon: 'pi pi-shopping-cart me-2 ', 
+            class: 'pi pi-book  me-1 ', 
             routerLink:'/store/sales/shopping-cart',
-            routerLinkActiveOptions:"active"
-        }
+            classActive:"active"
+        }        
     ]
   }
 

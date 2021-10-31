@@ -7,4 +7,5 @@ export interface Product{
     category:string,
     img?:string,
     state?:Boolean
+    file?:File
 }

@@ -9,6 +9,7 @@ import {
 	SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
 import { category } from '../../../interfaces/category.interface';
 import { Product } from '../../../interfaces/product.interface';
@@ -35,11 +36,14 @@ export class NewProductComponent implements OnInit, OnChanges {
 	listCategories: category[] = [{ name: 'default' }];
 	productWasSaved: boolean = false;
 
+    public files:any = []
+
 	constructor(
 		private fb: FormBuilder,
 		private productService: ProductsService,
 		private categoryService: CategoriesService,
-		private messageService: MessageService
+		private messageService: MessageService,
+        private sanitizer:DomSanitizer
 	) {}
 
 	ngOnChanges(changes: SimpleChanges): void {
@@ -92,41 +96,82 @@ export class NewProductComponent implements OnInit, OnChanges {
 	clearForm(): void {
 		this.myFormProduct.reset();
 	}
+    
+    captureDocument(event:any){
+        const fileCaptured = event.target.files[0];       
+        this.extractBase64(fileCaptured).then((imagen: any) => {
+            this.files.push(imagen.base);
+          })
+    }
 
+ 
 	saveProduct(): void {
-		this.productService.saveNewProduct(this.myFormProduct.value).subscribe(
-			(res) => {
-				this.messageService.add({
-					severity: 'success',
-					summary: 'Saved correctly',
-					detail: '',
-				});
-				this.productWasSaved = true;
 
-				this.productNew.emit(res.product);
-			},
-			(errors: HttpErrorResponse) => {
-				if (errors.status == 400) {
-					this.messageService.add({
-						severity: 'error',
-						summary: 'Error Bad Request: 400',
-						detail:
-							' Error: Check the data entered: In case the error persists, contact the technical support.',
-					});
-				}
-				if (errors.status == 500) {
-					this.messageService.add({
-						severity: 'error',
-						summary: 'Error:  HTTP server internal error',
-						detail: 'Contact the technical support.',
-					});
-				}
-			}
-		);
-	}
+        try {
+            
+            const formularioDeDatos = new FormData();
+            formularioDeDatos.append('files', this.files[0]);    
+            formularioDeDatos.append('category',this.myFormProduct.controls['category'].value) 
+            formularioDeDatos.append('description',this.myFormProduct.controls['description'].value) 
+            formularioDeDatos.append('img',this.myFormProduct.controls['img'].value) 
+            formularioDeDatos.append('name',this.myFormProduct.controls['name'].value) 
+            formularioDeDatos.append('price',this.myFormProduct.controls['price'].value)
+            formularioDeDatos.append('stock',this.myFormProduct.controls['stock'].value) 
+            formularioDeDatos.append('_id',this.myFormProduct.controls['_id'].value) 
+            this.productService.saveNewProduct(formularioDeDatos).subscribe(
+                (res) => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Saved correctly',
+                        detail: '',
+                    });
+                    this.productWasSaved = true;
+    
+                    this.productNew.emit(res.product);
+                },
+                (errors: HttpErrorResponse) => {
+                    console.log(errors.error);
+                    if (errors.status == 400) {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error Bad Request: 400',
+                            detail:
+                                ' Error: Check the data entered: In case the error persists, contact the technical support.',
+                        });
+                    }
+                    if (errors.status == 500) {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Error:  HTTP server internal error',
+                            detail: 'Contact the technical support.',
+                        });
+                    }
+    
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: errors.error.msg,
+                        detail:'',
+                    });
+                }
+                );
+        } catch (error) {
+            
+        }
+
+		
+        }
 
 	updateProduct(): void {
-		this.productService.updateProduct(this.myFormProduct.value).subscribe(
+        const formularioDeDatos = new FormData();
+        formularioDeDatos.append('files', this.files[0]);    
+        formularioDeDatos.append('category',this.myFormProduct.controls['category'].value) 
+        formularioDeDatos.append('description',this.myFormProduct.controls['description'].value) 
+        formularioDeDatos.append('img',this.myFormProduct.controls['img'].value) 
+        formularioDeDatos.append('name',this.myFormProduct.controls['name'].value) 
+        formularioDeDatos.append('price',this.myFormProduct.controls['price'].value)
+        formularioDeDatos.append('stock',this.myFormProduct.controls['stock'].value) 
+        formularioDeDatos.append('_id',this.myFormProduct.controls['_id'].value) 
+		this.productService.updateProduct(formularioDeDatos,this.myFormProduct.controls['_id'].value).subscribe(
 			(res) => {
 				this.messageService.add({
 					severity: 'success',
@@ -163,4 +208,29 @@ export class NewProductComponent implements OnInit, OnChanges {
 			this.productWasSaved = false;
 		}, 100);
 	}
+
+   
+    extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
+        try {
+          const unsafeImg = window.URL.createObjectURL($event);
+          const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+          const reader = new FileReader();
+          reader.readAsDataURL($event);
+          reader.onload = () => {
+            resolve({
+              base: reader.result
+            });
+          };
+          reader.onerror = error => {
+            resolve({
+              base: null
+            });
+          };
+    
+        } catch (e) {
+            reject({
+                error:e
+            })
+        }
+      })
 }
