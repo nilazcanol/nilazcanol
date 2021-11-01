@@ -1,0 +1,22 @@
+<div class="card-body">
+	<p class="card-text">
+		<strong>Product: </strong>{{ nameProduct | titlecase }} |
+		<small class="text-muted">{{ categoryProduct }}</small> <br />
+		<strong>Description: </strong> {{ descriptionProduct | titlecase }}
+		<br />
+		<strong>Price: </strong>
+		{{ priceProduct | currency: 'USD':'symbol':'1.0-0' }} <br />
+		<strong>Stock: </strong> {{ stockProduct }} U
+	</p>
+	<div class="card-text">
+		<img [src]="imgProduct" [alt]="nameProduct" class="img-fluid" />
+	</div>
+
+	<button
+		pButton
+		type="button"
+		class="p-button-raised p-button-rounded p-button-danger float-end mt-5"
+		label="Close"
+		data-bs-dismiss="modal"
+	></button>
+</div>

@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div
+	class="modal fade"
+	id="modalDeleteProduct"
+	tabindex="-1"
+	aria-labelledby="modalDeleteProduct"
+	aria-hidden="true"
+	data-bs-backdrop="static"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalNewProduct">
+					Delete Product: {{ productSelected.name }}
+				</h5>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<dl class="row">
+					<dt class="col-sm-3">Category:</dt>
+					<dd class="col-sm-9">{{ productSelected.category }}</dd>
+
+					<dt class="col-sm-3">Description:</dt>
+					<dd class="col-sm-9">
+						<p>{{ productSelected.description }}</p>
+					</dd>
+
+					<div class="col-sm-12 mt-3">
+						<button
+							type="button"
+							class="btn btn-danger"
+							data-bs-dismiss="modal"
+							(click)="activateButtonAgain()"
+						>
+							Back
+						</button>
+						<button
+							type="button"
+							class="btn btn-dark  float-end"
+							[disabled]="productRemoved|| showLoading"
+							[hidden]="productRemoved"
+							(click)="deleteProduct()"
+						>
+							Delete product
+						</button>
+					</div>
+				</dl>
+				<div class="text-center mt-5 mb-5" [hidden]="!showLoading">
+					<h3 class="mb-3">Loading...</h3>
+					<div class="spinner-border text-warning" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

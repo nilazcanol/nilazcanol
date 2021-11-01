@@ -1,0 +1,68 @@
+<div
+	class="modal fade"
+	id="modalCategory"
+	data-bs-backdrop="static"
+	data-bs-keyboard="false"
+	tabindex="-1"
+	aria-labelledby="staticBackdropLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">
+					{{isNewCategory== true? 'New Category': 'Update Category'}}
+				</h5>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+
+			<form
+				[formGroup]="myFormCategory"
+				(ngSubmit)="isNewCategory== true ? saveCategory(): updateCategory() "
+			>
+				<div class="modal-body">
+					<div class="input-group mb-3">
+						<span class="input-group-text">Name</span>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Name"
+							aria-label="name"
+							formControlName="name"
+							aria-describedby="basic-addon1"
+						/>
+					</div>
+					<span
+						*ngIf="fieldIsValid('name')"
+						class="input-group alert alert-danger mb-3"
+					>
+						The name must be required
+					</span>
+				</div>
+				<div class="modal-footer">
+					<button
+						type="button"
+						class="btn btn-danger"
+						data-bs-dismiss="modal"
+						(click)="Restoreform()"
+					>
+						Close
+					</button>
+					<button
+						type="submit"
+						class="btn btn-dark float-end"
+                        [disabled]="myFormCategory.invalid"
+                        [hidden]="categoryWasSaved"
+					>
+						Save product
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

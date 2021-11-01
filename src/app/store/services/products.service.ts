@@ -1,59 +1,48 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { category } from '../interfaces/category.interface';
+import { Product } from '../interfaces/product.interface';
 import { resApiProduct } from '../interfaces/resApiProduct.interface';
+import { resApiProductResponse } from '../interfaces/resApiProductResponse.interface';
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class ProductsService {
+	private _urlBase = environment.URLBASE;
+	constructor(private http: HttpClient) {}
 
-    private _urlBase = environment.URLBASE;
-  constructor(private http:HttpClient) { }
+	getAllProducts(page:number = 0): Observable<resApiProduct> {
+		const url: string = `${this._urlBase}/products?from=${page}`;
+		return this.http.get<resApiProduct>(url);
+	}
 
-  getProducts = ()=>{
-        return [
-            {
-              name: 'Arroz Tucapel',
-              description: 'Arroz Gran Selección Grado 2 Tucapel, 1kg',
-              price:1999,
-              stock:'13',
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-            {
-              name: 'Azúcar Iansa',
-              description: 'Azúcar Blanca Granulada Iansa, 1kg',
-              price:5999,
-              stock:'13',
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-            {
-              name: 'Azúcar Iansa',
-              description: 'Azúcar Blanca Granulada Iansa, 1kg',
-              price:5999,
-              stock:'13',
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-            {
-              name: 'Azúcar Iansa',
-              description: 'Azúcar Blanca Granulada Iansa, 1kg',
-              price:5999,
-              stock:'13',
-              category:'Grocery',
-              img:'https://jumbo.vteximg.com.br/arquivos/ids/396670/Leche-entera-1-L.jpg?v=637469297528530000'
-            },
-          ]
-  }
+	getProductById(productID?: string, category?:string): Observable<Product[]> {
+        var url:string = ''
+        if(productID?.length!==0){
+            url = `${this._urlBase}/products/search?product=${productID}`;
+        }else{
+            url = `${this._urlBase}/products/search?category=${category}`;
+        }
+		return this.http.get<Product[]>(url);
+	}
 
-  getAllProducts():Observable<resApiProduct> {
-    const url:string = `${this._urlBase}/products` 
-    return this.http.get<resApiProduct>(url);
+	saveNewProduct(product: FormData): Observable<resApiProductResponse> {
+		const url: string = `${this._urlBase}/products`;
+		return this.http.post<resApiProductResponse>(url, product);
+	}
 
-  }
+    updateProduct(product:FormData,productID:string):Observable<resApiProductResponse>{
+        const url: string = `${this._urlBase}/products/${productID}`;
+        return this.http.put<resApiProductResponse>(url,product);
+    }
 
 
+	deleteProduct(product: Product): Observable<resApiProductResponse> {
+		const url: string = `${this._urlBase}/products/${product._id}`;
+		return this.http.delete<resApiProductResponse>(url);
+	}
 
+  
 }

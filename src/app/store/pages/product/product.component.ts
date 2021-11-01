@@ -1,55 +1,48 @@
-import { Component, OnInit } from '@angular/core'
-import { Product } from '../../interfaces/product.interface'
-import { resApiProduct } from '../../interfaces/resApiProduct.interface';
-import { ProductsService } from '../../services/products.service'
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ChildActivationEnd } from '@angular/router';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styles: [],
+	selector: 'app-product',
+	templateUrl: './product.component.html',
+	styles: [],
 })
 export class ProductComponent implements OnInit {
-  constructor(private productService: ProductsService) {}
+	
 
-  isList!: boolean
-  isNew!: boolean;
-  mostSelledProducts!: Product[]
-  productSelected: Product ={
-    category: '',
-    name: '',
-    description: '',
-    price:0,
-    stock:'',
-    img:''
-  };
+    constructor(private route: ActivatedRoute) {
+     
+	}
+
+	isList!: boolean;
+	isNew!: boolean;
+	productSelected: Product = {
+		category: '',
+		name: '',
+		description: '',
+		price: 0,
+		stock: 0,
+		img: '',
+	};
+
+    searchCategory?: string;
+    
+	ngOnInit(): void {
 
 
+        const category: string[] = this.route.snapshot.queryParamMap.getAll('categoryid')
 
-  ngOnInit(): void {
-    this.isList = true
-    this.isNew = true
-    this.mostSelledProducts = this.productService.getProducts();
-    this.productService.getAllProducts().subscribe( (res)=> {
-        this.mostSelledProducts = res.products;
-    })
-  }
+        if(category.length>0){
+            if(category[0].length>0){
+                this.searchCategory = category[0];
+            }
+        }
+		this.isList = true;
+		this.isNew = true;
+	}
 
-  changeView(isList: boolean) {
-    this.isList = !isList;
-  }
+	showProduct(product: Product): void {
+		this.productSelected = product;
+	}
 
-  display: boolean = false
-
-  showDialog() {
-    this.display = true
-  }
-
-  showProduct(product:Product):void{
-    this.productSelected = product;
-  }
-
-  selectProductCard(product:Product):void{
-    this.productSelected = product;
-  }
 }
-

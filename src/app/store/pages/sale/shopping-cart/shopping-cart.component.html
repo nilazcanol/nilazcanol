@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-sm-12 col-md-10 col-lg-9 col-xl-8">
+    <div class="p-5 bg-light">
+        <h2 class="mb-4 display-6">Summary of purchase</h2>
+        
+        <table class="table">
+            <caption class="mt-3 h5"><Strong>Total: $3.000</Strong></caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Arroz</td>
+                <td>1.000</td>
+                <td>3</td>
+                <td>3.000</td>
+              </tr>
+            </tbody>
+          </table>
+        <h1 class="display-6 mt-4" >Finish purchase</h1>
+        <p class="lead">Enter the amount with which the client pays</p>
+        <hr class="my-2" />
+        <form>
+          <div class="mb-3">
+            <label for="payWith" class="form-label mt-3">Pay with</label>
+            <input
+              type="number"
+              class="form-control"
+              id="payWith"
+              placeholder="10.000"
+            />
+          </div>
+          
+          <div class="mb-3">
+              <button type="button" class="btn btn-danger btn-lg mx-1 mb-1" (click)="finishPurchase(true) ">Finish purchase</button>
+            <button class="btn btn-secondary mx-1 mb-1">Cancel</button>
+          </div>
+
+        
+          <div class="mb-3" [hidden]="!isFinished">
+              <div class="alert alert-success">
+                  <label for="payWith" class="form-label">Exchange</label>
+                  <h5>$7.000</h5>
+              </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
