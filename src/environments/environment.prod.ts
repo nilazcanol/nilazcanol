@@ -1,7 +1,7 @@
 
 export const environment = {
   production: true,
-  URLBASE:'https://mialmacencr.herokuapp.com/api'
+  URLBASE:'https://my-store-app-01.herokuapp.com/api'
 };
 
 
