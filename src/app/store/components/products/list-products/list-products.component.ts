@@ -61,6 +61,7 @@ export class ListProductsComponent implements OnInit {
 	pagination: pagination[] = [];
 	pageActive: number = 1;
     isNewProduct:boolean = true;
+    showLoading: boolean = true;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -73,6 +74,7 @@ export class ListProductsComponent implements OnInit {
 
 		if (this.searchCategory !== undefined) {
 			this.searchProduct();
+            this.showLoading = false;
 		} else {
 			this.productService.getAllProducts().subscribe(
 				(res) => {
@@ -84,10 +86,13 @@ export class ListProductsComponent implements OnInit {
 						});
 					}
 					this.listProducts = res.products;
+                    this.showLoading = false;
+
 				},
 				() => {
 					this.listProducts = [];
-				}
+                    this.showLoading = false;
+                }
 			);
 		}
 	}

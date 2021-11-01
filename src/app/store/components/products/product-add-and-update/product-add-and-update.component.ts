@@ -36,6 +36,8 @@ export class NewProductComponent implements OnInit, OnChanges {
 	listCategories: category[] = [{ name: 'default' }];
 	productWasSaved: boolean = false;
 
+    showLoading: boolean = false;
+
     public files:any = []
 
 	constructor(
@@ -108,7 +110,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 	saveProduct(): void {
 
         try {
-            
+            this.showLoading = true;
             const formularioDeDatos = new FormData();
             formularioDeDatos.append('files', this.files[0]);    
             formularioDeDatos.append('category',this.myFormProduct.controls['category'].value) 
@@ -128,8 +130,11 @@ export class NewProductComponent implements OnInit, OnChanges {
                     this.productWasSaved = true;
     
                     this.productNew.emit(res.product);
+                    this.showLoading = false;
                 },
                 (errors: HttpErrorResponse) => {
+                    this.showLoading = false;
+
                     console.log(errors.error);
                     if (errors.status == 400) {
                         this.messageService.add({

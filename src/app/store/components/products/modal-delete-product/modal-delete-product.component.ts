@@ -16,16 +16,24 @@ export class ModalDeleteProductComponent implements OnInit {
 	> = new EventEmitter();
 
 	@Input('productRemoved') productRemoved: boolean = false;
+    showLoading: boolean = false;
 
 	ngOnInit(): void {}
 
 	deleteProduct() {
+        this.showLoading = true;
 		this.productService
 			.deleteProduct(this.productSelected)
 			.subscribe((res) => {
 				this.productDelete.emit(res.product);
 				this.productRemoved = true;
-			});
+                this.showLoading =false;
+
+			},(err)=>{
+                console.log(err.msg);
+                this.showLoading =false;
+
+            });
 	}
 
 	activateButtonAgain() {
