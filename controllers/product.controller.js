@@ -71,12 +71,10 @@ const productGet = async (req = request, res = response) => {
 const productPost = async (req = request, res = response) => {
 	cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
 
-	if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
-		res.status(400).json({ msg: 'No file to load' });
-		return;
-	}
-	const { tempFilePath } = req.files.file;
-	const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+	// if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
+	// 	res.status(400).json({ msg: 'No file to load' });
+	// 	return;
+	// }
 
 	const {
 		name,
@@ -85,8 +83,12 @@ const productPost = async (req = request, res = response) => {
 		stock,
 		state,
 		category,
+        files,
 		...resto
 	} = req.body;
+
+    // 	const { tempFilePath } = req.files.file;
+	const { secure_url } = await cloudinary.uploader.upload(files);
 
 	const product = new Product({
 		name,
@@ -129,7 +131,9 @@ const productPost = async (req = request, res = response) => {
 };
 
 const productPut = async (req = request, res = response) => {
-	const { id } = req.params;
+    cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
+
+    const { id } = req.params;
 	const {
 		name,
 		description,
@@ -138,18 +142,19 @@ const productPut = async (req = request, res = response) => {
 		state,
 		category,
 		img,
+        files,
 		...resto
 	} = req.body;
 
-	if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
-		res.status(400).json({ msg: 'No file to load' });
-		return;
-	}
+	// if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
+	// 	res.status(400).json({ msg: 'No file to load' });
+	// 	return;
+	// }
+
 	const categorySelected = await Category.findOne(
 		$where[({ name: category }, { _id: category })]
 	);
 
-	cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
 
 	const productToBeUpdated = await Product.findById(id);
 	if (productToBeUpdated.img) {
@@ -159,8 +164,8 @@ const productPut = async (req = request, res = response) => {
 		cloudinary.uploader.destroy(public_id);
 	}
 
-	const { tempFilePath } = req.files.file;
-	const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
+	// const { tempFilePath } = req.files.file;
+	const { secure_url } = await cloudinary.uploader.upload(files);
 
 	const updatedProduct = await Product.findByIdAndUpdate(
 		id,
