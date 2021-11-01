@@ -112,7 +112,7 @@ export class NewProductComponent implements OnInit, OnChanges {
         try {
             this.showLoading = true;
             const formularioDeDatos = new FormData();
-            formularioDeDatos.append('files', this.files[0]);    
+            // formularioDeDatos.append('files', this.files[0]);    
             formularioDeDatos.append('category',this.myFormProduct.controls['category'].value) 
             formularioDeDatos.append('description',this.myFormProduct.controls['description'].value) 
             formularioDeDatos.append('img',this.myFormProduct.controls['img'].value) 
