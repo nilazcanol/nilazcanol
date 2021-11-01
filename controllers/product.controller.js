@@ -2,7 +2,6 @@ const { response, request } = require('express');
 const Product = require('../models/product');
 const Category = require('../models/category');
 const { $where } = require('../models/product');
-const { uploadFile } = require('../helpers/uploadFile');
 
 const cloudinary = require('cloudinary').v2;
 
