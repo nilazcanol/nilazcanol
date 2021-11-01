@@ -6,6 +6,10 @@
 >
 	New Product
 </button>
+<div class="d-flex align-items-center p-3" *ngIf="showLoading">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto text-warning" role="status" aria-hidden="true"></div>
+  </div>
 <div *ngIf="listProducts.length !== 0; else messageThereAreNoProducts">
 	<app-search (productSearch)="refreshTheList($event)"> </app-search>
 
