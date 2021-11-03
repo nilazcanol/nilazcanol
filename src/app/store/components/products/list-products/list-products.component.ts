@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { pagination } from 'src/app/store/interfaces/pagination.interface';
+import { pagination } from 'src/app/store/interfaces/others/pagination.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
-import { Product } from '../../../interfaces/product.interface';
+import { Product } from '../../../interfaces/product/product.interface';
 
 @Component({
 	selector: 'app-list-products',

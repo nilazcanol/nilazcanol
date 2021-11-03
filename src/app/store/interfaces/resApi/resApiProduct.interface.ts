@@ -1,4 +1,4 @@
-import { Product } from "./product.interface";
+import { Product } from "../product/product.interface";
 
 export interface resApiProduct{
     products: Product[] ,

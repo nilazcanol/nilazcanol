@@ -11,8 +11,8 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from 'primeng/api';
-import { category } from '../../../interfaces/category.interface';
-import { Product } from '../../../interfaces/product.interface';
+import { category } from '../../../interfaces/category/category.interface';
+import { Product } from '../../../interfaces/product/product.interface';
 import { CategoriesService } from '../../../services/categories.service';
 import { ProductsService } from '../../../services/products.service';
 

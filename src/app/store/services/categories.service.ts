@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { category } from '../interfaces/category.interface';
-import { categorySmall } from '../interfaces/categorySmall.interface';
-import { resApiCategories } from '../interfaces/resApiCategories.interface';
-import { resApiCategoryDeleteResponse } from '../interfaces/resApiCategoryDeleteResponse.interface';
-import { resApiCategoryResponse } from '../interfaces/resApiCategoryResponse.interface';
+import { category } from '../interfaces/category/category.interface';
+import { categorySmall } from '../interfaces/category/categorySmall.interface';
+import { resApiCategories } from '../interfaces/resApi/resApiCategories.interface';
+import { resApiCategoryDeleteResponse } from '../interfaces/resApi/resApiCategoryDeleteResponse.interface';
+import { resApiCategoryResponse } from '../interfaces/resApi/resApiCategoryResponse.interface';
 
 @Injectable({
 	providedIn: 'root',

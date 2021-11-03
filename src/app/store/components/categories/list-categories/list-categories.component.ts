@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { category } from '../../../interfaces/category.interface';
+import { category } from '../../../interfaces/category/category.interface';
 import { CategoriesService } from '../../../services/categories.service';
 
 @Component({

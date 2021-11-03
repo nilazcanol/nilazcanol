@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ChildActivationEnd } from '@angular/router';
-import { Product } from '../../interfaces/product.interface';
+import { Product } from '../../interfaces/product/product.interface';
 
 @Component({
 	selector: 'app-product',

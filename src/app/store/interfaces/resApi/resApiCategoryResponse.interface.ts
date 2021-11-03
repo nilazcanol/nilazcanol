@@ -1,4 +1,4 @@
-import { category } from "./category.interface";
+import { category } from "../category/category.interface";
 
 export interface resApiCategoryResponse{
     category: category ,
