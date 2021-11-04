@@ -4,6 +4,7 @@ const fileUpload = require('express-fileupload');
 const routerUsers = require('../routes/users.routes');
 const routerCategories = require('../routes/category.routes');
 const routerProducts = require('../routes/product.routes');
+const routerAuth = require('../routes/auth.routes');
 const { dbConnection } = require('../database/config');
 const path = require('path');
 const routerSales = require('../routes/sale.routes');
@@ -20,6 +21,7 @@ class Server {
 		this.categoriesPath = '/api/category';
 		this.salesPath      = '/api/sale';
 		this.productPath    = '/api/products';
+        this.authPath       = '/api/auth';
 
 		// Middleware
 		this.middlewares();
@@ -52,6 +54,7 @@ class Server {
 	// Routes
 	routes() {
 		this.app.use(this.usersPath, routerUsers);
+		this.app.use(this.authPath, routerAuth);
 		this.app.use(this.categoriesPath, routerCategories);
 		this.app.use(this.productPath, routerProducts);
 		this.app.use(this.salesPath, routerSales);

@@ -60,10 +60,13 @@ const userPost = async (req = request, res = response) => {
 const userDelete = async (req = request, res = response) => {
 	const { id } = req.params;
 	const user = await User.findByIdAndUpdate(id, {state:false});
-	
+    const userAuth = req.user;
+
 	res.json({
 		status: true,
-		user
+		user,
+        userAuth
+
 	})
 };
 
