@@ -1,5 +1,5 @@
-import { category } from "./category.interface";
-import { Product } from "./product.interface";
+import { category } from "../category/category.interface";
+import { Product } from "../product/product.interface";
 
 export interface resApiCategoryDeleteResponse {
 	category: category;

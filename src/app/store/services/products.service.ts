@@ -2,10 +2,10 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { category } from '../interfaces/category.interface';
-import { Product } from '../interfaces/product.interface';
-import { resApiProduct } from '../interfaces/resApiProduct.interface';
-import { resApiProductResponse } from '../interfaces/resApiProductResponse.interface';
+import { category } from '../interfaces/category/category.interface';
+import { Product } from '../interfaces/product/product.interface';
+import { resApiProduct } from '../interfaces/resApi/resApiProduct.interface';
+import { resApiProductResponse } from '../interfaces/resApi/resApiProductResponse.interface';
 @Injectable({
 	providedIn: 'root',
 })

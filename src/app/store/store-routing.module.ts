@@ -7,6 +7,7 @@ import { ProductComponent } from './pages/product/product.component';
 import { HomeSaleComponent } from "./pages/sale/home-sale/home-sale.component";
 import { HistoryComponent } from './pages/sale/history/history.component';
 import { NewComponent } from './pages/sale/new/new.component';
+import { HomeUsersComponent } from './pages/user/home-users/home-users.component';
 const routes: Routes = [
     {
         path:'',
@@ -22,9 +23,10 @@ const routes: Routes = [
                     { path:'history', component: HistoryComponent },
                     { path:'shopping-cart', component: ShoppingCartComponent },
                     { path:'**', redirectTo:'history'},
-
+                    
                 ]
             },
+            { path:'users', component:HomeUsersComponent },
             { path:'**', redirectTo:'home' }
         ]
     }

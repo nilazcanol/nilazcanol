@@ -1,67 +1,86 @@
+<form  [formGroup]="loginForm" (ngSubmit)="login()">
+	<div class="mb-4">
+		<div class="row justify-content-lg-center">
+			<div class="col-sm-12 col-md-8">
+				<h1 class="display-3">
+					MyStore <small class="display-6 text-secondary"> 1.0</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="mb-3 row justify-content-lg-center">
+		<label
+			for="staticEmail"
+			class="col-sm-12 col-md-4 col-lg-2 col-form-label"
+			>Email</label
+		>
+		<div class="col-sm-12 col-md-8 col-lg-6">
+			<input
+				type="email"
+				class="form-control"
+				id="staticEmail"
+				formControlName="email"
+				required
+				placeholder="email@example.com"
+			/>
 
+			<span
+				*ngIf="fieldIsValid('email')"
+				class="input-group alert alert-danger mb-2 mt-3"
+			>
+				The mail is required
+			</span>
+		</div>
+	</div>
+	<div class="mb-3 row justify-content-lg-center">
+		<label
+			for="inputPassword"
+			class="col-sm-12 col-md-4 col-lg-2 col-form-label"
+			>Password</label
+		>
+		<div class="col-sm-12 col-md-8 col-lg-6">
+			<input
+				type="password"
+				formControlName="password"
+				class="form-control"
+				id="inputPassword"
+				required
+				placeholder="Password"
+			/>
 
-<form action="">
-    <div class="mb-4">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8">
-                <h1 class="display-3">MyStore <small class=" display-6 text-secondary"> 1.0</small></h1>
-            </div>
-        </div>
-    </div>
-    <div class="mb-3 row justify-content-lg-center">
-        <label for="staticEmail" class="col-sm-12 col-md-4 col-lg-2 col-form-label"
-            >Email</label
+            <span
+            *ngIf="fieldIsValid('password')"
+            class="input-group alert alert-danger mb-2 mt-3"
         >
-        <div class="col-sm-12 col-md-8 col-lg-6">
-            <input
-                type="text"
-                class="form-control"
-                id="staticEmail"
-                placeholder="email@example.com"
-            />
-        </div>
-    </div>
-    <div class="mb-3 row justify-content-lg-center">
-        <label
-            for="inputPassword"
-            class="col-sm-12 col-md-4 col-lg-2 col-form-label"
-            >Password</label
-        >
-        <div class="col-sm-12 col-md-8 col-lg-6">
-            <input
-                type="password"
-                class="form-control"
-                id="inputPassword"
-                placeholder="Password"
-            />
-        </div>
-    </div>
-    <div class="mb-3 row justify-content-lg-center">
-        <div class="col-sm-12 col-md-8 col-lg-6 col-form-label">
-            <small class="text-muted">You do not have an account? <a class="link-warning mx-" routerLink="/access/register">Register here</a>
-            </small>
-        </div>
-        <div class="col-sm-12 col-md-8 col-lg-2">
-        </div>
-        
-    </div>
-    <div class="mb-3 row mt-4">
-        <label
-            for="inputPassword"
-            class="col-sm-2 col-form-label"
-        ></label>
-        <div class="col-sm-10">
-            <div class="d-grid gap-2">
-                <a
-                    type="password"
-                    class="btn btn-warning btn-lg mx-sm-2"
-                    id="inputPassword"                    
-                    routerLink="/store/home"
-
-                >
-                    Login
-                </a>
-            </div>
-        </div>
-    </div>
+            The password is required, must have {{ 6- this.loginForm.controls['password'].value.length }} characters as a minimum
+        </span>
+		</div>
+	</div>
+	<div class="mb-3 row justify-content-lg-center">
+		<div class="col-sm-12 col-md-8 col-lg-6 col-form-label">
+			<small class="text-muted"
+				>You do not have an account?
+				<a class="link-warning mx-" routerLink="/access/register"
+					>Register here</a
+				>
+			</small>
+		</div>
+		<div class="col-sm-12 col-md-8 col-lg-2"></div>
+	</div>
+	<div class="mb-3 row mt-4">
+		<label for="inputPassword" class="col-sm-2 col-form-label"></label>
+		<div class="col-sm-10">
+			<div class="d-grid gap-2">
+				<button
+					type="submit"
+					class="btn btn-warning btn-lg mx-sm-2"
+					[disabled]="loginForm.invalid"
+					id="inputPassword"
+				>
+					Login
+				</button>
+			</div>
+		</div>
+	</div>
 </form>
+<p-toast></p-toast>

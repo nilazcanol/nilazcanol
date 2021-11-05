@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from 'src/app/store/services/products.service';
-import { Product } from '../../../interfaces/product.interface';
+import { Product } from '../../../interfaces/product/product.interface';
 
 @Component({
 	selector: 'app-modal-delete-product',

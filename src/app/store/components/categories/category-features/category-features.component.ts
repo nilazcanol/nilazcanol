@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { category } from 'src/app/store/interfaces/category.interface';
+import { category } from 'src/app/store/interfaces/category/category.interface';
 import { CategoriesService } from 'src/app/store/services/categories.service';
 
 @Component({
