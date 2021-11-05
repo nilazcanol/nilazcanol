@@ -1,3 +1,4 @@
+import { IsAdminGuard } from './../login/guards/is-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShoppingCartComponent } from './pages/sale/shopping-cart/shopping-cart.component';
@@ -16,21 +17,27 @@ const routes: Routes = [
             { path:'home', component:HomeComponent },
             { path:'products', component:ProductComponent },
             { path:'categories', component:CategoryComponent },
-            { 
-                path:'sales', 
+            {
+                path:'sales',
                 component:HomeSaleComponent,
                 children:[
                     { path:'new', component: NewComponent },
                     { path:'history', component: HistoryComponent },
                     { path:'shopping-cart', component: ShoppingCartComponent },
                     { path:'**', redirectTo:'history'},
-                    
+
                 ]
             },
-            { 
+            {
                 path:'users', component:HomeUsersComponent,
                 children:[
                     { path:'listUser',component:ListUserComponent }
+                ],
+                canLoad:[
+                  IsAdminGuard
+                ],
+                canActivate:[
+                  IsAdminGuard
                 ]
             },
             { path:'**', redirectTo:'home' }

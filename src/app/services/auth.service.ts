@@ -43,7 +43,7 @@ export class AuthService {
               localStorage.setItem('user', JSON.stringify(resp.user!) ),
               localStorage.setItem('token', resp.token! );
                   return resp.status
-              
+
           }),
           catchError( err => of(err))
     )
@@ -57,10 +57,20 @@ export class AuthService {
         .set('x-token',localStorage.getItem('token') || '')
     return this.http.get<resApiLogin>(url,{headers}).pipe(
         map( resp => {
-            
+
             return resp.status
         }),catchError( err =>of(false) )
     )
+
+  }
+
+  validateTokenByRole(rol:string):boolean{
+    const user = JSON.parse(localStorage.getItem('user')!);
+    if(user.rol == rol){
+      return true
+    }else{
+      return false
+    }
 
   }
 

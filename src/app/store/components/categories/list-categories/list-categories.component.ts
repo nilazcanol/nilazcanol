@@ -18,16 +18,19 @@ export class ListCategoriesComponent implements OnInit {
 
 	categorySelected: category = { name: 'Abarrates' };
 	isNewCategory: boolean = true;
-  showLoading: boolean = true;
+	showLoading: boolean = true;
 
 	ngOnInit(): void {
-    this.showLoading = true;
-		this.categoriesService.getAllCategories().subscribe((res) => {
-			this.listCategories = res.categories;
-      this.showLoading = false;
-		},(err =>{
-      this.showLoading = false;
-    }));
+		this.showLoading = true;
+		this.categoriesService.getAllCategories().subscribe(
+			(res) => {
+				this.listCategories = res.categories;
+				this.showLoading = false;
+			},
+			(err) => {
+				this.showLoading = false;
+			}
+		);
 	}
 
 	selectCategory(newCategory: boolean, category?: category) {

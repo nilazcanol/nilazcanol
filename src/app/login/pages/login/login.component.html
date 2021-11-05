@@ -30,6 +30,7 @@
 			>
 				The mail is required
 			</span>
+
 		</div>
 	</div>
 	<div class="mb-3 row justify-content-lg-center">
@@ -44,8 +45,8 @@
 				formControlName="password"
 				class="form-control"
 				id="inputPassword"
+        autocomplete="false"
 				required
-				placeholder="Password"
 			/>
 
             <span
@@ -68,14 +69,13 @@
 		<div class="col-sm-12 col-md-8 col-lg-2"></div>
 	</div>
 	<div class="mb-3 row mt-4">
-		<label for="inputPassword" class="col-sm-2 col-form-label"></label>
+		<label class="col-sm-2 col-form-label"></label>
 		<div class="col-sm-10">
 			<div class="d-grid gap-2">
 				<button
 					type="submit"
 					class="btn btn-warning btn-lg mx-sm-2"
 					[disabled]="loginForm.invalid"
-					id="inputPassword"
 				>
 					Login
 				</button>
