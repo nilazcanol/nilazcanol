@@ -10,7 +10,11 @@ export class IsAdminGuard implements CanActivate, CanLoad {
 	constructor(private authService: AuthService, private router: Router) {}
 
 	canActivate(): Observable<boolean> | boolean {
-        window.alert('You do not have administrator permission')
+
+        const resIsRole =this.authService.validateTokenByRole('ADMIN_ROLE') 
+        if(!resIsRole){
+            window.alert('You do not have administrator permission')
+        }
 		return this.authService.validateTokenByRole('ADMIN_ROLE');
 	}
 	canLoad(): Observable<boolean> | boolean {
