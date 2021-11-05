@@ -1,40 +1,59 @@
-    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline mt-2">MySTORE<small class="ms-2 text-secondary">1.0</small></span>
-        </a>
-            
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                <li *ngFor="let item of items" class="nav-item ">
-                    <a 
-                        [routerLink]="item.routerLink" 
-                        routerLinkActive="bg-warning px-4" 
-                        [class]="item.label !=='Logout'?'nav-link align-middle px-0 text-white' :'nav-link align-middle px-0 bg-danger text-white px-3 mt-4' ">
-                        <i [class]="item.icon" ></i> <span class="ms-1 d-none d-sm-inline">{{item.label}}</span>
-                    </a>
-                </li>                
-                <li class="nav-item ">
-                    <a 
-                        (click)="logout()"                       
-                        class="nav-link align-middle px-0 bg-danger text-white px-3 mt-4">
-                        <i class="pi pi-fw pi-chevron-left" ></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
-                    </a>
-                </li>                
-                <li  class="nav-item ">
-                    <a 
-                      
-                        class="nav-link align-middle px-0 text-white mt-5">
-                        <i class="pi pi-user" ></i> <span class="ms-1 d-none d-sm-inline">{{user.name}}</span>
-                    </a>
-                </li>                
-                <li  class="nav-item ">
-                    <a 
-                      
-                        class="nav-link align-middle px-0 text-white mt-1">
-                        <i class="pi pi-envelope" ></i> <span class="ms-1 d-none d-sm-inline">{{user.email}}</span>
-                    </a>
-                </li>                
-            </ul>
-        <hr>
-        
-    </div>
+<div
+	class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100"
+>
+	<a
+		href="/"
+		class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+	>
+		<span class="fs-5 d-none d-sm-inline mt-2"
+			>MySTORE<small class="ms-2 text-secondary">1.0</small></span
+		>
+	</a>
 
+	<ul
+		class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+		id="menu"
+	>
+		<li *ngFor="let item of items" class="nav-item">
+			<button
+				[routerLink]="item.routerLink"
+				routerLinkActive="bg-warning px-4"
+				[class]="
+					item.label !== 'Logout'
+						? 'nav-link align-middle px-0 text-white'
+						: 'nav-link align-middle px-0 bg-danger text-white px-3 mt-4'
+				"
+			>
+				<i [class]="item.icon"></i>
+				<span class="ms-1 d-none d-sm-inline">{{ item.label }}</span>
+			</button>
+		</li>
+
+		<h5 class="rounded-pill text-light  mt-5 mb-2">{{ user.rol | rol }}</h5>
+		<li class="nav-item">
+			<a class="nav-link align-middle px-0 text-light  ">
+				<i class="pi pi-user"></i>
+				<span class="ms-1 d-none d-sm-inline text-light ">
+					{{ user.name }}
+				</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link align-middle px-0 text-light  mt-1">
+				<i class="pi pi-envelope"></i>
+				<span class="ms-1 d-none d-sm-inline text-light ">{{ user.email }}</span>
+			</a>
+		</li>
+
+		<li class="nav-item">
+			<a
+				(click)="logout()"
+				class="nav-link align-middle px-0 bg-danger text-white px-3 mt-4"
+			>
+				<i class="pi pi-fw pi-chevron-left"></i>
+				<span class="ms-1 d-none d-sm-inline">Logout</span>
+			</a>
+		</li>
+	</ul>
+	<hr />
+</div>
