@@ -1,4 +1,5 @@
-#  WEB-SERVER & REST-SERVER
+#  MyStoreApp
+
 
 ## How to start?
 ```
