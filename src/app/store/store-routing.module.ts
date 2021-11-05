@@ -8,7 +8,7 @@ import { HomeSaleComponent } from "./pages/sale/home-sale/home-sale.component";
 import { HistoryComponent } from './pages/sale/history/history.component';
 import { NewComponent } from './pages/sale/new/new.component';
 import { HomeUsersComponent } from './pages/user/home-users/home-users.component';
-import { UsersListComponent } from './components/users/users-list/users-list.component';
+import { ListUserComponent } from './pages/user/list-user/list-user.component';
 const routes: Routes = [
     {
         path:'',
@@ -30,7 +30,7 @@ const routes: Routes = [
             { 
                 path:'users', component:HomeUsersComponent,
                 children:[
-                    { path:'listUser',component:UsersListComponent }
+                    { path:'listUser',component:ListUserComponent }
                 ]
             },
             { path:'**', redirectTo:'home' }
