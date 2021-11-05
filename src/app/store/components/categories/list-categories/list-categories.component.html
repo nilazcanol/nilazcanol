@@ -1,3 +1,14 @@
+<div class="d-flex align-items-center p-3" *ngIf="showLoading">
+  <strong>Loading...</strong>
+  <div class="spinner-border ms-auto text-warning" role="status" aria-hidden="true"></div>
+</div>
+
+
+
+<div
+	*ngIf="listCategories.length !== 0; else messageThereAreNoCategories"
+	class="table-responsive"
+>
 <button
 	class="mb-4 btn btn-dark"
 	(click)="selectCategory(true)"
@@ -5,11 +16,6 @@
 	data-bs-target="#modalCategory"
 	data-bs-toggle="modal"
 >New category</button>
-
-<div
-	*ngIf="listCategories.length !== 0; else messageThereAreNoCategories"
-	class="table-responsive"
->
 	<table class="table table-sm">
 		<thead>
 			<tr>
@@ -48,7 +54,7 @@
 					</button>
                     </div>
 
-			
+
 				</td>
 			</tr>
 		</tbody>
@@ -56,7 +62,7 @@
 </div>
 
 <ng-template #messageThereAreNoCategories>
-	<div class="alert alert-danger" role="alert">
+	<div  *ngIf="showLoading == false" class="alert alert-danger" role="alert">
 		No categories were found!
 	</div>
 </ng-template>

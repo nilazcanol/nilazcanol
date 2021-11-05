@@ -32,6 +32,11 @@ import { HistoryComponent } from './pages/sale/history/history.component';
 import { NewComponent } from './pages/sale/new/new.component';
 import { ListSalesComponent } from './components/sales/list-sales/list-sales.component';
 import { SalesSearchComponent } from './components/sales/sales-search/sales-search.component';
+import { RolPipe } from './pipes/rol.pipe';
+import { HomeUsersComponent } from './pages/user/home-users/home-users.component';
+import { UsersListComponent } from './components/users/users-list/users-list.component';
+import { ListUserComponent } from './pages/user/list-user/list-user.component';
+import { UserFunctionsListComponent } from './components/users/user-functions-list/user-functions-list.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -51,6 +56,7 @@ import { SalesSearchComponent } from './components/sales/sales-search/sales-sear
     ProductFunctionsListComponent,
     ProductDetailComponent,
     CategoryPipe,
+    RolPipe,
     SearchComponent,
     CategoryFeaturesComponent,
     ModalDeleteCategoryComponent,
@@ -58,6 +64,10 @@ import { SalesSearchComponent } from './components/sales/sales-search/sales-sear
     NewComponent,
     ListSalesComponent,
     SalesSearchComponent,
+    HomeUsersComponent,
+    UsersListComponent,
+    ListUserComponent,
+    UserFunctionsListComponent
   ],
   imports: [
     CommonModule,

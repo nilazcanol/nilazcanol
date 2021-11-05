@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { category } from '../../../interfaces/category.interface';
+import { category } from '../../../interfaces/category/category.interface';
 import { CategoriesService } from '../../../services/categories.service';
 
 @Component({
@@ -18,11 +18,19 @@ export class ListCategoriesComponent implements OnInit {
 
 	categorySelected: category = { name: 'Abarrates' };
 	isNewCategory: boolean = true;
+	showLoading: boolean = true;
 
 	ngOnInit(): void {
-		this.categoriesService.getAllCategories().subscribe((res) => {
-			this.listCategories = res.categories;
-		});
+		this.showLoading = true;
+		this.categoriesService.getAllCategories().subscribe(
+			(res) => {
+				this.listCategories = res.categories;
+				this.showLoading = false;
+			},
+			(err) => {
+				this.showLoading = false;
+			}
+		);
 	}
 
 	selectCategory(newCategory: boolean, category?: category) {

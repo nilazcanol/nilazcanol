@@ -16,7 +16,7 @@ export class ProductFunctionsListComponent implements OnInit {
     this.listFuntion = [
         'Create product',
         'See detail',
-        'Edit producto',
+        'Edit product',
         'Remove product',
         'Search for the name'
     ]

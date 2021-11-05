@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { Month } from 'src/app/store/interfaces/month.interface';
+import { Month } from 'src/app/store/interfaces/others/month.interface';
 import { saleResponseGet } from 'src/app/store/interfaces/sales/saleResponseGet.inteface';
 import { SalesService } from 'src/app/store/services/sales.service';
 
