@@ -68,7 +68,7 @@ const productGet = async (req = request, res = response) => {
 	});
 };
 const productPost = async (req = request, res = response) => {
-	cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
+	// cloudinary.config(JSON.parse(process.env.CLOUDINARY_URL));
 
 	// if (!req.files || Object.keys(req.files) === 0 || !req.files.file) {
 	// 	res.status(400).json({ msg: 'No file to load' });
@@ -82,12 +82,12 @@ const productPost = async (req = request, res = response) => {
 		stock,
 		state,
 		category,
-        files,
+        img,
 		...resto
 	} = req.body;
 
     // 	const { tempFilePath } = req.files.file;
-	const { secure_url } = await cloudinary.uploader.upload(files);
+	// const { secure_url } = await cloudinary.uploader.upload(files);
 
 	const product = new Product({
 		name,
@@ -95,7 +95,7 @@ const productPost = async (req = request, res = response) => {
 		price,
 		stock,
 		state,
-		img: secure_url,
+		img,
 		category,
 	});
 	const existProduct = await Product.findOne({ name });

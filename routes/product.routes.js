@@ -3,15 +3,24 @@ const {	productGet, productPost, productPut,productDelete, searchProductsWithNam
 const { validateFields } =require('../middlewares');
 const { check } = require('express-validator')
 const { existProductById } = require('../helpers/db-validatiors');
-
+const { validateJWT } = require('../middlewares/validate-jwt');
+const { isAdminRole,hasRole } = require('../middlewares/validate-roles');
 
 const routerProduct = Router();
 
-routerProduct.get(`/`, productGet);
+routerProduct.get(`/`,[
+    validateJWT,
+    hasRole('ADMIN_ROLE','EMPLOYEE_ROLE'),
+], productGet);
 
-routerProduct.get(`/search`, searchProductsWithName);
+routerProduct.get(`/search`, [
+    validateJWT,
+    hasRole('ADMIN_ROLE','EMPLOYEE_ROLE'),
+],searchProductsWithName);
 
 routerProduct.post(`/`,[
+    validateJWT,
+    hasRole('ADMIN_ROLE','EMPLOYEE_ROLE'),
     check('name','The name is required').not().isEmpty(),
     check('description' ,'The description is required').not().isEmpty(),
     check('description','The description must have more than 6 letters').isLength({ min:6 }),
@@ -25,11 +34,16 @@ routerProduct.post(`/`,[
 
 
 routerProduct.put(`/:id`,[
+    validateJWT,
+    hasRole('ADMIN_ROLE','EMPLOYEE_ROLE'),
     check('id','It is not a valid ID').isMongoId(),
     check('id').custom(existProductById),
     validateFields
 ], productPut);
+
 routerProduct.delete(`/:id`, [
+    validateJWT,
+    hasRole('ADMIN_ROLE','EMPLOYEE_ROLE'),
     check('id','It is not a valid ID').isMongoId(),
     check('id').custom(existProductById),
     validateFields

@@ -8,28 +8,39 @@ const {
 } = require('../controllers/users.controller');
 const { validateFields } = require('../middlewares');
 const { validateJWT } = require('../middlewares/validate-jwt');
-const { isAdminRole,hasRole } = require('../middlewares/validate-roles');
+const { isAdminRole, hasRole } = require('../middlewares/validate-roles');
 
 const routerUsers = Router();
 
-routerUsers.get(`/`, userGet);
+routerUsers.get(
+	`/`,
+	[validateJWT, hasRole('ADMIN_ROLE')],
+	userGet
+);
 
-routerUsers.put(`/:id`, [
-    check('id','It is not a valid ID').isMongoId(),
+routerUsers.put(
+	`/:id`,
+	[
+		validateJWT,
+		isAdminRole,
+		hasRole('ADMIN_ROLE'),
+		check('id', 'It is not a valid ID').isMongoId(),
+	],
+	userPut
+);
 
-],userPut);
+routerUsers.post(`/`, [], userPost);
 
-routerUsers.post(`/`,[
-    
-], userPost);
-
-routerUsers.delete(`/:id`,[
-    // validateJWT,
-    // isAdminRole,
-    // hasRole('ADMIN_ROLE'),
-    check('id','It is not a valid ID').isMongoId(),
-    validateFields
-],
-    userDelete);
+routerUsers.delete(
+	`/:id`,
+	[
+		// validateJWT,
+		// isAdminRole,
+		// hasRole('ADMIN_ROLE'),
+		check('id', 'It is not a valid ID').isMongoId(),
+		validateFields,
+	],
+	userDelete
+);
 
 module.exports = routerUsers;
