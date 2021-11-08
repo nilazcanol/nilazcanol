@@ -1,0 +1,138 @@
+<div
+	class="modal fade"
+	id="modalUser"
+	data-bs-backdrop="static"
+	data-bs-keyboard="false"
+	tabindex="-1"
+	aria-labelledby="staticBackdropLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header mb-3">
+				<h5 class="modal-title" id="staticBackdropLabel">New User</h5>
+
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+
+			</div>
+
+			<form [formGroup]="myFormUser" (submit)="saveUser()">
+				<div class="modal-body">
+		
+                    <!--  Email -->
+                    <div class="input-group mb-3">
+						<span class="input-group-text">* Email</span>
+						<input
+							type="email"
+							class="form-control"
+							placeholder="Email"
+							aria-label="Email"
+							formControlName="email"
+							aria-describedby="basic-addon1"
+							required
+						/>
+					</div>                    
+                        <span
+                            *ngIf="fieldIsValid('email')"
+                            class="input-group alert alert-danger mb-3"
+                        >
+                            The email must be required
+                        </span>
+
+                    <!--  Name -->
+                    <div class="input-group mb-3">
+						<span class="input-group-text">* Name</span>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Name"
+							aria-label="name"
+							formControlName="name"
+                            autocomplete="false"
+							required
+						/>
+					</div>                    
+                        <span
+                            *ngIf="fieldIsValid('name')"
+                            class="input-group alert alert-danger mb-3"
+                        >
+                            The name must be required
+                        </span>
+
+                    <!--  Password -->
+                    <div class="input-group mb-3">
+						<span class="input-group-text">* Password</span>
+						<input
+							type="password"
+							class="form-control"
+							formControlName="password"
+                            autocomplete="false"
+							required
+						/>
+					</div>                    
+                        <span
+                            *ngIf="fieldIsValid('password')"
+                            class="input-group alert alert-danger mb-3"
+                        >
+                            The password must be required
+                        </span>
+                                        
+                    <!--  Rol -->
+                    <div class="input-group mb-3">
+						<span class="input-group-text">* Rol</span>
+						<select
+							formControlName="rol"
+							class="form-select"
+							aria-label="Select Rol"
+							required
+						>
+							<option *ngFor="let rol of listRole" [value]="rol._id">{{rol.name}}</option>
+						</select>
+					</div>                    
+                        <span
+                            *ngIf="fieldIsValid('rol')"
+                            class="input-group alert alert-danger mb-3"
+                        >
+                            The rol must be required
+                        </span>
+                </div>
+                                    
+                <!--  Footer -->
+				<div class="modal-footer">
+					<button
+						type="button"
+						class="btn btn-danger"
+						data-bs-dismiss="modal"
+						(click)="Restoreform()"
+					>
+						Close
+					</button>
+
+					<button
+						[disabled]="myFormUser.invalid || showLoading"
+						[hidden]="productWasSaved"
+						type="submit"
+						class="btn btn-dark float-end"
+					>
+						Save product
+					</button>
+				</div>
+		
+				<div class="text-center mt-5 mb-5" [hidden]="!showLoading">
+                    <h3 class="mb-3">Loading...</h3>
+					<div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+    <p-toast></p-toast>
+</div>
+
