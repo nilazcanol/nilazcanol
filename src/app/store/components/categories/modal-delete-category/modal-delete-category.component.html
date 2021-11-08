@@ -14,21 +14,25 @@
             
             <div class="col-sm-12 mt-3">
                 <button 
-                    type="button" 
-                    class="btn btn-dark" 
-                    [disabled]="eliminatedCategory"
-                    [hidden]="eliminatedCategory"
-                    (click)="deleteCategory(categorySelected)">
-                    Delete category
-                </button>
-                <button 
-                    type="button" 
-                    class="btn btn-danger float-end" 
-                    label="Back" 
-                    data-bs-dismiss="modal"
-                    (click)="activateButtonAgain()">
-                    Back
-                </button>
+                type="button" 
+                class="btn btn-danger" 
+                label="Back" 
+                data-bs-dismiss="modal"
+                (click)="activateButtonAgain()">
+                <i class="pi me-2 pi-times"></i>
+                Back
+                
+            </button>
+            <button 
+                type="button" 
+                class="btn btn-dark float-end" 
+                [disabled]="eliminatedCategory"
+                [hidden]="eliminatedCategory"
+                (click)="deleteCategory(categorySelected)">
+                <i class="pi me-2 pi-trash"></i>
+
+                Delete category
+            </button>
 
             </div>
       </div>

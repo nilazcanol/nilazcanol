@@ -10,9 +10,11 @@
                 formControlName="product"
 			/>
 			<button [disabled]="searchForm.controls['product'].invalid" type="submit" class="btn btn-outline-dark">
+                <i class="pi me-2 pi-search"></i>
 				Search
 			</button>
 			<button  type="button" class="btn btn-outline-danger" (click)="getAllProducts()">
+                <i class="pi me-2 pi-times"></i>
 				Clear
 			</button>
 		</div>
@@ -26,9 +28,11 @@
               </select>
 		
 			<button [disabled]="searchForm.controls['category'].invalid" type="submit" class="btn btn-outline-dark">
+                <i class="pi me-2 pi-search"></i>
 				Search
 			</button>
 			<button  type="button" class="btn btn-outline-danger" (click)="getAllProducts()">
+                <i class="pi me-2 pi-times"></i>
 				Clear
 			</button>
 		</div>

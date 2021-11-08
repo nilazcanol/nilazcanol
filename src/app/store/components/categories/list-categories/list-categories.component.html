@@ -15,7 +15,11 @@
 	label="New category"
 	data-bs-target="#modalCategory"
 	data-bs-toggle="modal"
->New category</button>
+>
+<i class="pi me-2 pi-plus"></i>
+
+New category
+</button>
 	<table class="table table-sm">
 		<thead>
 			<tr>
@@ -34,6 +38,8 @@
 						class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
                         (click)="goToProductByCategory(category)"
 					>
+                    <i class="pi me-2 pi-eye"></i>
+
 						View products
 					</button>
                         <button
@@ -42,6 +48,8 @@
                         data-bs-target="#modalCategory"
                         data-bs-toggle="modal"
 					>
+                    <i class="pi me-2 pi-pencil"></i>
+
 						Edit
 					</button>
 					<button
@@ -50,6 +58,8 @@
 						data-bs-toggle="modal"
 						(click)="selectCategory(false,category)"
 					>
+                    <i class="pi me-2 pi-trash"></i>
+
 						Delete
 					</button>
                     </div>
