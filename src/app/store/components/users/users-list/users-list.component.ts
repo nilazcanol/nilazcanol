@@ -38,4 +38,7 @@ export class UsersListComponent implements OnInit {
     }))
   }
 
+  addToUsersList(user:User){
+    this.listUsers.push(user)
+  }
 }

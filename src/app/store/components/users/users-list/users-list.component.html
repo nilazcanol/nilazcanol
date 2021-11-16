@@ -59,7 +59,9 @@
     </table>
   </div>
 
-  <app-user-add-and-update></app-user-add-and-update>
+  <app-user-add-and-update
+    (userNew)="addToUsersList($event)"
+  ></app-user-add-and-update>
 </div>
 
 

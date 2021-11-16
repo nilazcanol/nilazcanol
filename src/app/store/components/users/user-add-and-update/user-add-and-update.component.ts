@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Rol } from 'src/app/store/interfaces/rol/rol.interface';
@@ -20,6 +20,8 @@ export class UserAddAndUpdateComponent implements OnInit {
     ) {}
 
 	@Input('userInput') userInput?: User;
+    @Output('userNew') userNew: EventEmitter<User> = new EventEmitter();
+    
 	myFormUser!: FormGroup;
 
 	productWasSaved: boolean = false;
@@ -59,17 +61,16 @@ export class UserAddAndUpdateComponent implements OnInit {
     saveUser(){
             this.showLoading = true;
             this.userService.saveProduct(this.myFormUser.value).subscribe( res => {
-                console.log(res);
                 this.showLoading = false;
                 this.messageService.add({
                     severity: 'success',
                     summary: res.msg ,
                     detail:'',
                 });
-                this.productWasSaved=true;
+                this.productWasSaved = true;
+                this.userNew.emit(res.user)
             },(err => {
                 this.showLoading = false;
-                console.log(err.error.msg);
                 this.messageService.add({
                     severity: 'error',
                     summary: err.error.msg,
