@@ -68,6 +68,7 @@ export class UserAddAndUpdateComponent implements OnInit {
                     detail:'',
                 });
                 this.productWasSaved = true;
+                this.Restoreform();
                 this.userNew.emit(res.user)
             },(err => {
                 this.showLoading = false;
