@@ -10,14 +10,8 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header mb-3">
-				<h5 class="modal-title" id="staticBackdropLabel">New User</h5>
+				<h5 class="modal-title" id="staticBackdropLabel">{{isNewUser==true?'New User':'Update user'}}</h5>
 
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="modal"
-					aria-label="Close"
-				></button>
 
 			</div>
 
@@ -91,7 +85,7 @@
 							aria-label="Select Rol"
 							required
 						>
-							<option *ngFor="let rol of listRole" [value]="rol._id">{{rol.name}}</option>
+							<option   *ngFor="let rol of listRole; let i = index" [value]="rol._id">{{rol.name}}</option>
 						</select>
 					</div>                    
                         <span
@@ -121,7 +115,7 @@
 						class="btn btn-dark float-end"
 					>
                     <i class="pi me-2 pi-save"></i>
-						Save product
+						Save user
 					</button>
 				</div>
 		
