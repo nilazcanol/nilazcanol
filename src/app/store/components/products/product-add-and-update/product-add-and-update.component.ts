@@ -145,9 +145,9 @@ export class NewProductComponent implements OnInit, OnChanges {
 					this.showToast('Success', 'Saved correctly', 'success');
 
 					this.productWasSaved = true;
-
 					this.productNew.emit(res.product);
 					this.showLoading = false;
+                    this.Restoreform();
 				},
 				(errors: HttpErrorResponse) => {
 					this.showLoading = false;
@@ -164,6 +164,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 						);
 					}
 					this.showToast('Error', errors.error.msg, 'error');
+                    this.Restoreform();
 
 					setInterval(() => {
 						Swal.close();
@@ -217,6 +218,7 @@ export class NewProductComponent implements OnInit, OnChanges {
                     this.showToast('Success', 'Saved correctly', 'success');
 					this.productWasSaved = true;
 					this.productUpdate.emit(res.product);
+                    this.Restoreform();
 				},
 				(errors: HttpErrorResponse) => {
 					if (errors.status == 400) {
@@ -232,6 +234,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 	Restoreform() {
 		setTimeout(() => {
 			this.myFormProduct.reset();
+           
 			this.productWasSaved = false;
 		}, 100);
 	}
