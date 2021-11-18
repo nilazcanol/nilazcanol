@@ -28,6 +28,7 @@
                 class="btn btn-dark float-end" 
                 [disabled]="eliminatedCategory"
                 [hidden]="eliminatedCategory"
+                data-bs-dismiss="modal"
                 (click)="deleteCategory(categorySelected)">
                 <i class="pi me-2 pi-trash"></i>
 
@@ -39,4 +40,3 @@
     </div>
   </div>
 
-  <p-toast></p-toast>
