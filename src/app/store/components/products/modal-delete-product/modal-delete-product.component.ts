@@ -29,9 +29,11 @@ export class ModalDeleteProductComponent implements OnInit {
 				this.productDelete.emit(res.product);
 				this.productRemoved = true;
                 this.showLoading =false;
-                this.showToast('Success','It was deleted correctly','success');                
+                this.showToast('Success','It was deleted correctly','success');    
+                this.activateButtonAgain();            
 			},(err)=>{
                 this.showToast('Error',err.msg,'error');
+                this.activateButtonAgain();
                 this.showLoading =false;
             });
 	}
@@ -39,7 +41,7 @@ export class ModalDeleteProductComponent implements OnInit {
 	activateButtonAgain() {
 		setTimeout(() => {
 			this.productRemoved = false;
-		}, 2000);
+		}, 1000);
 	}
 
     showToast(
