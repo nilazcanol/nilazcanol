@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
+import swal from'sweetalert2';
 
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-	providers: [MessageService],
 	styles: [``],
 })
 export class LoginComponent implements OnInit {
@@ -15,7 +14,6 @@ export class LoginComponent implements OnInit {
 		private fb: FormBuilder,
 		private authService: AuthService,
 		private router: Router,
-		private messageService: MessageService
 	) {}
 
 	loginForm!: FormGroup;
@@ -35,18 +33,17 @@ export class LoginComponent implements OnInit {
 		const password = this.loginForm.controls['password'].value;
 		this.authService.login(email, password).subscribe((resp) => {
 			if (resp.hasOwnProperty('error')) {
-				this.messageService.add({
-					severity: 'error',
-					summary: resp.error.msg,
-					detail: '',
-				});
+			      swal.fire('Error',resp.error.msg,'error');
+                  setInterval(()=>{
+                      swal.close();
+                  },2000)
 			} 
             if(resp ==true) {
-				this.messageService.add({
-					severity: 'success',
-					summary: "Welcome!",
-					detail: '',
-				});
+				
+                swal.fire('Success','Welcome','success');
+                setInterval(()=>{
+                    swal.close();
+                },2000)
 				this.router.navigateByUrl('/store/home');
 			}
 		});
