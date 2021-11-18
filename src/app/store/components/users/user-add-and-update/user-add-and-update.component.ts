@@ -23,7 +23,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	constructor(
 		private fb: FormBuilder,
 		private userService: UsersService,
-		private messageService: MessageService
+		private messageService: MessageService,
 	) {}
 
 	@Input('userInput') userInput?: User;
@@ -80,6 +80,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 		this.showLoading = true;
 		this.userService.saveProduct(this.myFormUser.value).subscribe(
 			(res) => {
+
 				this.showLoading = false;
 				this.messageService.add({
 					severity: 'success',
