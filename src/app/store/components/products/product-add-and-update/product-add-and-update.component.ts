@@ -173,6 +173,9 @@ export class NewProductComponent implements OnInit, OnChanges {
 		} catch (error) {}
 	}
 
+
+    // TODO: No se actualiza la lista de forma instantánea
+
 	updateProduct(): void {
 		const formularioDeDatos = new FormData();
 		formularioDeDatos.append('files', this.files[0]);
