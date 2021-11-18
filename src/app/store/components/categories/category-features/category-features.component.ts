@@ -11,6 +11,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { category } from 'src/app/store/interfaces/category/category.interface';
 import { CategoriesService } from 'src/app/store/services/categories.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import swal from 'sweetalert2';
 
 @Component({
@@ -63,21 +64,22 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 			.subscribe(
 				(res) => {
 					this.categoryWasSaved = true;
-					swal.fire('Success', 'Saved correctly', 'success');
-
+					this.showToast('Success', 'Saved correctly', 'success');
+                    this.Restoreform();
 					this.categoryNew.emit(res.category);
 				},
 				(errors: HttpErrorResponse) => {
+                    this.Restoreform();
 					if (errors.status == 400) {
-						swal.fire(
+						this.showToast(
 							'Error',
 							'Check the data entered: In case the error persists, contact the technical support.',
 							'error'
 						);
 					}
 					if (errors.status == 500) {
-						swal.fire(
-							'Error:  HTTP server internal error',
+						this.showToast(
+							'Error',
 							'HTTP server internal error',
 							'error'
 						);
@@ -94,24 +96,27 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 			)
 			.subscribe(
 				(res) => {
+                    this.Restoreform();
 					this.categoryWasSaved = true;
+					this.showToast('Saved correctly', '', 'success');
 					swal.fire('Success', 'Saved correctly', 'success');
 
 					this.categoryUpdate.emit(res.category);
 				},
 				(errors: HttpErrorResponse) => {
+                    this.Restoreform();
 					if (errors.status == 400) {
-						swal.fire(
-							'Bad Request: 400 ',
-							'Check the data entered: In case the error persists, contact the technical support.',
-							'success'
+						this.showToast(
+							'Error 400 bad request',
+							'Check the data entered: In case the error persists, contact the technical support',
+							'error'
 						);
 					}
 					if (errors.status == 500) {
-						swal.fire(
-							'Error:  HTTP server internal error',
+						this.showToast(
+							'Error 500 Internal Server',
 							'Contact the technical support.',
-							'success'
+							'error'
 						);
 					}
 				}
@@ -130,5 +135,17 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 			this.categoryWasSaved = false;
 			this.myFormCategory.reset();
 		}, 500);
+	}
+
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }

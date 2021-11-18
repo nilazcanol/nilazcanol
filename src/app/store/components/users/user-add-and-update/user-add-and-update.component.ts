@@ -12,6 +12,7 @@ import { MessageService } from 'primeng/api';
 import { Rol } from 'src/app/store/interfaces/rol/rol.interface';
 import { User } from 'src/app/store/interfaces/user/user.interface';
 import { UsersService } from 'src/app/store/services/users.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-user-add-and-update',
@@ -80,25 +81,29 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 		this.showLoading = true;
 		this.userService.saveProduct(this.myFormUser.value).subscribe(
 			(res) => {
-
+                this.Restoreform();
 				this.showLoading = false;
-				this.messageService.add({
-					severity: 'success',
-					summary: res.msg,
-					detail: '',
-				});
+                this.showToast('Success',res.msg,'success');				
 				this.productWasSaved = true;
 				this.Restoreform();
 				this.userNew.emit(res.user);
 			},
 			(err) => {
+                this.Restoreform();
 				this.showLoading = false;
-				this.messageService.add({
-					severity: 'error',
-					summary: err.error.msg,
-					detail: '',
-				});
+                this.showToast('Error',err.error.msg,'error');			
 			}
 		);
+	}
+    showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }
