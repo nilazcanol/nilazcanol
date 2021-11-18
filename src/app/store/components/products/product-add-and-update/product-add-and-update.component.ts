@@ -49,6 +49,10 @@ export class NewProductComponent implements OnInit, OnChanges {
 	) {}
 
 	ngOnChanges(changes: SimpleChanges): void {
+
+        if(this.isNewProduct == true){
+            this.Restoreform();
+        }
 		if (this.myFormProduct !== undefined) {
 			this.myFormProduct.controls['_id'].setValue(this.productInput?._id);
 			this.myFormProduct.controls['name'].setValue(
