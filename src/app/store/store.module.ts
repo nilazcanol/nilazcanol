@@ -38,6 +38,7 @@ import { UsersListComponent } from './components/users/users-list/users-list.com
 import { ListUserComponent } from './pages/user/list-user/list-user.component';
 import { UserFunctionsListComponent } from './components/users/user-functions-list/user-functions-list.component';
 import { UserAddAndUpdateComponent } from './components/users/user-add-and-update/user-add-and-update.component';
+import { ModalDeleteUserComponent } from './components/users/modal-delete-user/modal-delete-user.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -69,7 +70,8 @@ import { UserAddAndUpdateComponent } from './components/users/user-add-and-updat
     UsersListComponent,
     ListUserComponent,
     UserFunctionsListComponent,
-    UserAddAndUpdateComponent
+    UserAddAndUpdateComponent,
+    ModalDeleteUserComponent
   ],
   imports: [
     CommonModule,

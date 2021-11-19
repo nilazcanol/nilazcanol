@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import {
 	Component,
 	EventEmitter,
@@ -24,11 +25,11 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	constructor(
 		private fb: FormBuilder,
 		private userService: UsersService,
-		private messageService: MessageService,
 	) {}
 
 	@Input('userInput') userInput?: User;
 	@Output('userNew') userNew: EventEmitter<User> = new EventEmitter();
+	@Output('userUpdated') userUpdated: EventEmitter<User> = new EventEmitter();
 	@Input('isNewUser') isNewUser!: boolean;
 
 	myFormUser!: FormGroup;
@@ -60,8 +61,14 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 			this.myFormUser.controls['rol'].setValue(this.userInput?.rol);
 		}
 
+
+
         if(this.isNewUser == true){
             this.Restoreform();
+
+        }else{
+            this.myFormUser.controls['email'].disable();
+            this.myFormUser.controls['password'].disable();
         }
 	}
 
@@ -73,13 +80,13 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	}
 
 	Restoreform() {
-		this.myFormUser.reset();
+		// this.myFormUser.reset();
 		this.productWasSaved = false;
 	}
 
 	saveUser() {
 		this.showLoading = true;
-		this.userService.saveProduct(this.myFormUser.value).subscribe(
+		this.userService.saveUser(this.myFormUser.value).subscribe(
 			(res) => {
                 this.Restoreform();
 				this.showLoading = false;
@@ -92,6 +99,39 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
                 this.Restoreform();
 				this.showLoading = false;
                 this.showToast('Error',err.error.msg,'error');			
+			}
+		);
+	}
+	updateUser() {
+		this.showLoading = true;
+		this.userService.updateUser(this.myFormUser.value).subscribe(
+			(res) => {
+				this.showLoading = false;
+                this.showToast('Success',res.msg,'success');				
+				this.productWasSaved = true;
+				this.Restoreform();
+				this.userUpdated.emit(res.user);
+			},
+			(err) => {
+                this.Restoreform();
+				this.showLoading = false;
+                console.log(err);
+                if (err.status == 400 || err.status == 404) {
+                    this.showToast(
+                        'Error',
+                        'Check the data entered: In case the error persists, contact the technical support.',
+                        'error'
+                    );
+                }
+                if (err.status == 500) {
+                    this.showToast(
+                        'Error',
+                        'HTTP server internal error',
+                        'error'
+                    );
+                }else{
+                    this.showToast('Error:'+err.statusText,err.message,'error',3000);			
+                }
 			}
 		);
 	}

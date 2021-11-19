@@ -50,6 +50,7 @@
                 class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
                 data-bs-target="#modalDeleteUser"
                 data-bs-toggle="modal"
+                (click)="selectedUser(false,user)"
               >
               <i class="pi me-2 pi-trash"></i>
                 Delete
@@ -63,10 +64,16 @@
 
   <app-user-add-and-update
     (userNew)="addToUsersList($event)"
+    (userUpdated)="addToUserListUpdated($event)"
     [userInput]="userSelected"
     [isNewUser]="isNewUser"
 
   ></app-user-add-and-update>
+
+  <app-modal-delete-user
+  (userDelete)="deleteListUser($event)"
+  [userDeleted]="userSelected!">
+</app-modal-delete-user>
 </div>
 
 
