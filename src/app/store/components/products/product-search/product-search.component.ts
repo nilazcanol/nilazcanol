@@ -1,16 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { category } from 'src/app/store/interfaces/category/category.interface';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
 import { CategoriesService } from 'src/app/store/services/categories.service';
 import { ProductsService } from 'src/app/store/services/products.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-search',
 	templateUrl: './product-search.component.html',
 	styles: [],
-    providers: [MessageService],
 
 })
 export class SearchComponent implements OnInit {
@@ -18,7 +17,6 @@ export class SearchComponent implements OnInit {
 		private fb: FormBuilder,
 		private productService: ProductsService,
         private categoryService: CategoriesService,
-        private messageService: MessageService
 	) {}
 
 	searchForm!: FormGroup;
@@ -47,34 +45,31 @@ export class SearchComponent implements OnInit {
                 this.productSearch.emit(res);
                 this.searchForm.controls['product'].reset('');
                 this.searchForm.controls['category'].reset('');
-                this.messageService.add({
-					severity: 'success',
-					summary: 'It was filtered by product name',
-					detail: '',
-				});
+                this.showToast('Success','It was filtered by product name','success')
+                if(res.length === 0){
+                    this.showToast('Ups!','No result for search','info',1000);     
+                }else{
+                    this.showToast('Success','it was filtered by category name','success',1000);     
+                }
             },()=>{
-                this.messageService.add({
-					severity: 'warn',
-					summary: 'Error, contact technical support',
-					detail: '',
-				});
+                this.showToast('Error','Contact technical support','error');               
             });
         }else{
             this.productService.getProductById('',categoryName).subscribe((res) => {
                 this.productSearch.emit(res);
                 this.searchForm.controls['category'].reset('');
                 this.searchForm.controls['product'].reset('');
-                this.messageService.add({
-					severity: 'success',
-					summary: 'It was filtered by category name',
-					detail: '',
-				});
+                if(res.length === 0){
+                    this.showToast('Ups!','No result for search','info',1000);     
+                }else{
+                    this.showToast('Success','it was filtered by category name','success',1000);     
+                }
+
+              
             },()=>{
-                this.messageService.add({
-					severity: 'warn',
-					summary: 'Error, contact technical support',
-					detail: '',
-				});
+                this.showToast('Error','Contact technical support','error');               
+
+               
             });
 
         }
@@ -85,5 +80,17 @@ export class SearchComponent implements OnInit {
 		this.productService.getAllProducts().subscribe((res) => {
 			this.productSearch.emit(res.products);
 		});
+	}
+
+    showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }

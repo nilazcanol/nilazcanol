@@ -2,54 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { pagination } from 'src/app/store/interfaces/others/pagination.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { Product } from '../../../interfaces/product/product.interface';
 
 @Component({
 	selector: 'app-list-products',
 	templateUrl: './list-products.component.html',
-	styles: [
-
-        `
-        .img-list{
-           
-            max-width:70px;
-            cursor:pointer;
-        }
-
-		.page-item.active .page-link {
-				z-index: 3;
-				color: #FFF;
-				border-color: #FFF;
-				background-color: #FFCA2C;
-                cursor:pointer;
-
-			}
-            
-			.page-link {
-                background-color: #FFF;
-                color: #212529;
-                border-color: #FFF;
-                cursor:pointer;
-
-			}
-
-            .backAndNext{
-                background-color: #FFCA2C;
-                border-color: #FFF;
-                color: #FFF;
-            }
-            .backAndNext:hover{
-                background-color: #FFC008;
-                border-color: #FFF;
-                color: #FFF;
-            }
-		`,
-	],
+	styleUrls: ['./list-products.component.css'],
 	providers: [MessageService],
 })
 export class ListProductsComponent implements OnInit {
 	@Input('searchCategory') searchCategory?: string;
-
 
 	constructor(
 		private productService: ProductsService,
@@ -60,8 +23,8 @@ export class ListProductsComponent implements OnInit {
 	productSelected?: Product;
 	pagination: pagination[] = [];
 	pageActive: number = 1;
-    isNewProduct:boolean = true;
-    showLoading: boolean = true;
+	isNewProduct: boolean = true;
+	showLoading: boolean = true;
 
 	ngOnInit(): void {
 		this.productSelected = {
@@ -74,7 +37,7 @@ export class ListProductsComponent implements OnInit {
 
 		if (this.searchCategory !== undefined) {
 			this.searchProduct();
-            this.showLoading = false;
+			this.showLoading = false;
 		} else {
 			this.productService.getAllProducts().subscribe(
 				(res) => {
@@ -86,26 +49,22 @@ export class ListProductsComponent implements OnInit {
 						});
 					}
 					this.listProducts = res.products;
-                    this.showLoading = false;
-
+					this.showLoading = false;
 				},
 				() => {
 					this.listProducts = [];
-                    this.showLoading = false;
-                }
+					this.showLoading = false;
+				}
 			);
 		}
 	}
 
-	selectProduct( newProduct:boolean,productSelect?: Product): void {
-        
-        
-        if(productSelect !== undefined){
+	selectProduct(newProduct: boolean, productSelect?: Product): void {
+		if (productSelect !== undefined) {
 			this.productSelected = productSelect!;
-            this.isNewProduct = newProduct;
-        }
-        this.isNewProduct = newProduct;
-		
+			this.isNewProduct = newProduct;
+		}
+		this.isNewProduct = newProduct;
 	}
 
 	addToTheList(product: Product) {
@@ -113,23 +72,28 @@ export class ListProductsComponent implements OnInit {
 	}
 
 	updateToTheList(product: Product) {
-        const productUpdated = this.listProducts.findIndex(el => el._id == product._id );
-        let newAllProducts = [...this.listProducts];
-        newAllProducts[productUpdated] = {...newAllProducts[productUpdated], 
-            name:product.name, 
-            description:product.description, 
-            price:product.price, 
-            img:product.img, 
-            category:product.category, 
-            stock:product.stock,            
-            _id:product._id            
-        }
+		const productUpdated = this.listProducts.findIndex(
+			(el) => el._id == product._id
+		);
+		let newAllProducts = [...this.listProducts];
+		newAllProducts[productUpdated] = {
+			...newAllProducts[productUpdated],
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			img: product.img,
+			category: product.category,
+			stock: product.stock,
+			_id: product._id,
+		};
 
-        this.listProducts = newAllProducts;
+		this.listProducts = newAllProducts;
 	}
 
 	refreshTheList(products: Product[]) {
-		this.listProducts = products;
+        if(products.length !== 0){
+            this.listProducts = products;
+        }
 	}
 
 	deleteTheList(product: Product) {
@@ -139,39 +103,46 @@ export class ListProductsComponent implements OnInit {
 	}
 
 	changePage(from: number) {
-        console.log(from);
-        if(from <=0 || from > this.pagination.length){
-            console.log('el valor es invalido: ',from);
-        }else{
-            this.pageActive = from;
-            this.productService.getAllProducts((from - 1) * 6).subscribe((res) => {
-                this.listProducts = res.products;
-            });
-        }
-
+		if (from <= 0 || from > this.pagination.length) {
+			this.showToast('Ups!', 'The value is invalid ' + from, 'info');
+		} else {
+			this.pageActive = from;
+			this.productService
+				.getAllProducts((from - 1) * 6)
+				.subscribe((res) => {
+					this.listProducts = res.products;
+				});
+		}
 	}
 
 	searchProduct() {
 		this.productService.getProductById('', this.searchCategory).subscribe(
 			(res) => {
-				this.messageService.add({
-					severity: 'success',
-					summary: 'It was filtered by category name',
-					detail: '',
-				});
-				this.listProducts = res;
+
+                if(res.length !== 0){
+                    this.listProducts = res;
+                }
+
 			},
 			() => {
-				this.messageService.add({
-					severity: 'warn',
-					summary: 'Error, contact technical support',
-					detail: '',
-				});
+				this.showToast(
+					'Error!',
+					'Contact technical support',
+					'warning'
+				);
 			}
 		);
 	}
 
-
-
-
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
+	}
 }

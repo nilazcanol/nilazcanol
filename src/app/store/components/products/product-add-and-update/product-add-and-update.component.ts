@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MessageService } from 'primeng/api';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { category } from '../../../interfaces/category/category.interface';
 import { Product } from '../../../interfaces/product/product.interface';
 import { CategoriesService } from '../../../services/categories.service';
@@ -20,7 +20,6 @@ import { ProductsService } from '../../../services/products.service';
 	selector: 'app-product-add-and-update',
 	templateUrl: './product-add-and-update.html',
 	styles: [],
-	providers: [MessageService],
 })
 export class NewProductComponent implements OnInit, OnChanges {
 	@Input('productInput') productInput?: Product;
@@ -36,23 +35,21 @@ export class NewProductComponent implements OnInit, OnChanges {
 	listCategories: category[] = [{ name: 'default' }];
 	productWasSaved: boolean = false;
 
-    showLoading: boolean = false;
+	showLoading: boolean = false;
 
-    public files:any = []
+	public files: any = [];
 
 	constructor(
 		private fb: FormBuilder,
 		private productService: ProductsService,
 		private categoryService: CategoriesService,
-		private messageService: MessageService,
-        private sanitizer:DomSanitizer
+		private sanitizer: DomSanitizer
 	) {}
 
 	ngOnChanges(changes: SimpleChanges): void {
-
-        if(this.isNewProduct == true){
-            this.Restoreform();
-        }
+		if (this.isNewProduct == true) {
+			this.Restoreform();
+		}
 		if (this.myFormProduct !== undefined) {
 			this.myFormProduct.controls['_id'].setValue(this.productInput?._id);
 			this.myFormProduct.controls['name'].setValue(
@@ -102,144 +99,179 @@ export class NewProductComponent implements OnInit, OnChanges {
 	clearForm(): void {
 		this.myFormProduct.reset();
 	}
-    
-    captureDocument(event:any){
-        const fileCaptured = event.target.files[0];       
-        this.extractBase64(fileCaptured).then((imagen: any) => {
-            this.files.push(imagen.base);
-          })
-    }
 
- 
+	// captureDocument(event: any) {
+	// 	const fileCaptured = event.target.files[0];
+	// 	this.extractBase64(fileCaptured).then((imagen: any) => {
+	// 		this.files.push(imagen.base);
+	// 	});
+	// }
+
 	saveProduct(): void {
+		try {
+			this.showLoading = true;
+			const formularioDeDatos = new FormData();
+			// formularioDeDatos.append('files', this.files[0]);
+			formularioDeDatos.append(
+				'category',
+				this.myFormProduct.controls['category'].value
+			);
+			formularioDeDatos.append(
+				'description',
+				this.myFormProduct.controls['description'].value
+			);
+			formularioDeDatos.append(
+				'img',
+				this.myFormProduct.controls['img'].value
+			);
+			formularioDeDatos.append(
+				'name',
+				this.myFormProduct.controls['name'].value
+			);
+			formularioDeDatos.append(
+				'price',
+				this.myFormProduct.controls['price'].value
+			);
+			formularioDeDatos.append(
+				'stock',
+				this.myFormProduct.controls['stock'].value
+			);
+			formularioDeDatos.append(
+				'_id',
+				this.myFormProduct.controls['_id'].value
+			);
+			this.productService.saveNewProduct(formularioDeDatos).subscribe(
+				(res) => {
+					this.showToast('Success', 'Saved correctly', 'success');
 
-        try {
-            this.showLoading = true;
-            const formularioDeDatos = new FormData();
-            // formularioDeDatos.append('files', this.files[0]);    
-            formularioDeDatos.append('category',this.myFormProduct.controls['category'].value) 
-            formularioDeDatos.append('description',this.myFormProduct.controls['description'].value) 
-            formularioDeDatos.append('img',this.myFormProduct.controls['img'].value) 
-            formularioDeDatos.append('name',this.myFormProduct.controls['name'].value) 
-            formularioDeDatos.append('price',this.myFormProduct.controls['price'].value)
-            formularioDeDatos.append('stock',this.myFormProduct.controls['stock'].value) 
-            formularioDeDatos.append('_id',this.myFormProduct.controls['_id'].value) 
-            this.productService.saveNewProduct(formularioDeDatos).subscribe(
-                (res) => {
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Saved correctly',
-                        detail: '',
-                    });
-                    this.productWasSaved = true;
-    
-                    this.productNew.emit(res.product);
-                    this.showLoading = false;
-                },
-                (errors: HttpErrorResponse) => {
-                    this.showLoading = false;
+					this.productWasSaved = true;
+					this.productNew.emit(res.product);
+					this.showLoading = false;
+                    this.Restoreform();
+				},
+				(errors: HttpErrorResponse) => {
+					this.showLoading = false;
 
-                    console.log(errors.error);
-                    if (errors.status == 400) {
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Error Bad Request: 400',
-                            detail:
-                                ' Error: Check the data entered: In case the error persists, contact the technical support.',
-                        });
-                    }
-                    if (errors.status == 500) {
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Error:  HTTP server internal error',
-                            detail: 'Contact the technical support.',
-                        });
-                    }
-    
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: errors.error.msg,
-                        detail:'',
-                    });
-                }
-                );
-        } catch (error) {
-            
-        }
+					console.log(errors.error);
+					if (errors.status == 400) {
+						this.showToast(
+							'Error 400 bad request','Check the data entered: In case the error persists, contact the technical support','error'
+						);
+					}
+					if (errors.status == 500) {
+						this.showToast(
+							'Error 500 Internal Server','Contact the technical support.','error'
+						);
+					}
+					this.showToast('Error', errors.error.msg, 'error');
+                    this.Restoreform();
 
-		
-        }
+					setInterval(() => {
+						Swal.close();
+					}, 2000);
+				}
+			);
+		} catch (error) {}
+	}
+
+
+    // TODO: No se actualiza la lista de forma instantánea
 
 	updateProduct(): void {
-        const formularioDeDatos = new FormData();
-        formularioDeDatos.append('files', this.files[0]);    
-        formularioDeDatos.append('category',this.myFormProduct.controls['category'].value) 
-        formularioDeDatos.append('description',this.myFormProduct.controls['description'].value) 
-        formularioDeDatos.append('img',this.myFormProduct.controls['img'].value) 
-        formularioDeDatos.append('name',this.myFormProduct.controls['name'].value) 
-        formularioDeDatos.append('price',this.myFormProduct.controls['price'].value)
-        formularioDeDatos.append('stock',this.myFormProduct.controls['stock'].value) 
-        formularioDeDatos.append('_id',this.myFormProduct.controls['_id'].value) 
-		this.productService.updateProduct(formularioDeDatos,this.myFormProduct.controls['_id'].value).subscribe(
-			(res) => {
-				this.messageService.add({
-					severity: 'success',
-					summary: 'Saved correctly',
-					detail: '',
-				});
-				this.productWasSaved = true;
-
-				this.productUpdate.emit(res.product);
-			},
-			(errors: HttpErrorResponse) => {
-				if (errors.status == 400) {
-					this.messageService.add({
-						severity: 'error',
-						summary: 'Error Bad Request: 400',
-						detail:
-							' Error: Check the data entered: In case the error persists, contact the technical support.',
-					});
-				}
-				if (errors.status == 500) {
-					this.messageService.add({
-						severity: 'error',
-						summary: 'Error:  HTTP server internal error',
-						detail: 'Contact the technical support.',
-					});
-				}
-			}
+		const formularioDeDatos = new FormData();
+		formularioDeDatos.append('files', this.files[0]);
+		formularioDeDatos.append(
+			'category',
+			this.myFormProduct.controls['category'].value
 		);
+		formularioDeDatos.append(
+			'description',
+			this.myFormProduct.controls['description'].value
+		);
+		formularioDeDatos.append(
+			'img',
+			this.myFormProduct.controls['img'].value
+		);
+		formularioDeDatos.append(
+			'name',
+			this.myFormProduct.controls['name'].value
+		);
+		formularioDeDatos.append(
+			'price',
+			this.myFormProduct.controls['price'].value
+		);
+		formularioDeDatos.append(
+			'stock',
+			this.myFormProduct.controls['stock'].value
+		);
+		formularioDeDatos.append(
+			'_id',
+			this.myFormProduct.controls['_id'].value
+		);
+		this.productService
+			.updateProduct(
+				formularioDeDatos,
+				this.myFormProduct.controls['_id'].value
+			)
+			.subscribe(
+				(res) => {					
+                    this.showToast('Success', 'Saved correctly', 'success');
+					this.productWasSaved = true;
+					this.productUpdate.emit(res.product);
+                    this.Restoreform();
+				},
+				(errors: HttpErrorResponse) => {
+					if (errors.status == 400) {
+                        this.showToast('Error 400 Bad Request', 'Check the data entered: In case the error persists, contact the technical support.', 'error');
+             		}
+					if (errors.status == 500) {
+                        this.showToast('Error 500 Internal server', 'Contact the technical support', 'error');
+					}
+				}
+			);
 	}
 
 	Restoreform() {
 		setTimeout(() => {
 			this.myFormProduct.reset();
+           
 			this.productWasSaved = false;
 		}, 100);
 	}
 
-   
-    extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
-        try {
-          const unsafeImg = window.URL.createObjectURL($event);
-          const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-          const reader = new FileReader();
-          reader.readAsDataURL($event);
-          reader.onload = () => {
-            resolve({
-              base: reader.result
-            });
-          };
-          reader.onerror = error => {
-            resolve({
-              base: null
-            });
-          };
-    
-        } catch (e) {
-            reject({
-                error:e
-            })
-        }
-      })
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
+	}
+
+	// extractBase64 = async ($event: any) =>
+	// 	new Promise((resolve, reject) => {
+	// 		try {
+	// 			const unsafeImg = window.URL.createObjectURL($event);
+	// 			const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+	// 			const reader = new FileReader();
+	// 			reader.readAsDataURL($event);
+	// 			reader.onload = () => {
+	// 				resolve({
+	// 					base: reader.result,
+	// 				});
+	// 			};
+	// 			reader.onerror = (error) => {
+	// 				resolve({
+	// 					base: null,
+	// 				});
+	// 			};
+	// 		} catch (e) {
+	// 			reject({
+	// 				error: e,
+	// 			});
+	// 		}
+	// 	});
 }
