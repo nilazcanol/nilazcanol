@@ -44,6 +44,23 @@ export class UsersListComponent implements OnInit {
 	addToUsersList(user: User) {
 		this.listUsers.push(user);
 	}
+	addToUserListUpdated (user: User) {
+        const userUpdated = this.listUsers.findIndex(
+			(el) => el.uid == user.uid
+		);
+		let newAllUser = [...this.listUsers];
+		newAllUser[userUpdated] = {
+			...newAllUser[userUpdated],
+			name: user.name,
+			email: user.email,
+			rol: user.rol,
+			state: user.state,
+			password: user.password,
+			uid: user.uid,
+		};
+
+		this.listUsers = newAllUser;
+	}
 
 	selectedUser(isNew: boolean, user?: User) {
 		if (isNew == false) {

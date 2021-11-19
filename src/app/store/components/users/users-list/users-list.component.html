@@ -63,6 +63,7 @@
 
   <app-user-add-and-update
     (userNew)="addToUsersList($event)"
+    (userUpdated)="addToUserListUpdated($event)"
     [userInput]="userSelected"
     [isNewUser]="isNewUser"
 

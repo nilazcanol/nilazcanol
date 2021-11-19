@@ -15,7 +15,7 @@
 
 			</div>
 
-			<form [formGroup]="myFormUser" (submit)="saveUser()">
+			<form [formGroup]="myFormUser" (submit)="isNewUser==true?saveUser():updateUser()">
 				<div class="modal-body">
 		
                     <!--  Email -->
@@ -130,6 +130,5 @@
 			</form>
 		</div>
 	</div>
-    <p-toast></p-toast>
 </div>
 

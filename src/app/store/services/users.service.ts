@@ -22,12 +22,20 @@ export class UsersService {
 		return this.http.get<ResApiUserResponse>(url, { headers });
 	}
     
-	saveProduct(user:User) {
+	saveUser(user:User) {
         const url: string = `${this._urlBase}/users`;
         const headers = new HttpHeaders().set(
             'x-token',
             localStorage.getItem('token') || ''
         );
         return this.http.post<resApiUserAddResponse>(url,user, { headers });
+	}
+	updateUser(user:User) {
+        const url: string = `${this._urlBase}/users/${user.uid}`;
+        const headers = new HttpHeaders().set(
+            'x-token',
+            localStorage.getItem('token') || ''
+        );
+        return this.http.put<resApiUserAddResponse>(url,user, { headers });
 	}
 }
