@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import {
 	Component,
 	EventEmitter,
@@ -60,8 +61,14 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 			this.myFormUser.controls['rol'].setValue(this.userInput?.rol);
 		}
 
+
+
         if(this.isNewUser == true){
             this.Restoreform();
+
+        }else{
+            this.myFormUser.controls['email'].disable();
+            this.myFormUser.controls['password'].disable();
         }
 	}
 
@@ -73,7 +80,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	}
 
 	Restoreform() {
-		this.myFormUser.reset();
+		// this.myFormUser.reset();
 		this.productWasSaved = false;
 	}
 

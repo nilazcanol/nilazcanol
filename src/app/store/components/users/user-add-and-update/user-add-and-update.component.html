@@ -19,7 +19,7 @@
 				<div class="modal-body">
 		
                     <!--  Email -->
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" [hidden]="isNewUser !== true">
 						<span class="input-group-text">* Email</span>
 						<input
 							type="email"
@@ -28,6 +28,7 @@
 							aria-label="Email"
 							formControlName="email"
 							aria-describedby="basic-addon1"
+                            [hidden]="isNewUser !== true"
 							required
 						/>
 					</div>                    
@@ -59,11 +60,12 @@
                         </span>
 
                     <!--  Password -->
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3" [hidden]="isNewUser !== true">
 						<span class="input-group-text">* Password</span>
 						<input
 							type="password"
 							class="form-control"
+                            [hidden]="isNewUser !== true"
 							formControlName="password"
                             autocomplete="false"
 							required
