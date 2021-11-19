@@ -13,12 +13,7 @@
 				<h5 class="modal-title" id="staticBackdropLabel">
 					{{isNewCategory== true? 'New Category': 'Update Category'}}
 				</h5>
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="modal"
-					aria-label="Close"
-				></button>
+				
 			</div>
 
 			<form
@@ -51,6 +46,8 @@
 						data-bs-dismiss="modal"
 						(click)="Restoreform()"
 					>
+                    <i class="pi me-2 pi-times"></i>
+
 						Close
 					</button>
 					<button
@@ -58,7 +55,9 @@
 						class="btn btn-dark float-end"
                         [disabled]="myFormCategory.invalid"
                         [hidden]="categoryWasSaved"
+                        data-bs-dismiss="modal"
 					>
+                    <i class="pi me-2 pi-save"></i>
 						Save product
 					</button>
 				</div>

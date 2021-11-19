@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from 'src/app/store/services/products.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { Product } from '../../../interfaces/product/product.interface';
 
 @Component({
@@ -28,17 +29,30 @@ export class ModalDeleteProductComponent implements OnInit {
 				this.productDelete.emit(res.product);
 				this.productRemoved = true;
                 this.showLoading =false;
-
+                this.showToast('Success','It was deleted correctly','success');    
+                this.activateButtonAgain();            
 			},(err)=>{
-                console.log(err.msg);
+                this.showToast('Error',err.msg,'error');
+                this.activateButtonAgain();
                 this.showLoading =false;
-
             });
 	}
 
 	activateButtonAgain() {
 		setTimeout(() => {
 			this.productRemoved = false;
-		}, 2000);
+		}, 1000);
+	}
+
+    showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }

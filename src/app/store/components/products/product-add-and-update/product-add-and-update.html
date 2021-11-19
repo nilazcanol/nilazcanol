@@ -14,12 +14,7 @@
 					{{isNewProduct == true ?' New product': 'Update product'}}
 				</h5>
 
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="modal"
-					aria-label="Close"
-				></button>
+			
 			</div>
 
 			<form
@@ -154,14 +149,19 @@
 						data-bs-dismiss="modal"
 						(click)="Restoreform()"
 					>
+                    <i class="pi me-2 pi-times"></i>
+
 						Close
 					</button>
 					<button
 						[disabled]="myFormProduct.invalid || showLoading"
 						[hidden]="productWasSaved"
 						type="submit"
+                        data-bs-dismiss="modal"
 						class="btn btn-dark float-end"
 					>
+                    <i class="pi me-2 pi-save"></i>
+
 						Save product
 					</button>
 				</div>

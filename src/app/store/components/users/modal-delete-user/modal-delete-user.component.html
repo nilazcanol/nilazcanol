@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div
 	class="modal fade"
-	id="modalDeleteProduct"
+	id="modalDeleteUser"
 	tabindex="-1"
 	aria-labelledby="modalDeleteProduct"
 	aria-hidden="true"
@@ -10,24 +10,19 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modalNewProduct">
-					Delete Product: {{ productSelected.name }}
+				<h5 class="modal-title">
+					Delete User
 				</h5>
-				<button
-					type="button"
-					class="btn-close"
-					data-bs-dismiss="modal"
-					aria-label="Close"
-				></button>
+				
 			</div>
 			<div class="modal-body">
 				<dl class="row">
-					<dt class="col-sm-3">Category:</dt>
-					<dd class="col-sm-9">{{ productSelected.category }}</dd>
+					<dt class="col-sm-3">Name:</dt>
+					<dd class="col-sm-9"> {{userDeleted.name}}</dd>
 
-					<dt class="col-sm-3">Description:</dt>
+					<dt class="col-sm-3">Email:</dt>
 					<dd class="col-sm-9">
-						<p>{{ productSelected.description }}</p>
+						<p>{{ userDeleted.email}} </p>
 					</dd>
 
 					<div class="col-sm-12 mt-3">
@@ -35,7 +30,7 @@
 							type="button"
 							class="btn btn-danger"
 							data-bs-dismiss="modal"
-							(click)="activateButtonAgain()"
+							
 						>
                         <i class="pi me-2 pi-times"></i>
 							Back
@@ -43,18 +38,16 @@
 						<button
 							type="button"
 							class="btn btn-dark  float-end"
-							[disabled]="productRemoved|| showLoading"
-							[hidden]="productRemoved"
-							(click)="deleteProduct()"
+							(click)="deleteUser()"
                             data-bs-dismiss="modal"
 						>
                         <i class="pi me-2 pi-trash"></i>
 
-							Delete product
+							Delete user
 						</button>
 					</div>
 				</dl>
-				<div class="text-center mt-5 mb-5" [hidden]="!showLoading">
+				<div class="text-center mt-5 mb-5" hidden="showLoading">
 					<h3 class="mb-3">Loading...</h3>
 					<div class="spinner-border text-warning" role="status">
 						<span class="visually-hidden">Loading...</span>

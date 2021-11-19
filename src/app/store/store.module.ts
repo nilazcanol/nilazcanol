@@ -37,6 +37,8 @@ import { HomeUsersComponent } from './pages/user/home-users/home-users.component
 import { UsersListComponent } from './components/users/users-list/users-list.component';
 import { ListUserComponent } from './pages/user/list-user/list-user.component';
 import { UserFunctionsListComponent } from './components/users/user-functions-list/user-functions-list.component';
+import { UserAddAndUpdateComponent } from './components/users/user-add-and-update/user-add-and-update.component';
+import { ModalDeleteUserComponent } from './components/users/modal-delete-user/modal-delete-user.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -67,7 +69,9 @@ import { UserFunctionsListComponent } from './components/users/user-functions-li
     HomeUsersComponent,
     UsersListComponent,
     ListUserComponent,
-    UserFunctionsListComponent
+    UserFunctionsListComponent,
+    UserAddAndUpdateComponent,
+    ModalDeleteUserComponent
   ],
   imports: [
     CommonModule,

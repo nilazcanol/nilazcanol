@@ -1,16 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { category } from 'src/app/store/interfaces/category/category.interface';
 import { CategoriesService } from 'src/app/store/services/categories.service';
+import Swal from 'sweetalert2';
+import swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-modal-delete-category',
 	templateUrl: './modal-delete-category.component.html',
 	styles: [],
-    providers: [MessageService]
 })
 export class ModalDeleteCategoryComponent implements OnInit {
-	constructor(private categoryService: CategoriesService, private messageService: MessageService ) {}
+	constructor(
+		private categoryService: CategoriesService,
+	) {}
 
 	@Input('categorySelected') categorySelected!: category;
 	@Output('categoryDelete') categoryDelete: EventEmitter<
@@ -24,22 +26,14 @@ export class ModalDeleteCategoryComponent implements OnInit {
 		this.categoryService
 			.deleteCategory(categorySelected)
 			.subscribe((res) => {
-                
 				if (res.status == true) {
 					this.eliminatedCategory = true;
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: `Category eliied correctly`,
-                        detail: '',
-                    });
+					
+                    this.showToast('Success','Will be deleted correctly','success')
 					this.categoryDelete.emit(res.category);
-				}else{
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: `There are ${res.categorySelected?.length} products with this category`,
-                        detail: 'Can not be eliminated, you must delete the products first',
-                    });
-                }
+				} else {
+                    this.showToast ('Can not be eliminated',`There are ${res.categorySelected?.length} products with this category`,'error',2000)
+				}
 			});
 	}
 
@@ -47,5 +41,17 @@ export class ModalDeleteCategoryComponent implements OnInit {
 		setTimeout(() => {
 			this.eliminatedCategory = false;
 		}, 2000);
+	}
+
+    showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }
