@@ -23,6 +23,13 @@ export class UsersListComponent implements OnInit {
 	isNewUser: boolean = true;
 
 	ngOnInit(): void {
+        this.userSelected = {
+			email: '',
+			rol: '',
+			name: '',
+			state: true
+			
+		};
 		this.showLoading = true;
 		this.userService.getAllUser().subscribe(
 			(res) => {
@@ -44,6 +51,13 @@ export class UsersListComponent implements OnInit {
 	addToUsersList(user: User) {
 		this.listUsers.push(user);
 	}
+
+	deleteListUser(user: User) {
+        this.listUsers = this.listUsers.filter(
+			(item) => item.uid !== user.uid
+		);
+	}
+
 	addToUserListUpdated (user: User) {
         const userUpdated = this.listUsers.findIndex(
 			(el) => el.uid == user.uid
