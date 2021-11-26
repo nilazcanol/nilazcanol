@@ -41,6 +41,7 @@ import { UserAddAndUpdateComponent } from './components/users/user-add-and-updat
 import { ModalDeleteUserComponent } from './components/users/modal-delete-user/modal-delete-user.component';
 import { CardProductStoreComponent } from './components/products/card-product-store/card-product-store.component';
 import { CartComponent } from './components/sales/cart/cart.component';
+import { InfoProductComponent } from './components/sales/info-product/info-product.component';
 @NgModule({
   declarations: [
     MenuStoreComponent,
@@ -75,7 +76,8 @@ import { CartComponent } from './components/sales/cart/cart.component';
     UserAddAndUpdateComponent,
     ModalDeleteUserComponent,
     CardProductStoreComponent,
-    CartComponent
+    CartComponent,
+    InfoProductComponent
   ],
   imports: [
     CommonModule,

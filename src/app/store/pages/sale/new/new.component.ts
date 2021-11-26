@@ -7,6 +7,18 @@ import { ProductsService } from 'src/app/store/services/products.service';
   selector: 'app-new',
   templateUrl: './new.component.html',
   styles: [
+    `
+     .btn-dark:hover, .btn-dark:active, .btn-dark:visited {
+      background-color: #FFC008;
+      border:#FFC008;
+      color:#212529;
+      -webkit-transition: background-color 0.5s ease-out;
+      -moz-transition: background-color 0.5s ease-out;
+      -o-transition: background-color 0.5s ease-out;
+      transition: background-color 0.5s ease-out;
+}
+
+    `
   ]
 })
 export class NewComponent implements OnInit {

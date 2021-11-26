@@ -1,34 +1,53 @@
 <div class="m-3">
 	<h2 class="mb-4 display-6">New Sale</h2>
-
 	<div class="row justify-content-center">
 		<div class="col-sm-12 col-md-10 col-lg-10 col-xl-10">
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-4"
 			>
 				<div *ngFor="let product of listProduct" class="col">
-					<app-card-product-store
-            [product]="product">
-          </app-card-product-store>
+					<app-card-product-store [product]="product">
+					</app-card-product-store>
 				</div>
 			</div>
-
 		</div>
-        <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-          <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">View Cart</button>
+		<div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+      <div class="d-grid gap-2">
+        <button
+          class="btn btn-lg btn-dark mb-3  hover-warning"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#viewCart"
+          aria-controls="viewCart"
+        >
+        <i class="pi pi-shopping-cart">
 
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <app-cart></app-cart>
-            </div>
-          </div>
+        </i>
+          View Cart
+        </button>
+      </div>
 
 
-        </div>
+			<app-info-product></app-info-product>
+
+			<div
+				class="offcanvas offcanvas-end"
+				tabindex="-1"
+				id="viewCart"
+				aria-labelledby="offcanvasRightLabel"
+			>
+				<div class="offcanvas-header">
+					<button
+						type="button"
+						class="btn-close text-reset"
+						data-bs-dismiss="offcanvas"
+						aria-label="Close"
+					></button>
+				</div>
+				<div class="offcanvas-body">
+					<app-cart></app-cart>
+				</div>
+			</div>
+		</div>
 	</div>
-
 </div>
-
