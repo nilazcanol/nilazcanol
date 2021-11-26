@@ -4,7 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-product-sale',
   templateUrl: './product-sale.component.html',
-  styles: [  ]
+  styles: [
+    `
+    .form-control:focus {
+      border-color: #FFCA2B !important;
+      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+}
+`
+   ]
 })
 export class ProductSaleComponent implements OnInit {
 
@@ -20,11 +27,11 @@ export class ProductSaleComponent implements OnInit {
 
   miFormularioReactivo: FormGroup = this.fb.group({
     amount: [this.stock, [Validators.required ] ],
-   
+
   })
 
   ngOnInit(): void {
   }
 
-  
+
 }
