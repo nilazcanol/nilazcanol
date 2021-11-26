@@ -6,7 +6,7 @@
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-4"
 			>
 				<div *ngFor="let product of listProduct" class="col">
-					<app-card-product-store [product]="product">
+					<app-card-product-store [product]="product" (sendProductSelected)="addShoppingCart($event)">
 					</app-card-product-store>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 					></button>
 				</div>
 				<div class="offcanvas-body">
-					<app-cart></app-cart>
+					<app-cart [listShoppingCart]="shoppingCart"></app-cart>
 				</div>
 			</div>
 		</div>

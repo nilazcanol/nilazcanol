@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/store/interfaces/product/product.interface';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Input('listShoppingCart') listShoppingCart: Product[] = [];
 
   change:number=0;
 

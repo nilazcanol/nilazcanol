@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
 
@@ -30,6 +31,8 @@ export class NewComponent implements OnInit {
     listProduct:Product[] = []
 
 
+  shoppingCart: Product[]= [];
+
 
   ngOnInit(): void {
 
@@ -40,6 +43,10 @@ export class NewComponent implements OnInit {
 
 
 
+
+  }
+  addShoppingCart(product:Product){
+    this.shoppingCart.push(product);
   }
 
 
