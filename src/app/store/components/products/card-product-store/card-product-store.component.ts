@@ -1,5 +1,7 @@
+import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { Product } from './../../../interfaces/product/product.interface';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-card-product-store',
@@ -9,7 +11,10 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CardProductStoreComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
+
+
+
 
   @Input('product') product!:Product;
 

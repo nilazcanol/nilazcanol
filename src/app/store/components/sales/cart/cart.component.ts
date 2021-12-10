@@ -16,6 +16,14 @@ export class CartComponent implements OnInit {
 
   @Input('listShoppingCart') listShoppingCart: Product[] = [];
 
+
+  get totalPrice(){
+    const total = this.listShoppingCart.map(product => product.price);
+
+
+    return 12
+  }
+
   change:number=0;
 
   onKey(event:any) {

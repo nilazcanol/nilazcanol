@@ -10,7 +10,7 @@
 <div class="row">
   <div class="col-sm-12">
       <h3 class="mt-3">Total</h3>
-      <h5 class="mb-4">$ 4.500</h5>
+      <h5 class="mb-4">{{totalPrice}}</h5>
       <h5>Pay with</h5>
       <input class="form-control mb-4" type="number" (keyup)="onKey($event)" id="change">
       <h5 class="mb-3">Change: {{change-0 | currency: 'USD':'symbol':'1.0-0'}}</h5>
