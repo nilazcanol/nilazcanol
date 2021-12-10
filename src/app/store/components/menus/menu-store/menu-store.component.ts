@@ -8,12 +8,12 @@ import { User } from 'src/app/store/interfaces/user/user.interface';
 	selector: 'app-menu-store',
 	templateUrl: './menu-store.component.html',
 	styles: [
-        `
-        .border-radius{
-            border-radius:10px
-        }
-        `
-    ],
+		`
+			.border-radius {
+				border-radius: 10px;
+			}
+		`,
+	],
 })
 export class MenuStoreComponent implements OnInit {
 	constructor(private authService: AuthService, private router: Router) {
@@ -57,9 +57,7 @@ export class MenuStoreComponent implements OnInit {
 
 	items!: MenuItem[];
 
-	ngOnInit() {
-	
-	}
+	ngOnInit() {}
 
 	logout() {
 		this.authService.logout();

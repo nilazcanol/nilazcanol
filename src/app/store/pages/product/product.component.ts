@@ -8,10 +8,10 @@ import { Product } from '../../interfaces/product/product.interface';
 	styles: [],
 })
 export class ProductComponent implements OnInit {
-	
+
 
     constructor(private route: ActivatedRoute) {
-     
+
 	}
 
 	isList!: boolean;
@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
 	};
 
     searchCategory?: string;
-    
+
 	ngOnInit(): void {
 
 

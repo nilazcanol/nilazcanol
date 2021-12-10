@@ -9,7 +9,16 @@ import { SalesService } from 'src/app/store/services/sales.service';
 	selector: 'app-sales-search',
 	templateUrl: './sales-search.component.html',
 	providers: [MessageService],
-	styles: [],
+	styles: [
+    `
+    .form-select:focus {
+      border-color: #FFCA2B !important;
+      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+}
+
+
+`
+  ],
 })
 export class SalesSearchComponent implements OnInit {
 	constructor(private fb: FormBuilder, private salesService: SalesService) {}

@@ -1,0 +1,77 @@
+<div class="card h-100">
+  <img
+    [src]="product.img"
+    class="card-img-top p-5 p-sm-3 p-md-3 p-lg-2"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ product.name | titlecase }}
+      <span
+        *ngIf="product.stock == 0; else producStock"
+        class="badge bg-warning text-dark"
+        >{{ product.stock }}</span
+      >
+      <ng-template #producStock>
+        <span
+          *ngIf="
+            product.stock > 0 &&
+            product.stock < 4
+              ? 'badge bg-warning'
+              : 'badge bg-dark'
+          "
+          [class]="
+            product.stock > 0 &&
+            product.stock < 4
+              ? 'badge bg-warning'
+              : 'badge bg-dark'
+          "
+        >
+          {{
+            product.stock > 0 &&
+            product.stock < 4
+              ? 'Short supply.'
+              : 'Available'
+          }}</span
+        >
+      </ng-template>
+    </h5>
+
+    <p class="card-text">{{ product.description }}.</p>
+  </div>
+  <form class="ms-3 me-3">
+    <label for="quantity" class="form-label"
+      >Quantity </label
+    >
+    <input
+      type="range"
+      class="form-range"
+      min="0"
+      [max]="product.stock"
+      step="1"
+      id="quantity"
+    />
+    <div
+      class="btn-group p-2"
+      role="group"
+      aria-label="Actions"
+    >
+      <button type="button" class="btn btn-warning" (click)="addCart(product)">
+        Add
+      </button>
+      <button type="button" class="btn btn-dark">
+        Info
+      </button>
+    </div>
+  </form>
+
+  <div class="card-footer">
+    <small class="text-muted ps-3 mb-2 mt-2">
+      <strong>Price: </strong>
+      {{
+        product.price
+          | currency: 'USD':'symbol':'1.0-0'
+      }}</small
+    >
+  </div>
+</div>

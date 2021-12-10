@@ -9,7 +9,16 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 @Component({
 	selector: 'app-search',
 	templateUrl: './product-search.component.html',
-	styles: [],
+	styles: [
+    `
+    .form-control:focus {
+      border-color: #FFCA2B !important;
+      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+}
+
+
+`
+  ],
 
 })
 export class SearchComponent implements OnInit {
@@ -47,12 +56,12 @@ export class SearchComponent implements OnInit {
                 this.searchForm.controls['category'].reset('');
                 this.showToast('Success','It was filtered by product name','success')
                 if(res.length === 0){
-                    this.showToast('Ups!','No result for search','info',1000);     
+                    this.showToast('Ups!','No result for search','info',1000);
                 }else{
-                    this.showToast('Success','it was filtered by category name','success',1000);     
+                    this.showToast('Success','it was filtered by category name','success',1000);
                 }
             },()=>{
-                this.showToast('Error','Contact technical support','error');               
+                this.showToast('Error','Contact technical support','error');
             });
         }else{
             this.productService.getProductById('',categoryName).subscribe((res) => {
@@ -60,16 +69,16 @@ export class SearchComponent implements OnInit {
                 this.searchForm.controls['category'].reset('');
                 this.searchForm.controls['product'].reset('');
                 if(res.length === 0){
-                    this.showToast('Ups!','No result for search','info',1000);     
+                    this.showToast('Ups!','No result for search','info',1000);
                 }else{
-                    this.showToast('Success','it was filtered by category name','success',1000);     
+                    this.showToast('Success','it was filtered by category name','success',1000);
                 }
 
-              
-            },()=>{
-                this.showToast('Error','Contact technical support','error');               
 
-               
+            },()=>{
+                this.showToast('Error','Contact technical support','error');
+
+
             });
 
         }

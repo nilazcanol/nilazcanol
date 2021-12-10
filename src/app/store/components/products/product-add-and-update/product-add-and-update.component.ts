@@ -19,7 +19,14 @@ import { ProductsService } from '../../../services/products.service';
 @Component({
 	selector: 'app-product-add-and-update',
 	templateUrl: './product-add-and-update.html',
-	styles: [],
+	styles: [
+    `
+        .form-control:focus, .form-select:focus {
+          border-color: #FFCA2B !important;
+          box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+    }
+  `
+  ],
 })
 export class NewProductComponent implements OnInit, OnChanges {
 	@Input('productInput') productInput?: Product;
@@ -214,7 +221,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 				this.myFormProduct.controls['_id'].value
 			)
 			.subscribe(
-				(res) => {					
+				(res) => {
                     this.showToast('Success', 'Saved correctly', 'success');
 					this.productWasSaved = true;
 					this.productUpdate.emit(res.product);
@@ -232,11 +239,9 @@ export class NewProductComponent implements OnInit, OnChanges {
 	}
 
 	Restoreform() {
-		setTimeout(() => {
 			this.myFormProduct.reset();
-           
+
 			this.productWasSaved = false;
-		}, 100);
 	}
 
 	showToast(
