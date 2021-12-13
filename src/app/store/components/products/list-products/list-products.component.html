@@ -27,14 +27,67 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let product of listProducts; let index = index">
-					<td>
+					<td class="d-none d-md-block">
                         <div class="row justify-content-sm-center justify-content-md-start">
                             <div class="col-sm-12 col-md-2 mb-md-2 mt-md-2">
                                 <img
-                                class="img-fluid img-list"
+                                class="img-fluid img-list  "
 								[src]="product.img"
 								[alt]="product.name"
 							/>
+                            </div>
+                            <div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
+                                <div class="ms-3">
+                                    <div class="fw-bold mb-1">
+                                        {{ product.name | titlecase }}
+                                    </div>
+                                    <div class="text-muted mb-0">
+                                        {{ product.category | titlecase }}
+                                    </div>
+                                    <div class="text-muted mb-0">
+                                        <td
+                                            *ngIf="
+                                                product.stock == 0;
+                                                else productStock
+                                            "
+                                        >
+                                            <span class="badge bg-danger">
+                                                Out of stock
+                                            </span>
+                                        </td>
+                                        <ng-template #productStock>
+                                            <td>
+                                                <span
+                                                    [class]="
+                                                        product.stock > 0 &&
+                                                        product.stock < 4
+                                                            ? 'badge bg-warning'
+                                                            : 'badge bg-dark'
+                                                    "
+                                                >
+                                                    {{
+                                                        product.stock > 0 &&
+                                                        product.stock < 4
+                                                            ? 'Under inventory'
+                                                            : 'Available'
+                                                    }}
+                                                </span>
+                                            </td>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+					</td>
+					<td class="d-block d-md-none">
+                        <div class="col-sm-12 col-md-2 mb-md-2 mt-md-2">
+                            <img
+                            class="img-list-responsive  "
+                            [src]="product.img"
+                            [alt]="product.name"
+                        />
+                        <div class="row justify-content-sm-center justify-content-md-start">
                             </div>
                             <div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
                                 <div class="ms-3">
