@@ -4,176 +4,197 @@
 	data-bs-target="#modalProduct"
 	data-bs-toggle="modal"
 >
-    <i class="pi me-2 pi-plus"></i>
+	<i class="pi me-2 pi-plus"></i>
 	New Product
 </button>
 
 <div class="d-flex align-items-center p-3" *ngIf="showLoading">
-    <strong>Loading...</strong>
-    <div class="spinner-border ms-auto text-warning" role="status" aria-hidden="true"></div>
-  </div>
+	<strong>Loading...</strong>
+	<div
+		class="spinner-border ms-auto text-warning"
+		role="status"
+		aria-hidden="true"
+	></div>
+</div>
 
 <div *ngIf="listProducts.length !== 0; else messageThereAreNoProducts">
 	<app-search (productSearch)="refreshTheList($event)"> </app-search>
 
-	<div class="table-responsive ">
+	<div class="table-responsive">
 		<table class="table table-hover align-middle">
 			<thead>
 				<tr>
 					<th scope="col">Product</th>
-					<th scope="col">Price</th>
+					<th scope="col" class="d-none d-sm-none d-md-block">
+						Price
+					</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr *ngFor="let product of listProducts; let index = index">
+					<!-- * PC Version -->
 					<td class="d-none d-md-block">
-                        <div class="row justify-content-sm-center justify-content-md-start">
-                            <div class="col-sm-12 col-md-2 mb-md-2 mt-md-2">
-                                <img
-                                class="img-fluid img-list  "
+						<div
+							class="row justify-content-sm-center justify-content-md-start"
+						>
+							<div class="col-sm-12 col-md-2 mb-md-2 mt-md-2">
+								<img
+									class="img-fluid img-list"
+									[src]="product.img"
+									[alt]="product.name"
+								/>
+							</div>
+							<div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
+								<div class="ms-3">
+									<div class="fw-bold mb-1">
+										{{ product.name | titlecase }}
+									</div>
+									<div class="text-muted mb-0">
+										{{ product.category | titlecase }}
+									</div>
+									<div class="text-muted mb-0">
+										<td
+											*ngIf="
+												product.stock == 0;
+												else productStock
+											"
+										>
+											<span class="badge bg-danger">
+												Out of stock
+											</span>
+										</td>
+										<ng-template #productStock>
+											<td>
+												<span
+													[class]="
+														product.stock > 0 &&
+														product.stock < 4
+															? 'badge bg-warning'
+															: 'badge bg-dark'
+													"
+												>
+													{{
+														product.stock > 0 &&
+														product.stock < 4
+															? 'Under inventory'
+															: 'Available'
+													}}
+												</span>
+											</td>
+										</ng-template>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<!-- * Mobile version -->
+					<td class="d-block d-md-none">
+						<div
+							class="col-sm-12 col-md-2 mb-md-2 mt-md-2 text-center"
+						>
+							<img
+								class="img-list-responsive"
 								[src]="product.img"
 								[alt]="product.name"
 							/>
-                            </div>
-                            <div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
-                                <div class="ms-3">
-                                    <div class="fw-bold mb-1">
-                                        {{ product.name | titlecase }}
-                                    </div>
-                                    <div class="text-muted mb-0">
-                                        {{ product.category | titlecase }}
-                                    </div>
-                                    <div class="text-muted mb-0">
-                                        <td
-                                            *ngIf="
-                                                product.stock == 0;
-                                                else productStock
-                                            "
-                                        >
-                                            <span class="badge bg-danger">
-                                                Out of stock
-                                            </span>
-                                        </td>
-                                        <ng-template #productStock>
-                                            <td>
-                                                <span
-                                                    [class]="
-                                                        product.stock > 0 &&
-                                                        product.stock < 4
-                                                            ? 'badge bg-warning'
-                                                            : 'badge bg-dark'
-                                                    "
-                                                >
-                                                    {{
-                                                        product.stock > 0 &&
-                                                        product.stock < 4
-                                                            ? 'Under inventory'
-                                                            : 'Available'
-                                                    }}
-                                                </span>
-                                            </td>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-					</td>
-					<td class="d-block d-md-none">
-                        <div class="col-sm-12 col-md-2 mb-md-2 mt-md-2">
-                            <img
-                            class="img-list-responsive  "
-                            [src]="product.img"
-                            [alt]="product.name"
-                        />
-                        <div class="row justify-content-sm-center justify-content-md-start">
-                            </div>
-                            <div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
-                                <div class="ms-3">
-                                    <div class="fw-bold mb-1">
-                                        {{ product.name | titlecase }}
-                                    </div>
-                                    <div class="text-muted mb-0">
-                                        {{ product.category | titlecase }}
-                                    </div>
-                                    <div class="text-muted mb-0">
-                                        <td
-                                            *ngIf="
-                                                product.stock == 0;
-                                                else productStock
-                                            "
-                                        >
-                                            <span class="badge bg-danger">
-                                                Out of stock
-                                            </span>
-                                        </td>
-                                        <ng-template #productStock>
-                                            <td>
-                                                <span
-                                                    [class]="
-                                                        product.stock > 0 &&
-                                                        product.stock < 4
-                                                            ? 'badge bg-warning'
-                                                            : 'badge bg-dark'
-                                                    "
-                                                >
-                                                    {{
-                                                        product.stock > 0 &&
-                                                        product.stock < 4
-                                                            ? 'Under inventory'
-                                                            : 'Available'
-                                                    }}
-                                                </span>
-                                            </td>
-                                        </ng-template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+							<div
+								class="row justify-content-sm-center justify-content-md-start"
+							></div>
+							<div class="col-sm-12 col-md-9 mb-md-2 mt-md-2">
+								<div class="ms-3 mt-3">
+									<div class="fw-bold mb-1">
+										{{ product.name | titlecase }}
+									</div>
+									<div class="text-muted mb-0">
+										{{ product.category | titlecase }}
+									</div>
+									<div class="text-dark mb-0">
+										<strong>
+											{{
+												product.price
+													| currency
+														: '$'
+														: 'symbol'
+														: '1.0-0'
+											}}
+										</strong>
+									</div>
+									<div class="text-muted mb-0">
+										<td
+											*ngIf="
+												product.stock == 0;
+												else productStock
+											"
+										>
+											<span class="badge bg-danger">
+												Out of stock
+											</span>
+										</td>
+										<ng-template #productStock>
+											<td>
+												<span
+													[class]="
+														product.stock > 0 &&
+														product.stock < 4
+															? 'badge bg-warning'
+															: 'badge bg-dark'
+													"
+												>
+													{{
+														product.stock > 0 &&
+														product.stock < 4
+															? 'Under inventory'
+															: 'Available'
+													}}
+												</span>
+											</td>
+										</ng-template>
+									</div>
+								</div>
+							</div>
+						</div>
 					</td>
 
-					<td>
+					<td class="d-none d-md-table-cell">
 						<p class="fw-bold">
 							{{ product.price | currency: '$':'symbol':'1.0-0' }}
 						</p>
 					</td>
 
 					<td>
-                        <div class="d-grid gap-2 d-md-block">
-                           <button
-							class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
-							data-bs-target="#modalDetailProduct"
-							data-bs-toggle="modal"
-							(click)="selectProduct(false,product)"
-						>
-                        <i class="pi me-2 pi-eye"></i>
+						<div class="d-grid gap-2 d-md-block">
+							<button
+								class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+								data-bs-target="#modalDetailProduct"
+								data-bs-toggle="modal"
+								(click)="selectProduct(false, product)"
+							>
+								<i class="pi me-2 pi-eye"></i>
 
-							Detail
-						</button>
-						<button
-							class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2"
-							data-bs-target="#modalProduct"
-							data-bs-toggle="modal"
-							(click)="selectProduct(false,product)"
-						>
-                        <i class="pi me-2 pi-pencil"></i>
+								Detail
+							</button>
+							<button
+								class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+								data-bs-target="#modalProduct"
+								data-bs-toggle="modal"
+								(click)="selectProduct(false, product)"
+							>
+								<i class="pi me-2 pi-pencil"></i>
 
-							Edit
-						</button>
-						<button
-							class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
-							data-bs-target="#modalDeleteProduct"
-							data-bs-toggle="modal"
-							(click)="selectProduct( false,product)"
-						>
-                        <i class="pi me-2 pi-trash"></i>
+								Edit
+							</button>
+							<button
+								class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2"
+								data-bs-target="#modalDeleteProduct"
+								data-bs-toggle="modal"
+								(click)="selectProduct(false, product)"
+							>
+								<i class="pi me-2 pi-trash"></i>
 
-							Delete
-						</button>
-                          </div>
-
+								Delete
+							</button>
+						</div>
 					</td>
 				</tr>
 			</tbody>
@@ -206,7 +227,7 @@
 
 				<li class="page-item">
 					<button
-						[disabled]="pageActive == pagination.length "
+						[disabled]="pageActive == pagination.length"
 						class="page-link backAndNext"
 						(click)="changePage(pageActive + 1)"
 						aria-label="Next"
@@ -236,13 +257,10 @@
 	<app-product-detail
 		[productSelected]="productSelected!"
 	></app-product-detail>
-
-
 </div>
 
 <ng-template #messageThereAreNoProducts>
-	<div *ngIf="showLoading == false"  class="alert alert-danger" role="alert">
+	<div *ngIf="showLoading == false" class="alert alert-danger" role="alert">
 		No products were found!
 	</div>
 </ng-template>
-
