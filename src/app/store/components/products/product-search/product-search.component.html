@@ -1,41 +1,158 @@
 <div class="mt-2">
 	<form [formGroup]="searchForm" class="mb-5" (ngSubmit)="searchProduct()">
-		<div class="input-group">
-			<input
-				type="search"
-				class="form-control rounded"
-				placeholder="Search product name"
-				aria-label="Search"
-				aria-describedby="search-addon"
-                formControlName="product"
-			/>
-			<button [disabled]="searchForm.controls['product'].invalid" type="submit" class="btn btn-outline-dark">
-                <i class="pi me-2 pi-search"></i>
-				Search
-			</button>
-			<button  type="button" class="btn btn-outline-danger" (click)="getAllProducts()">
-                <i class="pi me-2 pi-times"></i>
-				Clear
-			</button>
+		<!-- * PC VERSION SEARCH BY NAME PRODUCT -->
+		<div class="d-none d-md-block">
+			<div class="input-group">
+				<input
+					type="search"
+					class="form-control rounded"
+					placeholder="Search product name"
+					aria-label="Search"
+					aria-describedby="search-addon"
+					formControlName="product"
+				/>
+
+				<button
+					[disabled]="searchForm.controls['product'].invalid"
+					type="submit"
+					class="btn btn-outline-dark"
+				>
+					<i class="pi me-2 pi-search"></i>
+					Search
+				</button>
+				<button
+					type="button"
+					class="btn btn-outline-danger"
+					(click)="getAllProducts()"
+				>
+					<i class="pi me-2 pi-times"></i>
+					Clear
+				</button>
+			</div>
 		</div>
-		<div class="input-group mt-3">
-            <select 
-                class="form-select  rounded"
-                type="search"
-                formControlName="category">
-                <option  [value]="category.uid" *ngFor="let category of categoryList">{{category.name}}</option>
-       
-              </select>
-		
-			<button [disabled]="searchForm.controls['category'].invalid" type="submit" class="btn btn-outline-dark">
-                <i class="pi me-2 pi-search"></i>
-				Search
-			</button>
-			<button  type="button" class="btn btn-outline-danger" (click)="getAllProducts()">
-                <i class="pi me-2 pi-times"></i>
-				Clear
-			</button>
+
+		<!-- * MOBILE VERSION  SEARCH BY PRODUCT NAME -->
+		<div class="d-block d-md-none">
+            <!-- * Input -->
+			<div class="row mb-3">
+				<div class="col-sm-12">
+					<input
+						type="search"
+						class="form-control rounded"
+						placeholder="Search product name"
+						aria-label="Search"
+						aria-describedby="search-addon"
+						formControlName="product"
+					/>
+				</div>
+			</div>
+            <!-- * Button -->
+			<div class="row mb-1">
+				<div class="btn-group" role="group">
+					<button
+						[disabled]="searchForm.controls['product'].invalid"
+						type="submit"
+						class="btn btn-outline-dark"
+					>
+						<i class="pi me-2 pi-search"></i>
+						Search
+					</button>
+					<button
+						type="button"
+						class="btn btn-outline-danger"
+						(click)="getAllProducts()"
+					>
+						<i class="pi me-2 pi-times"></i>
+						Clear
+					</button>
+				</div>
+				<div class="d-grid gap-2 d-block float-end mb-1 mb-md-0">
+					<div class="col-sm-12"></div>
+				</div>
+			</div>
+		</div>	
+
+		<!-- * PC VERSION SEARCH BY CATEGORY -->
+		<div class="d-none d-md-block">
+			<div class="input-group mt-3">
+				<select
+					class="form-select rounded"
+					type="search"
+					formControlName="category"
+				>
+					<option
+						[value]="category.uid"
+						*ngFor="let category of categoryList"
+						>{{ category.name }}</option
+					>
+				</select>
+
+				<button
+					[disabled]="searchForm.controls['category'].invalid"
+					type="submit"
+					class="btn btn-outline-dark"
+				>
+					<i class="pi me-2 pi-search"></i>
+					Search
+				</button>
+				<button
+					type="button"
+					class="btn btn-outline-danger"
+					(click)="getAllProducts()"
+				>
+					<i class="pi me-2 pi-times"></i>
+					Clear
+				</button>
+                
+			</div>
 		</div>
+
+        	<!-- * MOBILE VERSION SEARCH BY CATEGORY -->
+		<div class="d-block d-md-none">
+            <!-- * Input -->
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <div class="input-group mt-3">
+                        <select
+                            class="form-select rounded"
+                            type="search"
+                            formControlName="category"
+                        >
+                            <option
+                                [value]="category.uid"
+                                *ngFor="let category of categoryList"
+                                >{{ category.name }}</option
+                            >
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- * Button -->
+            <div class="row mb-1">
+                <div class="btn-group" role="group">
+                    <button
+                    [disabled]="searchForm.controls['category'].invalid"
+                    type="submit"
+                    class="btn btn-outline-dark"
+                >
+                    <i class="pi me-2 pi-search"></i>
+                    Search
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    (click)="getAllProducts()"
+                >
+                    <i class="pi me-2 pi-times"></i>
+                    Clear
+                </button>
+                </div>
+                <div class="d-grid gap-2 d-block float-end mb-1 mb-md-0">
+                    <div class="col-sm-12"></div>
+                </div>
+            </div>
+            
+        </div>
 	</form>
 </div>
 <p-toast></p-toast>

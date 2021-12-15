@@ -13,8 +13,10 @@
 		</div>
 		<div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
       <div class="d-grid gap-2">
+        <app-info-product></app-info-product>
+
         <button
-          class="btn btn-lg btn-dark mb-3  hover-warning"
+          class="btn btn-lg btn-dark mb-3  hover-warning d-none d-xl-block"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#viewCart"
@@ -25,10 +27,19 @@
         </i>
           View Cart
         </button>
-      </div>
+        <button
+          class="btn btn-lg btn-dark mb-3 mt-3  hover-warning d-block d-xl-none"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#viewCart"
+          aria-controls="viewCart"
+        >
+        <i class="pi pi-shopping-cart"></i>
+        </button>
+
+    </div>
 
 
-			<app-info-product></app-info-product>
 
 			<div
 				class="offcanvas offcanvas-end"
@@ -43,6 +54,7 @@
 						data-bs-dismiss="offcanvas"
 						aria-label="Close"
 					></button>
+					
 				</div>
 				<div class="offcanvas-body">
 					<app-cart [listShoppingCart]="shoppingCart"></app-cart>

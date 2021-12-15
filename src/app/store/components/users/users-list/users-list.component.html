@@ -1,86 +1,96 @@
 <div class="d-flex align-items-center p-3" *ngIf="showLoading">
-  <strong>Loading...</strong>
-  <div class="spinner-border ms-auto text-warning" role="status" aria-hidden="true"></div>
+	<strong>Loading...</strong>
+	<div
+		class="spinner-border ms-auto text-warning"
+		role="status"
+		aria-hidden="true"
+	></div>
 </div>
 <p-toast></p-toast>
 
-<div *ngIf="listUsers.length !== 0 ; else messageThereAreNoProducts">
-  <button
-    class="mb-4 btn btn-dark"
-    label="New category"
-    data-bs-target="#modalUser"
-    data-bs-toggle="modal"
-    (click)="selectedUser(true)"
-  >
-  <i class="pi me-2 pi-plus"></i>
+<div *ngIf="listUsers.length !== 0; else messageThereAreNoProducts">
+	<button
+		class="mb-4 btn btn-dark"
+		label="New category"
+		data-bs-target="#modalUser"
+		data-bs-toggle="modal"
+		(click)="selectedUser(true)"
+	>
+		<i class="pi me-2 pi-plus"></i>
 
-    New User
-  </button>
+		New User
+	</button>
 
+	<div class="table-responsive">
+		<table class="table table-sm table-hover align-middle">
+			<thead>
+				<tr>
+					<th scope="col">User</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let user of listUsers">
+					<td>
+						<div
+							class="row justify-content-sm-start justify-content-md-start">
+							<div class="col-sm-2 col-md-2 text-cemter">
+								<div class="fw-bold mt-2">
+									{{ user.name | titlecase }}
+								</div>
+                                {{ user.email }}
+                                <span class="badge bg-dark mt-1 mb-2">
+                                    {{user.rol | rol}}
+                                </span>
+                                								
+							</div>
+							
+								
+						</div>
+					</td>
+					<td>
+						<div class="d-grid gap-3 d-md-block">
+							<button
+								class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+								data-bs-target="#modalUser"
+								data-bs-toggle="modal"
+								(click)="selectedUser(false, user)"
+							>
+								<i class="pi me-2 pi-pencil"></i>
+								Edit
+							</button>
+							<button
+								class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+								data-bs-target="#modalDeleteUser"
+								data-bs-toggle="modal"
+								(click)="selectedUser(false, user)"
+							>
+								<i class="pi me-2 pi-trash"></i>
+								Delete
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-  <div class="table-responsive">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Rol</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of listUsers">
-          <th scope="row">1</th>
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.rol | rol}}</td>
-          <td>
-            <div class="d-grid gap-3 d-md-block">
-              <button
-                class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
-                data-bs-target="#modalUser"
-                data-bs-toggle="modal"
-                (click)="selectedUser(false,user)"
-              >
-              <i class="pi me-2 pi-pencil"></i>
-                Edit
-              </button>
-              <button
-                class="btn btn-danger mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
-                data-bs-target="#modalDeleteUser"
-                data-bs-toggle="modal"
-                (click)="selectedUser(false,user)"
-              >
-              <i class="pi me-2 pi-trash"></i>
-                Delete
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+	<app-user-add-and-update
+		(userNew)="addToUsersList($event)"
+		(userUpdated)="addToUserListUpdated($event)"
+		[userInput]="userSelected"
+		[isNewUser]="isNewUser"
+	></app-user-add-and-update>
 
-  <app-user-add-and-update
-    (userNew)="addToUsersList($event)"
-    (userUpdated)="addToUserListUpdated($event)"
-    [userInput]="userSelected"
-    [isNewUser]="isNewUser"
-
-  ></app-user-add-and-update>
-
-  <app-modal-delete-user
-  (userDelete)="deleteListUser($event)"
-  [userDeleted]="userSelected!">
-</app-modal-delete-user>
+	<app-modal-delete-user
+		(userDelete)="deleteListUser($event)"
+		[userDeleted]="userSelected!"
+	>
+	</app-modal-delete-user>
 </div>
-
-
 
 <ng-template #messageThereAreNoProducts>
 	<div *ngIf="showLoading == false" class="alert alert-danger" role="alert">
 		No Users were found!
 	</div>
 </ng-template>
-
