@@ -19,7 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalDeleteProductComponent } from './components/products/modal-delete-product/modal-delete-product.component';
 import { ProductSaleComponent } from './components/products/product-sale/product-sale.component';
 import { MenuSaleComponent } from './components/menus/menu-sale/menu-sale.component';
-import { ProductSaleListComponent } from './components/products/product-sale-list/product-sale-list.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
 import { ProductFunctionsListComponent } from './components/products/product-functions-list/product-functions-list.component';
@@ -55,7 +54,6 @@ import { InfoProductComponent } from './components/sales/info-product/info-produ
     ModalDeleteProductComponent,
     ProductSaleComponent,
     MenuSaleComponent,
-    ProductSaleListComponent,
     ShoppingCartComponent,
     HomeSaleComponent,
     ProductFunctionsListComponent,
