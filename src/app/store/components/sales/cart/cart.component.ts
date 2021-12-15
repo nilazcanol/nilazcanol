@@ -28,8 +28,11 @@ export class CartComponent implements OnInit {
 
   onKey(event:any) {
     const { value } = event.target
-
       this.change = value;
+  }
 
+  deleteProduct(product:Product){
+    const newList = this.listShoppingCart.filter( (productList) => productList._id !== product._id );
+    this.listShoppingCart = newList;
   }
 }
