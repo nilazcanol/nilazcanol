@@ -27,13 +27,7 @@ export class MenuSaleComponent implements OnInit {
             class: 'pi pi-plus  me-1 ', 
             routerLink:'/store/sales/new',
             classActive:"active"
-        },
-        { 
-            label: 'Shopping cart', 
-            class: 'pi pi-book  me-1 ', 
-            routerLink:'/store/sales/shopping-cart',
-            classActive:"active"
-        }        
+        }
     ]
   }
 

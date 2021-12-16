@@ -1,7 +1,6 @@
 import { IsAdminGuard } from './../login/guards/is-admin.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShoppingCartComponent } from './pages/sale/shopping-cart/shopping-cart.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './pages/product/product.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
                 children:[
                     { path:'new', component: NewComponent },
                     { path:'history', component: HistoryComponent },
-                    { path:'shopping-cart', component: ShoppingCartComponent },
                     { path:'**', redirectTo:'history'},
 
                 ]
