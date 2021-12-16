@@ -8,7 +8,7 @@
 				style="max-width: 300px;"
 			>
 				<!-- <a class="btn btn-sm btn-danger text-truch me-2" (click)="deleteProduct(item.product)">X</a> -->
-				<strong>{{ item.amount }}</strong> {{ item.product.name }}
+				<strong>{{ item.amount }}  </strong>  {{ item.product.name  | titlecase }} <strong> {{item.product.price |  currency: '$':'symbol':'1.0-0' }} U</strong>
 			</li>
 		</ul>
 	</div>
