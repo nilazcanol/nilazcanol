@@ -1,3 +1,4 @@
+import { sale } from 'src/app/store/interfaces/sales/sale.interface';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
@@ -32,7 +33,7 @@ export class NewComponent implements OnInit {
     listProduct:Product[] = []
 
 
-  shoppingCart: Product[]= [];
+  shoppingCart: saleProductSelected[]= [];
 
 
   ngOnInit(): void {
@@ -47,7 +48,7 @@ export class NewComponent implements OnInit {
 
   }
   addShoppingCart(saleProductSelected:saleProductSelected){
-    this.shoppingCart.push(saleProductSelected.product);
+    this.shoppingCart.push({product:saleProductSelected.product, amount:saleProductSelected.amount});
   }
 
 

@@ -1,3 +1,4 @@
+import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { Product } from './../../../interfaces/product/product.interface';
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -6,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styles: [
+     
   ]
 })
 export class CartComponent implements OnInit {
@@ -13,9 +15,12 @@ export class CartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+      this.HaveProducts = this.saleProductSelected.length == 0 ? false : true;
   }
 
-  @Input('listShoppingCart') listShoppingCart: Product[] = [];
+  HaveProducts: Boolean = false;
+
+  @Input('saleProductSelected') saleProductSelected: saleProductSelected[] = [];
 
 
 
@@ -26,8 +31,21 @@ export class CartComponent implements OnInit {
       this.change = value;
   }
 
-  deleteProduct(product:Product){
-    const newList = this.listShoppingCart.filter( (productList) => productList._id !== product._id );
-    this.listShoppingCart = newList;
+  total:number = 0;
+
+  totalPrice(){
+
+    this.HaveProducts = this.saleProductSelected.length == 0 ? false : true;
+     
+    const arrayTotal = this.saleProductSelected.map(  item =>{
+        return item.product.price*item.amount
+    })
+
+    this.total = arrayTotal.reduce( (productPreviuos, productCurrent) => productPreviuos + productCurrent)
+
+
+
   }
+
+ 
 }
