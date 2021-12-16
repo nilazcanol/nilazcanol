@@ -1,3 +1,4 @@
+import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
@@ -45,8 +46,8 @@ export class NewComponent implements OnInit {
 
 
   }
-  addShoppingCart(product:Product){
-    this.shoppingCart.push(product);
+  addShoppingCart(saleProductSelected:saleProductSelected){
+    this.shoppingCart.push(saleProductSelected.product);
   }
 
 

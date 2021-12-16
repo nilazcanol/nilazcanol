@@ -39,18 +39,17 @@
 
     <p class="card-text">{{ product.description }}.</p>
   </div>
-  <form class="ms-3 me-3">
-    <label for="quantity" class="form-label"
-      >Quantity </label
+  <form class="ms-3 me-3" [formGroup]="cardForm">
+    <label for="quantity" class="form-label">Quantity: <strong>{{cardForm.controls['quantity'].value}}</strong> </label
     >
     <input
       type="range"
       class="form-range"
-      min="0"
+      min="1"
       [max]="product.stock"
       step="1"
-      id="quantity"
-    />
+      formControlName="quantity"
+      />
     <div
       class="btn-group p-2"
       role="group"
