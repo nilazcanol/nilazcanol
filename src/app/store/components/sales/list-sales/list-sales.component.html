@@ -7,9 +7,8 @@
     </p>
   
 </div>
-<app-sales-search (salesResult)="refreshListSales($event)"></app-sales-search>
 
-<div *ngIf="listSales.length !== 0;else messageThereAreNoSales">
+<div>
 
     <table  class="table">
         <thead>
@@ -17,22 +16,42 @@
             <th scope="col">#</th>
             <th scope="col">Total</th>
             <th scope="col">Date</th>
-            <th scope="col">Products</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let sale of listSales;let i = index">
+          <tr *ngFor="let sale of  listSales; let i = index">
             <th scope="row">{{i+1}}</th>
-            <td>{{sale.total |  currency: '$':'symbol':'1.0-0' }}</td>
-            <td>{{sale.date | date : 'dd-MM-yyyy'}}</td>
-            <td><button type="button" class="btn btn-warning">Detail</button>
+            <td>{{sale.total |  currency: '$':'symbol':'1.0-0' }}
+                <span [class]="sale.total<= 3000 ? 'badge bg-warning mx-2': 'badge bg-dark mx-2' ">{{sale.total<= 3000? 'Low' : 'High' }}</span>
+
+            </td>
+         
+            <td>
+                <i class="pi pi-calendar"></i>
+                {{sale.date | date : 'dd-MM-yyyy'}}
+            </td>
+            <td>
+                <button 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalDetailProducts"
+                    type="button" 
+                    class="btn btn-warning" 
+                    (click)="selectedProducts(sale)">
+                    <i class="pi pi-eye me-2"></i>
+                    Detail
+                </button>
             </td>
           </tr>
-          
           
         </tbody>
       </table>
 </div>
+
+<app-modalProductsSale
+    [products]="productSelected"
+></app-modalProductsSale>
+
 
 
 <ng-template #messageThereAreNoSales>

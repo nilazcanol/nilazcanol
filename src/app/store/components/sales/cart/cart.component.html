@@ -43,7 +43,7 @@
 		<h5 class="mb-3" [hidden]="change < total ">
 			Change: {{ change - total | currency: 'USD':'symbol':'1.0-0' }}
 		</h5>
-		<button class="btn btn-dark mt-2 mx-2">Finish purchase</button>
+		<button class="btn btn-dark mt-2 mx-2" (click)="finishPurchase()">Finish purchase</button>
 		<button class="btn btn-danger mt-2 mx-2">Close</button>
 	</div>
 </div>

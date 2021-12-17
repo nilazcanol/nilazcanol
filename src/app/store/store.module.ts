@@ -1,3 +1,4 @@
+import { ModalProductsSaleComponent } from './components/sales/modalProductsSale/modalProductsSale.component';
 // * Angular
 import { NgModule }         from '@angular/core';
 import { CommonModule }     from '@angular/common';
@@ -33,7 +34,6 @@ import { CategoryPipe } from './pipes/category.pipe';
 
 // * Sales components
 import { ListSalesComponent }   from './components/sales/list-sales/list-sales.component';
-import { SalesSearchComponent } from './components/sales/sales-search/sales-search.component';
 import { CartComponent }        from './components/sales/cart/cart.component';
 import { NewComponent }         from './pages/sale/new/new.component';
 import { HistoryComponent }     from './pages/sale/history/history.component';
@@ -82,7 +82,6 @@ import { StoreRoutingModule } from './store-routing.module';
     HistoryComponent,
     NewComponent,
     ListSalesComponent,
-    SalesSearchComponent,
     HomeUsersComponent,
     UsersListComponent,
     ListUserComponent,
@@ -91,7 +90,8 @@ import { StoreRoutingModule } from './store-routing.module';
     ModalDeleteUserComponent,
     CardProductStoreComponent,
     CartComponent,
-    InfoProductComponent
+    InfoProductComponent,
+    ModalProductsSaleComponent
   ],
   imports: [
     CommonModule,

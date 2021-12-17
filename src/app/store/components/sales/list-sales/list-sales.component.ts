@@ -1,6 +1,5 @@
+import { ArraySale, Product } from './../../../interfaces/sales/saleResponseGet.inteface';
 import { Component, OnInit } from '@angular/core';
-import { sale } from 'src/app/store/interfaces/sales/sale.interface';
-import { saleResponseGet } from 'src/app/store/interfaces/sales/saleResponseGet.inteface';
 import { SalesService } from 'src/app/store/services/sales.service';
 
 @Component({
@@ -11,15 +10,16 @@ import { SalesService } from 'src/app/store/services/sales.service';
 export class ListSalesComponent implements OnInit {
 	constructor(private salesService: SalesService) {}
 
-	listSales: sale[] = [];
+	listSales!: ArraySale[];
     
     date: Date = new Date();
+
+    productSelected : Product[] = []
     
 	ngOnInit(): void {
-        const formattedDate = this.getDate(this.date);
-		this.salesService.getListSales(formattedDate).subscribe((res) => {
-            this.listSales = res.Sales
-		});
+		this.salesService.getListSales().subscribe((res) => {
+            this.listSales = res.arraySales;
+        });
 	}
 
 	getDate = (date: Date): string => {
@@ -37,7 +37,8 @@ export class ListSalesComponent implements OnInit {
 		return dateRes;
 	};
 
-    refreshListSales(res:saleResponseGet){
-        this.listSales = res.Sales;
+    // * Mostrar los productos que compro;
+    selectedProducts(sale:ArraySale){
+        this.productSelected = sale.products
     }
 }
