@@ -2,7 +2,7 @@ import { SweetAlertIcon } from 'sweetalert2';
 import Swal from 'sweetalert2';
 
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
 
@@ -31,6 +31,8 @@ export class NewComponent implements OnInit {
 	listProduct: Product[] = [];
 
 	shoppingCart: saleProductSelected[] = [];
+
+    @ViewChild('buttonClose',{static: false}) buttonClose!:ElementRef; 
 
 	page: number = 0;
 
@@ -62,6 +64,8 @@ export class NewComponent implements OnInit {
 			});
 		});
 	}
+
+
 
   
 	showToast(

@@ -2,7 +2,7 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { SalesService } from 'src/app/store/services/sales.service';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
 	selector: 'app-cart',
@@ -10,6 +10,9 @@ import { Component, Input, OnInit } from '@angular/core';
 	styles: [],
 })
 export class CartComponent implements OnInit {
+
+    // * Intentar cerrar el modal mandando un true en el caso de que sea finalizado correctamente
+
 	constructor(private saleService: SalesService) {}
 
 	ngOnInit(): void {
@@ -44,6 +47,48 @@ export class CartComponent implements OnInit {
 	}
 
     finishPurchase(){
+
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-warning mx-2',
+              cancelButton: 'btn btn-danger mx-2'
+            },
+            buttonsStyling: false,
+            timer:10000
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Finish purchase',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+                    this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {
+                        swalWithBootstrapButtons.fire(
+                            'Success!',
+                            'The operation is correctly registered.',
+                            'success'
+                        );
+                        
+                    })
+              
+            } else if (
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your operation could not end',
+                'error'
+              );
+
+            }
+          })
+
         // TODO: Se debe cerrar modal, crear una interfaz para la respuesta y segun ella se debe
         // TODO: ver el status y mostrar la alerta correspondiente.
         // TODO: Se debe limitar a que no se agrege 2 veces los productos y en su lugar se sume a la que ya exista
@@ -51,9 +96,7 @@ export class CartComponent implements OnInit {
         // TODO: EL modal se debe cerrar y rederigir al historial. 
         // TODO: Se debe mostrar un mensaje de confirmacion al finalizar la compra 
 
-        this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {
-            this.showToast('Success','The operation is correctly registered.','success');
-        })
+        
     }
 
 

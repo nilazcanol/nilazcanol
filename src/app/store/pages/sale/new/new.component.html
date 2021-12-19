@@ -52,6 +52,7 @@
 			>
 				<div class="offcanvas-header">
 					<button
+                        #buttonClose
 						type="button"
 						class="btn-close text-reset"
 						data-bs-dismiss="offcanvas"
@@ -59,7 +60,10 @@
 					></button>
 				</div>
 				<div class="offcanvas-body">
-					<app-cart [saleProductSelected]="shoppingCart"></app-cart>
+					<app-cart 
+                   
+                    [saleProductSelected]="shoppingCart">
+                </app-cart>
 				</div>
 			</div>
 		</div>
