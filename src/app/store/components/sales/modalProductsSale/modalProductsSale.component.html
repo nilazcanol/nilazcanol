@@ -14,7 +14,7 @@
                 <table class="table table-hover table-borderless">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
@@ -22,10 +22,10 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let product of products">
-                        <th scope="row">1</th>
-                        <td>{{product.name}}</td>
-                        <td>{{product.description}}</td>
-                        <td>{{product.price |  currency: '$':'symbol':'1.0-0'}}</td>
+                        <th scope="row">{{product.amount}}</th>
+                        <td>{{product.productDB.name}}</td>
+                        <td>{{product.productDB.description}}</td>
+                        <td>{{product.productDB.price |  currency: '$':'symbol':'1.0-0'}}</td>
                       </tr>
                       
                       

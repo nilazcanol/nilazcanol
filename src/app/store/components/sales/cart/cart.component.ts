@@ -47,8 +47,8 @@ export class CartComponent implements OnInit {
 	}
 
     finishPurchase(){
-
-
+        this.totalPrice();
+        
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
               confirmButton: 'btn btn-warning mx-2',

@@ -10,8 +10,13 @@ export interface ArraySale {
 }
 
 export interface Product {
+    productDB: ProductDB;
+    amount?:    number;
+}
+
+export interface ProductDB {
     img:         string;
-    state:       null;
+    state:       boolean;
     _id:         string;
     name:        string;
     description: string;
