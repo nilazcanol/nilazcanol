@@ -10,15 +10,18 @@ import { SalesService } from 'src/app/store/services/sales.service';
 export class ListSalesComponent implements OnInit {
 	constructor(private salesService: SalesService) {}
 
-	listSales!: ArraySale[];
+	listSales: ArraySale[] = [];
     
     date: Date = new Date();
 
     productSelected : Product[] = []
+
+    showLoading:Boolean = true;
     
 	ngOnInit(): void {
 		this.salesService.getListSales().subscribe((res) => {
             this.listSales = res.arraySales;
+            this.showLoading = false;
         });
 	}
 
