@@ -2,13 +2,24 @@ import { MessageService } from 'primeng/api';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { Product } from './../../../interfaces/product/product.interface';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-card-product-store',
 	templateUrl: './card-product-store.component.html',
 	providers: [MessageService],
-	styles: [],
+	styles: [`
+
+    .btn-dark:hover {
+        color: #fff;
+        background-color: #FFAE0D;
+        border-color: #FFAE0D;
+    }
+    
+
+
+
+    `],
 })
 export class CardProductStoreComponent implements OnInit {
 	constructor(
@@ -18,9 +29,8 @@ export class CardProductStoreComponent implements OnInit {
 
 	@Input('product') product!: Product;
 
-	@Output('sendProductSelected') sendProductSelected: EventEmitter<
-    saleProductSelected
-	> = new EventEmitter();
+
+	@Output('sendProductSelected') sendProductSelected: EventEmitter<saleProductSelected> = new EventEmitter();
 
 	cardForm!: FormGroup;
 
@@ -33,11 +43,13 @@ export class CardProductStoreComponent implements OnInit {
 	}
 
 	addCart(product: Product) {
-		this.messageService.add({
-			severity: 'success',
-			summary: product.name + ' Amount: '+ this.cardForm.controls['quantity'].value ,
-			detail: ' Price: ' + product.price,
-		});
+
+            this.messageService.add({
+                severity: 'success',
+                summary: product.name + ' Amount: '+ this.cardForm.controls['quantity'].value ,
+                detail: ' Price: ' + product.price,
+            });
+        
 		this.sendProductSelected.emit({product,amount:this.cardForm.controls['quantity'].value });
 	}
 }

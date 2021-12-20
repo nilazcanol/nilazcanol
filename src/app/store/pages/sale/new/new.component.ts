@@ -2,7 +2,7 @@ import { SweetAlertIcon } from 'sweetalert2';
 import Swal from 'sweetalert2';
 
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
 
@@ -32,7 +32,6 @@ export class NewComponent implements OnInit {
 
 	shoppingCart: saleProductSelected[] = [];
 
-    @ViewChild('buttonClose',{static: false}) buttonClose!:ElementRef; 
 
 	page: number = 0;
 
@@ -41,11 +40,30 @@ export class NewComponent implements OnInit {
 			this.listProduct = res.products;
 		});
 	}
-	addShoppingCart(saleProductSelected: saleProductSelected) {
-		this.shoppingCart.push({
-			product: saleProductSelected.product,
-			amount: saleProductSelected.amount,
-		});
+	addShoppingCart(saleProductSelected: saleProductSelected) {       
+        
+        
+        
+        var indexProductSelected = 0;
+
+        const thereAreProducts = this.shoppingCart.every( (item,index)=> {
+            indexProductSelected = index
+            return item.product._id?.toString() !== saleProductSelected.product._id?.toString()
+        } );
+        
+        if(thereAreProducts){
+            this.shoppingCart.push({
+                product: saleProductSelected.product,
+                amount: saleProductSelected.amount,
+            });
+
+        }else{
+            const { stock } = saleProductSelected.product;
+            if( stock >= this.shoppingCart[indexProductSelected].amount ){
+                this.shoppingCart[indexProductSelected].amount += saleProductSelected.amount;
+            };
+            
+        }
 	}
 
 	addMoreProducts() {
