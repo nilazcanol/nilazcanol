@@ -20,13 +20,14 @@ import { ProductsService } from '../../../services/products.service';
 	selector: 'app-product-add-and-update',
 	templateUrl: './product-add-and-update.html',
 	styles: [
-    `
-        .form-control:focus, .form-select:focus {
-          border-color: #FFCA2B !important;
-          box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
-    }
-  `
-  ],
+		`
+			.form-control:focus,
+			.form-select:focus {
+				border-color: #ffca2b !important;
+				box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+			}
+		`,
+	],
 })
 export class NewProductComponent implements OnInit, OnChanges {
 	@Input('productInput') productInput?: Product;
@@ -154,7 +155,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 					this.productWasSaved = true;
 					this.productNew.emit(res.product);
 					this.showLoading = false;
-                    this.Restoreform();
+					this.Restoreform();
 				},
 				(errors: HttpErrorResponse) => {
 					this.showLoading = false;
@@ -162,16 +163,20 @@ export class NewProductComponent implements OnInit, OnChanges {
 					console.log(errors.error);
 					if (errors.status == 400) {
 						this.showToast(
-							'Error 400 bad request','Check the data entered: In case the error persists, contact the technical support','error'
+							'Error 400 bad request',
+							'Check the data entered: In case the error persists, contact the technical support',
+							'error'
 						);
 					}
 					if (errors.status == 500) {
 						this.showToast(
-							'Error 500 Internal Server','Contact the technical support.','error'
+							'Error 500 Internal Server',
+							'Contact the technical support.',
+							'error'
 						);
 					}
 					this.showToast('Error', errors.error.msg, 'error');
-                    this.Restoreform();
+					this.Restoreform();
 
 					setInterval(() => {
 						Swal.close();
@@ -181,8 +186,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 		} catch (error) {}
 	}
 
-
-    // TODO: No se actualiza la lista de forma instantánea
+	// TODO: No se actualiza la lista de forma instantánea
 
 	updateProduct(): void {
 		const formularioDeDatos = new FormData();
@@ -222,26 +226,34 @@ export class NewProductComponent implements OnInit, OnChanges {
 			)
 			.subscribe(
 				(res) => {
-                    this.showToast('Success', 'Saved correctly', 'success');
+					this.showToast('Success', 'Saved correctly', 'success');
 					this.productWasSaved = true;
 					this.productUpdate.emit(res.product);
-                    this.Restoreform();
+					this.Restoreform();
 				},
 				(errors: HttpErrorResponse) => {
 					if (errors.status == 400) {
-                        this.showToast('Error 400 Bad Request', 'Check the data entered: In case the error persists, contact the technical support.', 'error');
-             		}
+						this.showToast(
+							'Error 400 Bad Request',
+							'Check the data entered: In case the error persists, contact the technical support.',
+							'error'
+						);
+					}
 					if (errors.status == 500) {
-                        this.showToast('Error 500 Internal server', 'Contact the technical support', 'error');
+						this.showToast(
+							'Error 500 Internal server',
+							'Contact the technical support',
+							'error'
+						);
 					}
 				}
 			);
 	}
 
 	Restoreform() {
+		if (typeof this.myFormProduct !== 'undefined') {
 			this.myFormProduct.reset();
-
-			this.productWasSaved = false;
+		}
 	}
 
 	showToast(

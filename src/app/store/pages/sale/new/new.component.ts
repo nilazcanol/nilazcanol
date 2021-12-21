@@ -1,54 +1,100 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2';
+
+import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
 import { ProductsService } from 'src/app/store/services/products.service';
 
-
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  styles: [
-    `
-     .btn-dark:hover, .btn-dark:active, .btn-dark:visited {
-      background-color: #FFC008;
-      border:#FFC008;
-      color:#212529;
-      -webkit-transition: background-color 0.5s ease-out;
-      -moz-transition: background-color 0.5s ease-out;
-      -o-transition: background-color 0.5s ease-out;
-      transition: background-color 0.5s ease-out;
-}
-
-    `
-  ]
+	selector: 'app-new',
+	templateUrl: './new.component.html',
+	styles: [
+		`
+			.btn-dark:hover,
+			.btn-dark:active,
+			.btn-dark:visited {
+				background-color: #ffc008;
+				border: #ffc008;
+				color: #212529;
+				-webkit-transition: background-color 0.5s ease-out;
+				-moz-transition: background-color 0.5s ease-out;
+				-o-transition: background-color 0.5s ease-out;
+				transition: background-color 0.5s ease-out;
+			}
+		`,
+	],
 })
 export class NewComponent implements OnInit {
+	constructor(private productService: ProductsService) {}
 
-  constructor(
-      private productService:ProductsService
-  ) { }
+	listProduct: Product[] = [];
 
-    listProduct:Product[] = []
-
-
-  shoppingCart: Product[]= [];
+	shoppingCart: saleProductSelected[] = [];
 
 
-  ngOnInit(): void {
+	page: number = 0;
+
+	ngOnInit(): void {
+		this.productService.getAllProducts().subscribe((res) => {
+			this.listProduct = res.products;
+		});
+	}
+	addShoppingCart(saleProductSelected: saleProductSelected) {       
+        
+        
+        
+        var indexProductSelected = 0;
+
+        const thereAreProducts = this.shoppingCart.every( (item,index)=> {
+            indexProductSelected = index
+            return item.product._id?.toString() !== saleProductSelected.product._id?.toString()
+        } );
+        
+        if(thereAreProducts){
+            this.shoppingCart.push({
+                product: saleProductSelected.product,
+                amount: saleProductSelected.amount,
+            });
+
+        }else{
+            const { stock } = saleProductSelected.product;
+            if( stock >= this.shoppingCart[indexProductSelected].amount ){
+                this.shoppingCart[indexProductSelected].amount += saleProductSelected.amount;
+            };
+            
+        }
+	}
+
+	addMoreProducts() {
+		this.productService.getAllProducts(this.page + 1).subscribe((res) => {
+			
+            if (res.products.length == 0) {
+				this.showToast(
+					'No more products',
+					'',
+					'info'
+				);
+			}
+			res.products.forEach((product) => {
+				this.page += 1;
+				this.listProduct.push(product);
+			});
+		});
+	}
 
 
-    this.productService.getAllProducts().subscribe( res => {
-        this.listProduct = res.products;
-    });
 
-
-
-
-  }
-  addShoppingCart(product:Product){
-    this.shoppingCart.push(product);
-  }
-
-
-
+  
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
+	}
 }

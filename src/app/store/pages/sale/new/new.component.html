@@ -1,45 +1,48 @@
 <div class="m-3">
 	<h2 class="mb-4 display-6">New Sale</h2>
+
+
 	<div class="row justify-content-center">
 		<div class="col-sm-12 col-md-10 col-lg-10 col-xl-10">
 			<div
 				class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-4"
 			>
 				<div *ngFor="let product of listProduct" class="col">
-					<app-card-product-store [product]="product" (sendProductSelected)="addShoppingCart($event)">
+					<app-card-product-store
+						[product]="product"
+						(sendProductSelected)="addShoppingCart($event)"
+					>
 					</app-card-product-store>
 				</div>
 			</div>
-		</div>
+            <div class="text-center mt-4">
+                <button class="btn btn-warning" (click)="addMoreProducts()">See more products</button>
+            </div>
+        </div>
+        
 		<div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
-      <div class="d-grid gap-2">
-        <app-info-product></app-info-product>
+			<div class="d-grid gap-2">
 
-        <button
-          class="btn btn-lg btn-dark mb-3  hover-warning d-none d-xl-block"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#viewCart"
-          aria-controls="viewCart"
-        >
-        <i class="pi pi-shopping-cart">
-
-        </i>
-          View Cart
-        </button>
-        <button
-          class="btn btn-lg btn-dark mb-3 mt-3  hover-warning d-block d-xl-none"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#viewCart"
-          aria-controls="viewCart"
-        >
-        <i class="pi pi-shopping-cart"></i>
-        </button>
-
-    </div>
-
-
+				<button
+					class="btn btn-lg btn-dark mb-3 hover-warning d-none d-xl-block"
+					type="button"
+					data-bs-toggle="offcanvas"
+					data-bs-target="#viewCart"
+					aria-controls="viewCart"
+				>
+					<i class="pi pi-shopping-cart"> </i>
+					View Cart
+				</button>
+				<button
+					class="btn btn-lg btn-dark mb-3 mt-3 hover-warning d-block d-xl-none"
+					type="button"
+					data-bs-toggle="offcanvas"
+					data-bs-target="#viewCart"
+					aria-controls="viewCart"
+				>
+					<i class="pi pi-shopping-cart"></i>
+				</button>
+			</div>
 
 			<div
 				class="offcanvas offcanvas-end"
@@ -49,15 +52,17 @@
 			>
 				<div class="offcanvas-header">
 					<button
+                        #buttonClose
 						type="button"
 						class="btn-close text-reset"
 						data-bs-dismiss="offcanvas"
 						aria-label="Close"
 					></button>
-					
 				</div>
 				<div class="offcanvas-body">
-					<app-cart [listShoppingCart]="shoppingCart"></app-cart>
+					<app-cart                                       
+                    [saleProductSelected]="shoppingCart">
+                </app-cart>
 				</div>
 			</div>
 		</div>

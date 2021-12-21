@@ -7,7 +7,7 @@ import { Product } from 'src/app/store/interfaces/product/product.interface';
 	styles: [],
 })
 export class ProductDetailComponent implements OnInit {
-	@Input('productSelected') productSelected!: Product;
+	@Input('productSelected') productSelected!: Product ;
 
 	constructor() {}
 

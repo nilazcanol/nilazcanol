@@ -39,29 +39,27 @@
 
     <p class="card-text">{{ product.description }}.</p>
   </div>
-  <form class="ms-3 me-3">
-    <label for="quantity" class="form-label"
-      >Quantity </label
+  <form class="ms-3 me-3" [formGroup]="cardForm">
+    <label for="quantity" class="form-label">Quantity: <strong>{{cardForm.controls['quantity'].value}}</strong> </label
     >
     <input
       type="range"
       class="form-range"
-      min="0"
+      min="1"
       [max]="product.stock"
       step="1"
-      id="quantity"
-    />
+      formControlName="quantity"
+      />
     <div
       class="btn-group p-2"
       role="group"
       aria-label="Actions"
     >
-      <button type="button" class="btn btn-warning" (click)="addCart(product)">
+      <button type="button" class="btn btn-dark" (click)="addCart(product)">
+          <i class="pi pi-plus-circle me-2"></i>
         Add
       </button>
-      <button type="button" class="btn btn-dark">
-        Info
-      </button>
+      
     </div>
   </form>
 
@@ -75,3 +73,4 @@
     >
   </div>
 </div>
+<p-toast></p-toast>

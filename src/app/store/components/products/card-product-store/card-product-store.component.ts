@@ -1,29 +1,55 @@
+import { MessageService } from 'primeng/api';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { Product } from './../../../interfaces/product/product.interface';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-card-product-store',
-  templateUrl: './card-product-store.component.html',
-  styles: [
-  ]
+	selector: 'app-card-product-store',
+	templateUrl: './card-product-store.component.html',
+	providers: [MessageService],
+	styles: [`
+
+    .btn-dark:hover {
+        color: #fff;
+        background-color: #FFAE0D;
+        border-color: #FFAE0D;
+    }
+    
+
+
+
+    `],
 })
 export class CardProductStoreComponent implements OnInit {
+	constructor(
+		private fb: FormBuilder,
+		private messageService: MessageService
+	) {}
 
-  constructor(private fb:FormBuilder) { }
+	@Input('product') product!: Product;
 
 
+	@Output('sendProductSelected') sendProductSelected: EventEmitter<saleProductSelected> = new EventEmitter();
 
+	cardForm!: FormGroup;
 
-  @Input('product') product!:Product;
+	ngOnInit(): void {
+		this.cardForm = this.fb.group(
+			{
+				quantity: 1,
+			},
+		);
+	}
 
-  @Output('sendProductSelected') sendProductSelected:EventEmitter<Product> = new EventEmitter();
+	addCart(product: Product) {
 
-  ngOnInit(): void {
-  }
-
-  addCart(product:Product){
-    this.sendProductSelected.emit(product);
-  }
+            this.messageService.add({
+                severity: 'success',
+                summary: product.name + ' Amount: '+ this.cardForm.controls['quantity'].value ,
+                detail: ' Price: ' + product.price,
+            });
+        
+		this.sendProductSelected.emit({product,amount:this.cardForm.controls['quantity'].value });
+	}
 }
