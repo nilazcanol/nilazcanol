@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { SalesService } from 'src/app/store/services/sales.service';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit {
 
     // * Intentar cerrar el modal mandando un true en el caso de que sea finalizado correctamente
 
-	constructor(private saleService: SalesService) {}
+	constructor(private saleService: SalesService, private router:Router) {}
 
 	ngOnInit(): void {
 		this.HaveProducts = this.saleProductSelected.length == 0 ? false : true;
@@ -74,6 +75,8 @@ export class CartComponent implements OnInit {
                             'The operation is correctly registered.',
                             'success'
                         );
+
+                            this.router.navigateByUrl('store/sales/history');
                         
                     })
               
