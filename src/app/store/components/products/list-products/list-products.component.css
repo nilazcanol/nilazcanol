@@ -3,6 +3,11 @@
 	cursor: pointer;
 }
 
+.img-list-responsive{
+    max-width: 20vw;
+    cursor: pointer;
+}
+
 .page-item.active .page-link {
 	z-index: 3;
 	color: #fff;

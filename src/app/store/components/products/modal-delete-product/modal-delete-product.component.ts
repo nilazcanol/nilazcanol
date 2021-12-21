@@ -6,7 +6,9 @@ import { Product } from '../../../interfaces/product/product.interface';
 @Component({
 	selector: 'app-modal-delete-product',
 	templateUrl: './modal-delete-product.component.html',
-	styles: [],
+	styles: [
+
+  ],
 })
 export class ModalDeleteProductComponent implements OnInit {
 	constructor(private productService: ProductsService) {}
@@ -29,8 +31,8 @@ export class ModalDeleteProductComponent implements OnInit {
 				this.productDelete.emit(res.product);
 				this.productRemoved = true;
                 this.showLoading =false;
-                this.showToast('Success','It was deleted correctly','success');    
-                this.activateButtonAgain();            
+                this.showToast('Success','It was deleted correctly','success');
+                this.activateButtonAgain();
 			},(err)=>{
                 this.showToast('Error',err.msg,'error');
                 this.activateButtonAgain();

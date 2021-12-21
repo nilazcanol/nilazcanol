@@ -36,8 +36,9 @@ export class ListCategoriesComponent implements OnInit {
 	selectCategory(newCategory: boolean, category?: category) {
 		if (category !== undefined) {
 			this.categorySelected = category!;
-			this.isNewCategory = newCategory;
 		}
+    this.isNewCategory = newCategory;
+
 	}
 
 	addToTheList(category: category) {

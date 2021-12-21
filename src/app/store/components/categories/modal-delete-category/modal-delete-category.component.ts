@@ -28,7 +28,7 @@ export class ModalDeleteCategoryComponent implements OnInit {
 			.subscribe((res) => {
 				if (res.status == true) {
 					this.eliminatedCategory = true;
-					
+
                     this.showToast('Success','Will be deleted correctly','success')
 					this.categoryDelete.emit(res.category);
 				} else {
@@ -40,7 +40,7 @@ export class ModalDeleteCategoryComponent implements OnInit {
 	activateButtonAgain() {
 		setTimeout(() => {
 			this.eliminatedCategory = false;
-		}, 2000);
+		}, 500);
 	}
 
     showToast(

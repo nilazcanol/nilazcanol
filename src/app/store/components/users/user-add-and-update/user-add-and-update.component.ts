@@ -19,7 +19,14 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 	selector: 'app-user-add-and-update',
 	templateUrl: './user-add-and-update.component.html',
 	providers: [MessageService],
-	styles: [],
+	styles: [
+    `
+    .form-control:focus, .form-select:focus {
+      border-color: #FFCA2B !important;
+      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+}
+`
+  ],
 })
 export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	constructor(
@@ -90,7 +97,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 			(res) => {
                 this.Restoreform();
 				this.showLoading = false;
-                this.showToast('Success',res.msg,'success');				
+                this.showToast('Success',res.msg,'success');
 				this.productWasSaved = true;
 				this.Restoreform();
 				this.userNew.emit(res.user);
@@ -98,7 +105,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 			(err) => {
                 this.Restoreform();
 				this.showLoading = false;
-                this.showToast('Error',err.error.msg,'error');			
+                this.showToast('Error',err.error.msg,'error');
 			}
 		);
 	}
@@ -107,7 +114,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 		this.userService.updateUser(this.myFormUser.value).subscribe(
 			(res) => {
 				this.showLoading = false;
-                this.showToast('Success',res.msg,'success');				
+                this.showToast('Success',res.msg,'success');
 				this.productWasSaved = true;
 				this.Restoreform();
 				this.userUpdated.emit(res.user);
@@ -130,7 +137,7 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
                         'error'
                     );
                 }else{
-                    this.showToast('Error:'+err.statusText,err.message,'error',3000);			
+                    this.showToast('Error:'+err.statusText,err.message,'error',3000);
                 }
 			}
 		);

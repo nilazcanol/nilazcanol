@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h3 class="mt-3">Resumen</h3>
+		<ul class="mt-2 list-unstyled">
+			<li
+				*ngFor="let item of saleProductSelected"
+				class="d-inline-block text-truncate"
+				style="max-width: 300px;"
+			>
+				<!-- <a class="btn btn-sm btn-danger text-truch me-2" (click)="deleteProduct(item.product)">X</a> -->
+				<strong>{{ item.amount }}  </strong>  {{ item.product.name  | titlecase }} <strong> {{item.product.price |  currency: '$':'symbol':'1.0-0' }} U</strong>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row">
+	<ng-template #messageNotFoundProduct>
+		<div class="alert mb-4 alert-warning" role="alert">
+			<h5>Do not make added products</h5>
+			<small>You must add some product to continue.</small>
+		</div>
+	</ng-template>
+	<button
+		class="btn btn-dark mb-2"
+		(click)="totalPrice()"
+		[disabled]="saleProductSelected.length == 0"
+	>
+		Calculate Total
+	</button>
+
+	<div *ngIf="HaveProducts; else messageNotFoundProduct" class="col-sm-12">
+		<h3 class="mt-3">Total</h3>
+		<h5>{{ total | currency: '$':'symbol':'1.0-0' }}</h5>
+		<h5>Pay with</h5>
+		<input
+			class="form-control mb-4"
+			type="number"
+			(keyup)="onKey($event)"
+			min="1"
+			id="change"
+			oninput="this.value = Math.abs(this.value)"
+		/>
+		<h5 class="mb-3" [hidden]="change < total ">
+			Change: {{ change - total | currency: 'USD':'symbol':'1.0-0' }}
+		</h5>
+		<button class="btn btn-dark mt-2 mx-2" (click)="finishPurchase()" data-bs-dismiss="modal" data-bs-dismiss="offcanvas" [disabled]="change< total">Finish purchase</button>
+		<button class="btn btn-danger mt-2 mx-2" data-bs-dismiss="offcanvas"
+        >Close</button>
+	</div>
+</div>

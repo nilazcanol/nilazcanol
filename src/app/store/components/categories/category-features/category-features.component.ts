@@ -17,7 +17,16 @@ import swal from 'sweetalert2';
 @Component({
 	selector: 'app-category-features',
 	templateUrl: './category-features.component.html',
-	styles: [],
+	styles: [
+    `
+    .form-control:focus {
+      border-color: #FFCA2B !important;
+      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+}
+
+
+`
+  ],
 })
 export class CategoryFeaturesComponent implements OnInit, OnChanges {
 	constructor(
