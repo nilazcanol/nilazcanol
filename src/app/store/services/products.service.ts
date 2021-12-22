@@ -1,3 +1,4 @@
+import { resApiProductUnderStock } from './../interfaces/product/product.interface';
 import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -67,5 +68,14 @@ export class ProductsService {
 			localStorage.getItem('token') || ''
 		);
 		return this.http.delete<resApiProductResponse>(url, { headers });
+	}
+
+	productsUnderStock(): Observable<resApiProductUnderStock> {
+		const url: string = `${this._urlBase}/products/under_stock`;
+		const headers = new HttpHeaders().set(
+			'x-token',
+			localStorage.getItem('token') || ''
+		);
+		return this.http.get<resApiProductUnderStock>(url, { headers });
 	}
 }
