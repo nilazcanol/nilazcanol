@@ -30,7 +30,7 @@
 						</ng-template>
 						<ng-template pTemplate="body">
 							<h2>
-								<strong>300 Sales</strong>
+								<strong>{{countSales}} Sales</strong>
 								<i
 									class="pi pi-angle-double-up ms-2 text-dark bg-warning p-1 rounded"
 									style="font-size: 1.5rem;"
@@ -49,7 +49,7 @@
 						</ng-template>
 						<ng-template pTemplate="body">
 							<h3>
-								<strong>300 Sales</strong>
+								<strong>{{total| currency: '$':'symbol':'1.0-0' }}</strong>
 								<i
 									class="pi pi-angle-double-down ms-2 text-warning bg-dark p-1 rounded"
 									style="font-size: 1.5rem;"
