@@ -56,6 +56,7 @@ import { RolPipe } from './pipes/rol.pipe';
 
 
 import { StoreRoutingModule } from './store-routing.module';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
 
 
 @NgModule({
@@ -91,7 +92,8 @@ import { StoreRoutingModule } from './store-routing.module';
     CardProductStoreComponent,
     CartComponent,
     InfoProductComponent,
-    ModalProductsSaleComponent
+    ModalProductsSaleComponent,
+    StatisticsComponent
   ],
   imports: [
     CommonModule,

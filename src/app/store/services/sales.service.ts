@@ -39,4 +39,14 @@ export class SalesService {
     }
 
 
+    staticticsSale(){
+        const url: string = `${this._urlBase}/sale/statistics`;
+        const headers = new HttpHeaders().set(
+          'x-token',
+          localStorage.getItem('token') || ''
+        );
+        return this.http.get<{countSales:number,totalReduce:number}>(url,{headers});
+    }
+
+
 }
