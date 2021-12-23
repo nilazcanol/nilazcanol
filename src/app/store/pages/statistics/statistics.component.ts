@@ -46,14 +46,10 @@ export class StatisticsComponent implements OnInit {
         title: {
             display: true,
             text: 'Products under stock',
-            fontSize: 30,
+            fontSize: 25,
             position: 'top',
-            align: 'end'
-        },
-        legend: {
-            position: 'left',
-            
         }
+        
     };
       
 
