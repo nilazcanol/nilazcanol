@@ -1,52 +1,29 @@
 import { CommonModule } from '@angular/common';
-// * Angular
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-// * PrimeNG
+// PrimeNG
 import { PrimengModule } from '../primeNg/primeng.module';
-import { ComponentsModule } from './components/components.module';
-// * Category components
-import { CategoryComponent } from './pages/category/category.component';
-// * Home component
-import { HomeComponent } from './pages/home/home.component';
-// * Product components
-import { ProductComponent } from './pages/product/product.component';
-import { HistoryComponent } from './pages/sale/history/history.component';
-import { HomeSaleComponent } from './pages/sale/home-sale/home-sale.component';
-// * Sales components
-import { NewComponent } from './pages/sale/new/new.component';
-import { StatisticsComponent } from './pages/statistics/statistics.component';
-// * User components
-import { HomeUsersComponent } from './pages/user/home-users/home-users.component';
-import { ListUserComponent } from './pages/user/list-user/list-user.component';
-// * Category pipe
+// Pipes
 import { CategoryPipe } from './pipes/category.pipe';
+// Router
 import { StoreRoutingModule } from './store-routing.module';
-
-
-
+// Modules
+import { ComponentsModule } from './components/components.module';
+import { PagesModule } from './pages/pages.module';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    CategoryComponent,
-    ProductComponent,
-    HomeSaleComponent,
-    CategoryPipe,
-    HistoryComponent,
-    NewComponent,
-    HomeUsersComponent,
-    ListUserComponent,
-    StatisticsComponent
+      CategoryPipe,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     StoreRoutingModule,
     PrimengModule,
-    ComponentsModule
+    ComponentsModule, 
+    PagesModule
   ]
 })
 export class StoreModule { }
