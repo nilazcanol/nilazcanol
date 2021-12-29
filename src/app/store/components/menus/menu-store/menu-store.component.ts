@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/store/interfaces/user/user.interface';
 
 @Component({
 	selector: 'app-menu-store',
