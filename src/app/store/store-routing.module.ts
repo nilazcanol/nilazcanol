@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from './../login/guards/is-admin.guard';
 import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
+import { PagesComponent } from './pages/pages.component';
 import { ProductComponent } from './pages/product/product.component';
 import { salesRoutingModule } from './pages/sale/sales.routes';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
@@ -11,6 +12,7 @@ import { usersRoutingModule } from './pages/user/user.routes';
 const routes: Routes = [
 	{
 		path: '',
+		component:PagesComponent,
 		children: [
 			{ path: 'home', component: HomeComponent },
 			{ path: 'products', component: ProductComponent },

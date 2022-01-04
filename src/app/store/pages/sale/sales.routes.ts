@@ -1,10 +1,10 @@
 import { HistoryComponent } from './history/history.component';
 import { NewComponent } from './new/new.component';
-import { HomeSaleComponent } from './home-sale/home-sale.component';
 // Angular
 import { RouterModule } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { Routes } from '@angular/router'
+import { HomeSaleComponent } from './home-sale.component';
 // Components
 
 export const routes: Routes = [
