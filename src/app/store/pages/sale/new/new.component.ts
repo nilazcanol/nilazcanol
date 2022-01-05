@@ -11,9 +11,9 @@ import { ProductsService } from 'src/app/store/services/products.service';
 	templateUrl: './new.component.html',
 	styles: [
 		`
-			.btn-dark:hover,
-			.btn-dark:active,
-			.btn-dark:visited {
+			.btn-primary:hover,
+			.btn-primary:active,
+			.btn-primary:visited {
 				background-color: #ffc008;
 				border: #ffc008;
 				color: #212529;

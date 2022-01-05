@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center p-3" *ngIf="showLoading">
 	<strong>Loading...</strong>
 	<div
-		class="spinner-border ms-auto text-warning"
+		class="spinner-border ms-auto text-secondary"
 		role="status"
 		aria-hidden="true"
 	></div>
@@ -10,7 +10,7 @@
 
 <div *ngIf="listUsers.length !== 0; else messageThereAreNoProducts">
 	<button
-		class="mb-4 btn btn-dark"
+		class="mb-4 btn btn-primary"
 		label="New category"
 		data-bs-target="#modalUser"
 		data-bs-toggle="modal"
@@ -39,7 +39,7 @@
 									{{ user.name | titlecase }}
 								</div>
                                 {{ user.email }}
-                                <span class="badge bg-dark mt-1 mb-2">
+                                <span class="badge bg-primary mt-1 mb-2">
                                     {{user.rol | rol}}
                                 </span>
                                 								
@@ -51,7 +51,7 @@
 					<td>
 						<div class="d-grid gap-3 d-md-block">
 							<button
-								class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+								class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
 								data-bs-target="#modalUser"
 								data-bs-toggle="modal"
 								(click)="selectedUser(false, user)"

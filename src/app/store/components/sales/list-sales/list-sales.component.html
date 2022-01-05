@@ -1,6 +1,6 @@
 <div class="text-center mt-5 mb-5" [hidden]="!showLoading">
     <h3 class="mb-3">Loading...</h3>
-    <div class="spinner-border text-warning" role="status">
+    <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
 
@@ -24,8 +24,8 @@
 					<span
 						[class]="
 							sale.total <= 3000
-								? 'badge bg-warning mx-2'
-								: 'badge bg-dark mx-2'
+								? 'badge bg-secondary mx-2'
+								: 'badge bg-primary mx-2'
 						"
 						>{{ sale.total <= 3000 ? 'Low' : 'High' }}</span
 					>
@@ -40,7 +40,7 @@
 						data-bs-toggle="modal"
 						data-bs-target="#modalDetailProducts"
 						type="button"
-						class="btn btn-warning"
+						class="btn btn-secondary"
 						(click)="selectedProducts(sale)"
 					>
 						<i class="pi pi-eye me-2"></i>

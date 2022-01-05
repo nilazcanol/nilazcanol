@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 	providers: [MessageService],
 	styles: [`
 
-    .btn-dark:hover {
+    .btn-primary:hover {
         color: #fff;
         background-color: #FFAE0D;
         border-color: #FFAE0D;

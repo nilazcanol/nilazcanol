@@ -5,3 +5,113 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
+/* * Primary elements */
+.bg-primary{
+    background-color: var(--bg-primary) !important
+}
+.btn-primary{
+    background-color: var(--bg-primary) !important;
+    border: var(--bg-primary) !important;
+    color: #fff !important;
+}
+.btn-outline-primary{
+    background-color: var(--tx-primary) !important;
+    color: var(--bg-primary) !important;
+}
+.btn-outline-primary:hover{
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+    border-color: var(--bg-secondary) !important;
+    box-shadow: 0 0 0 0.2rem var(--bg-primary-degraded) !important;
+}
+
+/* * Secondary elements */
+.bg-secondary{
+    background-color: var(--bg-secondary) !important
+}
+.btn-secondary{
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: var(--bg-primary) !important;
+}
+
+.text-secondary{
+    color:var(--text-secondary);
+}
+
+.alert-warning {
+    color: var(--text-primary-light);
+    background-color: var(--bg-secondary);
+    border-color: var(--bg-primary-light);
+}
+
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: var(--text-primary);
+	border-color: var(--text-primary);
+	background-color: var(--bg-secondary);
+	cursor: pointer;
+}
+
+.page-link {
+	background-color: var(--text-primary);
+	color: #212529;
+	border-color: var(--text-primary);
+	cursor: pointer;
+}
+
+.backAndNext {
+	background-color: var(--bg-secondary);
+	border-color: var(--text-primary);
+	color: var(--text-primary);
+}
+.backAndNext:hover {
+	background-color: var(--bg-secondary);
+	border-color: var(--text-primary);
+	color: var(--text-primary);
+}
+
+
+
+/* * Theme 1 */
+:root{
+    --bg-primary: #072227;
+    --text-primary: #fff;
+    --bg-secondary: #35858B;
+    --text-secondary: #fff;
+    --bg-primary-light: #4FBDBA;
+    --text-primary-light: #fff;
+    --bg-secondary-light: #35858B;
+    --text-secondary-light: rgb(32, 32, 32);
+    --bg-primary-degraded: #35858b3f;
+}
+/* * Theme 2 */
+/* :root{
+    --bg-primary: #2E0B71;
+    --text-primary: #fff;
+    --bg-secondary: #7500B2;
+    --text-secondary: #fff;
+    --bg-primary-light: #9349bb;
+    --text-primary-light: #fff;
+    --bg-secondary-light: #7400b228;
+    --text-secondary-light: rgb(32, 32, 32);
+    --bg-primary-degraded: #36222241;
+} */
+/* * Theme 3*/
+/* :root{
+    --bg-primary: #1A3154;
+    --text-primary: #fff;
+    --bg-secondary: #185ADB;
+    --text-secondary: #fff;
+    --bg-primary-light: #FFC947;
+    --text-primary-light: #fff;
+    --bg-secondary-light: #EFEFEF;
+    --text-secondary-light: rgb(32, 32, 32);
+    --bg-primary-degraded: #36222241;
+} */

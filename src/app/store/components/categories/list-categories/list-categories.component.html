@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center p-3" *ngIf="showLoading">
   <strong>Loading...</strong>
-  <div class="spinner-border ms-auto text-warning" role="status" aria-hidden="true"></div>
+  <div class="spinner-border ms-auto text-secondary" role="status" aria-hidden="true"></div>
 </div>
 
 
@@ -10,7 +10,7 @@
 	class="table-responsive"
 >
 <button
-	class="mb-4 btn btn-dark"
+	class="mb-4 btn btn-primary"
 	(click)="selectCategory(true)"
 	label="New category"
 	data-bs-target="#modalCategory"
@@ -35,7 +35,7 @@ New category
 				<td>
                     <div class="d-grid gap-3 d-md-block">
                         <button
-						class="btn btn-dark mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+						class="btn btn-primary mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
                         (click)="goToProductByCategory(category)"
 					>
                     <i class="pi me-2 pi-eye"></i>
@@ -43,7 +43,7 @@ New category
 						View products
 					</button>
                         <button
-						class="btn btn-warning mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
+						class="btn btn-secondary mx-md-1 mb-2 mb-sm-2 mx-sm-2 mx-2 me-sm-4"
                         (click)="selectCategory(false,category)"
                         data-bs-target="#modalCategory"
                         data-bs-toggle="modal"

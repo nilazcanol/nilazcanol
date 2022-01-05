@@ -9,7 +9,7 @@
       {{ product.name | titlecase }}
       <span
         *ngIf="product.stock == 0; else producStock"
-        class="badge bg-warning text-dark"
+        class="badge bg-secondary text-dark"
         >{{ product.stock }}</span
       >
       <ng-template #producStock>
@@ -17,14 +17,14 @@
           *ngIf="
             product.stock > 0 &&
             product.stock < 4
-              ? 'badge bg-warning'
-              : 'badge bg-dark'
+              ? 'badge bg-secondary'
+              : 'badge bg-primary'
           "
           [class]="
             product.stock > 0 &&
             product.stock < 4
-              ? 'badge bg-warning'
-              : 'badge bg-dark'
+              ? 'badge bg-secondary'
+              : 'badge bg-primary'
           "
         >
           {{
@@ -55,7 +55,7 @@
       role="group"
       aria-label="Actions"
     >
-      <button type="button" class="btn btn-dark" (click)="addCart(product)">
+      <button type="button" class="btn btn-primary" (click)="addCart(product)">
           <i class="pi pi-plus-circle me-2"></i>
         Add
       </button>
