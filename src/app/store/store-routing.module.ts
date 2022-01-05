@@ -1,3 +1,4 @@
+import { SettingsComponent } from './pages/settings/settings.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from './../login/guards/is-admin.guard';
@@ -17,6 +18,7 @@ const routes: Routes = [
 			{ path: 'home', component: HomeComponent },
 			{ path: 'products', component: ProductComponent },
 			{ path: 'categories', component: CategoryComponent },
+			{ path: 'settings', component: SettingsComponent },
 			{
 				path: 'statistics',
 				component: StatisticsComponent,

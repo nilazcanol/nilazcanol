@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { HomeSaleComponent } from './sale/home-sale.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
 	declarations: [
@@ -26,6 +27,7 @@ import { HomeSaleComponent } from './sale/home-sale.component';
 		HomeUsersComponent,
 		ListUserComponent,
   PagesComponent,
+  SettingsComponent,
 	],
 	imports: [CommonModule, ComponentsModule, RouterModule, PrimengModule],
 	exports: [
