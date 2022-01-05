@@ -75,10 +75,7 @@ export class AuthService {
   }
 
   logout(){
-      localStorage.clear();
-  }
-
-  register(){
-
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
   }
 }
