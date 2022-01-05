@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/store/interfaces/user/user.interface';
 
 @Component({
 	selector: 'app-menu-store',
@@ -46,6 +45,18 @@ export class MenuStoreComponent implements OnInit {
 				label: 'User',
 				icon: 'pi pi-fw pi-users',
 				routerLink: '/store/users/listUser',
+				routerLinkActiveOptions: 'active',
+			},
+			{
+				label: 'Statistics',
+				icon: 'pi pi-fw pi-chart-bar',
+				routerLink: '/store/statistics',
+				routerLinkActiveOptions: 'active',
+			},
+			{
+				label: 'Settings',
+				icon: 'pi pi-fw pi-cog',
+				routerLink: '/store/settings',
 				routerLinkActiveOptions: 'active',
 			},
 		];

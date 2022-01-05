@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
         
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-              confirmButton: 'btn btn-warning mx-2',
+              confirmButton: 'btn btn-secondary mx-2',
               cancelButton: 'btn btn-danger mx-2'
             },
             buttonsStyling: false,

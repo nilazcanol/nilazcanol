@@ -9,16 +9,7 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 @Component({
 	selector: 'app-search',
 	templateUrl: './product-search.component.html',
-	styles: [
-    `
-    .form-control:focus {
-      border-color: #FFCA2B !important;
-      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
-}
-
-
-`
-  ],
+	styles: [],
 
 })
 export class SearchComponent implements OnInit {

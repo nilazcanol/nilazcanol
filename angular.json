@@ -26,6 +26,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+                "chart.js"
+             ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -36,7 +39,9 @@
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
-            "scripts": []
+            "scripts": [
+                "node_modules/chart.js/dist/Chart.js"
+            ]
           },
           "configurations": {
             "production": {

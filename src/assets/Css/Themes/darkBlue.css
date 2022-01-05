@@ -1,0 +1,88 @@
+/* * Theme 3*/
+:root{
+    --bg-primary: #1A3154;
+    --text-primary: #fff;
+    --bg-secondary: #185ADB;
+    --text-secondary: #fff;
+    --bg-primary-light: #FFC947;
+    --text-primary-light: #fff;
+    --bg-secondary-light: #EFEFEF;
+    --text-secondary-light: rgb(32, 32, 32);
+    --bg-primary-degraded: #36222241;
+}
+
+/* * Primary elements */
+.bg-primary{
+    background-color: var(--bg-primary) !important
+}
+.btn-primary{
+    background-color: var(--bg-primary) !important;
+    border: var(--bg-primary) !important;
+    color: #fff !important;
+}
+.btn-outline-primary{
+    background-color: var(--tx-primary) !important;
+    color: var(--bg-primary) !important;
+}
+.btn-outline-primary:hover{
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.form-control:focus {
+    border-color: var(--bg-secondary) !important;
+    box-shadow: 0 0 0 0.2rem var(--bg-primary-degraded) !important;
+}
+
+.text-primary{
+    color:var(--bg-primary);
+}
+
+/* * Secondary elements */
+.bg-secondary{
+    background-color: var(--bg-secondary) !important
+}
+.btn-secondary{
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: var(--bg-primary) !important;
+}
+
+.text-secondary{
+    color:var(--text-secondary);
+}
+
+.alert-warning {
+    color: var(--text-primary-light);
+    background-color: var(--bg-secondary);
+    border-color: var(--bg-primary-light);
+}
+
+
+.page-item.active .page-link {
+	z-index: 3;
+	color: var(--text-primary);
+	border-color: var(--text-primary);
+	background-color: var(--bg-secondary);
+	cursor: pointer;
+}
+
+.page-link {
+	background-color: var(--text-primary);
+	color: #212529;
+	border-color: var(--text-primary);
+	cursor: pointer;
+}
+
+.backAndNext {
+	background-color: var(--bg-secondary);
+	border-color: var(--text-primary);
+	color: var(--text-primary);
+}
+.backAndNext:hover {
+	background-color: var(--bg-secondary);
+	border-color: var(--text-primary);
+	color: var(--text-primary);
+}
+
+

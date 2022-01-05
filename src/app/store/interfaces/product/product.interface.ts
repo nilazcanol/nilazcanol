@@ -9,3 +9,8 @@ export interface Product{
     state?:Boolean
     file?:File
 }
+
+export interface resApiProductUnderStock {
+    productsName:  string[];
+    productsPrice: number[];
+}

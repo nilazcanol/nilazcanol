@@ -1,0 +1,66 @@
+<div class="row mb-2">
+	<div class="col-12">
+		<div class="alert mb-4 alert-warning" role="alert">
+			<h4>Statistics</h4>
+			<p>
+				Here you can visualize your sales and the statistics
+				of the month
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<h3 class="ms-2">Sales of the month</h3>
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-4 mb-md-3">
+		<p-card>
+			<ng-template pTemplate="header">
+				<img
+					alt="Card"
+					src="assets/img/Sales_carried_out_in_the_month.png"
+				/>
+			</ng-template>
+			<ng-template pTemplate="body">
+				<h2>
+					<strong>{{countSales}} Sales</strong>
+					<i
+						class="pi pi-angle-double-up ms-2 text-dark bg-secondary p-1 rounded"
+						style="font-size: 1.5rem;"
+					></i>
+				</h2>
+			</ng-template>
+		</p-card>
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-4 mb-md-3">
+		<p-card>
+			<ng-template pTemplate="header">
+				<img
+					alt="Card"
+					src="assets/img/Income_from_sales in_the_month.png"
+				/>
+			</ng-template>
+			<ng-template pTemplate="body">
+				<h3>
+					<strong>{{total| currency: '$':'symbol':'1.0-0' }}</strong>
+					<i
+						class="pi pi-angle-double-down ms-2 text-secondary bg-primary p-1 rounded"
+						style="font-size: 1.5rem;"
+					></i>
+				</h3>
+			</ng-template>
+		</p-card>
+	</div>
+	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-4 mb-md-3">
+		<p-card>
+			<ng-template pTemplate="body">
+				<p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
+			</ng-template>
+		</p-card>
+	</div>
+
+
+	
+	
+</div>
