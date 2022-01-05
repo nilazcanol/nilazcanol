@@ -1,12 +1,12 @@
-/* * Theme 3*/
+/* * Theme 4 */
 :root{
-    --bg-primary: #1A3154;
+    --bg-primary: #1D1F23;
     --text-primary: #fff;
-    --bg-secondary: #185ADB;
+    --bg-secondary: #ffbf00bb;
     --text-secondary: #fff;
-    --bg-primary-light: #3573ee;
+    --bg-primary-light: #ffd967;
     --text-primary-light: #fff;
-    --bg-secondary-light: #EFEFEF;
+    --bg-secondary-light: #ffc72155;
     --text-secondary-light: rgb(32, 32, 32);
     --bg-primary-degraded: #36222241;
 }
@@ -84,5 +84,7 @@
 	border-color: var(--text-primary);
 	color: var(--text-primary);
 }
+
+
 
 

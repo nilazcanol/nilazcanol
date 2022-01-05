@@ -6,12 +6,11 @@
     <div class="col-12">
       <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
       <div class="input-group">
-        <div class="input-group-text">Select theme</div>
-        <select class="form-select" id="inlineFormSelectPref">
-            <option  (click)="selectTheme('darkCian')">Dark Cian</option>
-            <option  (click)="selectTheme('darkPurple')">Dark Purple</option>
-            <option  (click)="selectTheme('darkBlue')">Dark Blue</option>
-          </select>      
+        <div class="input-group-text">Change theme</div>
+            <button class="btn btn-theme1" (click)="selectTheme('darkBlue')">Blue</button>
+            <button class="btn btn-theme2" (click)="selectTheme('darkCian')">Cian</button>
+            <button class="btn btn-theme3" (click)="selectTheme('darkPurple')">Purple</button>
+            <button class="btn btn-theme4" (click)="selectTheme('darkNight')">Night</button>
         </div>
     </div> 
   </div>
