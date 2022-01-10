@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { resApiProductUnderStock } from './../interfaces/product/product.interface';
 import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,6 +21,20 @@ export class ProductsService {
 			localStorage.getItem('token') || ''
 		);
 		return this.http.get<resApiProduct>(url, { headers });
+	}
+	getAllProductsWithStock(page: number = 0): Observable<resApiProduct> {
+		const url: string = `${this._urlBase}/products?from=${page}`;
+		const headers = new HttpHeaders().set(
+			'x-token',
+			localStorage.getItem('token') || ''
+		);
+		return this.http.get<resApiProduct>(url, { headers }).pipe(
+			map( item => {
+				const products =item.products.filter( product => product.stock>0 );
+				item.products = products;
+				return item
+			})
+		);
 	}
 
 	getProductById(
