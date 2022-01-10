@@ -28,7 +28,7 @@ import { ProductsService } from 'src/app/store/services/products.service';
 export class NewComponent implements OnInit {
 	constructor(private productService: ProductsService) {}
 
-	listProduct: Product[] = [];
+	listProduct: Product[]   = [];
 
 	shoppingCart: saleProductSelected[] = [];
 
@@ -36,7 +36,12 @@ export class NewComponent implements OnInit {
 	page: number = 0;
 
 	ngOnInit(): void {
-		this.productService.getAllProducts().subscribe((res) => {
+		this.getProductsDB();
+	}
+
+	getProductsDB(){
+		this.productService.getAllProductsWithStock().subscribe((res) => {
+		
 			this.listProduct = res.products;
 		});
 	}
@@ -67,7 +72,8 @@ export class NewComponent implements OnInit {
 	}
 
 	addMoreProducts() {
-		this.productService.getAllProducts(this.page + 1).subscribe((res) => {
+		this.productService.getAllProductsWithStock(this.page + 1).subscribe((res) => {
+			
 			
             if (res.products.length == 0) {
 				this.showToast(
@@ -76,9 +82,18 @@ export class NewComponent implements OnInit {
 					'info'
 				);
 			}
+
+			var indexProductSelected = 0;
+
+		
+
+
 			res.products.forEach((product) => {
-				this.page += 1;
-				this.listProduct.push(product);
+				this.page += 1;	
+				const thereIsAproduct =this.listProduct.some(productFromTheList => productFromTheList._id  == product._id )
+				if(!thereIsAproduct){
+					this.listProduct.push(product);
+				}
 			});
 		});
 	}

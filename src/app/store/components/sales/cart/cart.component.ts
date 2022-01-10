@@ -56,7 +56,7 @@ export class CartComponent implements OnInit {
               cancelButton: 'btn btn-danger mx-2'
             },
             buttonsStyling: false,
-            timer:10000
+            timer:30000
           })
           
           swalWithBootstrapButtons.fire({
@@ -67,6 +67,7 @@ export class CartComponent implements OnInit {
             confirmButtonText: 'Yes, Finish purchase',
             cancelButtonText: 'No, cancel!',
             reverseButtons: true,
+            timer:30000
           }).then((result) => {
             if (result.isConfirmed) {
                     this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {
