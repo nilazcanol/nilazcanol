@@ -8,7 +8,6 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { RouterModule } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 import { ComponentsModule } from './../components/components.module';
-import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
@@ -17,7 +16,6 @@ import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
 	declarations: [
-		HomeComponent,
 		ProductComponent,
 		StatisticsComponent,
 		HomeSaleComponent,
@@ -31,7 +29,6 @@ import { SettingsComponent } from './settings/settings.component';
 	],
 	imports: [CommonModule, ComponentsModule, RouterModule, PrimengModule],
 	exports: [
-		HomeComponent,
 		ProductComponent,
 		StatisticsComponent,
 		HomeSaleComponent,

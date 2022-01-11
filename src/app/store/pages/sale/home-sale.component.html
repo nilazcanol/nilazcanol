@@ -1,12 +1,22 @@
 <div class="container-fluid">
 	<div class="row flex-nowrap">
-		<app-menu-store class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-primary">
+		<app-menu-store
+			class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-primary"
+		>
 		</app-menu-store>
 		<div class="col py-3">
 			<div class="row">
-				<div class="col-sm-12 mb-3">
-					<app-menu-sale> </app-menu-sale>                  
-                    
+				<div class="col-12 mb-1">
+					<p-card
+						header="List Sales"
+						subheader="Full list of all sales in DB
+            The data obtained are those of the present month
+            If you want to get another month, use the filter below"
+						styleClass="p-card-shadow text-lg-start text-sm-center"
+					>
+						<app-menu-sale> </app-menu-sale>
+
+					</p-card>
 				</div>
 				<div class="col-sm-12">
 					<router-outlet></router-outlet>
