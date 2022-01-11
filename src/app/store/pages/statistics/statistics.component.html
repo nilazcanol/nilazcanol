@@ -2,7 +2,7 @@
 
 <p-card header="Dashboard" subheader="Statistics of your updated store" styleClass="p-card-shadow text-lg-start text-sm-center" class="">
 	<div class="row justify-content-center">
-		<div class="col-sm-12 col-md-9 col-lg-7">
+		<div class="col-sm-12 col-md-9 col-lg-7 d-none d-md-block">
 			<p-chart
 				type="doughnut"
 				[data]="dataProductUnderStock"
@@ -12,7 +12,7 @@
 
 		<div class="col-sm-12 col-md-10 col-lg-5 align-middle mb-md-4 mb-lg-0">
 			<div class="row mb-sm-3 mb-lg-0">
-				<div class="col-sm-12">
+				<div class="col-sm-12 d-none d-md-block">
 					<p-chart
 						type="bar"
 						[data]="dataSales"
@@ -47,14 +47,14 @@
 				</div>
 			</div>
 			<!-- * Goals  -->
-			<!-- <div class="row justify-content-center">
+			<div class="row justify-content-center">
 				<div class="col-sm-12 col-md-9 col-lg-6 col-xl-5 text-center mt-3 mt-md-0">
 					<h2>
 						<i
 							class="pi pi-arrow-down ms-2 text-dark p-1 pe-2"
 							style="font-size: 1.5rem;"
 						></i>
-						<strong>{{1000-countSales}} remaining sales</strong>
+						<strong>{{countSales}}</strong>
 					</h2>
 					<h6 class="mb-3">Goal of 1000 sales per month</h6>
 				</div>
@@ -65,12 +65,12 @@
 							style="font-size: 1.5rem;"
 						></i>
 						<strong>{{
-							total-500000 | currency: '$':'symbol':'1.0-0'
+							total | currency: '$':'symbol':'1.0-0'
 						}} </strong>
 					</h2>
 					<h6 class="mb-3">Goal of $500.000 in the month</h6>
 				</div>
-			</div> -->
+			</div>
 					
 		</div>
 	</div>
