@@ -50,55 +50,27 @@ export class CartComponent implements OnInit {
     finishPurchase(){
         this.totalPrice();
         
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-secondary mx-2',
-              cancelButton: 'btn btn-danger mx-2'
-            },
-            buttonsStyling: false,
-            timer:30000
-          })
-          
-          swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, Finish purchase',
-            cancelButtonText: 'No, cancel!',
-            reverseButtons: true,
-            timer:30000
-          }).then((result) => {
-            if (result.isConfirmed) {
-                    this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {
-                        swalWithBootstrapButtons.fire(
-                            'Success!',
-                            'The operation is correctly registered.',
-                            'success'
-                        );
+        Swal.fire({
+          title: 'You are sure to finish the purchase ?',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Finish',
+          denyButtonText: `Don't finish`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {            
+              this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {        
+                this.router.navigateByUrl('store/sales/history');
+              })
+            Swal.fire('Saved!', '', 'success')
+          } else if (result.isDenied) {
+            Swal.fire('Changes are not saved', '', 'info')
+          }
+        })
+      
+            
+        
 
-                            this.router.navigateByUrl('store/sales/history');
-                        
-                    })
-              
-            } else if (
-              result.dismiss === Swal.DismissReason.cancel
-            ) {
-              swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your operation could not end',
-                'error'
-              );
-
-            }
-          })
-
-        // TODO: Se debe cerrar modal, crear una interfaz para la respuesta y segun ella se debe
-        // TODO: ver el status y mostrar la alerta correspondiente.
-        // TODO: Se debe limitar a que no se agrege 2 veces los productos y en su lugar se sume a la que ya exista
-        // TODO: El boton de guardar se debe mostrar solo cuando se ingrese el vuelto.
-        // TODO: EL modal se debe cerrar y rederigir al historial. 
-        // TODO: Se debe mostrar un mensaje de confirmacion al finalizar la compra 
 
         
     }
