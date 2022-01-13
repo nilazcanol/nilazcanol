@@ -1,79 +1,30 @@
-<form  [formGroup]="loginForm" (ngSubmit)="login()">
-	<div class="mb-4">
-		<div class="row justify-content-lg-center">
-			<div class="col-sm-12 col-md-8">
-				<h1 class="display-3">
-					MyStore <small class="display-6 text-secondary"> 1.0</small>
-				</h1>
-			</div>
-		</div>
-	</div>
-	<div class="mb-3 row justify-content-lg-center">
-		<label
-			for="staticEmail"
-			class="col-sm-12 col-md-4 col-lg-2 col-form-label"
-			>Email</label
-		>
-		<div class="col-sm-12 col-md-8 col-lg-6">
-			<input
-				type="email"
-				class="form-control"
-				id="staticEmail"
-				formControlName="email"
-				required
-				placeholder="email@example.com"
-			/>
 
-			<span
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+	<div class="mb-4">
+		<label for="email" class="form-label">Email</label>
+		<input type="email" class="form-control" name="email" formControlName="email">
+		<span
 				*ngIf="fieldIsValid('email')"
 				class="input-group alert alert-danger mb-2 mt-3"
 			>
 				The mail is required
 			</span>
-
-		</div>
 	</div>
-	<div class="mb-3 row justify-content-lg-center">
-		<label
-			for="inputPassword"
-			class="col-sm-12 col-md-4 col-lg-2 col-form-label"
-			>Password</label
-		>
-		<div class="col-sm-12 col-md-8 col-lg-6">
-			<input
-				type="password"
-				formControlName="password"
-				class="form-control"
-				id="inputPassword"
-        autocomplete="false"
-				required
-			/>
-
-            <span
-            *ngIf="fieldIsValid('password')"
-            class="input-group alert alert-danger mb-2 mt-3"
-        >
-            The password is required, must have {{ 6- this.loginForm.controls['password'].value.length }} characters as a minimum
-        </span>
-		</div>
+	<div class="mb-4">
+		<label for="password" class="form-label">Password</label>
+		<input type="password" class="form-control" name="password" formControlName="password">
+		<span
+		*ngIf="fieldIsValid('password')"
+		class="input-group alert alert-danger mb-2 mt-3"
+	>
+		The password is required, must have {{ 6- this.loginForm.controls['password'].value.length }} characters as a minimum
+	</span>
 	</div>
-	<div class="mb-3 row justify-content-lg-center">
-		
-		<div class="col-sm-12 col-md-8 col-lg-2"></div>
-	</div>
-	<div class="mb-3 row mt-4">
-		<label class="col-sm-2 col-form-label"></label>
-		<div class="col-sm-10">
-			<div class="d-grid gap-2">
-				<button
-					type="submit"
-					class="btn btn-primary btn-lg mx-sm-2"
-					[disabled]="loginForm.invalid"
-				>
-                    Login
-				    <i class="pi pi-fw pi-sign-in"></i>
-				</button>
-			</div>
-		</div>
+	<div class="d-grid">
+		<button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">
+			<i class="pi pi-fw pi-sign-in"></i>
+			Log in
+		</button>
 	</div>
 </form>
