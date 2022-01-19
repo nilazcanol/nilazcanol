@@ -9,21 +9,7 @@ import { ProductsService } from 'src/app/store/services/products.service';
 @Component({
 	selector: 'app-new',
 	templateUrl: './new.component.html',
-	styles: [
-		`
-			.btn-primary:hover,
-			.btn-primary:active,
-			.btn-primary:visited {
-				background-color: #ffc008;
-				border: #ffc008;
-				color: #212529;
-				-webkit-transition: background-color 0.5s ease-out;
-				-moz-transition: background-color 0.5s ease-out;
-				-o-transition: background-color 0.5s ease-out;
-				transition: background-color 0.5s ease-out;
-			}
-		`,
-	],
+	styleUrls: ['./new.component.css'],
 })
 export class NewComponent implements OnInit {
 	constructor(private productService: ProductsService) {}

@@ -22,11 +22,11 @@
 }
 .btn-outline-primary{
     background-color: var(--tx-primary) !important;
-    color: var(--bg-primary) !important;
+    color: var(--text-secondary) !important;
 }
 .btn-outline-primary:hover{
     background-color: var(--bg-primary) !important;
-    color: var(--text-primary) !important;
+    color: var(--text-secondary) !important;
 }
 
 .form-control:focus {
@@ -35,7 +35,7 @@
 }
 
 .text-primary{
-    color:var(--bg-primary);
+    color:var(--text-primary);
 }
 
 /* * Secondary elements */
@@ -44,7 +44,7 @@
 }
 .btn-secondary{
     background-color: var(--bg-secondary) !important;
-    color: var(--text-primary) !important;
+    color: var(--text-secondary) !important;
     border: var(--bg-primary) !important;
 }
 

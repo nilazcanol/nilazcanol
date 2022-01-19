@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import swal from'sweetalert2';
+import swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-login',
@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
 		private fb: FormBuilder,
 		private authService: AuthService,
 		private router: Router,
-	) {}
+	) {
+		
+	}
 
 	loginForm!: FormGroup;
 

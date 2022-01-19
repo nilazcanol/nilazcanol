@@ -1,0 +1,9 @@
+.bg{
+    background-image: url("/assets/img/background.jpeg");
+    background-position: center center;
+}    
+
+.rounded-container{
+    border-radius:20px
+}
+

@@ -5,7 +5,7 @@ import { AfterContentInit, Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'app-statistics',
 	templateUrl: './statistics.component.html',
-	styles: [],
+	styleUrls: ['./statistics.component.css'],
 })
 export class StatisticsComponent implements OnInit {
 	constructor(
