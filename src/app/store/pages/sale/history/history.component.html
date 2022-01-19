@@ -1,4 +1,4 @@
 
 
-
-<app-list-sales></app-list-sales>
+<app-filter (filteredSales)="filterSales($event)"></app-filter>
+<app-list-sales [listSales]="listSales"></app-list-sales>
