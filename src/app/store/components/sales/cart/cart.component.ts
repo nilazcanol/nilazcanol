@@ -4,6 +4,7 @@ import { SalesService } from 'src/app/store/services/sales.service';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Product } from '../../../interfaces/product/product.interface';
 
 @Component({
 	selector: 'app-cart',
@@ -12,12 +13,12 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-    // * Intentar cerrar el modal mandando un true en el caso de que sea finalizado correctamente
 
 	constructor(private saleService: SalesService, private router:Router) {}
 
 	ngOnInit(): void {
 		this.HaveProducts = this.saleProductSelected.length == 0 ? false : true;
+		this.totalPrice();
 	}
 
 	HaveProducts: Boolean = false;
@@ -49,33 +50,20 @@ export class CartComponent implements OnInit {
 
     finishPurchase(){
         this.totalPrice();
-        
-        Swal.fire({
-          title: 'You are sure to finish the purchase ?',
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: 'Finish',
-          denyButtonText: `Don't finish`,
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {            
-              this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {        
-                this.router.navigateByUrl('store/sales/history');
-              })
-            Swal.fire('Saved!', '', 'success')
-          } else if (result.isDenied) {
-            Swal.fire('Changes are not saved', '', 'info')
-          }
-        })
-      
-            
-        
-
-
-        
+        this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {        
+			Swal.fire('Saved!', '', 'success')
+			
+			this.router.navigateByUrl('store/sales/history');
+			localStorage.setItem('shoppingCart','')
+		});
     }
 
+	deleteProduct(product:Product){
+		const saleFilter = [...this.saleProductSelected.filter( sale => sale.product._id !== product._id)];
+		this.saleProductSelected = saleFilter;
+		localStorage.setItem('shoppingCart', JSON.stringify(saleFilter) );
 
+	}
 
     showToast(
 		title: string,

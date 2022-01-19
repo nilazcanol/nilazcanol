@@ -23,6 +23,16 @@ export class NewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getProductsDB();
+		this.salesLocalStorage();
+
+	}
+
+	salesLocalStorage(){
+		const salesLocalStorage = localStorage.getItem('shoppingCart');
+		if(salesLocalStorage){
+			this.shoppingCart = JSON.parse(salesLocalStorage)
+		}
+	
 	}
 
 	getProductsDB(){
@@ -32,11 +42,8 @@ export class NewComponent implements OnInit {
 		});
 	}
 	addShoppingCart(saleProductSelected: saleProductSelected) {       
-        
-        
-        
-        var indexProductSelected = 0;
 
+        var indexProductSelected = 0;
         const thereAreProducts = this.shoppingCart.every( (item,index)=> {
             indexProductSelected = index
             return item.product._id?.toString() !== saleProductSelected.product._id?.toString()
@@ -55,6 +62,8 @@ export class NewComponent implements OnInit {
             };
             
         }
+
+		localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart) );
 	}
 
 	addMoreProducts() {
