@@ -3,6 +3,8 @@ import { Product, ResGetallSale } from './../interfaces/sales/saleResponseGet.in
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { sale } from '../interfaces/sales/sale.interface';
+import { ArraySale } from '../interfaces/sales/saleResponseGet.inteface';
 
 @Injectable({
 	providedIn: 'root',
@@ -40,12 +42,31 @@ export class SalesService {
 
 
     staticticsSale(){
-        const url: string = `${this._urlBase}/sale/statistics`;
+        const url: string = `${this._urlBase}/sale/statisticsForMonth`;
         const headers = new HttpHeaders().set(
           'x-token',
           localStorage.getItem('token') || ''
         );
         return this.http.get<{countSales:number,totalReduce:number}>(url,{headers});
+    }
+
+    getListSalesOnDay(){
+        const url: string = `${this._urlBase}/sale/statisticsOnDay`;
+        const headers = new HttpHeaders().set(
+          'x-token',
+          localStorage.getItem('token') || ''
+        );
+        return this.http.get<{countSales:number,totalReduce:number}>(url,{headers});
+    }
+
+
+    getSalesForMonth(date:string){
+      const url: string = `${this._urlBase}/sale/date?date=${date}`
+      const headers = new HttpHeaders().set(
+        'x-token',
+        localStorage.getItem('token') || ''
+      );
+      return this.http.get<{sales:ArraySale[]}>(url,{headers});
     }
 
 

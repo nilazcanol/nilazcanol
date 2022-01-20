@@ -1,0 +1,22 @@
+<div class="my-3">
+    <div class="row justify-content-start">
+        <div class="col-12">
+            <h5>Filter</h5>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 mb-sm-3 mb-md-0">
+            <p-calendar [(ngModel)]="month"  dateFormat="dd/mm/yy"  [touchUI]="true" class="d-block d-sm-block d-md-none " (onSelect)="filterSales(month.toLocaleDateString() )" [maxDate]="currentDate" [defaultDate]="currentDate"></p-calendar>
+            <p-calendar [(ngModel)]="month"  dateFormat="dd/mm/yy"  [touchUI]="false"  class="d-none d-sm-none d-md-block" (onSelect)="filterSales(month.toLocaleDateString() )" [maxDate]="currentDate" [defaultDate]="currentDate"></p-calendar>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-4 mb-sm-3 mb-md-0">
+   
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 col-xxl-4 mb-sm-3 mb-md-0">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-outline-danger mt-3" [hidden]="!activeFilter" (click)="filterSales(currentDate.toLocaleDateString())">Clear filter</button>
+        </div>
+    </div>
+</div>

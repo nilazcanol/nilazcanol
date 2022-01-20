@@ -24,6 +24,9 @@ export class StatisticsComponent implements OnInit {
 	countSales: number = 0;
 	total: number = 0;
 
+	countSalesOnDay: number = 0;
+	totalOnDay: number = 0;
+
 	ngOnInit(): void {
 		this.productsUnderStock();
 		this.staticticsSale();
@@ -89,6 +92,11 @@ export class StatisticsComponent implements OnInit {
 		this.saleService.staticticsSale().subscribe((res) => {
 			this.total = res.totalReduce;
 			this.countSales = res.countSales;
+		});
+
+		this.saleService.getListSalesOnDay().subscribe((res) => {
+			this.totalOnDay = res.totalReduce;
+			this.countSalesOnDay = res.countSales;
 		});
 	}
 }
