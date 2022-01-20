@@ -22,8 +22,9 @@ export class ListSalesComponent implements OnInit {
 	showLoading: Boolean = true;
 
 	ngOnInit(): void {
-		this.salesService.getListSales().subscribe((res) => {
-			this.listSales = res.arraySales;
+		const date  = new Date()
+		this.salesService.getSalesForMonth(date.toLocaleDateString()).subscribe((res) => {
+			this.listSales = res.sales
 			this.showLoading = false;
 		});
 	}

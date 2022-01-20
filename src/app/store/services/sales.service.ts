@@ -42,7 +42,16 @@ export class SalesService {
 
 
     staticticsSale(){
-        const url: string = `${this._urlBase}/sale/statistics`;
+        const url: string = `${this._urlBase}/sale/statisticsForMonth`;
+        const headers = new HttpHeaders().set(
+          'x-token',
+          localStorage.getItem('token') || ''
+        );
+        return this.http.get<{countSales:number,totalReduce:number}>(url,{headers});
+    }
+
+    getListSalesOnDay(){
+        const url: string = `${this._urlBase}/sale/statisticsOnDay`;
         const headers = new HttpHeaders().set(
           'x-token',
           localStorage.getItem('token') || ''
