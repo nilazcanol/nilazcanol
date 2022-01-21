@@ -18,7 +18,7 @@ export class StatisticsComponent implements OnInit {
 	ngAfterContentInit(): void {}
 	dataProductUnderStock: any;
 	optionsUnderStock: any;
-  
+
 	dataSales: any;
 	optionsSales: any;
 
@@ -32,6 +32,7 @@ export class StatisticsComponent implements OnInit {
 	ngOnInit(): void {
 		this.productsUnderStock();
 		this.staticticsSale();
+		this.salesLastDay();
 		this.optionsUnderStock = {
 			title: {
 				display: true,
@@ -43,7 +44,7 @@ export class StatisticsComponent implements OnInit {
 		this.optionsSales = {
 			title: {
 				display: true,
-				text: 'Sales for months',
+				text: 'Sales last days',
 				fontSize: 25,
 				position: 'top',
 			},
@@ -51,61 +52,80 @@ export class StatisticsComponent implements OnInit {
 	}
 
 	productsUnderStock() {
-		this.productService.productsUnderStock().subscribe((res) => {
-			const { productsName, productsPrice } = res;
-			this.listProductsName = productsName;
-			this.dataProductUnderStock = {
-				labels: this.listProductsName,
-				datasets: [
-					{
-						data: productsPrice,
-						backgroundColor: [
-							'#406882',
-							'#FF5C58',
-							'#4C3F91',
-							'#5E454B',
-							'#3A6351',
-						],
-						hoverBackgroundColor: [
-							'#6998AB',
-							'#FE8F8F',
-							'#9145B6',
-							'#461111',
-							'#7EB5A6',
-						],
-					},
-				],
-			};
-		},(err) => {
-			this.showToast('Oh! there was a problem',err,'error');
-		});
-
-    this.dataSales = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-            label: 'Sales number',
-            backgroundColor: '#6941A0',
-            data: [2, 59, 80, 81, 56, 55, 40]
-        }      
-    ]
-    };
+		this.productService.productsUnderStock().subscribe(
+			(res) => {
+				const { productsName, productsPrice } = res;
+				this.listProductsName = productsName;
+				this.dataProductUnderStock = {
+					labels: this.listProductsName,
+					datasets: [
+						{
+							data: productsPrice,
+							backgroundColor: [
+								'#406882',
+								'#FF5C58',
+								'#4C3F91',
+								'#5E454B',
+								'#3A6351',
+							],
+							hoverBackgroundColor: [
+								'#6998AB',
+								'#FE8F8F',
+								'#9145B6',
+								'#461111',
+								'#7EB5A6',
+							],
+						},
+					],
+				};
+			},
+			(err) => {
+				this.showToast('Oh! there was a problem', err, 'error');
+			}
+		);
 	}
+	salesLastDay() {
+		this.saleService.getSalesLastDay().subscribe((res:any) => {
+			const {dayForMonth, sales} = res;
+			this.dataSales = {
+				labels: dayForMonth,
+				datasets: [
+				  {
+					  label: 'Sales number',
+					  backgroundColor: '#6941A0',
+					  data: sales
+				  }      
+			  ]
+			}
+		},(err)=> {
+			this.showToast('Oh! there was a problem', err, 'error');
+
+		})
+	}
+		
+
+
 
 	staticticsSale() {
-		this.saleService.staticticsSale().subscribe((res) => {
-			this.total = res.totalReduce;
-			this.countSales = res.countSales;
-		},(err)=> {
-			this.showToast('Oh! there was a problem',err,'error');
-		});
+		this.saleService.staticticsSale().subscribe(
+			(res) => {
+				this.total = res.totalReduce;
+				this.countSales = res.countSales;
+			},
+			(err) => {
+				this.showToast('Oh! there was a problem', err, 'error');
+			}
+		);
 
-		this.saleService.getListSalesOnDay().subscribe((res) => {
-			this.totalOnDay = res.totalReduce;
-			this.countSalesOnDay = res.countSales;
-		},(err)=> {
-			this.showToast('Oh! there was a problem',err,'error');
-		});
+		this.saleService.getListSalesOnDay().subscribe(
+			(res) => {
+				this.totalOnDay = res.totalReduce;
+				this.countSalesOnDay = res.countSales;
+			},
+			(err) => {
+				this.showToast('Oh! there was a problem', err, 'error');
+			}
+		);
 	}
 
 	showToast(

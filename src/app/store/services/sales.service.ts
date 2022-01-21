@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { ResSalesLastDay } from '../interfaces/sales/saleLastDay.interface';
 import { ArraySale } from '../interfaces/sales/saleResponseGet.inteface';
 import { saleProductSelected } from './../interfaces/sales/saleProductSelected.interface';
 import { ResGetallSale } from './../interfaces/sales/saleResponseGet.inteface';
@@ -40,5 +41,10 @@ export class SalesService {
 	getSalesForMonth(date: string) {
 		const url: string = `${this._urlBase}/sale/date?date=${date}`;
 		return this.http.get<{ sales: ArraySale[] }>(url);
+	}
+
+	getSalesLastDay(days: number = 7) {
+		const url: string = `${this._urlBase}/sale/salesLastDay?numberOfDays=${days}`;
+		return this.http.get<ResSalesLastDay>(url);
 	}
 }

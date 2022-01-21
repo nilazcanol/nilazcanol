@@ -18,6 +18,7 @@ export class ListSalesComponent implements OnInit {
 	@Input() listSales: ArraySale[] = [];
 	date: Date = new Date();
 	productSelected: Product[] = [];
+
 	showLoading: Boolean = true;
 
 	ngOnInit(): void {
