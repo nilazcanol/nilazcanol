@@ -1,10 +1,9 @@
-import { saleProductSelected } from './../interfaces/sales/saleProductSelected.interface';
-import { Product, ResGetallSale } from './../interfaces/sales/saleResponseGet.inteface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { sale } from '../interfaces/sales/sale.interface';
 import { ArraySale } from '../interfaces/sales/saleResponseGet.inteface';
+import { saleProductSelected } from './../interfaces/sales/saleProductSelected.interface';
+import { ResGetallSale } from './../interfaces/sales/saleResponseGet.inteface';
 
 @Injectable({
 	providedIn: 'root',
@@ -15,59 +14,31 @@ export class SalesService {
 	private _urlBase = environment.URLBASE;
 
 	getListSales = () => {
-
-        const url: string = `${this._urlBase}/sale`;
-        const headers = new HttpHeaders().set(
-          'x-token',
-          localStorage.getItem('token') || ''
-        );
-        return this.http.get<ResGetallSale>(url,{headers});
-
+		const url: string = `${this._urlBase}/sale`;
+		return this.http.get<ResGetallSale>(url);
 	};
 
-    saveSale(total:number,products:saleProductSelected[]){
-        const url: string = `${this._urlBase}/sale/save`;
-        const headers = new HttpHeaders().set(
-          'x-token',
-          localStorage.getItem('token') || ''
-        );
-        return this.http.post<ResGetallSale>(url,
-            {
-                products,
-                "saleDate":Date.now(),
-                total
-            }
-            ,{headers});
-    }
+	saveSale(total: number, products: saleProductSelected[]) {
+		const url: string = `${this._urlBase}/sale/save`;
+		return this.http.post<ResGetallSale>(url, {
+			products,
+			saleDate: Date.now(),
+			total,
+		});
+	}
 
+	staticticsSale() {
+		const url: string = `${this._urlBase}/sale/statisticsForMonth`;
+		return this.http.get<{ countSales: number; totalReduce: number }>(url);
+	}
 
-    staticticsSale(){
-        const url: string = `${this._urlBase}/sale/statisticsForMonth`;
-        const headers = new HttpHeaders().set(
-          'x-token',
-          localStorage.getItem('token') || ''
-        );
-        return this.http.get<{countSales:number,totalReduce:number}>(url,{headers});
-    }
+	getListSalesOnDay() {
+		const url: string = `${this._urlBase}/sale/statisticsOnDay`;
+		return this.http.get<{ countSales: number; totalReduce: number }>(url);
+	}
 
-    getListSalesOnDay(){
-        const url: string = `${this._urlBase}/sale/statisticsOnDay`;
-        const headers = new HttpHeaders().set(
-          'x-token',
-          localStorage.getItem('token') || ''
-        );
-        return this.http.get<{countSales:number,totalReduce:number}>(url,{headers});
-    }
-
-
-    getSalesForMonth(date:string){
-      const url: string = `${this._urlBase}/sale/date?date=${date}`
-      const headers = new HttpHeaders().set(
-        'x-token',
-        localStorage.getItem('token') || ''
-      );
-      return this.http.get<{sales:ArraySale[]}>(url,{headers});
-    }
-
-
+	getSalesForMonth(date: string) {
+		const url: string = `${this._urlBase}/sale/date?date=${date}`;
+		return this.http.get<{ sales: ArraySale[] }>(url);
+	}
 }
