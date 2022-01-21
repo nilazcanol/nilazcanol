@@ -1,11 +1,18 @@
-<div  #loginPage >
-    <div class="row justify-content-md-center justify-content-lg-center ">
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="container mt-5">
-                <div class="bg-white p-5 rounded-container">
-                    <router-outlet></router-outlet>
-                </div>
+<div #loginPage>
+    <div class="container w-75  mt-5 rounded shadow" >
+        <br>
+        <div class="row align-items-stretch">
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
+            <div class="col bg-white text-primary p-5 rounded-end ">
+               
+        
+                <h3 class="fw-bold text-center ">Welcome</h3>
+                <h1 class="fw-bold text-center text-dark">MyStore <small class="text-secondary">1.0</small></h1>
+        
+                <router-outlet></router-outlet>
+                <hr class="mt-5">
             </div>
+         
         </div>
     </div>
 </div>

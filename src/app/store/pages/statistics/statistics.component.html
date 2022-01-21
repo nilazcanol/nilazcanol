@@ -1,66 +1,84 @@
-<div class="row mb-2">
-	<div class="col-12">
-		<div class="alert mb-4 alert-warning" role="alert">
-			<h4>Statistics</h4>
-			<p>
-				Here you can visualize your sales and the statistics
-				of the month
-			</p>
+
+
+<p-card header="Dashboard" subheader="Statistics of your updated store" styleClass="p-card-shadow text-lg-start text-sm-center" class="">
+	<div class="row justify-content-center">
+
+		<!-- * Statistics General -->
+		<div class="col-12">
+			<div class="row justify-content-center">
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 text-center mt-3 mt-md-0 mb-sm-2 mb-lg-2">
+					<!-- * Sales number -->
+					<div class="bg-container p-2 rounded">
+						<h2 class="mt-2">
+							<i
+								class="pi pi-arrow-down ms-2 text-dark p-1 pe-2"
+								style="font-size: 1.5rem;"
+							></i>
+							<strong>{{ countSales }} Sales</strong>
+						</h2>
+						<h6 class="mb-3">Sales number made</h6>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 text-center mt-3 mt-md-0 mb-sm-2 mb-lg-2">
+					<!-- * Money on sales -->
+					<div class="bg-container p-2 rounded">
+						<h2 class="mt-2">
+							<i
+								class="pi pi-briefcase ms-2 text-dark p-1 pe-2"
+								style="font-size: 1.5rem;"
+							></i>
+							<strong>{{
+								total | currency: '$':'symbol':'1.0-0'
+							}} </strong>
+						</h2>
+						<h6 class="mb-3">Total income</h6>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 text-center mt-3 mt-md-0 mb-sm-2 mb-lg-2 ">
+					<!-- * Free -->
+					<div class="bg-container p-2 rounded">
+						<h2 class="mt-2">
+							<i
+								class="pi pi-arrow-down ms-2 text-dark p-1 pe-2"
+								style="font-size: 1.5rem;"
+							></i>
+							<strong>{{countSalesOnDay}}</strong>
+						</h2>
+						<h6 class="mb-3">Sales on the day</h6>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 text-center mt-3 mt-md-0 mb-sm-2 mb-lg-2 ">
+					<!-- * Free -->
+					<div class="bg-container p-2 rounded">
+						<h2 class="mt-2">
+							<i
+								class="pi pi-arrow-down ms-2 text-dark p-1 pe-2"
+								style="font-size: 1.5rem;"
+							></i>
+							<strong>{{
+								totalOnDay | currency: '$':'symbol':'1.0-0'
+							}} </strong>
+						</h2>
+						<h6 class="mb-3">Income on the day</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-10 col-md-11 col-lg-11 col-xl-6 col-xxl-6 d-none d-md-block mb-md-4 mt-md-3">
+			<p-chart
+				type="doughnut"
+				[data]="dataProductUnderStock"
+				[options]="optionsUnderStock"
+			></p-chart>
+		</div>
+
+		<div class="col-sm-10 col-md-11 col-lg-11 col-xl-6 col-xxl-6 align-middle  d-none d-md-block mb-md-4 mt-md-3">
+			<p-chart
+				type="bar"
+				[data]="dataSales"
+				[options]="optionsSales"
+			></p-chart>
 		</div>
 	</div>
-</div>
-
-<div class="row">
-	<div class="col-sm-12">
-		<h3 class="ms-2">Sales of the month</h3>
-	</div>
-	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-4 mb-md-3">
-		<p-card>
-			<ng-template pTemplate="header">
-				<img
-					alt="Card"
-					src="assets/img/Sales_carried_out_in_the_month.png"
-				/>
-			</ng-template>
-			<ng-template pTemplate="body">
-				<h2>
-					<strong>{{countSales}} Sales</strong>
-					<i
-						class="pi pi-angle-double-up ms-2 text-dark bg-secondary p-1 rounded"
-						style="font-size: 1.5rem;"
-					></i>
-				</h2>
-			</ng-template>
-		</p-card>
-	</div>
-	<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-4 mb-md-3">
-		<p-card>
-			<ng-template pTemplate="header">
-				<img
-					alt="Card"
-					src="assets/img/Income_from_sales in_the_month.png"
-				/>
-			</ng-template>
-			<ng-template pTemplate="body">
-				<h3>
-					<strong>{{total| currency: '$':'symbol':'1.0-0' }}</strong>
-					<i
-						class="pi pi-angle-double-down ms-2 text-secondary bg-primary p-1 rounded"
-						style="font-size: 1.5rem;"
-					></i>
-				</h3>
-			</ng-template>
-		</p-card>
-	</div>
-	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 mb-4 mb-md-3">
-		<p-card>
-			<ng-template pTemplate="body">
-				<p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
-			</ng-template>
-		</p-card>
-	</div>
-
-
-	
-	
-</div>
+</p-card>

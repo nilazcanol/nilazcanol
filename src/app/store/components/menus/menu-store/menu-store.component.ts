@@ -46,13 +46,7 @@ export class MenuStoreComponent implements OnInit {
 				icon: 'pi pi-fw pi-users',
 				routerLink: '/store/users/listUser',
 				routerLinkActiveOptions: 'active',
-			},
-			{
-				label: 'Statistics',
-				icon: 'pi pi-fw pi-chart-bar',
-				routerLink: '/store/statistics',
-				routerLinkActiveOptions: 'active',
-			},
+			},		
 			{
 				label: 'Settings',
 				icon: 'pi pi-fw pi-cog',

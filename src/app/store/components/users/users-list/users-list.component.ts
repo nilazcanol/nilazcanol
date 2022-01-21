@@ -2,6 +2,8 @@ import { MessageService } from 'primeng/api';
 import { User } from './../../../interfaces/user/user.interface';
 import { UsersService } from './../../../services/users.service';
 import { Component, OnInit } from '@angular/core';
+import { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-users-list',
@@ -34,16 +36,11 @@ export class UsersListComponent implements OnInit {
 		this.userService.getAllUser().subscribe(
 			(res) => {
 				this.listUsers = res.users;
-
 				this.showLoading = false;
 			},
 			(err) => {
 				this.showLoading = false;
-				this.messageService.add({
-					severity: 'error',
-					summary: `${err.status}: ${err.statusText}`,
-					detail: err.error.msg,
-				});
+				this.showToast('Oh! there was a problem',err,'error');
 			}
 		);
 	}
@@ -87,5 +84,17 @@ export class UsersListComponent implements OnInit {
            
             
         }
+	}
+
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }

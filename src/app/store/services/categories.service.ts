@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -22,54 +22,28 @@ export class CategoriesService {
 
 	getAllCategories(): Observable<resApiCategories> {
 		const url: string = `${this._urlBase}/category`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<resApiCategories>(url, { headers });
+		return this.http.get<resApiCategories>(url);
 	}
 
 	getNameCategory(id: string): Observable<categorySmall> {
-		const url: string = `${this._urlBase}/${id}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<categorySmall>(url, { headers });
+		const url: string = `${this._urlBase}/${id}`;		
+		return this.http.get<categorySmall>(url);
 	}
 
 	saveCategory(category: string) {
-		const url: string = `${this._urlBase}/category`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
+		const url: string = `${this._urlBase}/category`;		
 		return this.http.post<resApiCategoryResponse>(
-			url,
-			{ name: category },
-			{ headers }
-		);
+			url,{ name: category } );
 	}
 
 	updateCategory(categoryID: string, categoryName: string) {
-		const url: string = `${this._urlBase}/category/${categoryID}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
+		const url: string = `${this._urlBase}/category/${categoryID}`;	
 		return this.http.put<resApiCategoryResponse>(
-			url,
-			{ name: categoryName },
-			{ headers }
-		);
+			url, { name: categoryName } );
 	}
 
 	deleteCategory(category: category) {
-		const url: string = `${this._urlBase}/category/${category.uid}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.delete<resApiCategoryDeleteResponse>(url, { headers });
+		const url: string = `${this._urlBase}/category/${category.uid}`;	
+		return this.http.delete<resApiCategoryDeleteResponse>(url);
 	}
 }

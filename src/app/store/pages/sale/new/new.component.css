@@ -1,0 +1,48 @@
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+    background-color: #ffc008;
+    border: #ffc008;
+    color: #212529;
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+
+a{
+    text-decoration:none;
+}
+.btn-flotante {
+	font-size: 16px; /* Cambiar el tamaño de la tipografia */
+	background-color: #3B3B3B; /* Color de fondo */
+	color: #F8F9FA;
+	border-radius: 10px;
+	padding: 18px 30px; /* Relleno del boton */
+	position: fixed;
+	bottom: 40px;
+	right: 40px;
+	transition: all 800ms ease 0ms;
+	z-index: 99;
+}
+
+.btn-flotante:hover {
+	background-color: #0f0f0f; /* Color de fondo */
+	color: #F8F9FA;
+	transition: all 800ms ease 0ms;
+}
+
+.offcanvas-end{
+	width: 500px !important;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+ 	.btn-flotante {
+		font-size: 14px;
+		padding: 12px 20px;
+		bottom: 20px;
+		right: 20px;
+	}
+} 

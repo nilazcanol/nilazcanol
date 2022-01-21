@@ -34,6 +34,9 @@ export class ModalDeleteCategoryComponent implements OnInit {
 				} else {
                     this.showToast ('Can not be eliminated',`There are ${res.categorySelected?.length} products with this category`,'error',2000)
 				}
+			},(err)=> {
+				this.showToast('Oh! there was a problem',err,'error');
+
 			});
 	}
 
@@ -42,6 +45,7 @@ export class ModalDeleteCategoryComponent implements OnInit {
 			this.eliminatedCategory = false;
 		}, 500);
 	}
+
 
     showToast(
 		title: string,

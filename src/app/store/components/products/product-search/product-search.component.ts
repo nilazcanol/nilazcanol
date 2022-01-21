@@ -34,7 +34,9 @@ export class SearchComponent implements OnInit {
 		});
         this.categoryService.getAllCategories().subscribe( res => {
             this.categoryList = res.categories
-        })
+        },(err => {
+            this.showToast('Oh! there was a problem',err,'error');
+        }))
     }
 	searchProduct() {
 		const productName = this.searchForm.controls['product'].value;
@@ -66,10 +68,8 @@ export class SearchComponent implements OnInit {
                 }
 
 
-            },()=>{
-                this.showToast('Error','Contact technical support','error');
-
-
+            },(err)=>{
+                this.showToast('Oh! there was a problem',err,'error');
             });
 
         }
@@ -79,7 +79,9 @@ export class SearchComponent implements OnInit {
 
 		this.productService.getAllProducts().subscribe((res) => {
 			this.productSearch.emit(res.products);
-		});
+		},(err => {
+            this.showToast('Oh! there was a problem',err,'error');
+        }));
 	}
 
     showToast(

@@ -1,16 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/store/sales/history"><strong >Sales</strong></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li *ngFor="let item of menuList" class="nav-item">
-            <a  [routerLinkActive]="item.classActive" class="nav-link" aria-current="page" [routerLink]="item.routerLink"><i [class]="item.class"></i> {{item.label}}</a>
-        </li>
-                  
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div class="btn-group" role="group" aria-label="">
+    <button type="button" class="btn btn-light-50 mx-1 " routerLink="history">
+      <i class="pi pi-book "></i> History
+    </button>
+    <button type="button" class="btn btn-light-50 mx-1" routerLink="new">
+      <i class="pi pi-plus "></i> New
+    </button>
+  </div>

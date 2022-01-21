@@ -3,6 +3,8 @@ import { CommonModule }    from '@angular/common';
 import { ToastModule    }  from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 import { ChartModule } from 'primeng/chart';
+import { CalendarModule } from 'primeng/calendar';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -11,7 +13,8 @@ import { ChartModule } from 'primeng/chart';
   exports:[
     CardModule,
     ToastModule,
-    ChartModule
+    ChartModule,
+    CalendarModule
   ]
 })
 export class PrimengModule { }

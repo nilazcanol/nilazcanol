@@ -3,7 +3,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardProductStoreComponent } from './card-product-store/card-product-store.component';
 import { SearchComponent } from './product-search/product-search.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductFunctionsListComponent } from './product-functions-list/product-functions-list.component';
 import { ProductSaleComponent } from './product-sale/product-sale.component';
 import { ModalDeleteProductComponent } from './modal-delete-product/modal-delete-product.component';
 import { NewProductComponent } from './product-add-and-update/product-add-and-update.component';
@@ -21,7 +20,6 @@ import { CommonModule } from '@angular/common';
     NewProductComponent,
     ModalDeleteProductComponent,
     ProductSaleComponent,
-    ProductFunctionsListComponent,
     ProductDetailComponent,
     SearchComponent,    
     CardProductStoreComponent
@@ -37,7 +35,6 @@ import { CommonModule } from '@angular/common';
     NewProductComponent,
     ModalDeleteProductComponent,
     ProductSaleComponent,
-    ProductFunctionsListComponent,
     ProductDetailComponent,
     SearchComponent,    
     CardProductStoreComponent,

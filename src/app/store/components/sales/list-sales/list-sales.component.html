@@ -1,4 +1,4 @@
-<div class="text-center mt-5 mb-5" [hidden]="!showLoading">
+<div class="text-center mt-5 mb-5" [hidden]="!showLoading" >
     <h3 class="mb-3">Loading...</h3>
     <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -53,7 +53,7 @@
 </div>
 
 <ng-template #messageThereAreNoSales>
-    <div class="alert alert-danger" role="alert">
+    <div *ngIf="!showLoading" class="alert alert-danger" role="alert">
         No sales were found!
 	</div>
 </ng-template>

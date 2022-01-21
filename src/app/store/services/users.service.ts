@@ -1,9 +1,9 @@
-import { ResApiUserResponse } from './../interfaces/resApi/resApiUserResponse';
-import { environment } from './../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user/user.interface';
 import { resApiUserAddResponse } from '../interfaces/resApi/resApiUserAddResponse';
+import { User } from '../interfaces/user/user.interface';
+import { environment } from './../../../environments/environment';
+import { ResApiUserResponse } from './../interfaces/resApi/resApiUserResponse';
 
 @Injectable({
 	providedIn: 'root',
@@ -14,37 +14,21 @@ export class UsersService {
 	constructor(private http: HttpClient) {}
 
 	getAllUser() {
-		const url: string = `${this._urlBase}/users`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<ResApiUserResponse>(url, { headers });
+		const url: string = `${this._urlBase}/users`;		
+		return this.http.get<ResApiUserResponse>(url);
 	}
     
 	saveUser(user:User) {
-        const url: string = `${this._urlBase}/users`;
-        const headers = new HttpHeaders().set(
-            'x-token',
-            localStorage.getItem('token') || ''
-        );
-        return this.http.post<resApiUserAddResponse>(url,user, { headers });
+        const url: string = `${this._urlBase}/users`;       
+        return this.http.post<resApiUserAddResponse>(url,user);
 	}
 	updateUser(user:User) {
-        const url: string = `${this._urlBase}/users/${user.uid}`;
-        const headers = new HttpHeaders().set(
-            'x-token',
-            localStorage.getItem('token') || ''
-        );
-        return this.http.put<resApiUserAddResponse>(url,user, { headers });
+        const url: string = `${this._urlBase}/users/${user.uid}`;       
+        return this.http.put<resApiUserAddResponse>(url,user);
 	}
 
 	deleteUser(user:User) {
-        const url: string = `${this._urlBase}/users/${user.uid}`;
-        const headers = new HttpHeaders().set(
-            'x-token',
-            localStorage.getItem('token') || ''
-        );
-        return this.http.delete<resApiUserAddResponse>(url, { headers });
+        const url: string = `${this._urlBase}/users/${user.uid}`;     
+        return this.http.delete<resApiUserAddResponse>(url);
 	}
 }

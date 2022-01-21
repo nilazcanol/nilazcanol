@@ -9,21 +9,7 @@ import { ProductsService } from 'src/app/store/services/products.service';
 @Component({
 	selector: 'app-new',
 	templateUrl: './new.component.html',
-	styles: [
-		`
-			.btn-primary:hover,
-			.btn-primary:active,
-			.btn-primary:visited {
-				background-color: #ffc008;
-				border: #ffc008;
-				color: #212529;
-				-webkit-transition: background-color 0.5s ease-out;
-				-moz-transition: background-color 0.5s ease-out;
-				-o-transition: background-color 0.5s ease-out;
-				transition: background-color 0.5s ease-out;
-			}
-		`,
-	],
+	styleUrls: ['./new.component.css'],
 })
 export class NewComponent implements OnInit {
 	constructor(private productService: ProductsService) {}
@@ -37,20 +23,29 @@ export class NewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getProductsDB();
+		this.salesLocalStorage();
+
+	}
+
+	salesLocalStorage(){
+		const salesLocalStorage = localStorage.getItem('shoppingCart');
+		if(salesLocalStorage){
+			this.shoppingCart = JSON.parse(salesLocalStorage)
+		}
+	
 	}
 
 	getProductsDB(){
 		this.productService.getAllProductsWithStock().subscribe((res) => {
 		
 			this.listProduct = res.products;
-		});
+		},(err => {
+			this.showToast('Oh! there was a problem',err,'error');
+		}));
 	}
 	addShoppingCart(saleProductSelected: saleProductSelected) {       
-        
-        
-        
-        var indexProductSelected = 0;
 
+        var indexProductSelected = 0;
         const thereAreProducts = this.shoppingCart.every( (item,index)=> {
             indexProductSelected = index
             return item.product._id?.toString() !== saleProductSelected.product._id?.toString()
@@ -69,11 +64,12 @@ export class NewComponent implements OnInit {
             };
             
         }
+
+		localStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart) );
 	}
 
 	addMoreProducts() {
-		this.productService.getAllProductsWithStock(this.page + 1).subscribe((res) => {
-			
+		this.productService.getAllProductsWithStock(this.page + 1).subscribe((res) => {		
 			
             if (res.products.length == 0) {
 				this.showToast(
@@ -82,12 +78,7 @@ export class NewComponent implements OnInit {
 					'info'
 				);
 			}
-
 			var indexProductSelected = 0;
-
-		
-
-
 			res.products.forEach((product) => {
 				this.page += 1;	
 				const thereIsAproduct =this.listProduct.some(productFromTheList => productFromTheList._id  == product._id )
@@ -95,6 +86,8 @@ export class NewComponent implements OnInit {
 					this.listProduct.push(product);
 				}
 			});
+		},(err)=>{
+			this.showToast('Oh! there was a problem',err,'error');
 		});
 	}
 
@@ -112,4 +105,7 @@ export class NewComponent implements OnInit {
 			Swal.close();
 		}, timeOut);
 	}
+
+	
+
 }
