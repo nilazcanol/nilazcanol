@@ -77,22 +77,9 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
                     this.Restoreform();
 					this.categoryNew.emit(res.category);
 				},
-				(errors: HttpErrorResponse) => {
+				(err) => {
                     this.Restoreform();
-					if (errors.status == 400) {
-						this.showToast(
-							'Error',
-							'Check the data entered: In case the error persists, contact the technical support.',
-							'error'
-						);
-					}
-					if (errors.status == 500) {
-						this.showToast(
-							'Error',
-							'HTTP server internal error',
-							'error'
-						);
-					}
+					this.showToast('Oh! there was a problem',err,'error');
 				}
 			);
 	}
@@ -112,22 +99,10 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 
 					this.categoryUpdate.emit(res.category);
 				},
-				(errors: HttpErrorResponse) => {
+				(err) => {
                     this.Restoreform();
-					if (errors.status == 400) {
-						this.showToast(
-							'Error 400 bad request',
-							'Check the data entered: In case the error persists, contact the technical support',
-							'error'
-						);
-					}
-					if (errors.status == 500) {
-						this.showToast(
-							'Error 500 Internal Server',
-							'Contact the technical support.',
-							'error'
-						);
-					}
+					this.showToast('Oh! there was a problem',err,'error');
+
 				}
 			);
 	}

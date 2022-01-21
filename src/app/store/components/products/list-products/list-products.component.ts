@@ -51,9 +51,11 @@ export class ListProductsComponent implements OnInit {
 					this.listProducts = res.products;
 					this.showLoading = false;
 				},
-				() => {
+				(err) => {
 					this.listProducts = [];
 					this.showLoading = false;
+					this.showToast('Oh! there was a problem',err,'error');
+
 				}
 			);
 		}
@@ -124,12 +126,8 @@ export class ListProductsComponent implements OnInit {
                 }
 
 			},
-			() => {
-				this.showToast(
-					'Error!',
-					'Contact technical support',
-					'warning'
-				);
+			(err) => {
+				this.showToast('Oh! there was a problem',err,'error');
 			}
 		);
 	}

@@ -39,7 +39,9 @@ export class NewComponent implements OnInit {
 		this.productService.getAllProductsWithStock().subscribe((res) => {
 		
 			this.listProduct = res.products;
-		});
+		},(err => {
+			this.showToast('Oh! there was a problem',err,'error');
+		}));
 	}
 	addShoppingCart(saleProductSelected: saleProductSelected) {       
 
@@ -67,8 +69,7 @@ export class NewComponent implements OnInit {
 	}
 
 	addMoreProducts() {
-		this.productService.getAllProductsWithStock(this.page + 1).subscribe((res) => {
-			
+		this.productService.getAllProductsWithStock(this.page + 1).subscribe((res) => {		
 			
             if (res.products.length == 0) {
 				this.showToast(
@@ -77,12 +78,7 @@ export class NewComponent implements OnInit {
 					'info'
 				);
 			}
-
 			var indexProductSelected = 0;
-
-		
-
-
 			res.products.forEach((product) => {
 				this.page += 1;	
 				const thereIsAproduct =this.listProduct.some(productFromTheList => productFromTheList._id  == product._id )
@@ -90,6 +86,8 @@ export class NewComponent implements OnInit {
 					this.listProduct.push(product);
 				}
 			});
+		},(err)=>{
+			this.showToast('Oh! there was a problem',err,'error');
 		});
 	}
 
@@ -107,4 +105,7 @@ export class NewComponent implements OnInit {
 			Swal.close();
 		}, timeOut);
 	}
+
+	
+
 }

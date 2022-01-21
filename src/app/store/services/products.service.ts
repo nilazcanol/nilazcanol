@@ -1,12 +1,12 @@
-import { map } from 'rxjs/operators';
-import { resApiProductUnderStock } from './../interfaces/product/product.interface';
-import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product/product.interface';
 import { resApiProduct } from '../interfaces/resApi/resApiProduct.interface';
 import { resApiProductResponse } from '../interfaces/resApi/resApiProductResponse.interface';
+import { resApiProductUnderStock } from './../interfaces/product/product.interface';
 @Injectable({
 	providedIn: 'root',
 })
@@ -15,20 +15,12 @@ export class ProductsService {
 	constructor(private http: HttpClient) {}
 
 	getAllProducts(page: number = 0): Observable<resApiProduct> {
-		const url: string = `${this._urlBase}/products?from=${page}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<resApiProduct>(url, { headers });
+		const url: string = `${this._urlBase}/products?from=${page}`;	
+		return this.http.get<resApiProduct>(url);
 	}
 	getAllProductsWithStock(page: number = 0): Observable<resApiProduct> {
-		const url: string = `${this._urlBase}/products?from=${page}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<resApiProduct>(url, { headers }).pipe(
+		const url: string = `${this._urlBase}/products?from=${page}`;		
+		return this.http.get<resApiProduct>(url,).pipe(
 			map( item => {
 				const products =item.products.filter( product => product.stock>0 );
 				item.products = products;
@@ -46,51 +38,30 @@ export class ProductsService {
 			url = `${this._urlBase}/products/search?product=${productID}`;
 		} else {
 			url = `${this._urlBase}/products/search?category=${category}`;
-		}
-
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<Product[]>(url, { headers });
+		}		
+		return this.http.get<Product[]>(url);
 	}
 
 	saveNewProduct(product: FormData): Observable<resApiProductResponse> {
-		const url: string = `${this._urlBase}/products`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.post<resApiProductResponse>(url, product, { headers });
+		const url: string = `${this._urlBase}/products`;		
+		return this.http.post<resApiProductResponse>(url, product);
 	}
 
 	updateProduct(
 		product: FormData,
 		productID: string
 	): Observable<resApiProductResponse> {
-		const url: string = `${this._urlBase}/products/${productID}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.put<resApiProductResponse>(url, product, { headers });
+		const url: string = `${this._urlBase}/products/${productID}`;		
+		return this.http.put<resApiProductResponse>(url, product);
 	}
 
 	deleteProduct(product: Product): Observable<resApiProductResponse> {
-		const url: string = `${this._urlBase}/products/${product._id}`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.delete<resApiProductResponse>(url, { headers });
+		const url: string = `${this._urlBase}/products/${product._id}`;		
+		return this.http.delete<resApiProductResponse>(url);
 	}
 
 	productsUnderStock(): Observable<resApiProductUnderStock> {
-		const url: string = `${this._urlBase}/products/under_stock`;
-		const headers = new HttpHeaders().set(
-			'x-token',
-			localStorage.getItem('token') || ''
-		);
-		return this.http.get<resApiProductUnderStock>(url, { headers });
+		const url: string = `${this._urlBase}/products/under_stock`;		
+		return this.http.get<resApiProductUnderStock>(url);
 	}
 }

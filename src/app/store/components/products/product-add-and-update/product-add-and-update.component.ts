@@ -6,7 +6,7 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -157,27 +157,11 @@ export class NewProductComponent implements OnInit, OnChanges {
 					this.showLoading = false;
 					this.Restoreform();
 				},
-				(errors: HttpErrorResponse) => {
+				(err) => {
 					this.showLoading = false;
 
-					console.log(errors.error);
-					if (errors.status == 400) {
-						this.showToast(
-							'Error 400 bad request',
-							'Check the data entered: In case the error persists, contact the technical support',
-							'error'
-						);
-					}
-					if (errors.status == 500) {
-						this.showToast(
-							'Error 500 Internal Server',
-							'Contact the technical support.',
-							'error'
-						);
-					}
-					this.showToast('Error', errors.error.msg, 'error');
+					this.showToast('Oh! there was a problem',err,'error');
 					this.Restoreform();
-
 					setInterval(() => {
 						Swal.close();
 					}, 2000);
@@ -231,22 +215,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 					this.productUpdate.emit(res.product);
 					this.Restoreform();
 				},
-				(errors: HttpErrorResponse) => {
-					if (errors.status == 400) {
-						this.showToast(
-							'Error 400 Bad Request',
-							'Check the data entered: In case the error persists, contact the technical support.',
-							'error'
-						);
-					}
-					if (errors.status == 500) {
-						this.showToast(
-							'Error 500 Internal server',
-							'Contact the technical support',
-							'error'
-						);
-					}
-				}
+				(err) => { this.showToast('Oh! there was a problem',err,'error'); }
 			);
 	}
 
@@ -268,27 +237,5 @@ export class NewProductComponent implements OnInit, OnChanges {
 		}, timeOut);
 	}
 
-	// extractBase64 = async ($event: any) =>
-	// 	new Promise((resolve, reject) => {
-	// 		try {
-	// 			const unsafeImg = window.URL.createObjectURL($event);
-	// 			const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-	// 			const reader = new FileReader();
-	// 			reader.readAsDataURL($event);
-	// 			reader.onload = () => {
-	// 				resolve({
-	// 					base: reader.result,
-	// 				});
-	// 			};
-	// 			reader.onerror = (error) => {
-	// 				resolve({
-	// 					base: null,
-	// 				});
-	// 			};
-	// 		} catch (e) {
-	// 			reject({
-	// 				error: e,
-	// 			});
-	// 		}
-	// 	});
+
 }

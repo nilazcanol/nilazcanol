@@ -12,7 +12,6 @@ import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 
 
-
 @NgModule({
   declarations: [
       CategoryPipe,
@@ -24,6 +23,7 @@ import { PagesModule } from './pages/pages.module';
     PrimengModule,
     ComponentsModule, 
     PagesModule
-  ]
+  ], 
+  
 })
 export class StoreModule { }
