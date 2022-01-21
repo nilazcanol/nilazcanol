@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
 		const arrayTotal = this.saleProductSelected.map((item) => {
 			return item.product.price * item.amount;
 		});
-
+		if(arrayTotal.length == 0) { return }
 		this.total = arrayTotal.reduce(
 			(productPreviuos, productCurrent) =>
 				productPreviuos + productCurrent
@@ -55,6 +55,8 @@ export class CartComponent implements OnInit {
 			
 			this.router.navigateByUrl('store/sales/history');
 			localStorage.setItem('shoppingCart','')
+		},(err) => {
+			this.showToast('Oh! there was a problem',err,'error');
 		});
     }
 

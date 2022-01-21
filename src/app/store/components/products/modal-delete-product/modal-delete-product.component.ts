@@ -34,7 +34,7 @@ export class ModalDeleteProductComponent implements OnInit {
                 this.showToast('Success','It was deleted correctly','success');
                 this.activateButtonAgain();
 			},(err)=>{
-                this.showToast('Error',err.msg,'error');
+				this.showToast('Oh! there was a problem',err,'error');
                 this.activateButtonAgain();
                 this.showLoading =false;
             });

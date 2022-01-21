@@ -1,6 +1,8 @@
+import { Component, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/store/services/sales.service';
 import { ProductsService } from './../../services/products.service';
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-statistics',
@@ -74,6 +76,8 @@ export class StatisticsComponent implements OnInit {
 					},
 				],
 			};
+		},(err) => {
+			this.showToast('Oh! there was a problem',err,'error');
 		});
 
     this.dataSales = {
@@ -92,11 +96,27 @@ export class StatisticsComponent implements OnInit {
 		this.saleService.staticticsSale().subscribe((res) => {
 			this.total = res.totalReduce;
 			this.countSales = res.countSales;
+		},(err)=> {
+			this.showToast('Oh! there was a problem',err,'error');
 		});
 
 		this.saleService.getListSalesOnDay().subscribe((res) => {
 			this.totalOnDay = res.totalReduce;
 			this.countSalesOnDay = res.countSales;
+		},(err)=> {
+			this.showToast('Oh! there was a problem',err,'error');
 		});
+	}
+
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { category } from '../../../interfaces/category/category.interface';
 import { CategoriesService } from '../../../services/categories.service';
+import { SweetAlertIcon } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-list-categories',
@@ -29,6 +31,8 @@ export class ListCategoriesComponent implements OnInit {
 			},
 			(err) => {
 				this.showLoading = false;
+				this.showToast('Oh! there was a problem',err,'error');
+
 			}
 		);
 	}
@@ -70,5 +74,17 @@ export class ListCategoriesComponent implements OnInit {
 		this.router.navigate(['/store/products'], {
 			queryParams,
 		});
+	}
+
+	showToast(
+		title: string,
+		detai: string,
+		icon: SweetAlertIcon,
+		timeOut: number = 2000
+	) {
+		Swal.fire(title, detai, icon);
+		setInterval(() => {
+			Swal.close();
+		}, timeOut);
 	}
 }

@@ -1,6 +1,7 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,14 @@ export class InterceptorService implements HttpInterceptor {
     const reqClone = req.clone({
       headers
     })
-    return next.handle(reqClone);
+    return next.handle(reqClone).pipe(
+      catchError( this.manageErrors )
+    );
   }
+
+  manageErrors( error: HttpErrorResponse ){
+    return throwError(error.error.msg)
+  }
+
+ 
 }

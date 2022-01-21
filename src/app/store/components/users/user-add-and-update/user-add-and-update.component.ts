@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import {
 	Component,
 	EventEmitter,
@@ -6,7 +5,7 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -87,7 +86,6 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	}
 
 	Restoreform() {
-		// this.myFormUser.reset();
 		this.productWasSaved = false;
 	}
 
@@ -103,9 +101,8 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 				this.userNew.emit(res.user);
 			},
 			(err) => {
-                this.Restoreform();
+				this.showToast('Oh! Hubo un error',err,'error');
 				this.showLoading = false;
-                this.showToast('Error',err.error.msg,'error');
 			}
 		);
 	}
@@ -120,25 +117,10 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 				this.userUpdated.emit(res.user);
 			},
 			(err) => {
+				this.showToast('Oh! there was a problem',err,'error');
                 this.Restoreform();
 				this.showLoading = false;
-                console.log(err);
-                if (err.status == 400 || err.status == 404) {
-                    this.showToast(
-                        'Error',
-                        'Check the data entered: In case the error persists, contact the technical support.',
-                        'error'
-                    );
-                }
-                if (err.status == 500) {
-                    this.showToast(
-                        'Error',
-                        'HTTP server internal error',
-                        'error'
-                    );
-                }else{
-                    this.showToast('Error:'+err.statusText,err.message,'error',3000);
-                }
+              
 			}
 		);
 	}
