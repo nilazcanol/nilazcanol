@@ -1,6 +1,6 @@
 import { category } from "../category/category.interface";
 
 export interface resApiCategoryResponse{
-    category: category ,
+    category: category,
     msg?:string
 }
