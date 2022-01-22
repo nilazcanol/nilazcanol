@@ -2,8 +2,7 @@ import { MessageService } from 'primeng/api';
 import { User } from './../../../interfaces/user/user.interface';
 import { UsersService } from './../../../services/users.service';
 import { Component, OnInit } from '@angular/core';
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-users-list',
@@ -40,7 +39,7 @@ export class UsersListComponent implements OnInit {
 			},
 			(err) => {
 				this.showLoading = false;
-				this.showToast('Oh! there was a problem',err,'error');
+				this.showToast('Oh! there was a problem', err, 'error');
 			}
 		);
 	}
