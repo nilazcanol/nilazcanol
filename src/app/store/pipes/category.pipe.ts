@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 import { CategoriesService } from "../services/categories.service";
 
 @Pipe({
-    name:'categoryName'
+    name: 'categoryName'
 })
 export class CategoryPipe implements PipeTransform{
     
