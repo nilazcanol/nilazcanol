@@ -4,8 +4,7 @@ import {
 } from './../../../interfaces/sales/saleResponseGet.inteface';
 import { Component, Input, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/store/services/sales.service';
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-list-sales',
@@ -26,8 +25,8 @@ export class ListSalesComponent implements OnInit {
 		this.salesService.getSalesForMonth(date.toLocaleDateString()).subscribe((res) => {
 			this.listSales = res.sales
 			this.showLoading = false;
-		},(err)=> {
-			this.showToast('Oh! there was a problem',err,'error');
+		}, (err)=> {
+			this.showToast('Oh! there was a problem', err, 'error');
 		});
 	}
 
