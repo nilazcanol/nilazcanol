@@ -1,22 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { pagination } from 'src/app/store/interfaces/others/pagination.interface';
-import { ProductsService } from 'src/app/store/services/products.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
-import { Product } from '../../../interfaces/product/product.interface';
+import { pagination } 		from 'src/app/store/interfaces/others/pagination.interface';
+import { Product } 			from '../../../interfaces/product/product.interface';
+import { ProductsService }  from 'src/app/store/services/products.service';
 
 @Component({
 	selector: 'app-list-products',
 	templateUrl: './list-products.component.html',
 	styleUrls: ['./list-products.component.css'],
-	providers: [MessageService],
 })
 export class ListProductsComponent implements OnInit {
-	@Input('searchCategory') searchCategory?: string;
+	@Input() searchCategory?: string;
 
 	constructor(
 		private productService: ProductsService,
-		private messageService: MessageService
 	) {}
 
 	listProducts: Product[] = [];
@@ -54,7 +51,7 @@ export class ListProductsComponent implements OnInit {
 				(err) => {
 					this.listProducts = [];
 					this.showLoading = false;
-					this.showToast('Oh! there was a problem',err,'error');
+					this.showToast('Oh! there was a problem', err, 'error');
 
 				}
 			);
@@ -127,7 +124,7 @@ export class ListProductsComponent implements OnInit {
 
 			},
 			(err) => {
-				this.showToast('Oh! there was a problem',err,'error');
+				this.showToast('Oh! there was a problem', err, 'error');
 			}
 		);
 	}

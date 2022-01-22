@@ -24,18 +24,24 @@ export class SearchComponent implements OnInit {
     categoryList: category[] = [];
 
 
-	@Output('productSearch') productSearch: EventEmitter<Product[]> = new EventEmitter<Product[]>();
+	@Output() productSearch: EventEmitter<Product[]> = new EventEmitter<Product[]>();
 
 
 	ngOnInit(): void {
 		this.searchForm = this.fb.group({
-			product: ['', Validators.required],
-			category: ['', Validators.required],
+			product: [
+                '', 
+                Validators.required
+            ],
+			category: [
+                '', 
+                Validators.required
+            ],
 		});
-        this.categoryService.getAllCategories().subscribe( res => {
+        this.categoryService.getAllCategories().subscribe( (res) => {
             this.categoryList = res.categories
-        },(err => {
-            this.showToast('Oh! there was a problem',err,'error');
+        }, ( (err) => {
+            this.showToast('Oh! there was a problem', err, 'error');
         }))
     }
 	searchProduct() {
@@ -47,29 +53,29 @@ export class SearchComponent implements OnInit {
                 this.productSearch.emit(res);
                 this.searchForm.controls['product'].reset('');
                 this.searchForm.controls['category'].reset('');
-                this.showToast('Success','It was filtered by product name','success')
+                this.showToast('Success', 'It was filtered by product name', 'success')
                 if(res.length === 0){
-                    this.showToast('Ups!','No result for search','info',1000);
+                    this.showToast('Ups!', 'No result for search', 'info', 1000);
                 }else{
-                    this.showToast('Success','it was filtered by category name','success',1000);
+                    this.showToast('Success', 'it was filtered by category name', 'success', 1000);
                 }
-            },()=>{
-                this.showToast('Error','Contact technical support','error');
+            }, ()=>{
+                this.showToast('Error', 'Contact technical support', 'error');
             });
         }else{
-            this.productService.getProductById('',categoryName).subscribe((res) => {
+            this.productService.getProductById('', categoryName).subscribe((res) => {
                 this.productSearch.emit(res);
                 this.searchForm.controls['category'].reset('');
                 this.searchForm.controls['product'].reset('');
                 if(res.length === 0){
-                    this.showToast('Ups!','No result for search','info',1000);
+                    this.showToast('Ups!', 'No result for search', 'info', 1000);
                 }else{
-                    this.showToast('Success','it was filtered by category name','success',1000);
+                    this.showToast('Success', 'it was filtered by category name', 'success', 1000);
                 }
 
 
-            },(err)=>{
-                this.showToast('Oh! there was a problem',err,'error');
+            }, (err)=>{
+                this.showToast('Oh! there was a problem', err, 'error');
             });
 
         }
@@ -79,8 +85,8 @@ export class SearchComponent implements OnInit {
 
 		this.productService.getAllProducts().subscribe((res) => {
 			this.productSearch.emit(res.products);
-		},(err => {
-            this.showToast('Oh! there was a problem',err,'error');
+		}, ( (err) => {
+            this.showToast('Oh! there was a problem', err, 'error');
         }));
 	}
 
