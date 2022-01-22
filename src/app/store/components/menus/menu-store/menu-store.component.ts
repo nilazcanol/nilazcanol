@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 		`,
 	],
 })
-export class MenuStoreComponent implements OnInit {
+export class MenuStoreComponent  {
 	constructor(private authService: AuthService, private router: Router) {
 		this.items = [
 			{
@@ -62,7 +62,6 @@ export class MenuStoreComponent implements OnInit {
 
 	items!: MenuItem[];
 
-	ngOnInit() {}
 
 	logout() {
 		this.authService.logout();
