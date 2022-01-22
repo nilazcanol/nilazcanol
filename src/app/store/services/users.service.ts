@@ -20,11 +20,11 @@ export class UsersService {
     
 	saveUser(user:User) {
         const url: string = `${this._urlBase}/users`;       
-        return this.http.post<resApiUserAddResponse>(url,user);
+        return this.http.post<resApiUserAddResponse>(url, user);
 	}
 	updateUser(user:User) {
         const url: string = `${this._urlBase}/users/${user.uid}`;       
-        return this.http.put<resApiUserAddResponse>(url,user);
+        return this.http.put<resApiUserAddResponse>(url, user);
 	}
 
 	deleteUser(user:User) {
