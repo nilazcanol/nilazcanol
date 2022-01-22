@@ -20,11 +20,11 @@ import { InterceptorService } from './interceptors/interceptor.service';
       ReactiveFormsModule,
       
     ],
-    providers:[
+    providers: [
       {
         provide: HTTP_INTERCEPTORS,
         useClass: InterceptorService,
-        multi:true
+        multi: true
       }
     ],
     bootstrap: [AppComponent]
