@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import {
 	Component,
 	EventEmitter,
@@ -11,22 +10,19 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { category } from 'src/app/store/interfaces/category/category.interface';
 import { CategoriesService } from 'src/app/store/services/categories.service';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
-import swal from 'sweetalert2';
+import { default as Swal, default as swal, SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-category-features',
 	templateUrl: './category-features.component.html',
 	styles: [
-    `
-    .form-control:focus {
-      border-color: #FFCA2B !important;
-      box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
-}
-
-
-`
-  ],
+		`
+			.form-control:focus {
+				border-color: #ffca2b !important;
+				box-shadow: 0 0 0 0.2rem rgb(255, 202, 43, 0.25) !important;
+			}
+		`,
+	],
 })
 export class CategoryFeaturesComponent implements OnInit, OnChanges {
 	constructor(
@@ -34,18 +30,14 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 		private categoryService: CategoriesService
 	) {}
 
-	@Input('categoryInput') categoryInput?: category;
-	@Input('isNewCategory') isNewCategory!: boolean;
+	@Input() categoryInput?: category;
+	@Input() isNewCategory!: boolean;
 
 	categoryWasSaved: boolean = false;
 
-	@Output('categoryNew') categoryNew: EventEmitter<
-		category
-	> = new EventEmitter();
+	@Output() categoryNew: EventEmitter<category> = new EventEmitter();
 
-	@Output('categoryUpdate') categoryUpdate: EventEmitter<
-		category
-	> = new EventEmitter();
+	@Output() categoryUpdate: EventEmitter<category> = new EventEmitter();
 
 	myFormCategory!: FormGroup;
 
@@ -62,7 +54,10 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 
 	ngOnInit(): void {
 		this.myFormCategory = this.fb.group({
-			name: ['', Validators.required],
+			name: [
+				'', 
+				Validators.required
+			],
 			_id: [''],
 		});
 	}
@@ -74,12 +69,12 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 				(res) => {
 					this.categoryWasSaved = true;
 					this.showToast('Success', 'Saved correctly', 'success');
-                    this.Restoreform();
+					this.Restoreform();
 					this.categoryNew.emit(res.category);
 				},
 				(err) => {
-                    this.Restoreform();
-					this.showToast('Oh! there was a problem',err,'error');
+					this.Restoreform();
+					this.showToast('Oh! there was a problem', err, 'error');
 				}
 			);
 	}
@@ -92,7 +87,7 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 			)
 			.subscribe(
 				(res) => {
-                    this.Restoreform();
+					this.Restoreform();
 					this.categoryWasSaved = true;
 					this.showToast('Saved correctly', '', 'success');
 					swal.fire('Success', 'Saved correctly', 'success');
@@ -100,9 +95,8 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 					this.categoryUpdate.emit(res.category);
 				},
 				(err) => {
-                    this.Restoreform();
-					this.showToast('Oh! there was a problem',err,'error');
-
+					this.Restoreform();
+					this.showToast('Oh! there was a problem', err, 'error');
 				}
 			);
 	}
