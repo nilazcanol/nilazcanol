@@ -1,28 +1,23 @@
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: [  './settings.component.css'  ]
+	selector: 'app-settings',
+	templateUrl: './settings.component.html',
+	styleUrls: ['./settings.component.css'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent {
+	themeLink = document.querySelector('#theme');
+	constructor() {}
 
-  themeLink = document.querySelector('#theme')
-  constructor() { }
+	selectTheme(theme: string) {
+		const url = `./assets/Css/Themes/${theme}.css`;
+		localStorage.setItem('theme', url);
+		this.themeLink?.setAttribute('href', url);
+		this.showToast('The change is saved', '', 'success');
+	}
 
-  ngOnInit(): void {
-  }
-
-  selectTheme(theme:string){
-    const url = `./assets/Css/Themes/${theme}.css`;
-    localStorage.setItem('theme',url);
-    this.themeLink?.setAttribute('href',url);
-    this.showToast('The change is saved','','success')
-  }
-
-  showToast(
+	showToast(
 		title: string,
 		detai: string,
 		icon: SweetAlertIcon,
