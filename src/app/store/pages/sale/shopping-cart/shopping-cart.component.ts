@@ -6,14 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent {
 
   constructor() { }
 
   isFinished: boolean = false;
 
-  ngOnInit(): void {
-  }
+
 
   finishPurchase(state:boolean){
     this.isFinished = state;

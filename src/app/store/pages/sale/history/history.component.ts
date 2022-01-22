@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ArraySale } from '../../../interfaces/sales/saleResponseGet.inteface';
 
 @Component({
@@ -7,14 +7,12 @@ import { ArraySale } from '../../../interfaces/sales/saleResponseGet.inteface';
   styles: [
   ]
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent  {
 
   @Input() listSales: ArraySale[] = [];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
   filterSales( sales: ArraySale[] ){
     this.listSales = sales
