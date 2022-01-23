@@ -33,10 +33,10 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 		private userService: UsersService,
 	) {}
 
-	@Input('userInput') userInput?: User;
-	@Output('userNew') userNew: EventEmitter<User> = new EventEmitter();
-	@Output('userUpdated') userUpdated: EventEmitter<User> = new EventEmitter();
-	@Input('isNewUser') isNewUser!: boolean;
+	@Input() userInput?: User;
+	@Output() userNew: EventEmitter<User> = new EventEmitter();
+	@Output() userUpdated: EventEmitter<User> = new EventEmitter();
+	@Input() isNewUser!: boolean;
 
 	myFormUser!: FormGroup;
 
@@ -47,10 +47,22 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 	ngOnInit(): void {
 		this.myFormUser = this.fb.group({
 			uid: [''],
-			email: ['', Validators.email],
-			password: ['', Validators.required],
-			name: ['', Validators.required],
-			rol: ['', Validators.required],
+			email: [
+				'', 
+				Validators.email
+			],
+			password: [
+				'', 
+				Validators.required
+			],
+			name: [
+				'', 
+				Validators.required
+			],
+			rol: [
+				'', 
+				Validators.required
+			],
 		});
 
 		this.listRole = [
@@ -95,13 +107,13 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 			(res) => {
                 this.Restoreform();
 				this.showLoading = false;
-                this.showToast('Success',res.msg,'success');
+                this.showToast('Success', res.msg, 'success');
 				this.productWasSaved = true;
 				this.Restoreform();
 				this.userNew.emit(res.user);
 			},
 			(err) => {
-				this.showToast('Oh! Hubo un error',err,'error');
+				this.showToast('Oh! Hubo un error', err, 'error');
 				this.showLoading = false;
 			}
 		);
@@ -111,13 +123,13 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 		this.userService.updateUser(this.myFormUser.value).subscribe(
 			(res) => {
 				this.showLoading = false;
-                this.showToast('Success',res.msg,'success');
+                this.showToast('Success', res.msg, 'success');
 				this.productWasSaved = true;
 				this.Restoreform();
 				this.userUpdated.emit(res.user);
 			},
 			(err) => {
-				this.showToast('Oh! there was a problem',err,'error');
+				this.showToast('Oh! there was a problem', err, 'error');
                 this.Restoreform();
 				this.showLoading = false;
               

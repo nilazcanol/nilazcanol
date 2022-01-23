@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -27,8 +28,8 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": [
-                "chart.js"
-             ],
+              "chart.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -40,7 +41,7 @@
               "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
-                "node_modules/chart.js/dist/Chart.js"
+              "node_modules/chart.js/dist/Chart.js"
             ]
           },
           "configurations": {
@@ -108,15 +109,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         },

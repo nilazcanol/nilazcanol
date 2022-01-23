@@ -1,26 +1,24 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { category } from 'src/app/store/interfaces/category/category.interface';
 import { CategoriesService } from 'src/app/store/services/categories.service';
-import Swal from 'sweetalert2';
-import swal, { SweetAlertIcon } from 'sweetalert2';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Component({
 	selector: 'app-modal-delete-category',
 	templateUrl: './modal-delete-category.component.html',
 	styles: [],
 })
-export class ModalDeleteCategoryComponent implements OnInit {
+export class ModalDeleteCategoryComponent {
 	constructor(
 		private categoryService: CategoriesService,
 	) {}
 
-	@Input('categorySelected') categorySelected!: category;
-	@Output('categoryDelete') categoryDelete: EventEmitter<
+	@Input() categorySelected!: category;
+	@Output() categoryDelete: EventEmitter<
 		category
 	> = new EventEmitter();
 
 	eliminatedCategory: boolean = false;
-	ngOnInit(): void {}
 
 	deleteCategory(categorySelected: category) {
 		this.categoryService
@@ -29,13 +27,13 @@ export class ModalDeleteCategoryComponent implements OnInit {
 				if (res.status == true) {
 					this.eliminatedCategory = true;
 
-                    this.showToast('Success','Will be deleted correctly','success')
+                    this.showToast('Success', 'Will be deleted correctly', 'success')
 					this.categoryDelete.emit(res.category);
 				} else {
-                    this.showToast ('Can not be eliminated',`There are ${res.categorySelected?.length} products with this category`,'error',2000)
+                    this.showToast ('Can not be eliminated', `There are ${res.categorySelected?.length} products with this category`, 'error', 2000)
 				}
-			},(err)=> {
-				this.showToast('Oh! there was a problem',err,'error');
+			}, (err)=> {
+				this.showToast('Oh! there was a problem', err, 'error');
 
 			});
 	}

@@ -21,8 +21,8 @@ export class ProductsService {
 	getAllProductsWithStock(page: number = 0): Observable<resApiProduct> {
 		const url: string = `${this._urlBase}/products?from=${page}`;		
 		return this.http.get<resApiProduct>(url,).pipe(
-			map( item => {
-				const products =item.products.filter( product => product.stock>0 );
+			map( (item) => {
+				const products =item.products.filter( (product) => product.stock>0 );
 				item.products = products;
 				return item
 			})

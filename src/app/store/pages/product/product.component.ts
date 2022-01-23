@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ChildActivationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../interfaces/product/product.interface';
 
 @Component({
@@ -34,7 +34,8 @@ export class ProductComponent implements OnInit {
 
         if(category.length>0){
             if(category[0].length>0){
-                this.searchCategory = category[0];
+				const [result] = category 
+                this.searchCategory = result;
             }
         }
 		this.isList = true;

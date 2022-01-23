@@ -29,7 +29,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     PrimengModule,
   ],
-  exports:[
+  exports: [
     CardProductComponent,
     ListProductsComponent,
     NewProductComponent,

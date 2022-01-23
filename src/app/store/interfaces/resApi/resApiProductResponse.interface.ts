@@ -1,6 +1,6 @@
 import { Product } from "../product/product.interface";
 
 export interface resApiProductResponse{
-    product: Product ,
+    product: Product,
     msg:string
 }

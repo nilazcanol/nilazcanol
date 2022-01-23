@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -13,25 +13,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 `
    ]
 })
-export class ProductSaleComponent implements OnInit {
+export class ProductSaleComponent  {
 
-  @Input('name') name:string = 'name';
-  @Input('description') description:string  = 'description';
-  @Input('category') category:string = 'category';
-  @Input('priceProduct') price:  number = 0;
-  @Input('stock') stock:number  = 0;
+  @Input() name:string = 'name';
+  @Input() description:string  = 'description';
+  @Input() category:string = 'category';
+  @Input() price:  number = 0;
+  @Input() stock:number  = 0;
 
   constructor(private fb: FormBuilder) { }
 
 
 
   miFormularioReactivo: FormGroup = this.fb.group({
-    amount: [this.stock, [Validators.required ] ],
+    amount: [
+      this.stock, 
+        [
+          Validators.required
+        ] 
+    ],
 
   })
 
-  ngOnInit(): void {
-  }
+ 
 
 
 }

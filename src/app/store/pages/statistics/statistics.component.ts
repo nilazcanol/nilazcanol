@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/store/services/sales.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { ProductsService } from './../../services/products.service';
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-statistics',
@@ -15,7 +14,6 @@ export class StatisticsComponent implements OnInit {
 		private saleService: SalesService
 	) {}
 
-	ngAfterContentInit(): void {}
 	dataProductUnderStock: any;
 	optionsUnderStock: any;
 
@@ -85,26 +83,25 @@ export class StatisticsComponent implements OnInit {
 		);
 	}
 	salesLastDay() {
-		this.saleService.getSalesLastDay().subscribe((res:any) => {
-			const {dayForMonth, sales} = res;
-			this.dataSales = {
-				labels: dayForMonth,
-				datasets: [
-				  {
-					  label: 'Sales number',
-					  backgroundColor: '#6941A0',
-					  data: sales
-				  }      
-			  ]
+		this.saleService.getSalesLastDay().subscribe(
+			(res: any) => {
+				const { dayForMonth, sales } = res;
+				this.dataSales = {
+					labels: dayForMonth,
+					datasets: [
+						{
+							label: 'Sales number',
+							backgroundColor: '#6941A0',
+							data: sales,
+						},
+					],
+				};
+			},
+			(err) => {
+				this.showToast('Oh! there was a problem', err, 'error');
 			}
-		},(err)=> {
-			this.showToast('Oh! there was a problem', err, 'error');
-
-		})
+		);
 	}
-		
-
-
 
 	staticticsSale() {
 		this.saleService.staticticsSale().subscribe(

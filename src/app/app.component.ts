@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const theme = localStorage.getItem('theme') || './assets/Css/Themes/darkBlue.css';
-    this.themeLink?.setAttribute('href',theme!);
+    this.themeLink?.setAttribute('href', theme!);
   }
 
 }

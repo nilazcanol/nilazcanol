@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import {
 	Component,
 	EventEmitter,
@@ -6,7 +5,7 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges
+	SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -30,15 +29,11 @@ import { ProductsService } from '../../../services/products.service';
 	],
 })
 export class NewProductComponent implements OnInit, OnChanges {
-	@Input('productInput') productInput?: Product;
-	@Input('isNewProduct') isNewProduct!: boolean;
+	@Input() productInput?: Product;
+	@Input() isNewProduct!: boolean;
 
-	@Output('productNew') productNew: EventEmitter<
-		Product
-	> = new EventEmitter();
-	@Output('productUpdate') productUpdate: EventEmitter<
-		Product
-	> = new EventEmitter();
+	@Output() productNew: EventEmitter<Product> = new EventEmitter();
+	@Output() productUpdate: EventEmitter<Product> = new EventEmitter();
 
 	listCategories: category[] = [{ name: 'default' }];
 	productWasSaved: boolean = false;
@@ -84,12 +79,30 @@ export class NewProductComponent implements OnInit, OnChanges {
 	ngOnInit(): void {
 		this.myFormProduct = this.fb.group({
 			_id: [this.productInput!._id],
-			name: [this.productInput!.name, Validators.required],
-			img: [this.productInput!.img, Validators.required],
-			description: [this.productInput!.description, Validators.required],
-			price: [this.productInput!.price, Validators.required],
-			stock: [this.productInput!.stock, Validators.required],
-			category: [this.productInput!.category, Validators.required],
+			name: [
+				this.productInput!.name, 
+				Validators.required
+			],
+			img: [
+				this.productInput!.img,
+				 Validators.required
+			],
+			description: [
+				this.productInput!.description,
+				Validators.required
+			],
+			price: [
+				this.productInput!.price,
+				Validators.required
+			],
+			stock: [
+				this.productInput!.stock,
+				Validators.required
+			],
+			category: [
+				this.productInput!.category,
+				Validators.required
+			],
 		});
 
 		this.categoryService.getAllCategories().subscribe((res) => {
@@ -108,18 +121,12 @@ export class NewProductComponent implements OnInit, OnChanges {
 		this.myFormProduct.reset();
 	}
 
-	// captureDocument(event: any) {
-	// 	const fileCaptured = event.target.files[0];
-	// 	this.extractBase64(fileCaptured).then((imagen: any) => {
-	// 		this.files.push(imagen.base);
-	// 	});
-	// }
+
 
 	saveProduct(): void {
 		try {
 			this.showLoading = true;
 			const formularioDeDatos = new FormData();
-			// formularioDeDatos.append('files', this.files[0]);
 			formularioDeDatos.append(
 				'category',
 				this.myFormProduct.controls['category'].value
@@ -160,14 +167,16 @@ export class NewProductComponent implements OnInit, OnChanges {
 				(err) => {
 					this.showLoading = false;
 
-					this.showToast('Oh! there was a problem',err,'error');
+					this.showToast('Oh! there was a problem', err, 'error');
 					this.Restoreform();
 					setInterval(() => {
 						Swal.close();
 					}, 2000);
 				}
 			);
-		} catch (error) {}
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	// TODO: No se actualiza la lista de forma instantánea
@@ -215,7 +224,9 @@ export class NewProductComponent implements OnInit, OnChanges {
 					this.productUpdate.emit(res.product);
 					this.Restoreform();
 				},
-				(err) => { this.showToast('Oh! there was a problem',err,'error'); }
+				(err) => {
+					this.showToast('Oh! there was a problem', err, 'error');
+				}
 			);
 	}
 
@@ -236,6 +247,4 @@ export class NewProductComponent implements OnInit, OnChanges {
 			Swal.close();
 		}, timeOut);
 	}
-
-
 }

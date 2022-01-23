@@ -1,11 +1,6 @@
-import {
-	ArraySale,
-	Product,
-} from './../../../interfaces/sales/saleResponseGet.inteface';
+import { ArraySale, Product } from './../../../interfaces/sales/saleResponseGet.inteface';
 import { Component, Input, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/store/services/sales.service';
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-list-sales',
@@ -15,36 +10,39 @@ import Swal from 'sweetalert2';
 export class ListSalesComponent implements OnInit {
 	constructor(private salesService: SalesService) {}
 
-	@Input() listSales: ArraySale[] = [];
-	date: Date = new Date();
-	productSelected: Product[] = [];
+	@Input()listSales: ArraySale[] = [];
+    
+    date: Date = new Date();
 
-	showLoading: Boolean = true;
+    productSelected : Product[] = []
 
+    showLoading:Boolean = true;
+    
 	ngOnInit(): void {
-		const date  = new Date()
-		this.salesService.getSalesForMonth(date.toLocaleDateString()).subscribe((res) => {
-			this.listSales = res.sales
-			this.showLoading = false;
-		},(err)=> {
-			this.showToast('Oh! there was a problem',err,'error');
-		});
+		const date = new Date().toLocaleDateString();
+		this.salesService.getSalesForMonth(date).subscribe((res) => {
+            this.listSales = res.sales;
+            this.showLoading = false;
+        });
 	}
 
-	// * Mostrar los productos que compro;
-	selectedProducts(sale: ArraySale) {
-		this.productSelected = sale.products;
-	}
+	getDate = (date: Date): string => {
+		var day: string | number = date.getDate();
+		var month: string | number = date.getMonth() + 1;
 
-	showToast(
-		title: string,
-		detai: string,
-		icon: SweetAlertIcon,
-		timeOut: number = 2000
-	) {
-		Swal.fire(title, detai, icon);
-		setInterval(() => {
-			Swal.close();
-		}, timeOut);
-	}
+		var year = date.getFullYear();
+		if (day < 10) {
+			day = '0' + day;
+		}
+		if (month < 10) {
+			month = '0' + month;
+		}
+		var dateRes = year + '-' + month + '-' + day;
+		return dateRes;
+	};
+
+    // * Mostrar los productos que compro;
+    selectedProducts(sale:ArraySale){
+        this.productSelected = sale.products
+    }
 }

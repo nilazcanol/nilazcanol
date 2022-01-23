@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
 
 @Component({
@@ -6,10 +6,9 @@ import { Product } from 'src/app/store/interfaces/product/product.interface';
 	templateUrl: './product-detail.component.html',
 	styles: [],
 })
-export class ProductDetailComponent implements OnInit {
-	@Input('productSelected') productSelected!: Product ;
+export class ProductDetailComponent  {
+	@Input() productSelected!: Product ;
 
 	constructor() {}
 
-	ngOnInit(): void {}
 }

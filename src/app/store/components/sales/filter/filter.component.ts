@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SalesService } from 'src/app/store/services/sales.service';
-import { sale } from '../../../interfaces/sales/sale.interface';
 import { ArraySale } from '../../../interfaces/sales/saleResponseGet.inteface';
 
 @Component({
@@ -9,7 +8,7 @@ import { ArraySale } from '../../../interfaces/sales/saleResponseGet.inteface';
   styles: [
   ]
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent  {
 
   constructor(private salesServices: SalesService) { }
 
@@ -20,17 +19,15 @@ export class FilterComponent implements OnInit {
 
   @Output() filteredSales:EventEmitter<ArraySale[]> = new EventEmitter();
 
-  ngOnInit(): void {
-  }
-  
 
   
   filterSales(date:string){
     date == this.currentDate.toLocaleDateString() ? this.changeFilter() : this.activeFilter = true;
+      this.salesServices.getSalesForMonth(date).subscribe( (res) => {
+        this.filteredSales.emit(res.sales);
+      })
 
-    this.salesServices.getSalesForMonth(date).subscribe( res => {
-      this.filteredSales.emit(res.sales);
-    })
+    
   };
 
 

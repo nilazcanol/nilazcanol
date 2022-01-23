@@ -22,10 +22,18 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.loginForm = this.fb.group({
-			email: ['', [Validators.email, Validators.required]],
+			email: ['',  
+				[
+					Validators.email, 
+					Validators.required 
+				]
+			],
 			password: [
 				'',
-				[Validators.required, Validators.minLength(6)],
+				[
+					Validators.required, 
+					Validators.minLength(6)
+				],
 			],
 		});
 	}
@@ -35,17 +43,17 @@ export class LoginComponent implements OnInit {
 		const password = this.loginForm.controls['password'].value;
 		this.authService.login(email, password).subscribe((resp) => {
 			if (resp.hasOwnProperty('error')) {
-			      swal.fire('Error',resp.error.msg,'error');
+			      swal.fire('Error', resp.error.msg, 'error');
                   setInterval(()=>{
                       swal.close();
-                  },2000)
+                  }, 2000)
 			} 
             if(resp ==true) {
 				
-                swal.fire('Success','Welcome','success');
+                swal.fire('Success', 'Welcome', 'success');
                 setInterval(()=>{
                     swal.close();
-                },2000)
+                }, 2000)
 				this.router.navigateByUrl('/store/home');
 			}
 		});

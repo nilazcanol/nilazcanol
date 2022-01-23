@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { category } from '../../../interfaces/category/category.interface';
 import { CategoriesService } from '../../../services/categories.service';
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
+import Swal, {SweetAlertIcon} from 'sweetalert2';
 
 @Component({
 	selector: 'app-list-categories',
@@ -31,7 +30,7 @@ export class ListCategoriesComponent implements OnInit {
 			},
 			(err) => {
 				this.showLoading = false;
-				this.showToast('Oh! there was a problem',err,'error');
+				this.showToast('Oh! there was a problem', err, 'error');
 
 			}
 		);

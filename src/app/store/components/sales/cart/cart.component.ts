@@ -1,10 +1,10 @@
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { SalesService } from 'src/app/store/services/sales.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { Product } from '../../../interfaces/product/product.interface';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Product } from '../../../interfaces/product/product.interface';
 
 @Component({
 	selector: 'app-cart',
@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
 
 	HaveProducts: Boolean = false;
 
-	@Input('saleProductSelected')
+	@Input()
 	saleProductSelected: saleProductSelected[] = [];
 
 	change: number = 0;
@@ -50,18 +50,18 @@ export class CartComponent implements OnInit {
 
     finishPurchase(){
         this.totalPrice();
-        this.saleService.saveSale(this.total,this.saleProductSelected).subscribe( res => {        
+        this.saleService.saveSale(this.total, this.saleProductSelected).subscribe( (res) => {        
 			Swal.fire('Saved!', '', 'success')
 			
 			this.router.navigateByUrl('store/sales/history');
-			localStorage.setItem('shoppingCart','')
-		},(err) => {
-			this.showToast('Oh! there was a problem',err,'error');
+			localStorage.setItem('shoppingCart', '')
+		}, (err) => {
+			this.showToast('Oh! there was a problem', err, 'error');
 		});
     }
 
 	deleteProduct(product:Product){
-		const saleFilter = [...this.saleProductSelected.filter( sale => sale.product._id !== product._id)];
+		const saleFilter = [...this.saleProductSelected.filter( (sale) => sale.product._id !== product._id)];
 		this.saleProductSelected = saleFilter;
 		localStorage.setItem('shoppingCart', JSON.stringify(saleFilter) );
 

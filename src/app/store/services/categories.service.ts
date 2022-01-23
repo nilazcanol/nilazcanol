@@ -17,7 +17,10 @@ export class CategoriesService {
 	private _urlBase = environment.URLBASE;
 
 	getListCategories = () => {
-		return [{ name: 'Grocery' }, { name: 'Dairy products' }];
+		return [
+			{ name: 'Grocery' }, 
+			{ name: 'Dairy products' }
+		];
 	};
 
 	getAllCategories(): Observable<resApiCategories> {
@@ -33,7 +36,7 @@ export class CategoriesService {
 	saveCategory(category: string) {
 		const url: string = `${this._urlBase}/category`;		
 		return this.http.post<resApiCategoryResponse>(
-			url,{ name: category } );
+			url, { name: category } );
 	}
 
 	updateCategory(categoryID: string, categoryName: string) {
