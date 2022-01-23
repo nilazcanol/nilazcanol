@@ -7,13 +7,13 @@ import { ArraySale } from '../../../interfaces/sales/saleResponseGet.inteface';
   styles: [
   ]
 })
-export class HistoryComponent  {
+export class HistoryComponent    {
 
   @Input() listSales: ArraySale[] = [];
 
-  constructor() { }
+  constructor(  ) { }
 
-
+ 
   filterSales( sales: ArraySale[] ){
     this.listSales = sales
   }

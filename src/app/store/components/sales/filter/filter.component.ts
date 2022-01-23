@@ -23,10 +23,11 @@ export class FilterComponent  {
   
   filterSales(date:string){
     date == this.currentDate.toLocaleDateString() ? this.changeFilter() : this.activeFilter = true;
+      this.salesServices.getSalesForMonth(date).subscribe( (res) => {
+        this.filteredSales.emit(res.sales);
+      })
 
-    this.salesServices.getSalesForMonth(date).subscribe( (res) => {
-      this.filteredSales.emit(res.sales);
-    })
+    
   };
 
 
