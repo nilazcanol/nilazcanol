@@ -1,4 +1,3 @@
-import { ModalProductsSaleComponent } from './modalProductsSale/modalProductsSale.component';
 import { InfoProductComponent } from './info-product/info-product.component';
 import { CartComponent } from './cart/cart.component';
 import { ListSalesComponent } from './list-sales/list-sales.component';
@@ -13,7 +12,6 @@ import { FormsModule } from '@angular/forms';
 		ListSalesComponent,
 		CartComponent,
 		InfoProductComponent,
-		ModalProductsSaleComponent,
   		FilterComponent,
 	],
 	imports: [
@@ -25,7 +23,6 @@ import { FormsModule } from '@angular/forms';
 		ListSalesComponent,
 		CartComponent,
 		InfoProductComponent,
-		ModalProductsSaleComponent,
 		FilterComponent
 	],
 })
