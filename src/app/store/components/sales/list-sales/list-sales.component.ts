@@ -14,7 +14,6 @@ export class ListSalesComponent implements OnInit {
     
     date: Date = new Date();
 
-    productSelected : Product[] = []
 
     showLoading:Boolean = true;
     
@@ -41,8 +40,5 @@ export class ListSalesComponent implements OnInit {
 		return dateRes;
 	};
 
-    // * Mostrar los productos que compro;
-    selectedProducts(sale:ArraySale){
-        this.productSelected = sale.products
-    }
+
 }

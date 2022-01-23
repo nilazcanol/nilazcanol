@@ -6,51 +6,148 @@
 
 </div>
 
-<div *ngIf="listSales.length > 0 ; else messageThereAreNoSales">
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Total</th>
-				<th scope="col">Date</th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let sale of listSales; let i = index">
-				<th scope="row">{{ i + 1 }}</th>
-				<td>
-					{{ sale.total | currency: '$':'symbol':'1.0-0' }}
-					<span
-						[class]="
-							sale.total <= 3000
-								? 'badge bg-secondary mx-2'
-								: 'badge bg-primary mx-2'
-						"
-						>{{ sale.total <= 3000 ? 'Low' : 'High' }}</span
-					>
-				</td>
 
-				<td>
-					<i class="pi pi-calendar"></i>
-					{{ sale.date | date: 'dd-MM-yyyy' }}
-				</td>
-				<td>
-					<button
-						data-bs-toggle="modal"
-						data-bs-target="#modalDetailProducts"
-						type="button"
-						class="btn btn-secondary"
-						(click)="selectedProducts(sale)"
-					>
-						<i class="pi pi-eye me-2"></i>
-						Detail
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+
+<p-table [value]="listSales" dataKey="_id"   *ngIf="listSales.length > 0 ; else messageThereAreNoSales" [scrollable]="true"  scrollHeight="800vh" scrollDirection="both" styleClass="p-datatable-gridlines">
+
+	<!-- * Headers general -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="min-width:200px">Detail</th>
+            <th style="min-width:200px" pSortableColumn="total">Total<p-sortIcon field="total"></p-sortIcon></th> 
+			<th style="min-width:300px" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th> 
+			<th class="d-none d-sm-none d-md-table-cell" style="min-width:200px" pSortableColumn="products"  data-toggle="tooltip" data-placement="top" title="Indicates the number of product types, not its totality">Number of product types <p-sortIcon field="products"></p-sortIcon></th> 
+			<th class="d-none d-sm-none d-md-table-cell" style="min-width:200px" pSortableColumn="total">Type of sale <p-sortIcon field="total"></p-sortIcon></th>
+         </tr>
+    </ng-template>
+
+	<!-- * Body general -->
+    <ng-template pTemplate="body" let-sale let-expanded="expanded">
+
+        <tr>
+			<!-- * Column 1. -->
+			<td style="min-width:200px">
+                <button type="button" pButton pRipple [pRowToggler]="sale" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
+
+			<!-- * Column 2. -->
+            <td style="min-width:200px">
+				<strong>
+					{{sale.total | currency: '$':'symbol':'1.0-0'}}
+				</strong>
+			</td>
+	
+			<!-- * Column 3. -->
+            <td style="min-width:300px">
+				<strong>
+					{{sale.date }}
+				</strong>
+			</td>
+
+			<!-- * Column 4. -->
+            <td style="min-width:200px" class="d-none d-sm-none d-md-table-cell">
+				<strong>
+					{{sale.products.length }} 
+				</strong>
+				{{sale.products.length == 1 ? 'product': 'products'}}
+			</td>
+            
+			<td style="min-width:200px" class="d-none d-sm-none d-md-table-cell">
+		
+				<span [class]="sale.total <= 1000? 'badge bg-danger': sale.total>1000 && sale.total<=3000 ? 'badge bg-warning':'badge bg-primary' ">
+					{{
+						sale.total <= 1000?
+							'Low sale' :
+						sale.total>1000 && sale.total<=3000  ?
+							'Average' :
+						'High sale'
+					}}
+				</span>
+		</td>
+        </tr>
+    </ng-template>
+
+	<!-- * Row products -->
+    <ng-template pTemplate="rowexpansion" let-sale>
+        <tr>
+            <td colspan="5">
+                <div class="p-3">
+                    <p-table [value]="sale.products" dataKey="_id" > 
+
+						<!-- * Header products -->
+                        <ng-template pTemplate="header">
+							<h5 class="text-dark mb-3">
+								<strong>
+									Detail sale
+								</strong>
+							</h5>
+						
+                            <tr>
+                                <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+                                <th pSortableColumn="product">Product <p-sortIcon field="customer"></p-sortIcon></th>
+                                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+              
+                            </tr>
+                        </ng-template>
+
+						<!-- * Body products -->
+                        <ng-template pTemplate="body" let-product>
+                            <tr>
+                                <td>
+									<strong>
+										{{product.amount}}
+									</strong>
+									<span [class]="product.amount <= 2 ? 'badge bg-danger mx-2': product.amount > 2 && product.amount<=5 ? 'badge bg-warning mx-2':'badge bg-primary mx-2' ">
+										{{
+											product.amount <= 2?
+												'Few products' :
+												product.amount>2 && product.amount<=5  ?
+												'Average' :
+											'A lot of products'
+										}}
+									</span>
+								</td>
+                                <td>
+									<strong>
+										{{product.productDB.name}}
+									</strong>
+									
+								</td>
+                                <td>
+									<strong>
+										{{product.productDB.price}}
+									</strong>
+								
+								</td>
+                            
+                            </tr>
+						
+						
+                        </ng-template>
+						<ng-template pTemplate="summary">
+							<h6 class="text-dark mt-3">
+								<strong>
+									End detail
+								</strong>
+							</h6></ng-template>
+						
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="5">There are no order for this product yet.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+
+
+
+
 
 <ng-template #messageThereAreNoSales>
     <div *ngIf="!showLoading" class="alert alert-danger" role="alert">
@@ -60,5 +157,4 @@
 
 
 
-<app-modal-products-sale [products]="productSelected"></app-modal-products-sale>
 
