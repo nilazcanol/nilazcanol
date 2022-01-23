@@ -10,7 +10,7 @@ import { CalendarModule } from 'primeng/calendar';
   imports: [
     CommonModule
   ],
-  exports:[
+  exports: [
     CardModule,
     ToastModule,
     ChartModule,

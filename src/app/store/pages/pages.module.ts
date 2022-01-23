@@ -27,7 +27,12 @@ import { SettingsComponent } from './settings/settings.component';
   PagesComponent,
   SettingsComponent,
 	],
-	imports: [CommonModule, ComponentsModule, RouterModule, PrimengModule],
+	imports: [
+		CommonModule, 
+		ComponentsModule, 
+		RouterModule, 
+		PrimengModule
+	],
 	exports: [
 		ProductComponent,
 		StatisticsComponent,

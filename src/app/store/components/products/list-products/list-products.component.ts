@@ -12,7 +12,7 @@ import { Product } from '../../../interfaces/product/product.interface';
 	providers: [MessageService],
 })
 export class ListProductsComponent implements OnInit {
-	@Input('searchCategory') searchCategory?: string;
+	@Input() searchCategory?: string;
 
 	constructor(
 		private productService: ProductsService,
@@ -54,7 +54,7 @@ export class ListProductsComponent implements OnInit {
 				(err) => {
 					this.listProducts = [];
 					this.showLoading = false;
-					this.showToast('Oh! there was a problem',err,'error');
+					this.showToast('Oh! there was a problem', err, 'error');
 
 				}
 			);
@@ -127,7 +127,7 @@ export class ListProductsComponent implements OnInit {
 
 			},
 			(err) => {
-				this.showToast('Oh! there was a problem',err,'error');
+				this.showToast('Oh! there was a problem', err, 'error');
 			}
 		);
 	}

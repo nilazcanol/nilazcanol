@@ -12,7 +12,7 @@ import { usersRoutingModule } from './pages/user/user.routes';
 const routes: Routes = [
 	{
 		path: '',
-		component:PagesComponent,
+		component: PagesComponent,
 		children: [
 			{ path: 'products', component: ProductComponent },
 			{ path: 'categories', component: CategoryComponent },

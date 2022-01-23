@@ -11,8 +11,11 @@ import { MenuStoreComponent } from './menu-store/menu-store.component';
     MenuSaleComponent,
   ],
   imports: [
-    CommonModule, RouterModule,UsersModule  ],
-  exports:[
+    CommonModule, 
+    RouterModule,
+    UsersModule  
+  ],
+  exports: [
     MenuStoreComponent,
     MenuSaleComponent,
   ]

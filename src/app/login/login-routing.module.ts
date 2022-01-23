@@ -5,11 +5,11 @@ import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
     {
-        path:'',
-        component:TemplateLoginComponent,
-        children:[
-            {path:'login',component:LoginComponent},
-            {path:'**',redirectTo:'login'}
+        path: '',
+        component: TemplateLoginComponent,
+        children: [
+            { path: 'login', component: LoginComponent },
+            { path: '**', redirectTo: 'login' }
         ]
     }
 ];

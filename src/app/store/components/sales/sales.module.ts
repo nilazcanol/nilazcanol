@@ -16,7 +16,11 @@ import { FormsModule } from '@angular/forms';
 		ModalProductsSaleComponent,
   		FilterComponent,
 	],
-	imports: [CommonModule, PrimengModule,FormsModule],
+	imports: [
+		CommonModule, 
+		PrimengModule,
+		FormsModule
+	],
 	exports: [
 		ListSalesComponent,
 		CartComponent,

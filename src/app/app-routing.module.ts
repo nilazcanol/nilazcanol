@@ -3,16 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { ValidateTokenGuard } from './login/guards/validate-token.guard';
 
 const routes: Routes = [
-    { path:'store', loadChildren: () => import('./store/store.module').then( m => m.StoreModule ),
-      canActivate:[
+    { path: 'store', loadChildren: () => import('./store/store.module').then( (m) => m.StoreModule ),
+      canActivate: [
           ValidateTokenGuard
       ],
-      canLoad:[
+      canLoad: [
           ValidateTokenGuard
       ]
     },
-    { path:'access', loadChildren: () => import('./login/login.module').then( m => m.LoginModule )},
-    { path: '**', redirectTo:'access'}
+    { path: 'access', loadChildren: () => import('./login/login.module').then( (m) => m.LoginModule )},
+    { path: '**', redirectTo: 'access' }
 ];
 
 @NgModule({

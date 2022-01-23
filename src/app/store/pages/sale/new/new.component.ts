@@ -1,6 +1,4 @@
-import { SweetAlertIcon } from 'sweetalert2';
-import Swal from 'sweetalert2';
-
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { saleProductSelected } from './../../../interfaces/sales/saleProductSelected.interface';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/store/interfaces/product/product.interface';
@@ -36,17 +34,17 @@ export class NewComponent implements OnInit {
 	}
 
 	getProductsDB(){
-		this.productService.getAllProductsWithStock().subscribe((res) => {
-		
+		this.productService.getAllProductsWithStock().subscribe((res) => {		
 			this.listProduct = res.products;
-		},(err => {
-			this.showToast('Oh! there was a problem',err,'error');
-		}));
+		}, ( (err) => {
+				this.showToast('Oh! there was a problem', err, 'error');
+			}
+		));
 	}
 	addShoppingCart(saleProductSelected: saleProductSelected) {       
 
         var indexProductSelected = 0;
-        const thereAreProducts = this.shoppingCart.every( (item,index)=> {
+        const thereAreProducts = this.shoppingCart.every( ( item, index)=> {
             indexProductSelected = index
             return item.product._id?.toString() !== saleProductSelected.product._id?.toString()
         } );
@@ -81,13 +79,13 @@ export class NewComponent implements OnInit {
 			var indexProductSelected = 0;
 			res.products.forEach((product) => {
 				this.page += 1;	
-				const thereIsAproduct =this.listProduct.some(productFromTheList => productFromTheList._id  == product._id )
+				const thereIsAproduct =this.listProduct.some( (productFromTheList) => productFromTheList._id  == product._id )
 				if(!thereIsAproduct){
 					this.listProduct.push(product);
 				}
 			});
-		},(err)=>{
-			this.showToast('Oh! there was a problem',err,'error');
+		}, (err)=>{
+			this.showToast('Oh! there was a problem', err, 'error');
 		});
 	}
 

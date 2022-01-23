@@ -15,7 +15,11 @@ import { RolPipe } from '../../pipes/rol.pipe';
 		ModalDeleteUserComponent,
         RolPipe
 	],
-	imports: [CommonModule, ReactiveFormsModule, PrimengModule],
+	imports: [
+		CommonModule, 
+		ReactiveFormsModule, 
+		PrimengModule
+	],
 	exports: [
 		UsersListComponent,
 		UserAddAndUpdateComponent,

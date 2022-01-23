@@ -27,10 +27,8 @@ export class CardProductStoreComponent implements OnInit {
 		private messageService: MessageService
 	) {}
 
-	@Input('product') product!: Product;
-
-
-	@Output('sendProductSelected') sendProductSelected: EventEmitter<saleProductSelected> = new EventEmitter();
+	@Input() product!: Product;
+	@Output() sendProductSelected: EventEmitter<saleProductSelected> = new EventEmitter();
 
 	cardForm!: FormGroup;
 
@@ -46,10 +44,10 @@ export class CardProductStoreComponent implements OnInit {
 
             this.messageService.add({
                 severity: 'success',
-                summary: product.name + ' Amount: '+ this.cardForm.controls['quantity'].value ,
+                summary: product.name + ' Amount: '+ this.cardForm.controls['quantity'].value,
                 detail: ' Price: ' + product.price,
             });
         
-		this.sendProductSelected.emit({product,amount:this.cardForm.controls['quantity'].value });
+		this.sendProductSelected.emit({product, amount: this.cardForm.controls['quantity'].value });
 	}
 }

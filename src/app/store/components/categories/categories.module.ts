@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     ListCategoriesComponent,
     CategoryFeaturesComponent,
     ModalDeleteCategoryComponent,

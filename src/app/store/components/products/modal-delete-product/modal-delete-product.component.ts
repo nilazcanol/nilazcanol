@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductsService } from 'src/app/store/services/products.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { Product } from '../../../interfaces/product/product.interface';
@@ -10,18 +10,16 @@ import { Product } from '../../../interfaces/product/product.interface';
 
   ],
 })
-export class ModalDeleteProductComponent implements OnInit {
+export class ModalDeleteProductComponent  {
 	constructor(private productService: ProductsService) {}
 
-	@Input('productSelected') productSelected!: Product;
-	@Output('productDelete') productDelete: EventEmitter<
+	@Input() productSelected!: Product;
+	@Output() productDelete: EventEmitter<
 		Product
 	> = new EventEmitter();
 
-	@Input('productRemoved') productRemoved: boolean = false;
+	@Input() productRemoved: boolean = false;
     showLoading: boolean = false;
-
-	ngOnInit(): void {}
 
 	deleteProduct() {
         this.showLoading = true;
@@ -31,10 +29,10 @@ export class ModalDeleteProductComponent implements OnInit {
 				this.productDelete.emit(res.product);
 				this.productRemoved = true;
                 this.showLoading =false;
-                this.showToast('Success','It was deleted correctly','success');
+                this.showToast('Success', 'It was deleted correctly', 'success');
                 this.activateButtonAgain();
-			},(err)=>{
-				this.showToast('Oh! there was a problem',err,'error');
+			}, (err)=>{
+				this.showToast('Oh! there was a problem', err, 'error');
                 this.activateButtonAgain();
                 this.showLoading =false;
             });
