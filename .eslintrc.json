@@ -40,7 +40,6 @@
         "array-element-newline": 2,
         "arrow-parens": 2,
         "camelcase": 2,
-        "capitalized-comments": 2,
         "comma-spacing": 2,
         "comma-style": 2,
         "generator-star-spacing": 2,
