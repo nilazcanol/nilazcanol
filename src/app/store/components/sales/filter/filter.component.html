@@ -1,7 +1,7 @@
 <div class="my-3">
     <div class="row justify-content-start">
-        <div class="col-12">
-            <h5><strong>Filter</strong></h5>
+        <div class="col-12 mb-2 mt-3">
+            <h5><strong>Filter by date</strong></h5>
         </div>
         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-xxl-4 mb-sm-3 mb-md-0">
             <p-calendar [(ngModel)]="month"  dateFormat="dd/mm/yy"  [touchUI]="true" class="d-block d-sm-block d-md-none " (onSelect)="filterSales(month.toLocaleDateString() )" [maxDate]="currentDate" [defaultDate]="currentDate"></p-calendar>

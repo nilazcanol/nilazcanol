@@ -119,6 +119,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 
 	clearForm(): void {
 		this.myFormProduct.reset();
+		
 	}
 
 
@@ -233,6 +234,14 @@ export class NewProductComponent implements OnInit, OnChanges {
 	Restoreform() {
 		if (typeof this.myFormProduct !== 'undefined') {
 			this.myFormProduct.reset();
+		}
+		this.productInput = {
+			category: '',
+			description: '',
+			name: '',
+			price: 0,
+			stock: 1
+
 		}
 	}
 

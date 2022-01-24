@@ -112,7 +112,11 @@ export class CategoryFeaturesComponent implements OnInit, OnChanges {
 		setTimeout(() => {
 			this.categoryWasSaved = false;
 			this.myFormCategory.reset();
-		}, 500);
+			this.categoryInput = {
+				name: '',
+				uid: ''
+			}
+		}, 100);
 	}
 
 	showToast(
