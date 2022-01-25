@@ -13,7 +13,7 @@
 	<!-- * Headers general -->
     <ng-template pTemplate="header">
         <tr>
-            <th style="min-width:200px">Detail</th>
+            <th  class="d-none d-sm-none d-md-table-cell" style="min-width:200px">Detail</th>
             <th style="min-width:200px" pSortableColumn="total">Total<p-sortIcon field="total"></p-sortIcon></th> 
 			<th style="min-width:300px" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th> 
 			<th class="d-none d-sm-none d-md-table-cell" style="min-width:200px" pSortableColumn="products"  data-toggle="tooltip" data-placement="top" title="Indicates the number of product types, not its totality">Number of product types <p-sortIcon field="products"></p-sortIcon></th> 
@@ -26,7 +26,7 @@
 
         <tr>
 			<!-- * Column 1. -->
-			<td style="min-width:200px">
+			<td class="d-none d-sm-none d-md-table-cell" style="min-width:200px">
                 <button type="button" pButton pRipple [pRowToggler]="sale" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td>
 
@@ -83,9 +83,10 @@
 							</h5>
 						
                             <tr>
-                                <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+                                <th pSortableColumn="product">img <p-sortIcon field="product"></p-sortIcon></th>
                                 <th pSortableColumn="product">Product <p-sortIcon field="customer"></p-sortIcon></th>
                                 <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                                <th pSortableColumn="price">SubTotal <p-sortIcon field="price"></p-sortIcon></th>
               
                             </tr>
                         </ng-template>
@@ -93,22 +94,12 @@
 						<!-- * Body products -->
                         <ng-template pTemplate="body" let-product>
                             <tr>
+								<td><img [src]="product.productDB.img" [alt]="product.name" width="80" class="shadow-4" /></td>
+
+                               
                                 <td>
 									<strong>
 										{{product.amount}}
-									</strong>
-									<span [class]="product.amount <= 2 ? 'badge bg-danger mx-2': product.amount > 2 && product.amount<=5 ? 'badge bg-warning mx-2':'badge bg-primary mx-2' ">
-										{{
-											product.amount <= 2?
-												'Few products' :
-												product.amount>2 && product.amount<=5  ?
-												'Average' :
-											'A lot of products'
-										}}
-									</span>
-								</td>
-                                <td>
-									<strong>
 										{{product.productDB.name}}
 									</strong>
 									
@@ -116,6 +107,12 @@
                                 <td>
 									<strong>
 										{{product.productDB.price}}
+									</strong>
+								
+								</td>
+                                <td>
+									<strong>
+										{{product.productDB.price * product.amount}}
 									</strong>
 								
 								</td>

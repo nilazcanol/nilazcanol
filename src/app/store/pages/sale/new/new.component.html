@@ -1,54 +1,5 @@
 <div class="m-3">
-
-
-	<div class="row justify-content-center">
-		<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<div
-				class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-4"
-			>
-				<div *ngFor="let product of listProduct" class="col">
-					<app-card-product-store
-						[product]="product"
-						(sendProductSelected)="addShoppingCart($event)"
-						
-					>
-					</app-card-product-store>
-				</div>
-			</div>
-            <div class="text-center mt-4">
-                <button class="btn btn-secondary" (click)="addMoreProducts()">See more products</button>
-            </div>
-        </div>
-        
-		<div class="col-sm-12 col-md-4 col-lg-5 col-xl-3">
-		
-
-			<div
-				class="offcanvas offcanvas-end"
-				tabindex="-1"
-				id="viewCart"
-				aria-labelledby="offcanvasRightLabel"
-			>
-				<div class="offcanvas-header">
-					<button
-                        #buttonClose
-						type="button"
-						class="btn-close text-reset"
-						data-bs-dismiss="offcanvas"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="offcanvas-body">
-					<app-cart                                       
-                    [saleProductSelected]="shoppingCart">
-                </app-cart>
-				</div>
-			</div>
-		</div>
-	</div>
-	<button class="btn-flotante" data-bs-toggle="offcanvas" data-bs-target="#viewCart" aria-controls="viewCart"> 					
-		<i class="pi pi-shopping-cart"> </i>
-		View Cart
-	</button>
-
+	<app-table-product
+			[products]="listProduct">
+	</app-table-product>
 </div>

@@ -1,6 +1,5 @@
 import { PrimengModule } from './../../../primeNg/primeng.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CardProductStoreComponent } from './card-product-store/card-product-store.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchComponent } from './product-search/product-search.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductSaleComponent } from './product-sale/product-sale.component';
@@ -10,8 +9,8 @@ import { ListProductsComponent } from './list-products/list-products.component';
 import { CardProductComponent } from './card-product/card-product.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { SalesModule } from '../sales/sales.module';
+import { CardProductStoreComponent } from './card-product-store/table-product.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +20,15 @@ import { CommonModule } from '@angular/common';
     ModalDeleteProductComponent,
     ProductSaleComponent,
     ProductDetailComponent,
-    SearchComponent,    
+    SearchComponent,  
     CardProductStoreComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     PrimengModule,
+    FormsModule,
+    SalesModule
   ],
   exports: [
     CardProductComponent,
@@ -37,7 +38,7 @@ import { CommonModule } from '@angular/common';
     ProductSaleComponent,
     ProductDetailComponent,
     SearchComponent,    
-    CardProductStoreComponent,
+    CardProductStoreComponent
 
   ]
 })

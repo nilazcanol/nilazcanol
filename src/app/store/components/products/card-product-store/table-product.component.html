@@ -1,0 +1,43 @@
+
+<p-toast></p-toast>
+
+<button class="btn btn-primary"(click)="showCart()">Finished</button>
+<p-table [value]="products" dataKey="name" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+      <tr>
+        <th>Image</th>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+          <th class="d-none d-sm-none d-md-table-cell" pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+          <th class="d-none d-sm-none d-md-table-cell" pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+          <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product let-expanded="expanded">
+      <tr>
+         
+        <td><img [src]="product.img" [alt]="product.name" width="80" class="shadow-4" /></td>
+          <td>{{product.name}}</td>
+          <td>{{product.price | currency: 'USD':'symbol':'1.0-0'}}</td>
+          <td class="d-none d-sm-none d-md-table-cell">{{product.category}}</td>
+          <td class="d-none d-sm-none d-md-table-cell">{{product.stock}}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <div class="input-group mb-3">
+                <input type="number" min="0" [max]="product.stock" class="form-control" #amountProduct [defaultValue]="1" >
+                <button 
+                  class="btn btn-primary mt-3 mt-sm-3 mt-md-3 mt-lg-0" 
+                  type="button" 
+                  id="button-addon1"
+                  (click)="addCart(product,amountProduct.value)"
+                  [disabled]="product.stock == 0">ADD
+                </button>
+              </div>
+          
+            </div>
+          </td>
+      </tr>
+  </ng-template>
+  
+</p-table>
+

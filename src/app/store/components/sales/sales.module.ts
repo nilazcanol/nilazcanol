@@ -1,5 +1,4 @@
 import { InfoProductComponent } from './info-product/info-product.component';
-import { CartComponent } from './cart/cart.component';
 import { ListSalesComponent } from './list-sales/list-sales.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
 	declarations: [
 		ListSalesComponent,
-		CartComponent,
 		InfoProductComponent,
   		FilterComponent,
 	],
@@ -21,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 	],
 	exports: [
 		ListSalesComponent,
-		CartComponent,
 		InfoProductComponent,
 		FilterComponent
 	],

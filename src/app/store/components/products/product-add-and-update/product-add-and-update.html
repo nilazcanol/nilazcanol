@@ -68,18 +68,7 @@
 							required
 						/>
 					</div>
-					<!-- <div class="input-group mb-3">
-						<span class="input-group-text">* Img</span>
-						<input
-							type="file"
-							class="form-control"
-							aria-label="imgProduct"
-							formControlName="img"
-							aria-describedby="basic-addon1"
-							(change)="captureDocument($event)"
-							required
-						/>
-					</div> -->
+				
 					<span
 						*ngIf="fieldIsValid('img')"
 						class="input-group alert alert-danger mb-3"
@@ -131,6 +120,7 @@
 							<option
 								*ngFor="let category of listCategories"
 								[value]="category.uid"
+								[selected]="category.uid"
 								>{{ category.name }}</option
 							>
 						</select>

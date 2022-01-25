@@ -39,8 +39,12 @@ export class ListCategoriesComponent implements OnInit {
 	selectCategory(newCategory: boolean, category?: category) {
 		if (category !== undefined) {
 			this.categorySelected = category!;
+		}else{
+			this.isNewCategory = newCategory;
+			this.categorySelected = {name: '', uid: ''}
+
 		}
-    this.isNewCategory = newCategory;
+		this.isNewCategory = newCategory;
 
 	}
 

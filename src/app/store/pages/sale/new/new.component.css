@@ -13,28 +13,6 @@
 a{
     text-decoration:none;
 }
-.btn-flotante {
-	font-size: 16px; /* Cambiar el tamaño de la tipografia */
-	background-color: #3B3B3B; /* Color de fondo */
-	color: #F8F9FA;
-	border-radius: 10px;
-	padding: 18px 30px; /* Relleno del boton */
-	position: fixed;
-	bottom: 40px;
-	right: 40px;
-	transition: all 800ms ease 0ms;
-	z-index: 99;
-}
-
-.btn-flotante:hover {
-	background-color: #0f0f0f; /* Color de fondo */
-	color: #F8F9FA;
-	transition: all 800ms ease 0ms;
-}
-
-.offcanvas-end{
-	width: 500px !important;
-}
 
 
 
