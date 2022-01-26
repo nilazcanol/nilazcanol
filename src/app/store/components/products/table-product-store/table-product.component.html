@@ -1,7 +1,7 @@
 
 <p-toast></p-toast>
 
-<button class="btn btn-primary" >Finished</button>
+<button class="btn btn-primary" routerLink="/store/sales/shoppingCart" routerLinkActive="router-link-active" [disabled]="this.listProduct.length==0" >Finished</button>
 <p-table [value]="products" dataKey="name" responsiveLayout="scroll">
   <ng-template pTemplate="header">
       <tr>

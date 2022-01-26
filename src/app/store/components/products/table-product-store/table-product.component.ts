@@ -40,7 +40,7 @@ export class CardProductStoreComponent implements OnInit {
 		this.cartService.changeShoppingCart(product, Number(amount));
 		this.showToast('It added product', 'success' );
 	}
-	format(amount:any){
+	format(amount:any) {
 		console.log('vee');
 		console.log(amount);
 	}

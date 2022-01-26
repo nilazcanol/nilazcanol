@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SalesModule } from '../sales/sales.module';
 import { CardProductStoreComponent } from './table-product-store/table-product.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CardProductStoreComponent } from './table-product-store/table-product.c
     ReactiveFormsModule,
     PrimengModule,
     FormsModule,
-    SalesModule
+    SalesModule,
+    RouterModule
   ],
   exports: [
     CardProductComponent,

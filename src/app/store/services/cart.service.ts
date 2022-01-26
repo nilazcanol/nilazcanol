@@ -14,6 +14,12 @@ export class CartService {
 
 	constructor() {}
 
+	clearShoppingCart(){
+		this.messageSource.next([]);
+		localStorage.setItem('shoppingCart', '' )
+
+	}
+
 	changeShoppingCart(product: Product, amount: number) {
 		const cart = this.messageSource.getValue();
     
@@ -31,6 +37,7 @@ export class CartService {
 				cart[indexProductSelected].amount += amount;
 			}
 		}
+		localStorage.setItem('shoppingCart', JSON.stringify(cart) )
 		this.messageSource.next(cart);
 	}
   
