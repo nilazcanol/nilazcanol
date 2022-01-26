@@ -19,7 +19,13 @@ export class ListProductsComponent implements OnInit {
 		private messageService: MessageService
 	) {}
 
-	listProducts: Product[] = [];
+	listProducts: Product[] = [{
+		category: '',
+		description: '',
+		name: '',
+		price: 0,
+		stock: 0,
+	}];
 	productSelected?: Product;
 	pagination: pagination[] = [];
 	pageActive: number = 1;
@@ -48,7 +54,10 @@ export class ListProductsComponent implements OnInit {
 							url: 'aa',
 						});
 					}
-					this.listProducts = res.products;
+					if(res.products.length>0){
+						this.listProducts = res.products;
+					}
+					
 					this.showLoading = false;
 				},
 				(err) => {
@@ -65,8 +74,18 @@ export class ListProductsComponent implements OnInit {
 		if (productSelect !== undefined) {
 			this.productSelected = productSelect!;
 			this.isNewProduct = newProduct;
+		}else {
+			this.productSelected = {
+				category: '',
+				description: '',
+				name: '',
+				price: 0,
+				stock: 0
+			};
+	
+			this.isNewProduct = newProduct;
 		}
-		this.isNewProduct = newProduct;
+
 	}
 
 	addToTheList(product: Product) {

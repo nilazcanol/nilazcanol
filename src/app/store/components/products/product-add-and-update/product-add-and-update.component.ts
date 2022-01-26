@@ -5,7 +5,7 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
-	SimpleChanges,
+	SimpleChanges
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -221,7 +221,6 @@ export class NewProductComponent implements OnInit, OnChanges {
 			.subscribe(
 				(res) => {
 					this.showToast('Success', 'Saved correctly', 'success');
-					this.productWasSaved = true;
 					this.productUpdate.emit(res.product);
 					this.Restoreform();
 				},
