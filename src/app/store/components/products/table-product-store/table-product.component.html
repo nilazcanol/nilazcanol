@@ -1,7 +1,7 @@
 
 <p-toast></p-toast>
 
-<button class="btn btn-primary"(click)="showCart()">Finished</button>
+<button class="btn btn-primary" >Finished</button>
 <p-table [value]="products" dataKey="name" responsiveLayout="scroll">
   <ng-template pTemplate="header">
       <tr>
@@ -24,7 +24,7 @@
           <td>
             <div class="btn-group" role="group" aria-label="Basic example">
               <div class="input-group mb-3">
-                <input type="number" min="0" [max]="product.stock" class="form-control" #amountProduct [defaultValue]="1" >
+                <input type="number" min="0" [max]="product.stock" class="form-control"  #amountProduct [defaultValue]="1"  (ngModelChange)="format($event)">
                 <button 
                   class="btn btn-primary mt-3 mt-sm-3 mt-md-3 mt-lg-0" 
                   type="button" 

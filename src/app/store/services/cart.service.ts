@@ -3,21 +3,43 @@ import { BehaviorSubject } from 'rxjs';
 import { Product } from '../interfaces/product/product.interface';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class CartService {
+	private messageSource = new BehaviorSubject<
+		Array<{ product: Product; amount: number }>
+	>([]);
 
-  private messageSource = new BehaviorSubject<Array<{product:Product, amount: number}>> ([]);
+	currentShoppingCart = this.messageSource.asObservable();
 
-  currentShoppingCart  = this.messageSource.asObservable();
+	constructor() {}
 
-
-  constructor() { }
-
-  changeShoppingCart (product:Product, amount:number) {
-    this.messageSource.value.push({ product, amount});
-    const data = this.messageSource.getValue()
-    this.messageSource.next(data)
+	changeShoppingCart(product: Product, amount: number) {
+		const cart = this.messageSource.getValue();
     
-  }
+    const resultProductIsOnTheList = this.productIsOnTheList(cart, 0, product);
+    const { indexProductSelected, thereAreProducts} = resultProductIsOnTheList;
+
+		if (thereAreProducts) {
+			cart.push({
+				product: product,
+				amount: amount,
+			});
+		} else {
+			const { stock } = product;
+			if (stock >= cart[indexProductSelected].amount) {
+				cart[indexProductSelected].amount += amount;
+			}
+		}
+		this.messageSource.next(cart);
+	}
+  
+
+	productIsOnTheList = (cart:	Array<{ product: Product; amount: number }>, indexProductSelected:number, product: Product ) => {
+		const thereAreProducts = cart.every((item, index) => {
+			indexProductSelected = index;
+			return item.product._id?.toString() !== product._id?.toString();
+		});
+    return {thereAreProducts, indexProductSelected};
+	};
 }

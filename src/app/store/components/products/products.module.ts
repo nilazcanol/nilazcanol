@@ -10,7 +10,7 @@ import { CardProductComponent } from './card-product/card-product.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SalesModule } from '../sales/sales.module';
-import { CardProductStoreComponent } from './card-product-store/table-product.component';
+import { CardProductStoreComponent } from './table-product-store/table-product.component';
 
 @NgModule({
   declarations: [
