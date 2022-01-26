@@ -1,28 +1,26 @@
-import { InfoProductComponent } from './info-product/info-product.component';
-import { CartComponent } from './cart/cart.component';
 import { ListSalesComponent } from './list-sales/list-sales.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilterComponent } from './filter/filter.component';
 import { PrimengModule } from '../../../primeNg/primeng.module';
 import { FormsModule } from '@angular/forms';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
 	declarations: [
 		ListSalesComponent,
-		CartComponent,
-		InfoProductComponent,
   		FilterComponent,
+    ShoppingCartComponent,
 	],
 	imports: [
 		CommonModule, 
 		PrimengModule,
-		FormsModule
+		FormsModule,
+		RouterModule
 	],
 	exports: [
 		ListSalesComponent,
-		CartComponent,
-		InfoProductComponent,
 		FilterComponent
 	],
 })
