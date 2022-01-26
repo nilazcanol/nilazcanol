@@ -20,7 +20,7 @@ export class CardProductStoreComponent implements OnInit {
 		new EventEmitter();
 
 	cardForm!: FormGroup;
-
+	amount:number = 0;
 	listProduct: saleProductSelected[] = [];
 
 	ngOnInit(): void {
@@ -37,13 +37,28 @@ export class CardProductStoreComponent implements OnInit {
 	}
 
 	addCart(product: Product, amount: any) {
-		this.cartService.changeShoppingCart(product, Number(amount));
-		this.showToast('It added product', 'success' );
+		if(product.stock < amount){
+			this.showToast('You can not add more stock products', 'error' );
+
+		}else{
+			this.cartService.changeShoppingCart(product, Number(amount));
+			this.showToast('It added product', 'success' );
+		}
 	}
-	format(amount:any) {
-		console.log('vee');
-		console.log(amount);
-	}
+	
+
+	OnChange(valor:any){
+		
+		console.log(valor.value);
+        
+        if(valor>=100){ 
+            this.amount = 100 
+        } else if(valor<=0){
+            this.amount = 0
+        } else {
+            this.amount = valor
+        }
+    }
 
 	showToast(title: string, icon: SweetAlertIcon) {
 		const Toast = Swal.mixin({

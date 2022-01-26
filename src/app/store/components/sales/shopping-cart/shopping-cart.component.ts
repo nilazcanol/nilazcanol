@@ -11,13 +11,17 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 	styles: [],
 })
 export class ShoppingCartComponent implements OnInit {
-
-	constructor(private cartService: CartService, private router:Router, private saleService:SalesService) {}
+	constructor(
+		private cartService: CartService,
+		private router: Router,
+		private saleService: SalesService
+	) {}
 	change: number = 0;
 	HaveProducts: Boolean = false;
 
 	listProduct: Array<{ product: Product; amount: number }> = [];
 	ngOnInit(): void {
+
 		this.cartService.currentShoppingCart.subscribe((cart) => {
 			this.listProduct = cart;
 		});
@@ -42,25 +46,26 @@ export class ShoppingCartComponent implements OnInit {
 		);
 	}
 
-  finishPurchase(){
-    this.totalPrice();
-    this.saleService.saveSale(this.total, this.listProduct).subscribe( (res) => {        
-      Swal.fire('Saved!', '', 'success');  
-      this.router.navigateByUrl('store/sales/history');
-      this.cartService.clearShoppingCart();
-
-    }, (err) => {
-      this.showToast('Oh! there was a problem', err, 'error');
-    });
-    
-  }
+	finishPurchase() {
+		this.totalPrice();
+		this.saleService.saveSale(this.total, this.listProduct).subscribe(
+			(res) => {
+				Swal.fire('Saved!', '', 'success');
+				this.router.navigateByUrl('store/sales/history');
+				this.cartService.clearShoppingCart();
+			},
+			(err) => {
+				this.showToast('Oh! there was a problem', err, 'error');
+			}
+		);
+	}
 
 	onKey(event: any) {
 		const { value } = event.target;
 		this.change = value;
 	}
 
-  showToast(
+	showToast(
 		title: string,
 		detai: string,
 		icon: SweetAlertIcon,
@@ -71,4 +76,6 @@ export class ShoppingCartComponent implements OnInit {
 			Swal.close();
 		}, timeOut);
 	}
+
+
 }
