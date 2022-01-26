@@ -13,11 +13,11 @@
 	<!-- * Headers general -->
     <ng-template pTemplate="header">
         <tr>
-            <th  class="d-none d-sm-none d-md-table-cell" style="min-width:200px">Detail</th>
+            <th class="d-none d-sm-none d-md-table-cell" style="min-width:200px">Detail</th>
             <th style="min-width:200px" pSortableColumn="total">Total<p-sortIcon field="total"></p-sortIcon></th> 
 			<th style="min-width:300px" pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th> 
 			<th class="d-none d-sm-none d-md-table-cell" style="min-width:200px" pSortableColumn="products"  data-toggle="tooltip" data-placement="top" title="Indicates the number of product types, not its totality">Number of product types <p-sortIcon field="products"></p-sortIcon></th> 
-			<th class="d-none d-sm-none d-md-table-cell" style="min-width:200px" pSortableColumn="total">Type of sale <p-sortIcon field="total"></p-sortIcon></th>
+			<th  style="min-width:200px" pSortableColumn="total">Type of sale <p-sortIcon field="total"></p-sortIcon></th>
          </tr>
     </ng-template>
 
@@ -26,7 +26,7 @@
 
         <tr>
 			<!-- * Column 1. -->
-			<td class="d-none d-sm-none d-md-table-cell" style="min-width:200px">
+			<td style="min-width:200px"  class="d-none d-sm-none d-md-table-cell">
                 <button type="button" pButton pRipple [pRowToggler]="sale" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td>
 
@@ -52,9 +52,9 @@
 				{{sale.products.length == 1 ? 'product': 'products'}}
 			</td>
             
-			<td style="min-width:200px" class="d-none d-sm-none d-md-table-cell">
-		
-				<span [class]="sale.total <= 1000? 'badge bg-danger': sale.total>1000 && sale.total<=3000 ? 'badge bg-warning':'badge bg-primary' ">
+			<td style="min-width:200px">
+				
+				<button [class]="sale.total <= 1000? 'btn btn-danger': sale.total>1000 && sale.total<=3000 ? 'btn btn-warning':'btn btn-primary' ">
 					{{
 						sale.total <= 1000?
 							'Low sale' :
@@ -62,7 +62,7 @@
 							'Average' :
 						'High sale'
 					}}
-				</span>
+				</button>
 		</td>
         </tr>
     </ng-template>
@@ -83,40 +83,42 @@
 							</h5>
 						
                             <tr>
-                                <th pSortableColumn="product">img <p-sortIcon field="product"></p-sortIcon></th>
-                                <th pSortableColumn="product">Product <p-sortIcon field="customer"></p-sortIcon></th>
+								<th pSortableColumn="product">Img<p-sortIcon field="customer"></p-sortIcon></th>
+								<th pSortableColumn="product">Product <p-sortIcon field="customer"></p-sortIcon></th>
                                 <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                                <th pSortableColumn="price">SubTotal <p-sortIcon field="price"></p-sortIcon></th>
+                                <th pSortableColumn="amount">SubTotal <p-sortIcon field="amount"></p-sortIcon></th>
               
                             </tr>
                         </ng-template>
 
 						<!-- * Body products -->
                         <ng-template pTemplate="body" let-product>
-                            <tr>
-								<td><img [src]="product.productDB.img" [alt]="product.name" width="80" class="shadow-4" /></td>
-
-                               
+							
+							<tr>                                
+								<td><img [src]="product.productDB.img" [alt]="product.name" width="60" class="shadow-4" /></td>
                                 <td>
 									<strong>
-										{{product.amount}}
-										{{product.productDB.name}}
+										{{product.amount}} {{product.productDB.name}}
 									</strong>
 									
 								</td>
                                 <td>
 									<strong>
-										{{product.productDB.price}}
+										{{product.productDB.price | currency: '$':'symbol':'1.0-0'}}
 									</strong>
 								
 								</td>
-                                <td>
+								
+								<td>
 									<strong>
-										{{product.productDB.price * product.amount}}
+										{{product.productDB.price * product.amount  | currency: '$':'symbol':'1.0-0'}}
 									</strong>
 								
 								</td>
+
+								
                             
+							
                             </tr>
 						
 						

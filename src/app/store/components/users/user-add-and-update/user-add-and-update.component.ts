@@ -79,15 +79,11 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 			this.myFormUser.controls['rol'].setValue(this.userInput?.rol);
 		}
 
-
-
-        if(this.isNewUser == true){
-            this.Restoreform();
-
-        }else{
-            this.myFormUser.controls['email'].disable();
-            this.myFormUser.controls['password'].disable();
-        }
+		if( !changes.isNewUser.firstChange ){
+			if(this.isNewUser == true){
+				this.Restoreform();
+			}
+		}
 	}
 
 	fieldIsValid(campo: string) {
@@ -99,6 +95,8 @@ export class UserAddAndUpdateComponent implements OnInit, OnChanges {
 
 	Restoreform() {
 		this.productWasSaved = false;
+		this.isNewUser = true;
+		this.myFormUser.reset();
 	}
 
 	saveUser() {

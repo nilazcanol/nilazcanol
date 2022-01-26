@@ -119,6 +119,7 @@ export class NewProductComponent implements OnInit, OnChanges {
 
 	clearForm(): void {
 		this.myFormProduct.reset();
+		
 	}
 
 
@@ -233,7 +234,14 @@ export class NewProductComponent implements OnInit, OnChanges {
 		if (typeof this.myFormProduct !== 'undefined') {
 			this.myFormProduct.reset();
 		}
-		this.productWasSaved = false;
+		this.productInput = {
+			category: '',
+			description: '',
+			name: '',
+			price: 0,
+			stock: 1
+
+		}
 	}
 
 	showToast(
